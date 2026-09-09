@@ -1,0 +1,4 @@
+stage	category	n_records
+ena_retrieval	retrieved	5058
+fastq_filter	retained	5018
+fastq_filter	excluded	40

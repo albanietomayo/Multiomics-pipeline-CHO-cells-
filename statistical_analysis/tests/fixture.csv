@@ -1,0 +1,7 @@
+sample_id,cell_line,sequencing_type,technical_record
+s1,A,RNA-seq,R1
+s1,A,RNA,R2
+s2,A,Multiome,lane1
+s2,A,ATAC,lane2
+s3,B,scATAC,R1
+s4,B,ChIP-seq,R1

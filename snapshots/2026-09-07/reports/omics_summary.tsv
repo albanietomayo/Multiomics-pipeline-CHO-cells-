@@ -1,0 +1,6 @@
+stage	category	n_records
+omics_classification	RNA-seq	2059
+omics_classification	unclassified	2024
+omics_classification	excluded_single_cell	797
+omics_classification	ChIP-seq	120
+omics_classification	ATAC-seq	18

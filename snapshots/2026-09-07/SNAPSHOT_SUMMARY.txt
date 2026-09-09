@@ -1,0 +1,20 @@
+FINAL ENA SNAPSHOT FOR TFM
+Snapshot date: 2026-09-07
+Query organism: Cricetulus griseus (TaxID 10029)
+Selected modalities: RNA-seq, ChIP-seq, ATAC-seq
+
+Target runs: 1983
+RNA-seq target: 1849
+ChIP-seq target: 120
+ATAC-seq target: 14
+FASTQ files: 3122
+Compressed bytes: 5560984835570
+Compressed TB: 5.561
+Compressed TiB: 5.058
+
+Comparison with 2026-08-30:
+Added target runs: 36
+Removed target runs: 0
+Omics changes among common runs: 0
+Added FASTQ files: 68
+Removed FASTQ files: 0

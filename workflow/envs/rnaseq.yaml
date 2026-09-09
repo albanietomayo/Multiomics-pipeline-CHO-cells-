@@ -1,0 +1,13 @@
+name: rnaseq
+
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - star=2.7.11b
+  - samtools=1.22.1
+  - subread=2.1.1
+  - rseqc=5.0.5
+  - ucsc-gtftogenepred=482
+  - ucsc-genepredtobed=482

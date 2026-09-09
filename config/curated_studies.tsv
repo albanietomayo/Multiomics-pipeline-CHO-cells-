@@ -1,0 +1,16 @@
+curation_id	study_accession	field	pattern	match_type	classification	priority	evidence	reference
+CUR001	PRJNA604220	study_accession	PRJNA604220	exact	target	100	RNA-seq study performed in CHO-S and CHO-S-derived engineered cell lines.	GSE144624; doi:10.1038/s41467-020-15866-w
+CUR002	PRJNA504034	experiment_title	CellLine	contains	target	100	Within this mixed study, experiment titles labelled CellLine correspond to CHO cell-line RNA-seq samples.	PRJNA504034; PMCID:PMC6571120
+CUR003	PRJNA504034	experiment_title	Tissue	contains	non_target	100	Within this mixed study, experiment titles labelled Tissue correspond to Chinese hamster tissue RNA-seq samples rather than CHO cell lines.	PRJNA504034; PMCID:PMC6571120
+CUR004	PRJNA580502	study_accession	PRJNA580502	exact	non_target	100	Target-omics records correspond to Chinese hamster tissues including liver, kidney, heart, testis, brain, cerebellum and ovary.	PRJNA580502
+CUR005	PRJNA1468945	study_accession	PRJNA1468945	exact	non_target	100	RNA-seq records correspond to anatomically defined nervous-system samples rather than CHO cell lines.	PRJNA1468945
+CUR006	PRJNA649238	study_accession	PRJNA649238	exact	non_target	100	All target-omics records are explicitly annotated as V79 cells.	PRJNA649238; Cellosaurus:CVCL_2234
+CUR007	PRJNA564074	study_accession	PRJNA564074	exact	non_target	100	RNA-seq records correspond to Chinese hamster lung cells rather than ovarian CHO cells.	PRJNA564074; PMCID:PMC7934843
+CUR008	PRJNA824784	study_accession	PRJNA824784	exact	non_target	100	Records correspond to Cricetulus griseus oocytes.	PRJNA824784; GSE200470
+CUR009	PRJNA1282762	study_accession	PRJNA1282762	exact	target	100	Cricetulus griseus RNA-seq records correspond to engineered CHO clones in the Shotgun Genetic Engineering study.	PRJNA1282762; doi:10.1101/2025.07.08.663766
+CUR010	PRJDB9148	study_accession	PRJDB9148	exact	non_target	100	RNA-seq samples correspond to embryonic Chinese hamster tail tissue at developmental stages E13.5-E17.5.	PRJDB9148
+CUR011	PRJNA255418	study_accession	PRJNA255418	exact	target	100	Control and Mre11-KD RNA-seq samples derive from CHO-dhfr-derived cell lines.	GSE59487; PMCID:PMC4357702
+CUR012	PRJNA214684	study_accession	PRJNA214684	exact	non_target	100	RNA-seq records correspond to CCL39 Chinese hamster lung fibroblasts.	PRJNA214684; Cellosaurus:CVCL_2886
+CUR013	PRJNA882483	study_accession	PRJNA882483	exact	non_target	100	RNA-seq records correspond to fully grown GV-stage Chinese hamster oocytes.	GSE213818; GSM6594843
+CUR014	PRJNA763926	cell_line	ChA27	exact	target	100	The ChA27 RNA-seq records correspond to a Cricetulus griseus cell line annotated in NCBI BioSample as strain CHO-S.	PRJNA763926; NCBI BioSample SAMN21462896
+CUR015	PRJEB49939	study_accession	PRJEB49939	exact	target	100	The Sensitive and Resistant RNA-seq samples derive from the CHO-GLUT4 cellular model used to study insulin resistance.	PRJEB49939; PMCID:PMC11705401

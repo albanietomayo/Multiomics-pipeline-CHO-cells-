@@ -1,0 +1,4 @@
+stage	category	n_records
+target_omics	total	2197
+explicit_evidence	explicit_target	1728
+explicit_evidence	no_explicit_target	469

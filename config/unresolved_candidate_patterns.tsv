@@ -1,0 +1,359 @@
+field	value	n_registros	n_estudios
+cell_line	LR73	12	1
+cell_line	ChA27	3	1
+experiment_title	Illumina HiSeq 1500 sequencing: V79 cells grown under below background ionizing radiation	9	1
+experiment_title	Illumina NovaSeq X Plus sequencing: RNA-Seq of Engineered Cricetulus griseus clone: female ovary	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292486: WT-Rituximab-Day4_rep1 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292487: WT-Rituximab-Day6_rep1 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292488: WT-Rituximab-Day8_rep1 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292489: WT-Rituximab-Day4_rep2 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292490: WT-Rituximab-Day6_rep2 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292491: WT-Rituximab-Day8_rep2 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292492: 6X-Rituximab-Day4_rep1 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292493: 6X-Rituximab-Day6_rep1 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292494: 6X-Rituximab-Day8_rep1 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292495: 6X-Rituximab-Day4_rep2 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292496: 6X-Rituximab-Day6_rep2 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292497: 6X-Rituximab-Day8_rep2 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292498: 11X-Rituximab-Day4_rep1 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292499: 11X-Rituximab-Day6_rep1 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292500: 11X-Rituximab-Day8_rep1 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292501: 11X-Rituximab-Day4_rep2 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292502: 11X-Rituximab-Day6_rep2 Cricetulus griseus RNA-Seq	4	1
+experiment_title	NextSeq 500 sequencing: GSM4292503: 11X-Rituximab-Day8_rep2 Cricetulus griseus RNA-Seq	4	1
+experiment_title	Illumina HiSeq 4000 sequencing: RNA-Seq of Cricetulus griseus:ovary cells	3	1
+experiment_title	Illumina NovaSeq 6000 sequencing: RNA-seq of Cricetulus griseus: NAc	3	1
+experiment_title	Illumina NovaSeq 6000 sequencing: RNA-seq of Cricetulus griseus: mPFC	3	1
+experiment_title	Illumina NovaSeq 6000 sequencing: RNA-seq of Cricetulus griseus: mPOA	3	1
+experiment_title	Illumina HiSeq 2500 sequencing	2	1
+experiment_title	NextSeq 550 sequencing: ATAC-seq of Cricetulus griseus DNA Zoo Sample2409	2	1
+experiment_title	NextSeq 550 sequencing: ATAC-seq of Cricetulus griseus DNA Zoo Sample2592	2	1
+experiment_title	Illumina Genome Analyzer IIx sequencing: GSM1437747: Control sample A Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina Genome Analyzer IIx sequencing: GSM1437748: Mre11-KD sample A Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina Genome Analyzer IIx sequencing: GSM1437749: Control sample B Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina Genome Analyzer IIx sequencing: GSM1437750: Mre11-KD sample B Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina HiSeq 2000 paired end sequencing: RNA-Seq of chinese hamster CCL39 cell lines (replicate 2)	1	1
+experiment_title	Illumina HiSeq 2000 paired end sequencing: RNA-Seq of chinese hamster CCL39 cell lines (replicate 3)	1	1
+experiment_title	Illumina HiSeq 2000 paired end sequencing: RNA-seq of chinese hamster CCL39 cell lines (replicate 1)	1	1
+experiment_title	Illumina HiSeq 2000 sequencing: GSM6594842: s_GV_WT_ChHam_r1.PE Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina HiSeq 2000 sequencing: GSM6594843: s_GV_WT_ChHam_r2.PE Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine10_1R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine10_2R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine10_3R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine11_1R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine11_2R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine11_3R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine12_1R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine12_2R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine12_3R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine13_1R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine13_2R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine13_3R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine14_1	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine14_2	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine14_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine15_2	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine15_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine15_7	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine1_1	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine1_2	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine1_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine2_1	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine2_2	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine2_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine3_1	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine3_2	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine3_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine4_1	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine4_2	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine4_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine5_A	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine5_B	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine5_C	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine6_1	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine6_2	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine6_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine7_A	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine7_B	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine7_C	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine8_1R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine8_2R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine8_3R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine9_1R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine9_2R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: CellLine9_3R	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) female Brain	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) female Cerebellum	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) female Heart	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) female Kidney	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) female Liver	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) female Ovary	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) male Brain	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) male Cerebellum	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) male Heart	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) male Kidney	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) male Liver	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: RNAseq from Cricetulus griseus (Hamster) male Testis	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue1_B_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue1_C_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue1_D_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue2_B_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue2_C_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue2_D_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue3_B_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue3_C_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue3_D_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue4_B_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue4_C_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue4_D_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue5_B_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue5_C_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue5_D_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue6_B_1_of_2	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue6_C_1_of_2	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue6_D_1_of_2	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue7_B_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue7_C_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: Tissue7_D_1_of_3	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: negctrl	1	1
+experiment_title	Illumina HiSeq 2500 sequencing: posRNActrl	1	1
+experiment_title	Illumina NovaSeq 6000 paired end sequencing: Illumina NovaSeq 6000 paired end sequencing of SAMD00199247	1	1
+experiment_title	Illumina NovaSeq 6000 paired end sequencing: Illumina NovaSeq 6000 paired end sequencing of SAMD00199248	1	1
+experiment_title	Illumina NovaSeq 6000 paired end sequencing: Illumina NovaSeq 6000 paired end sequencing of SAMD00199249	1	1
+experiment_title	Illumina NovaSeq 6000 paired end sequencing: Illumina NovaSeq 6000 paired end sequencing of SAMD00199253	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM4061930: Sample 127458: WTICD1 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM4061931: Sample 127459: WTICD3 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM4061932: Sample 127460: WTICD4 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM4061933: Sample 127461: WTICD5 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM4061934: Sample 127462: eGFP3 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM4061935: Sample 127463: eGFP4 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM4061936: Sample 127464: eGFP5 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM4061937: Sample 127465: eGFP6 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM6034610: Chinese hamster control Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM6034611: Chinese hamster oxidation Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM6034634: RNAseq Chinese hamster 1 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM6034635: RNAseq Chinese hamster 2 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM6034636: RNAseq Chinese hamster 3 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM6034637: RNAseq Chinese hamster 4 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq 6000 sequencing: GSM6034638: RNAseq Chinese hamster 5 Cricetulus griseus RNA-Seq	1	1
+experiment_title	Illumina NovaSeq X Plus sequencing: RNA-Seq of Cricetulus griseus: female ovary	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827102: FL-1 Cricetulus griseus RNA-Seq	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827103: FL-2 Cricetulus griseus RNA-Seq	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827104: FL-3 Cricetulus griseus RNA-Seq	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827105: FL-4 Cricetulus griseus RNA-Seq	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827106: FA-1 Cricetulus griseus RNA-Seq	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827107: FA-2 Cricetulus griseus RNA-Seq	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827108: FA-3 Cricetulus griseus RNA-Seq	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827109: FA-4 Cricetulus griseus RNA-Seq	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827110: DA-1 Cricetulus griseus RNA-Seq	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827111: DA-2 Cricetulus griseus RNA-Seq	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827112: DA-3 Cricetulus griseus RNA-Seq	1	1
+experiment_title	NextSeq 500 sequencing: GSM3827113: DA-4 Cricetulus griseus RNA-Seq	1	1
+library_name	L1	2	1
+library_name	1	1	1
+library_name	10	1	1
+library_name	11	1	1
+library_name	12	1	1
+library_name	13	1	1
+library_name	14	1	1
+library_name	15	1	1
+library_name	16	1	1
+library_name	17	1	1
+library_name	18	1	1
+library_name	19	1	1
+library_name	2	1	1
+library_name	20	1	1
+library_name	21	1	1
+library_name	22	1	1
+library_name	23	1	1
+library_name	24	1	1
+library_name	25	1	1
+library_name	26	1	1
+library_name	27	1	1
+library_name	28	1	1
+library_name	29	1	1
+library_name	3	1	1
+library_name	30	1	1
+library_name	31	1	1
+library_name	32	1	1
+library_name	33	1	1
+library_name	34	1	1
+library_name	35	1	1
+library_name	36	1	1
+library_name	37	1	1
+library_name	38	1	1
+library_name	39	1	1
+library_name	4	1	1
+library_name	40	1	1
+library_name	41	1	1
+library_name	42	1	1
+library_name	43	1	1
+library_name	44	1	1
+library_name	45	1	1
+library_name	46	1	1
+library_name	47	1	1
+library_name	48	1	1
+library_name	49	1	1
+library_name	5	1	1
+library_name	50	1	1
+library_name	51	1	1
+library_name	52	1	1
+library_name	53	1	1
+library_name	54	1	1
+library_name	55	1	1
+library_name	56	1	1
+library_name	57	1	1
+library_name	58	1	1
+library_name	59	1	1
+library_name	6	1	1
+library_name	60	1	1
+library_name	61	1	1
+library_name	62	1	1
+library_name	63	1	1
+library_name	64	1	1
+library_name	65	1	1
+library_name	66	1	1
+library_name	67	1	1
+library_name	68	1	1
+library_name	7	1	1
+library_name	8	1	1
+library_name	9	1	1
+library_name	BS27868	1	1
+library_name	BS27870	1	1
+library_name	BS28016	1	1
+library_name	BS28017	1	1
+library_name	Cgr-NAc-1	1	1
+library_name	Cgr-NAc-2	1	1
+library_name	Cgr-NAc-3	1	1
+library_name	Cgr-mPFC-1	1	1
+library_name	Cgr-mPFC-2	1	1
+library_name	Cgr-mPFC-3	1	1
+library_name	Cgr-mPOA-1	1	1
+library_name	Cgr-mPOA-2	1	1
+library_name	Cgr-mPOA-3	1	1
+library_name	Chi_E13.5_tail	1	1
+library_name	Chi_E14.5_tail	1	1
+library_name	Chi_E15.5_tail	1	1
+library_name	Chi_E17.5_tail	1	1
+library_name	Cricetulus.griseus.2863sTS.Male1.Brain	1	1
+library_name	Cricetulus.griseus.2864sTS.Male1.Cerebellum	1	1
+library_name	Cricetulus.griseus.2865sTS.Male1.Testis	1	1
+library_name	Cricetulus.griseus.2866sTS.Male1.Heart	1	1
+library_name	Cricetulus.griseus.2867sTS.Female1.Liver	1	1
+library_name	Cricetulus.griseus.2868sTS.Male1.Liver	1	1
+library_name	Cricetulus.griseus.2871sTS.Female1.Ovary	1	1
+library_name	Cricetulus.griseus.3067sTS.Female1.Brain	1	1
+library_name	Cricetulus.griseus.3068sTS.Female1.Cerebellum	1	1
+library_name	Cricetulus.griseus.3069sTS.Female1.Heart	1	1
+library_name	Cricetulus.griseus.3070sTS.Female1.Kidney	1	1
+library_name	Cricetulus.griseus.3071sTS.Male1.Kidney	1	1
+library_name	GSM6034610	1	1
+library_name	GSM6034611	1	1
+library_name	GSM6034634	1	1
+library_name	GSM6034635	1	1
+library_name	GSM6034636	1	1
+library_name	GSM6034637	1	1
+library_name	GSM6034638	1	1
+library_name	GSM6594842	1	1
+library_name	GSM6594843	1	1
+library_name	L2027	1	1
+library_name	L2028	1	1
+library_name	L868	1	1
+library_name	L869	1	1
+library_name	LIB_0000_2709	1	1
+library_name	LIB_0000_2710	1	1
+library_name	LIB_0000_2711	1	1
+library_name	Minus rep 1	1	1
+library_name	Minus rep 2	1	1
+library_name	Minus rep 3	1	1
+library_name	Plus rep 1	1	1
+library_name	Plus rep 2	1	1
+library_name	Plus rep 3	1	1
+library_name	RNA_Flp	1	1
+library_name	S1	1	1
+library_name	S2	1	1
+library_name	S3	1	1
+library_name	Surface rep 1	1	1
+library_name	Surface rep 2	1	1
+library_name	Surface rep 3	1	1
+sample_title	Model organism or animal sample from Cricetulus griseus	97	5
+sample_title	11X-Rituximab-Day4_rep1	4	1
+sample_title	11X-Rituximab-Day4_rep2	4	1
+sample_title	11X-Rituximab-Day6_rep1	4	1
+sample_title	11X-Rituximab-Day6_rep2	4	1
+sample_title	11X-Rituximab-Day8_rep1	4	1
+sample_title	11X-Rituximab-Day8_rep2	4	1
+sample_title	6X-Rituximab-Day4_rep1	4	1
+sample_title	6X-Rituximab-Day4_rep2	4	1
+sample_title	6X-Rituximab-Day6_rep1	4	1
+sample_title	6X-Rituximab-Day6_rep2	4	1
+sample_title	6X-Rituximab-Day8_rep1	4	1
+sample_title	6X-Rituximab-Day8_rep2	4	1
+sample_title	Chinese hamster	4	1
+sample_title	WT-Rituximab-Day4_rep1	4	1
+sample_title	WT-Rituximab-Day4_rep2	4	1
+sample_title	WT-Rituximab-Day6_rep1	4	1
+sample_title	WT-Rituximab-Day6_rep2	4	1
+sample_title	WT-Rituximab-Day8_rep1	4	1
+sample_title	WT-Rituximab-Day8_rep2	4	1
+sample_title	Below background	3	1
+sample_title	KCl background	3	1
+sample_title	Surface background	3	1
+sample_title	CCL39 cells 1	1	1
+sample_title	CCL39 cells 2	1	1
+sample_title	CCL39 cells 3	1	1
+sample_title	Chinese hamster control	1	1
+sample_title	Chinese hamster oxidation	1	1
+sample_title	Control sample A	1	1
+sample_title	Control sample B	1	1
+sample_title	DA-1	1	1
+sample_title	DA-2	1	1
+sample_title	DA-3	1	1
+sample_title	DA-4	1	1
+sample_title	FA-1	1	1
+sample_title	FA-2	1	1
+sample_title	FA-3	1	1
+sample_title	FA-4	1	1
+sample_title	FL-1	1	1
+sample_title	FL-2	1	1
+sample_title	FL-3	1	1
+sample_title	FL-4	1	1
+sample_title	Mre11-KD sample A	1	1
+sample_title	Mre11-KD sample B	1	1
+sample_title	RNAseq Chinese hamster 1	1	1
+sample_title	RNAseq Chinese hamster 2	1	1
+sample_title	RNAseq Chinese hamster 3	1	1
+sample_title	RNAseq Chinese hamster 4	1	1
+sample_title	RNAseq Chinese hamster 5	1	1
+sample_title	Resistant	1	1
+sample_title	Sample 127458: WTICD1	1	1
+sample_title	Sample 127459: WTICD3	1	1
+sample_title	Sample 127460: WTICD4	1	1
+sample_title	Sample 127461: WTICD5	1	1
+sample_title	Sample 127462: eGFP3	1	1
+sample_title	Sample 127463: eGFP4	1	1
+sample_title	Sample 127464: eGFP5	1	1
+sample_title	Sample 127465: eGFP6	1	1
+sample_title	Sensitive	1	1
+sample_title	chinese-hamster E13.5 elongating-tail	1	1
+sample_title	chinese-hamster E14.5 longest-tail	1	1
+sample_title	chinese-hamster E15.5 reducing-tail	1	1
+sample_title	chinese-hamster E17.5 reduced-tail	1	1
+sample_title	s_GV_WT_ChHam_r1.PE	1	1
+sample_title	s_GV_WT_ChHam_r2.PE	1	1
+study_title	Multiplex secretome engineering enhances recombinant protein production and purity	72	1
+study_title	Annotation improvement and retroviral element discovery in the Chinese hamster genome using proteogenomics	68	1
+study_title	Apoptotic cells actively release metabolite messanger with anti-inflammatory properties	12	1
+study_title	RNAseq and DNAseq data for tree shrew, hamster, guinea pig, sheep, cow, pig, hedgehog, armadillo, and tenrec Raw sequence reads	12	1
+study_title	Chinese hamster (Cricetulus griseus) V79 cells grown under below-background radiation	9	1
+study_title	Rodentia Raw sequence reads	9	1
+study_title	Voltage-gated sodium channel (VGSC) beta1 subunit-intracellular domain (Beta1-ICD) overexpression in Chinese hamster lung cells	8	1
+study_title	Divergent composition and transposon-silencing activity of small RNAs in mammalian oocytes	7	1
+study_title	Shotgun Genetic Engineering	5	1
+study_title	Comparison of gene expressions involved in tail reduction among 4 species of amniotes	4	1
+study_title	DNA Zoo	4	1
+study_title	Mre11 suppresses replication stress and gene amplification proficiency	4	1
+study_title	Cricetulus griseus Transcriptome or Gene expression	3	1
+study_title	Murine mast cell and mastocytoma transcriptome	3	1
+study_title	De novo emergence, existence, and demise of a protein-coding gene in murids [chinese hamster]	2	1
+study_title	Delineating the meachanism of insulin resistance	2	1

@@ -1,0 +1,5 @@
+run_accession	study_accession	omics	fastq_structure	processing_layout	n_fastq	fastq_bytes	fastq_GB	pilot_reason
+SRR10493862	PRJNA590485	RNA-seq	PAIRED	PAIRED	2	316000465	0.316	smallest_run_for_structure
+SRR10215658	PRJNA575354	RNA-seq	SINGLE	SINGLE	1	96096	0.000	smallest_run_for_structure
+SRR23603866	PRJNA938154	RNA-seq	UNPAIRED_FROM_PAIRED	SINGLE	1	402412730	0.402	smallest_run_for_structure
+SRR10493846	PRJNA590485	RNA-seq	PAIRED_PLUS_UNPAIRED	PAIRED	3	24277258	0.024	smallest_run_for_structure

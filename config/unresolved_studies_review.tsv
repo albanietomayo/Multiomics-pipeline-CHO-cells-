@@ -1,0 +1,18 @@
+study_accession	study_title	n_runs	sample_examples	classification	evidence	rule_pattern
+PRJDB9148	Comparison of gene expressions involved in tail reduction among 4 species of amniotes	4	chinese-hamster E14.5 longest-tail | chinese-hamster E15.5 reducing-tail | chinese-hamster E13.5 elongating-tail	unresolved		
+PRJEB49939	Delineating the meachanism of insulin resistance	2	Sensitive | Resistant	unresolved		
+PRJNA1282762	Shotgun Genetic Engineering	5	Model organism or animal sample from Cricetulus griseus	unresolved		
+PRJNA1468945	Rodentia Raw sequence reads	9	Model organism or animal sample from Cricetulus griseus	unresolved		
+PRJNA214684	Cricetulus griseus Transcriptome or Gene expression	3	CCL39 cells 1 | CCL39 cells 2 | CCL39 cells 3	unresolved		
+PRJNA255418	Mre11 suppresses replication stress and gene amplification proficiency	4	Mre11-KD sample A | Control sample A | Control sample B	unresolved		
+PRJNA488640	Efferocytosis induces a novel SLC program to promote glucose uptake and lactate release	4	Phagocytes + Apoptotic Cells 3 | Phagocytes + Apoptotic Cells 1 | Phagocytes + Apoptotic Cells 2	unresolved		
+PRJNA504034	Annotation improvement and retroviral element discovery in the Chinese hamster genome using proteogenomics	68	Model organism or animal sample from Cricetulus griseus	unresolved		
+PRJNA512907	DNA Zoo	4	Chinese hamster	unresolved		
+PRJNA545309	Apoptotic cells actively release metabolite messanger with anti-inflammatory properties	12	FA-2 | DA-4 | FL-2	unresolved		
+PRJNA564074	Voltage-gated sodium channel (VGSC) beta1 subunit-intracellular domain (Beta1-ICD) overexpression in Chinese hamster lung cells	8	Sample 127463: eGFP4 | Sample 127458: WTICD1 | Sample 127459: WTICD3	unresolved		
+PRJNA580502	RNAseq and DNAseq data for tree shrew, hamster, guinea pig, sheep, cow, pig, hedgehog, armadillo, and tenrec Raw sequence reads	12	Model organism or animal sample from Cricetulus griseus	unresolved		
+PRJNA604220	Multiplex secretome engineering enhances recombinant protein production and purity	72	WT-Rituximab-Day6_rep1 | WT-Rituximab-Day8_rep1 | WT-Rituximab-Day4_rep2	unresolved		
+PRJNA649238	Chinese hamster (Cricetulus griseus) V79 cells grown under below-background radiation	9	Surface background | KCl background | Below background	unresolved		
+PRJNA763926	Murine mast cell and mastocytoma transcriptome	3	Model organism or animal sample from Cricetulus griseus	unresolved		
+PRJNA824784	Divergent composition and transposon-silencing activity of small RNAs in mammalian oocytes	7	RNAseq Chinese hamster 1 | Chinese hamster control | RNAseq Chinese hamster 5	unresolved		
+PRJNA882483	De novo emergence, existence, and demise of a protein-coding gene in murids [chinese hamster]	2	s_GV_WT_ChHam_r2.PE | s_GV_WT_ChHam_r1.PE	unresolved		

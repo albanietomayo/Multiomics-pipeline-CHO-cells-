@@ -1,0 +1,8 @@
+name: atacseq-picard
+
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - picard=3.5.0

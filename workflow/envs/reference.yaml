@@ -1,0 +1,8 @@
+name: reference
+
+channels:
+  - conda-forge
+
+dependencies:
+  - ncbi-datasets-cli=18.36.0
+  - pyyaml

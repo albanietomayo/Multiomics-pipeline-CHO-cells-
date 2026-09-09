@@ -1,0 +1,8 @@
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - python=3.14.7
+  - pandas=3.0.5
+  - pyyaml=6.0.3

@@ -1,0 +1,7 @@
+study_accession	run_accession	sample_accession	sample_title	experiment_title	study_title	cell_line	cell_type	omics	target_status
+PRJNA504034	SRR8165648	SAMN10388111	Model organism or animal sample from Cricetulus griseus	Illumina HiSeq 2500 sequencing: negctrl	Annotation improvement and retroviral element discovery in the Chinese hamster genome using proteogenomics			RNA-seq	unresolved
+PRJNA504034	SRR8165650	SAMN10388112	Model organism or animal sample from Cricetulus griseus	Illumina HiSeq 2500 sequencing: posRNActrl	Annotation improvement and retroviral element discovery in the Chinese hamster genome using proteogenomics			RNA-seq	unresolved
+PRJNA512907	SRR25949011	SAMN13072006	Chinese hamster	NextSeq 550 sequencing: ATAC-seq of Cricetulus griseus DNA Zoo Sample2409	DNA Zoo			ATAC-seq	unresolved
+PRJNA512907	SRR25949012	SAMN13072006	Chinese hamster	NextSeq 550 sequencing: ATAC-seq of Cricetulus griseus DNA Zoo Sample2409	DNA Zoo			ATAC-seq	unresolved
+PRJNA512907	SRR26061916	SAMN37320019	Chinese hamster	NextSeq 550 sequencing: ATAC-seq of Cricetulus griseus DNA Zoo Sample2592	DNA Zoo			ATAC-seq	unresolved
+PRJNA512907	SRR26061917	SAMN37320019	Chinese hamster	NextSeq 550 sequencing: ATAC-seq of Cricetulus griseus DNA Zoo Sample2592	DNA Zoo			ATAC-seq	unresolved

@@ -1,0 +1,4 @@
+classification	before_external	after_external	change
+target	1840	1852	12
+non_target	133	133	0
+unresolved	224	212	-12

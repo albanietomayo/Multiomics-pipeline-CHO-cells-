@@ -1,0 +1,37 @@
+# Snakemake runtime files
+.snakemake/
+
+# Raw sequencing data
+data/
+
+# Generated analysis results
+results/
+hpc_logs/
+hpc_pilot_results/
+statistical_analysis/results/
+
+# Large genomic resources generated/downloaded by the workflow
+resources/reference/
+
+# Temporary/project bundles
+*.tar.gz
+*.tgz
+
+# Development backup copies
+workflow/backups_before_dynamic_mate_split/
+*.before_*
+*.bak
+
+# Python temporary files
+__pycache__/
+*.py[cod]
+
+# Editor / operating system files
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# Historical development backups
+**/backups_before_*/
+*.bak*

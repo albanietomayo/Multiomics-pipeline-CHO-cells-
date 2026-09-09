@@ -1,0 +1,4 @@
+60bd1bb06ad046fc37d7642b0328e9bd35fc7a8ecbc2f30ff6a1f822bced1bcb  snapshots/2026-08-30/samples.tsv
+c78edd6b978bd3e0fa72f2dc46a5d6fa586014fbe2674c580197599717bc5251  snapshots/2026-08-30/ena_metadata_after_curation.tsv
+f9877f90207f7fd478a4b941de2adc853bc2e63f19032473ba67ff78900dcedd  snapshots/2026-08-30/fastq_manifest.tsv
+a956cc634c82720e38491e01af7ea9f86f2ecde673b9ec75a68072e25fbb86a5  snapshots/2026-08-30/validation_fastq_manifest.tsv

@@ -1,0 +1,18 @@
+rule_id	stage	field	pattern	match_type	classification	priority	evidence	reference
+EXP001	explicit_evidence	cell_line	cho|chinese hamster ovary	regex	target	100	Explicit textual evidence compatible with CHO	
+EXP002	explicit_evidence	cell_type	cho|chinese hamster ovary	regex	target	100	Explicit textual evidence compatible with CHO	
+EXP003	explicit_evidence	sample_title	cho|chinese hamster ovary	regex	target	100	Explicit textual evidence compatible with CHO	
+EXP004	explicit_evidence	experiment_title	cho|chinese hamster ovary	regex	target	100	Explicit textual evidence compatible with CHO	
+EXP005	explicit_evidence	study_title	cho|chinese hamster ovary	regex	target	100	Explicit textual evidence compatible with CHO	
+EXP006	explicit_evidence	library_name	cho|chinese hamster ovary	regex	target	100	Explicit textual evidence compatible with CHO	
+CL001	cell_line	cell_line	Icosagen QMCF	exact	target	100	CHO-derived expression platform based on CHO cells	Cellosaurus CVCL_E3JG
+CL002	cell_line	cell_line	V79	exact	non_target	100	Chinese hamster lung fibroblast cell line	Cellosaurus CVCL_2234
+CL003	cell_line	cell_line	V79 lung fibroblast cells	exact	non_target	100	Chinese hamster lung fibroblast cell line	Cellosaurus CVCL_2234
+CL004	cell_line	cell_line	CHL-YN	prefix	non_target	100	Chinese hamster lung-derived cell line	Cellosaurus CVCL_YS93
+CL005	cell_line	cell_line	CHK-Q	exact	non_target	100	Chinese hamster kidney-derived cell line	Cellosaurus CVCL_YS94
+CT001	cell_type	cell_type	Primary Preadipocyte	exact	non_target	100	Adipogenic precursor cell; not a CHO lineage	Rocha et al. 2026; doi:10.1007/s13679-026-00733-4
+CT002	cell_type	cell_type	Apoptotic Cells from human (Jurkat Lymphoma)	exact	non_target	100	Human Jurkat T-cell lineage	Cellosaurus CVCL_0065
+CT003	cell_type	cell_type	LR73	exact	target	100	Chinese hamster ovary-derived fibroblast cell line	Robinson et al. 1997; doi:10.1021/bi9627830
+CT004	cell_type	cell_type	actively engulfing.*jurkat lymphoma	regex	target	100	Sequenced phagocytic population corresponds to LR73 cells	Morioka et al. 2018; doi:10.1038/s41586-018-0735-5
+CT005	cell_type	cell_type	LR73 co-cultured with apoptotic Jurkat lymphoma cells	exact	target	100	Sequenced population corresponds to LR73 cells	Morioka et al. 2018; doi:10.1038/s41586-018-0735-5
+EXT001	external	cell_line	LR73	exact	target	100	Chinese hamster ovary-derived fibroblast cell line	Robinson et al. 1997; doi:10.1021/bi9627830
