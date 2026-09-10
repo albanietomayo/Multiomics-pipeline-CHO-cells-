@@ -1,0 +1,6 @@
+resource_class	min_fastq_bytes_exclusive	max_fastq_bytes_inclusive	cpus	memory_mb	scratch_target_gb	slurm_constraint	walltime	batch_target_predicted_minutes	evidence_level
+SMALL	0	2080781247	8	40000	60	ZEN4	08:00:00	240	interpolated_P10_P50
+MEDIUM	2080781247	6593410634	8	40000	100	ZEN4	08:00:00	240	interpolated_P50_P90
+LARGE	6593410634	9790184092	12	40000	125	ZEN4	08:00:00	240	extrapolated_P90_P95
+XLARGE	9790184092	18331754746	16	40000	200	ZEN4	08:00:00	240	extrapolated_P95_P99
+XXLARGE	18331754746		24	40000	300	ZEN4	08:00:00	240	extrapolated_above_P99

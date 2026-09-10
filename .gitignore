@@ -35,3 +35,6 @@ Thumbs.db
 # Historical development backups
 **/backups_before_*/
 *.bak*
+# Local benchmark logs and backup copies
+/rnaseq_benchmark_*.out
+*.pyc
