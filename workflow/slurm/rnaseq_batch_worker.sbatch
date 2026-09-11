@@ -206,6 +206,8 @@ printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
     gene_counts_bytes attempt_directory \
     > "$BATCH_SAVE/run_metrics.tsv"
 
+FAILED_RUNS=()
+
 copy_essential_outputs() {
     local run_accession="$1"
     local destination="$2"
@@ -347,12 +349,22 @@ for run_accession in "${RUNS[@]}"; do
             "$peak_apparent" "$peak_filesystem" "$gene_counts_bytes" \
             "$ATTEMPT_SAVE" >> "$BATCH_SAVE/run_metrics.tsv"
         echo "ERROR: $run_accession failed with status $workflow_status" >&2
-        exit "$workflow_status"
+        FAILED_RUNS+=("$run_accession")
+        rm -rf data/raw/fastq results/qc results/preprocessing results/rnaseq
+        rm -rf .snakemake/log
+        continue
     fi
 
     if [[ ! -s "$target" ]]; then
+        printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+            "$run_accession" FAILED_MISSING_TARGET "$elapsed_seconds" "$max_rss_kbytes" \
+            "$peak_apparent" "$peak_filesystem" "$gene_counts_bytes" \
+            "$ATTEMPT_SAVE" >> "$BATCH_SAVE/run_metrics.tsv"
         echo "ERROR: missing or empty target after successful workflow: $target" >&2
-        exit 3
+        FAILED_RUNS+=("$run_accession")
+        rm -rf data/raw/fastq results/qc results/preprocessing results/rnaseq
+        rm -rf .snakemake/log
+        continue
     fi
 
     PERSIST_STAGE="$RUN_SAVE/.persist_job_$JOB_TAG"
@@ -391,6 +403,20 @@ for run_accession in "${RUNS[@]}"; do
     rm -rf data/raw/fastq results/qc results/preprocessing results/rnaseq
     rm -rf .snakemake/log
 done
+
+if (( ${#FAILED_RUNS[@]} > 0 )); then
+    {
+        printf 'finished_at=%s\n' "$(date --iso-8601=seconds)"
+        printf 'run_count=%s\n' "${#RUNS[@]}"
+        printf 'failed_run_count=%s\n' "${#FAILED_RUNS[@]}"
+        printf 'failed_run_accession=%s\n' "${FAILED_RUNS[@]}"
+    } > "$BATCH_SAVE/finished_with_failures.txt"
+
+    echo "Batch finished with ${#FAILED_RUNS[@]} failed run(s): ${FAILED_RUNS[*]}" >&2
+    echo "Persistent batch logs: $BATCH_SAVE"
+    echo "Persistent run outputs: $RUNS_SAVE"
+    exit 1
+fi
 
 printf 'completed_at=%s\nrun_count=%s\n' \
     "$(date --iso-8601=seconds)" "${#RUNS[@]}" \
