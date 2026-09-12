@@ -279,26 +279,14 @@ rule atacseq_mark_duplicates:
         """
 
 
-def validate_atacseq_single_run(wildcards):
-    """
-    Ensure that this filtering rule is applied only to SINGLE ATAC-seq runs.
-    """
-    structure = get_atacseq_run_structure(wildcards.run_accession)
-
-    if structure != "SINGLE":
-        raise ValueError(
-            f"ATAC-seq run {wildcards.run_accession} has FASTQ structure "
-            f"{structure}, but atacseq_filter_single_bam only supports SINGLE runs."
-        )
-
-    return (
-        config["atacseq"]["align_dir"]
-        + f"/{wildcards.run_accession}/dupmarked.sorted.bam"
-    )
-
-rule atacseq_filter_single_bam:
+rule atacseq_filter_bam:
     input:
-        bam=validate_atacseq_single_run,
+        manifest=lambda wildcards: (
+            checkpoints.validation_fastq_manifest
+            .get()
+            .output.manifest
+        ),
+        bam=config["atacseq"]["align_dir"] + "/{run_accession}/dupmarked.sorted.bam",
         bai=config["atacseq"]["align_dir"] + "/{run_accession}/dupmarked.sorted.bai"
 
     output:
@@ -306,18 +294,28 @@ rule atacseq_filter_single_bam:
         bai=config["atacseq"]["filtered_bam_dir"] + "/{run_accession}/filtered.bam.bai"
 
     params:
+        structure=lambda wildcards: get_atacseq_run_structure(
+            wildcards.run_accession
+        ),
         min_mapq=config["atacseq"]["min_mapq"],
-        exclude_flags=config["atacseq"]["single_exclude_flags"],
+        single_exclude_flags=config["atacseq"]["single_exclude_flags"],
+        paired_require_flags=config["atacseq"]["paired_require_flags"],
+        paired_exclude_flags=config["atacseq"]["paired_exclude_flags"],
         mitochondrial_accession=config["atacseq"]["mitochondrial_accession"]
 
     threads:
-        1
+        4
+
+    resources:
+        mem_mb=8000
 
     conda:
         "../envs/atacseq.yaml"
 
     shell:
         r"""
+        set -euo pipefail
+
         mkdir -p $(dirname {output.bam:q})
 
         NUCLEAR_REFS=$(
@@ -326,14 +324,72 @@ rule atacseq_filter_single_bam:
                 '$1 != mt && $1 != "*" {{print $1}}'
         )
 
-        samtools view \
-          -b \
-          -q {params.min_mapq} \
-          -F {params.exclude_flags} \
-          -o {output.bam:q} \
-          {input.bam:q} \
-          $NUCLEAR_REFS
+        if [[ "{params.structure}" == "SINGLE" ]]; then
+            samtools view \
+              -b \
+              -q {params.min_mapq} \
+              -F {params.single_exclude_flags} \
+              -o {output.bam:q} \
+              {input.bam:q} \
+              $NUCLEAR_REFS
 
+        elif [[ "{params.structure}" == "PAIRED" ]]; then
+            TMP_ROOT="${{TMPDIR:-/tmp}}"
+            TMP_DIR=$(
+                mktemp -d \
+                  "$TMP_ROOT/atacseq_filter_{wildcards.run_accession}.XXXXXX"
+            )
+            trap 'rm -rf "$TMP_DIR"' EXIT
+
+            samtools view \
+              -u \
+              -q {params.min_mapq} \
+              -f {params.paired_require_flags} \
+              -F {params.paired_exclude_flags} \
+              {input.bam:q} \
+              $NUCLEAR_REFS \
+            | samtools sort \
+                -n \
+                -@ {threads} \
+                -m 750M \
+                -T "$TMP_DIR/queryname" \
+                -o "$TMP_DIR/candidates.name.bam" \
+                -
+
+            samtools view "$TMP_DIR/candidates.name.bam" \
+            | cut -f1 \
+            | uniq -c \
+            | awk '$1 == 2 {{print $2}}' \
+            > "$TMP_DIR/complete_pair_names.txt"
+
+            test -s "$TMP_DIR/complete_pair_names.txt"
+
+            samtools view \
+              -u \
+              -N "$TMP_DIR/complete_pair_names.txt" \
+              "$TMP_DIR/candidates.name.bam" \
+            | samtools sort \
+                -@ {threads} \
+                -m 750M \
+                -T "$TMP_DIR/coordinate" \
+                -o {output.bam:q} \
+                -
+
+            RECORD_COUNT=$(samtools view -c {output.bam:q})
+
+            if (( RECORD_COUNT == 0 || RECORD_COUNT % 2 != 0 )); then
+                printf 'Invalid paired ATAC-seq BAM record count: %s\n' \
+                  "$RECORD_COUNT" >&2
+                exit 1
+            fi
+
+        else
+            printf 'Unsupported ATAC-seq structure: %s\n' \
+              "{params.structure}" >&2
+            exit 1
+        fi
+
+        samtools quickcheck -v {output.bam:q}
         samtools index {output.bam:q} {output.bai:q}
         """
 

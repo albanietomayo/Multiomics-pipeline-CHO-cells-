@@ -107,6 +107,8 @@ atacseq:
 
   min_mapq: 30
   single_exclude_flags: 3844
+  paired_require_flags: 3
+  paired_exclude_flags: 3852
   tss_window_bp: 2000
   tss_bin_size_bp: 10
   tss_background_bp: 100
