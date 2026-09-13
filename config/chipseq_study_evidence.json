@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "studies": {
+    "PRJEB9291": {
+      "control_pairing_status": "not_performed",
+      "evidence_type": "archived_ena_xml",
+      "source_snapshot": "snapshots/chipseq/xml_validation_001/ena_xml_snapshot.tar.gz",
+      "unresolved_cases": [
+        {
+          "automatic_merge_allowed": false,
+          "declared_time_hours": 162,
+          "experiment_accessions": [
+            "ERX947764",
+            "ERX947771"
+          ],
+          "issue": "Two input experiments share one sample accession and the same time label; their relationship is unresolved.",
+          "run_accessions": [
+            "ERR868163",
+            "ERR868170"
+          ],
+          "sample_accession": "SAMEA3373350"
+        }
+      ]
+    },
+    "PRJNA865478": {
+      "evidence_type": "publication_methods",
+      "interpretation": {
+        "basis": "experiment_labels_and_publication_methods",
+        "control_pairing_status": "not_performed",
+        "time_label_to_days": {
+          "T3": 3,
+          "T7": 7
+        }
+      },
+      "reported_facts": {
+        "biological_replicates_pooled_before_ip": true,
+        "collection_days": [
+          3,
+          7
+        ],
+        "input_reserved_from_starting_chromatin": true
+      },
+      "source_sections": [
+        "2.2",
+        "2.3",
+        "2.4",
+        "Data availability statement"
+      ],
+      "source_url": "https://www.frontiersin.org/journals/bioengineering-and-biotechnology/articles/10.3389/fbioe.2022.1010719/full"
+    }
+  }
+}

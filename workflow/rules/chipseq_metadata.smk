@@ -25,7 +25,10 @@ rule chipseq_metadata_all:
         f"{SNAPSHOT}/xml_inventory.tsv",
         f"{SNAPSHOT}/annotations/chipseq_target_annotations.tsv",
         f"{SNAPSHOT}/annotations/chipseq_label_evidence.tsv",
-        f"{SNAPSHOT}/annotations/chipseq_label_summary.json"
+        f"{SNAPSHOT}/annotations/chipseq_label_summary.json",
+        f"{SNAPSHOT}/control_audit/chipseq_conditions.tsv",
+        f"{SNAPSHOT}/control_audit/chipseq_control_candidates.tsv",
+        f"{SNAPSHOT}/control_audit/control_candidate_summary.json"
 
 
 checkpoint chipseq_metadata_plan:
@@ -101,4 +104,31 @@ rule chipseq_annotate_labels:
         "--inventory {input.inventory:q} --snapshot {params.snapshot:q} "
         "--rules {input.rules:q} --outdir {params.outdir:q} "
         "> {log:q} 2>&1"
+
+rule chipseq_control_candidates:
+    input:
+        runs=lambda wildcards: str(
+            checkpoints.chipseq_metadata_plan.get().output.runs
+        ),
+        inventory=f"{SNAPSHOT}/xml_inventory.tsv",
+        annotations=f"{SNAPSHOT}/annotations/chipseq_target_annotations.tsv",
+        label_summary=f"{SNAPSHOT}/annotations/chipseq_label_summary.json",
+        rules="config/chipseq_condition_rules.json",
+        study_evidence="config/chipseq_study_evidence.json",
+        code="workflow/scripts/build_chipseq_control_candidates.py",
+        validator="workflow/scripts/fetch_chipseq_ena_xml.py"
+    output:
+        conditions=f"{SNAPSHOT}/control_audit/chipseq_conditions.tsv",
+        candidates=f"{SNAPSHOT}/control_audit/chipseq_control_candidates.tsv",
+        summary=f"{SNAPSHOT}/control_audit/control_candidate_summary.json"
+    params:
+        snapshot=SNAPSHOT,
+        outdir=f"{SNAPSHOT}/control_audit"
+    log:
+        f"{SNAPSHOT}/logs/control_candidates.log"
+    shell:
+        "python3 {input.code:q} --runs {input.runs:q} "
+        "--snapshot {params.snapshot:q} --rules {input.rules:q} "
+        "--study-evidence {input.study_evidence:q} "
+        "--outdir {params.outdir:q} > {log:q} 2>&1"
 

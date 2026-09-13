@@ -1,0 +1,23 @@
+{
+  "control_pairing": "not_performed",
+  "inventory_sha256": "b5e1ffa5b316e34162401fc789a3ea4786e3a5ed5aa78f5e32a2e73d8b398bdb",
+  "label_status_counts": {
+    "resolved_from_labels": 120
+  },
+  "role_counts": {
+    "input": 6,
+    "ip": 114
+  },
+  "rules_sha256": "a14edbae04f76c035d244786e529261c2dfc0fae255a87a4652561f132214373",
+  "run_count": 120,
+  "runs_sha256": "c13f1ffc79fc9e0ee3c97a293296c0a9a9ec2b25e67e836e6043986479f30911",
+  "script_sha256": "6f542b0f0e06eb602f44c4f3c413ba117cdf2eff9ec8e8c8ef8f7b861e15f0c9",
+  "target_counts": {
+    "H3K27ac": 20,
+    "H3K27me3": 18,
+    "H3K36me3": 18,
+    "H3K4me1": 18,
+    "H3K4me3": 20,
+    "H3K9me3": 20
+  }
+}

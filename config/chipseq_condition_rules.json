@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "patterns": [
+    {
+      "id": "alias_hours",
+      "field": "sample_alias",
+      "pattern": "(?P<context>.+?)_(?P<value>[0-9]+(?:[.][0-9]+)?)h_{assay}",
+      "unit": "hours"
+    },
+    {
+      "id": "alias_tp_hours",
+      "field": "sample_alias",
+      "pattern": "(?P<context>.+?)\\s+{assay}\\s+TP[0-9]+\\s+\\((?P<value>[0-9]+(?:[.][0-9]+)?)h\\)",
+      "unit": "hours"
+    },
+    {
+      "id": "title_time_label",
+      "field": "experiment_title",
+      "pattern": "ChIP-Seq \\({assay}\\) of (?P<context>.+?) (?P<value>T[0-9]+)",
+      "unit": "label"
+    }
+  ]
+}
