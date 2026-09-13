@@ -1,0 +1,4 @@
+chipseq_metadata:
+  samples: "config/samples.tsv"
+  plan_dir: "results/metadata/chipseq"
+  snapshot_dir: "results/metadata/chipseq/ena_snapshot_001"

@@ -1,0 +1,76 @@
+import csv
+
+configfile: "config/chipseq_metadata.yaml"
+
+CHIP = config["chipseq_metadata"]
+PLAN = CHIP["plan_dir"]
+SNAPSHOT = CHIP["snapshot_dir"]
+
+
+def chipseq_plan(wildcards):
+    return str(checkpoints.chipseq_metadata_plan.get().output.plan)
+
+
+def chipseq_record_files(wildcards):
+    with open(chipseq_plan(wildcards), encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    return [
+        f"{SNAPSHOT}/records/{row['accession']}/{name}"
+        for row in rows for name in ("record.xml", "receipt.json")
+    ]
+
+
+rule chipseq_metadata_all:
+    input:
+        f"{SNAPSHOT}/xml_inventory.tsv"
+
+
+checkpoint chipseq_metadata_plan:
+    input:
+        samples=CHIP["samples"],
+        code="workflow/scripts/build_chipseq_metadata_plan.py"
+    output:
+        runs=f"{PLAN}/chipseq_runs.tsv",
+        plan=f"{PLAN}/ena_request_plan.tsv",
+        provenance=f"{PLAN}/request_plan_provenance.json"
+    params:
+        outdir=PLAN
+    log:
+        f"{PLAN}/logs/request_plan.log"
+    shell:
+        "python3 {input.code:q} --samples {input.samples:q} "
+        "--outdir {params.outdir:q} > {log:q} 2>&1"
+
+
+rule chipseq_fetch_xml:
+    input:
+        plan=chipseq_plan,
+        code="workflow/scripts/fetch_chipseq_ena_xml.py"
+    output:
+        xml=f"{SNAPSHOT}/records/{{accession}}/record.xml",
+        receipt=f"{SNAPSHOT}/records/{{accession}}/receipt.json"
+    params:
+        outdir=SNAPSHOT
+    log:
+        f"{SNAPSHOT}/logs/{{accession}}.log"
+    shell:
+        "python3 {input.code:q} --plan {input.plan:q} "
+        "--outdir {params.outdir:q} --accessions {wildcards.accession:q} "
+        "> {log:q} 2>&1"
+
+
+rule chipseq_xml_inventory:
+    input:
+        plan=chipseq_plan,
+        records=chipseq_record_files,
+        code="workflow/scripts/summarize_chipseq_xml.py",
+        validator="workflow/scripts/fetch_chipseq_ena_xml.py"
+    output:
+        f"{SNAPSHOT}/xml_inventory.tsv"
+    params:
+        snapshot=SNAPSHOT
+    log:
+        f"{SNAPSHOT}/logs/inventory.log"
+    shell:
+        "python3 {input.code:q} --plan {input.plan:q} "
+        "--snapshot {params.snapshot:q} --output {output:q} > {log:q} 2>&1"
