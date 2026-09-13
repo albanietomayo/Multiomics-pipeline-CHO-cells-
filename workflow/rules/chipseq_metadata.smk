@@ -22,7 +22,10 @@ def chipseq_record_files(wildcards):
 
 rule chipseq_metadata_all:
     input:
-        f"{SNAPSHOT}/xml_inventory.tsv"
+        f"{SNAPSHOT}/xml_inventory.tsv",
+        f"{SNAPSHOT}/annotations/chipseq_target_annotations.tsv",
+        f"{SNAPSHOT}/annotations/chipseq_label_evidence.tsv",
+        f"{SNAPSHOT}/annotations/chipseq_label_summary.json"
 
 
 checkpoint chipseq_metadata_plan:
@@ -74,3 +77,28 @@ rule chipseq_xml_inventory:
     shell:
         "python3 {input.code:q} --plan {input.plan:q} "
         "--snapshot {params.snapshot:q} --output {output:q} > {log:q} 2>&1"
+
+rule chipseq_annotate_labels:
+    input:
+        runs=lambda wildcards: str(
+            checkpoints.chipseq_metadata_plan.get().output.runs
+        ),
+        inventory=f"{SNAPSHOT}/xml_inventory.tsv",
+        rules="config/chipseq_label_rules.json",
+        code="workflow/scripts/annotate_chipseq_labels.py",
+        validator="workflow/scripts/fetch_chipseq_ena_xml.py"
+    output:
+        annotations=f"{SNAPSHOT}/annotations/chipseq_target_annotations.tsv",
+        evidence=f"{SNAPSHOT}/annotations/chipseq_label_evidence.tsv",
+        summary=f"{SNAPSHOT}/annotations/chipseq_label_summary.json"
+    params:
+        snapshot=SNAPSHOT,
+        outdir=f"{SNAPSHOT}/annotations"
+    log:
+        f"{SNAPSHOT}/logs/annotations.log"
+    shell:
+        "python3 {input.code:q} --runs {input.runs:q} "
+        "--inventory {input.inventory:q} --snapshot {params.snapshot:q} "
+        "--rules {input.rules:q} --outdir {params.outdir:q} "
+        "> {log:q} 2>&1"
+
