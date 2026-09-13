@@ -800,7 +800,7 @@ rule star_align_unit:
             config["rnaseq"]["star_align_dir"]
             + "/{run_accession}/{alignment_unit}/"
             + "Aligned.sortedByCoord.out.bam.bai"
-        ),        
+        ),
         log=(
             config["rnaseq"]["star_align_dir"]
             + "/{run_accession}/{alignment_unit}/"
@@ -846,7 +846,7 @@ rule star_align_unit:
             --outSAMattrRGline ID:{params.rg_id} SM:{params.rg_sample} \
             --outSAMtype BAM SortedByCoordinate \
             --outFileNamePrefix {params.out_dir}/
-     
+
         samtools index \
             -@ {threads} \
             {output.bam} \
@@ -1132,6 +1132,35 @@ rule resolve_rseqc_strandedness_run:
 
 
 
+rule featurecounts_primary:
+    input:
+        bam=(
+            config["rnaseq"]["star_align_dir"]
+            + "/{run_accession}/{alignment_unit}/"
+            + "Aligned.sortedByCoord.out.bam"
+        ),
+        gtf=config["reference"]["gtf"],
+        classification=(
+            config["rnaseq"]["strandedness_dir"]
+            + "/{run_accession}/resolved_strandedness.tsv"
+        ),
+        script="workflow/scripts/run_featurecounts.py",
+        recovery="workflow/scripts/featurecounts_recovery.py"
+
+    output:
+        attempt=directory(config["rnaseq"]["counts_dir"] + "/{run_accession}/{alignment_unit}/.primary")
+    threads: 4
+    conda:
+        "../envs/rnaseq.yaml"
+    wildcard_constraints:
+        alignment_unit="PAIRED|SINGLE|UNPAIRED|UNPAIRED_R1|UNPAIRED_R2"
+    shell:
+        """
+        python {input.recovery:q} primary {output.attempt:q} {input.script:q} \
+            {input.classification:q} {wildcards.run_accession:q} {wildcards.alignment_unit:q} \
+            {input.gtf:q} {input.bam:q} {threads} unused unused unused
+        """
+
 rule featurecounts_unit:
     input:
         bam=(
@@ -1144,7 +1173,9 @@ rule featurecounts_unit:
             config["rnaseq"]["strandedness_dir"]
             + "/{run_accession}/resolved_strandedness.tsv"
         ),
-        script="workflow/scripts/run_featurecounts.py"
+        script="workflow/scripts/run_featurecounts.py",
+        recovery="workflow/scripts/featurecounts_recovery.py",
+        attempt=config["rnaseq"]["counts_dir"] + "/{run_accession}/{alignment_unit}/.primary"
 
     output:
         counts=(
@@ -1161,27 +1192,24 @@ rule featurecounts_unit:
             config["rnaseq"]["counts_dir"]
             + "/{run_accession}/{alignment_unit}/"
             + "featurecounts_strandedness.txt"
-        )
+        ),
+        provenance=config["rnaseq"]["counts_dir"] + "/{run_accession}/{alignment_unit}/featurecounts_provenance.json"
 
-    threads: 4
+
+    threads: 1
 
     conda:
-        "../envs/rnaseq.yaml"
+        "../envs/featurecounts_fallback.yaml"
 
     wildcard_constraints:
         alignment_unit="PAIRED|SINGLE|UNPAIRED|UNPAIRED_R1|UNPAIRED_R2"
 
     shell:
         """
-        python {input.script} \
-            {input.classification} \
-            {wildcards.run_accession} \
-            {wildcards.alignment_unit} \
-            {input.gtf} \
-            {input.bam} \
-            {threads} \
-            {output.counts} \
-            {output.strandedness}
+        python {input.recovery:q} finalize {input.attempt:q} {input.script:q} \
+            {input.classification:q} {wildcards.run_accession:q} {wildcards.alignment_unit:q} \
+            {input.gtf:q} {input.bam:q} {threads} \
+            {output.counts:q} {output.strandedness:q} {output.provenance:q}
         """
 
 rule rnaseq_featurecounts_validation:

@@ -236,7 +236,8 @@ copy_essential_outputs() {
 
     source_dir="results/rnaseq/counts/$run_accession"
     if [[ -d "$source_dir" ]]; then
-        find "$source_dir" -type f -name '*.summary' \
+        find "$source_dir" -type f \
+            \( -name '*.summary' -o -name '*strandedness.txt' -o -name '*.json' -o -name '*.log' \) \
             -exec cp --parents -t "$destination" {} +
     fi
 }
@@ -344,6 +345,7 @@ for run_accession in "${RUNS[@]}"; do
     } > "$ATTEMPT_SAVE/resource_summary.txt"
 
     if (( workflow_status != 0 )); then
+        copy_essential_outputs "$run_accession" "$ATTEMPT_SAVE/structured_outputs"
         printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
             "$run_accession" FAILED "$elapsed_seconds" "$max_rss_kbytes" \
             "$peak_apparent" "$peak_filesystem" "$gene_counts_bytes" \

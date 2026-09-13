@@ -2,6 +2,8 @@
 
 from pathlib import Path
 import csv
+import json
+import os
 import subprocess
 import sys
 
@@ -187,10 +189,13 @@ def main():
         ]
     )
 
-    subprocess.run(
-        command,
-        check=True,
-    )
+    try:
+        subprocess.run(command, check=True)
+    except subprocess.CalledProcessError as error:
+        report = os.environ.get("FEATURECOUNTS_SIGNAL_REPORT")
+        if report:
+            Path(report).write_text(json.dumps({"returncode": error.returncode}))
+        raise
 
     with open(
         output_strandedness,

@@ -1,0 +1,7 @@
+name: featurecounts-fallback
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.13
+  - subread=2.0.6
