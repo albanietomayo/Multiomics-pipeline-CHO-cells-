@@ -1,0 +1,4 @@
+chipseq_metadata:
+  samples: config/samples.tsv
+  plan_dir: results/chipseq/eligibility_validation/plan
+  snapshot_dir: results/chipseq/eligibility_validation/xml

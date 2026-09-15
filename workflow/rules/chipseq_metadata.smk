@@ -6,6 +6,12 @@ CHIP = config["chipseq_metadata"]
 PLAN = CHIP["plan_dir"]
 SNAPSHOT = CHIP["snapshot_dir"]
 
+# ChIP eligibility integration v1
+CHIP_ELIGIBILITY_SAMPLES = CHIP["samples"]
+CHIP_ELIGIBILITY_CONDITIONS = f"{SNAPSHOT}/control_audit/chipseq_conditions.tsv"
+CHIP_ELIGIBILITY_REPORT = f"{SNAPSHOT}/eligibility/experimental_eligibility.json"
+CHIP_ELIGIBILITY_PILOT = None
+
 
 def chipseq_plan(wildcards):
     return str(checkpoints.chipseq_metadata_plan.get().output.plan)
@@ -22,6 +28,7 @@ def chipseq_record_files(wildcards):
 
 rule chipseq_metadata_all:
     input:
+        CHIP_ELIGIBILITY_REPORT,
         f"{SNAPSHOT}/xml_inventory.tsv",
         f"{SNAPSHOT}/annotations/chipseq_target_annotations.tsv",
         f"{SNAPSHOT}/annotations/chipseq_label_evidence.tsv",
@@ -132,3 +139,5 @@ rule chipseq_control_candidates:
         "--study-evidence {input.study_evidence:q} "
         "--outdir {params.outdir:q} > {log:q} 2>&1"
 
+
+include: "chipseq_eligibility.smk"

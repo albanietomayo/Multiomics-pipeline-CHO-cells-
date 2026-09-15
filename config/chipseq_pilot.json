@@ -1,0 +1,39 @@
+{
+  "combined_fastq_bytes": 3902310393,
+  "initial_execution_scope": "download_preprocessing_qc",
+  "input_run_accession": "SRR20770287",
+  "ip_run_accession": "SRR20770297",
+  "pairing_status": "supported_by_metadata_and_publication_methods",
+  "pilot_id": "H3K4me3_day3",
+  "provenance_sha256": {
+    "candidate_summary": "4b142e603c711d3a2a0fc7ffbaf3c8b3e9719e88006bf7b4a521fec52ddf1cdd",
+    "samples": "8611f84086b97074cc2271a331adc42442bb5ebf908ee5a736db49f4f94bd570",
+    "study_evidence": "df7ec932a28b974a28db24b705dab36d3e080a99bb639f25237b09c7dcf611c1"
+  },
+  "publication_sections": [
+    "2.2",
+    "2.3",
+    "2.4",
+    "Data availability statement"
+  ],
+  "publication_url": "https://www.frontiersin.org/journals/bioengineering-and-biotechnology/articles/10.3389/fbioe.2022.1010719/full",
+  "quality_status": "not_evaluated",
+  "runs": [
+    {
+      "fastq_bytes": 1909331888,
+      "role": "ip",
+      "run_accession": "SRR20770297"
+    },
+    {
+      "fastq_bytes": 1992978505,
+      "role": "input",
+      "run_accession": "SRR20770287"
+    }
+  ],
+  "schema_version": 1,
+  "selection_basis": "lowest_combined_fastq_bytes_among_H3K4me3_day3_day7_pairs",
+  "study_accession": "PRJNA865478",
+  "target": "H3K4me3",
+  "time_unit": "days",
+  "time_value": 3
+}

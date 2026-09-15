@@ -1,0 +1,15 @@
+ M config/rnaseq_hpc_pilot_runs.tsv
+ M snapshots/2026-09-07/added_target_runs_since_2026-08-30.tsv
+ M snapshots/2026-09-07/snapshot_comparison_2026-08-30_to_2026-09-07.tsv
+ M workflow/rules/chipseq_metadata.smk
+?? .snakemake_chipseq_metadata/
+?? config/chipseq_experimental_eligibility.json
+?? config/chipseq_pilot.json
+?? docs/
+?? workflow/rules/chipseq_eligibility.smk
+?? workflow/rules/chipseq_preprocessing.smk
+?? workflow/scripts/prepare_chipseq_pilot_runs.py
+?? workflow/scripts/validate_chipseq_eligibility.py
+?? workflow/slurm/chipseq_preprocessing.sbatch
+?? workflow/slurm/submit_chipseq_preprocessing.sh
+?? workflow/slurm/validate_chipseq_eligibility.sbatch

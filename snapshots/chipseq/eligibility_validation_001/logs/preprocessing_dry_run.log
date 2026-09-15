@@ -1,0 +1,166 @@
+
+SNAKEMAKE
+=========
+  Date: 2026-09-15 19:44:56
+  Workflow ID: 70f2993f-638c-4898-aad0-d0b49830da94
+  Platform: Linux-5.14.0-687.33.1.el9_8.0.1.x86_64-x86_64-with-glibc2.34
+  Host: vera-r05-04
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /local/tmp.10295777/chipseq-validation-env/bin/snakemake chipseq_preprocessing_all --snakefile workflow/rules/chipseq_preprocessing.smk --cores 2 --use-conda --conda-prefix /local/tmp.10295777/chipseq-validation-rule-envs -n
+  Snakefile: /local/tmp.10295777/chipseq-eligibility-validation/workflow/rules/chipseq_preprocessing.smk
+  Base directory: /local/tmp.10295777/chipseq-eligibility-validation/workflow/rules
+  Run directory: /local/tmp.10295777/chipseq-eligibility-validation
+  Working directory: /local/tmp.10295777/chipseq-eligibility-validation
+  Config file(s): ['config/config.yaml']
+  Config MD5: bdf8f413fe66097b246c73f78bb828f1
+
+Building DAG of jobs...
+Updating checkpoint dependencies.
+Your conda installation is not configured to use strict channel priorities. This is however important for having robust and correct environments (for details, see https://conda-forge.org/docs/user/tipsandtricks.html). Please consider to configure strict priorities by executing 'conda config --set channel_priority strict'.
+Conda environment workflow/envs/reporting.yaml will be created.
+Conda environment workflow/envs/qc.yaml will be created.
+Conda environment workflow/envs/preprocessing.yaml will be created.
+Job stats:
+job                           count
+--------------------------  -------
+download_validation_fastq         2
+fastp_single                      2
+fastqc_raw                        2
+validation_download_report        1
+fastqc_post                       2
+multiqc_raw                       1
+multiqc_post                      1
+summarize_preprocessing_qc        1
+chipseq_preprocessing_all         1
+total                            13
+
+
+[Tue Sep 15 19:44:57 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    jobid: 14
+    reason: Missing output files: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    wildcards: run_accession=SRR20770297, filename=SRR20770297.fastq.gz
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    jobid: 13
+    reason: Missing output files: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    wildcards: run_accession=SRR20770287, filename=SRR20770287.fastq.gz
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    output: results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip
+    jobid: 16
+    reason: Missing output files: results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html; Input files updated by another job: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    wildcards: run_accession=SRR20770297, basename=SRR20770297
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule fastp_single:
+    input: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    output: results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.json, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.html
+    log: results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.log
+    jobid: 18
+    reason: Missing output files: results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.json, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.html; Input files updated by another job: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    wildcards: run_accession=SRR20770297, fastq_role=SINGLE, basename=SRR20770297
+    threads: 2
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule validation_download_report:
+    input: results/metadata/validation_fastq_manifest.tsv, data/raw/fastq/SRR20770287/SRR20770287.fastq.gz, data/raw/fastq/SRR20770297/SRR20770297.fastq.gz, workflow/scripts/download_validation_subset.py
+    output: results/metadata/reports/validation_download_summary.tsv
+    jobid: 2
+    reason: Missing output files: results/metadata/reports/validation_download_summary.tsv; Input files updated by another job: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz, data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule fastp_single:
+    input: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    output: results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.json, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.html
+    log: results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.log
+    jobid: 17
+    reason: Missing output files: results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.html, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.json; Input files updated by another job: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    wildcards: run_accession=SRR20770287, fastq_role=SINGLE, basename=SRR20770287
+    threads: 2
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    output: results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip
+    jobid: 15
+    reason: Missing output files: results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html; Input files updated by another job: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    wildcards: run_accession=SRR20770287, basename=SRR20770287
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz
+    output: results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip
+    log: results/qc/post/fastqc/SRR20770287/SRR20770287.fastqc.log
+    jobid: 19
+    reason: Missing output files: results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz
+    wildcards: run_accession=SRR20770287, basename=SRR20770287
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz
+    output: results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip
+    log: results/qc/post/fastqc/SRR20770297/SRR20770297.fastqc.log
+    jobid: 20
+    reason: Missing output files: results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.html; Input files updated by another job: results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz
+    wildcards: run_accession=SRR20770297, basename=SRR20770297
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule multiqc_raw:
+    input: results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip
+    output: results/qc/raw/multiqc/multiqc_report.html, results/qc/raw/multiqc/multiqc_report_data
+    jobid: 7
+    reason: Missing output files: results/qc/raw/multiqc/multiqc_report.html; Input files updated by another job: results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule summarize_preprocessing_qc:
+    input: results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip, results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.json, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.html, results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.json, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.html, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip, workflow/scripts/summarize_preprocessing_qc.py
+    output: results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv
+    log: results/preprocessing/fastp/reports/summarize_preprocessing_qc.log
+    jobid: 6
+    reason: Missing output files: results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv; Input files updated by another job: results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz, results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.html, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.json, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.html, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.json, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule multiqc_post:
+    input: results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip
+    output: results/qc/post/multiqc/multiqc_report.html, results/qc/post/multiqc/multiqc_report_data
+    log: results/qc/post/multiqc/multiqc.log
+    jobid: 8
+    reason: Missing output files: results/qc/post/multiqc/multiqc_report.html; Input files updated by another job: results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip
+    resources: tmpdir=/local/tmp.10295777
+[Tue Sep 15 19:44:57 2026]
+rule chipseq_preprocessing_all:
+    input: results/chipseq/eligibility/pilot_eligibility.json, results/metadata/reports/validation_download_summary.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv, results/qc/raw/multiqc/multiqc_report.html, results/qc/post/multiqc/multiqc_report.html
+    jobid: 0
+    reason: Input files updated by another job: results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv, results/qc/post/multiqc/multiqc_report.html, results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv, results/qc/raw/multiqc/multiqc_report.html, results/metadata/reports/validation_download_summary.tsv
+    resources: tmpdir=/local/tmp.10295777
+Job stats:
+job                           count
+--------------------------  -------
+download_validation_fastq         2
+fastp_single                      2
+fastqc_raw                        2
+validation_download_report        1
+fastqc_post                       2
+multiqc_raw                       1
+multiqc_post                      1
+summarize_preprocessing_qc        1
+chipseq_preprocessing_all         1
+total                            13
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        chipseq_preprocessing_all, fastp_single, fastqc_post, fastqc_raw, multiqc_post, multiqc_raw, summarize_preprocessing_qc, validation_download_report
+    output files have to be generated:
+        download_validation_fastq, fastp_single, fastqc_post, fastqc_raw, multiqc_post, multiqc_raw, summarize_preprocessing_qc, validation_download_report
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.

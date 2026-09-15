@@ -1,0 +1,19 @@
+{
+  "conditions_sha256": "12a6cb7c77a9ec9e1d6f560d24e6fa1e7ac5b1ecfa5192d668134cca6a7a447c",
+  "control_pairing": "not_approved_by_this_check",
+  "decisions_sha256": "1fe8d2defde8063857382a42353e619f8b849dd04804a2a0752970faf115d5ca",
+  "eligibility_counts": {
+    "retained_by_rules": 120
+  },
+  "pilot_sha256": "589fe6fe93eee6ca2e34402ee9599f4dd31cd039042d9f77dc11c731bf9adf35",
+  "reviewed_runs": 120,
+  "samples_sha256": "8611f84086b97074cc2271a331adc42442bb5ebf908ee5a736db49f4f94bd570",
+  "schema_version": 1,
+  "scope": "protocol_eligibility_only",
+  "selected_runs": [
+    "SRR20770287",
+    "SRR20770297"
+  ],
+  "technical_qc": "not_assessed_by_this_check",
+  "validator_sha256": "3b06373e9d9fde92f0307a6514fba4623190ce02cb020a542c3ee09c15f8f90f"
+}
