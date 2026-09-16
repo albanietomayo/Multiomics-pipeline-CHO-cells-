@@ -1,162 +1,69 @@
-from pathlib import Path
+"""Build a matrix from currently eligible RNA runs; record every input decision."""
+import argparse
 import csv
-import sys
+import gzip
+import hashlib
+import json
+import os
+import tempfile
+from pathlib import Path
+from selection_gate import ROOT, decision, fingerprint, write_rows
 
+ANNOTATION_COLUMNS = ['Geneid', 'Chr', 'Start', 'End', 'Strand', 'Length']
 
-ANNOTATION_COLUMNS = [
-    "Geneid",
-    "Chr",
-    "Start",
-    "End",
-    "Strand",
-    "Length",
-]
+def open_counts(path):
+    return gzip.open(path, 'rt') if str(path).endswith('.gz') else open(path)
 
-
-def read_run_counts(counts_file):
-    """
-    Read one run-level gene-count table.
-    """
-
-    rows = {}
-
-    with open(
-        counts_file,
-        "r",
-        encoding="utf-8",
-    ) as handle:
-
-        reader = csv.DictReader(
-            handle,
-            delimiter="\t",
-        )
-
-        if reader.fieldnames is None:
-            raise ValueError(
-                f"Missing header in {counts_file}."
-            )
-
-        if reader.fieldnames[:6] != ANNOTATION_COLUMNS:
-            raise ValueError(
-                f"Unexpected annotation columns in {counts_file}: "
-                f"{reader.fieldnames[:6]}"
-            )
-
-        if len(reader.fieldnames) != 7:
-            raise ValueError(
-                f"Expected exactly one count column in {counts_file}, "
-                f"found {len(reader.fieldnames) - 6}."
-            )
-
-        run_accession = reader.fieldnames[6]
-
+def read_run_counts(path, header_only=False):
+    with open_counts(path) as f:
+        reader=csv.DictReader(f, delimiter='\t')
+        if not reader.fieldnames or reader.fieldnames[:6]!=ANNOTATION_COLUMNS or len(reader.fieldnames)!=7:
+            raise ValueError(f'Expected six annotation columns and one run column: {path}')
+        acc=reader.fieldnames[6];rows={}
+        if header_only:return acc,rows
         for row in reader:
-            gene_id = row["Geneid"]
+            gene=row['Geneid'];count=int(row[acc])
+            if not gene or gene in rows or count<0:raise ValueError(f'Invalid or duplicate gene/count: {path}: {gene}')
+            rows[gene]={'annotation':[row[c] for c in ANNOTATION_COLUMNS],'count':count}
+        if not rows:raise ValueError(f'Empty counts: {path}')
+    return acc,rows
 
-            if gene_id in rows:
-                raise ValueError(
-                    f"Duplicate gene {gene_id} in {counts_file}."
-                )
-
-            rows[gene_id] = {
-                "annotation": [
-                    row[column]
-                    for column in ANNOTATION_COLUMNS
-                ],
-                "count": int(row[run_accession]),
-            }
-
-    return run_accession, rows
-
+def build(output, inputs, repo=ROOT):
+    output=Path(output);output.parent.mkdir(parents=True,exist_ok=True)
+    report=[];data=[];seen=set();hashes={}
+    for path in inputs:
+        path=Path(path);acc,_=read_run_counts(path,True)
+        ok,why=decision(acc,repo,'RNA-seq')
+        report.append(dict(path=str(path.resolve()),run_accession=acc,status='INCLUDED' if ok else 'BLOCKED',reason=why))
+        if not ok:continue
+        if acc in seen:raise ValueError('Duplicate run input: '+acc)
+        seen.add(acc);data.append(read_run_counts(path))
+        hashes[str(path.resolve())]=hashlib.sha256(path.read_bytes()).hexdigest()
+    write_rows(str(output)+'.selection.tsv',report,['path','run_accession','status','reason'])
+    if not data:raise ValueError('No eligible RNA-seq count inputs; matrix not written')
+    first=data[0][1]
+    for acc,rows in data[1:]:
+        if rows.keys()!=first.keys():raise ValueError('Gene set differs: '+acc)
+        for gene in first:
+            if rows[gene]['annotation']!=first[gene]['annotation']:raise ValueError('Annotation differs: '+acc+': '+gene)
+    # Never replace a valid old matrix with a partially written new matrix.
+    fd,name=tempfile.mkstemp(dir=output.parent,prefix=output.name+'.')
+    try:
+        with os.fdopen(fd,'w') as f:
+            w=csv.writer(f,delimiter='\t',lineterminator='\n');w.writerow(['Geneid']+[a for a,_ in data])
+            for gene in first:w.writerow([gene]+[rows[gene]['count'] for _,rows in data])
+        os.replace(name,output)
+    finally:
+        if os.path.exists(name):os.unlink(name)
+    Path(str(output)+'.provenance.json').write_text(json.dumps({'policy_inputs':fingerprint(repo),'count_inputs':hashes,'matrix_sha256':hashlib.sha256(output.read_bytes()).hexdigest()},indent=2)+'\n')
+    return len(data)
 
 def main():
-    if len(sys.argv) < 3:
-        raise ValueError(
-            "Usage: build_rnaseq_count_matrix.py "
-            "<output.tsv> <run_counts_1.tsv> "
-            "[run_counts_2.tsv ...]"
-        )
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('output',type=Path);p.add_argument('counts',nargs='*',type=Path)
+    p.add_argument('--repo',type=Path,default=ROOT);p.add_argument('--counts-list',type=Path)
+    a=p.parse_args();inputs=a.counts
+    if a.counts_list:inputs += [Path(s) for s in a.counts_list.read_text().splitlines() if s.strip()]
+    if not inputs:p.error('Provide count paths or --counts-list')
+    print('Matrix columns:',build(a.output,inputs,a.repo))
 
-    output_file = Path(sys.argv[1])
-    input_files = [
-        Path(path)
-        for path in sys.argv[2:]
-    ]
-
-    run_data = []
-
-    for counts_file in input_files:
-        run_accession, rows = read_run_counts(
-            counts_file
-        )
-
-        run_data.append(
-            (
-                run_accession,
-                rows,
-            )
-        )
-
-    reference_genes = set(
-        run_data[0][1].keys()
-    )
-
-    for run_accession, rows in run_data[1:]:
-        genes = set(rows.keys())
-
-        if genes != reference_genes:
-            raise ValueError(
-                f"Gene set differs for run {run_accession}."
-            )
-
-    first_rows = run_data[0][1]
-
-    output_file.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
-
-    with open(
-        output_file,
-        "w",
-        newline="",
-        encoding="utf-8",
-    ) as handle:
-
-        writer = csv.writer(
-            handle,
-            delimiter="\t",
-        )
-
-        writer.writerow(
-            ["Geneid"]
-            + [
-                run_accession
-                for run_accession, _ in run_data
-            ]
-        )
-
-        for gene_id in first_rows:
-            counts = []
-
-            for run_accession, rows in run_data:
-                if (
-                    rows[gene_id]["annotation"]
-                    != first_rows[gene_id]["annotation"]
-                ):
-                    raise ValueError(
-                        f"Inconsistent annotation for gene "
-                        f"{gene_id} in run {run_accession}."
-                    )
-
-                counts.append(
-                    rows[gene_id]["count"]
-                )
-
-            writer.writerow(
-                [gene_id] + counts
-            )
-
-
-if __name__ == "__main__":
-    main()
+if __name__=='__main__':main()

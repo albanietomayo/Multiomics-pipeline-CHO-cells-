@@ -16,6 +16,10 @@ def load_rnaseq_validation_manifest():
         manifest["omics"] == "RNA-seq"
     ].copy()
 
+    rnaseq_manifest = rnaseq_manifest[
+        rnaseq_manifest["run_accession"].map(lambda acc: selection_decision(acc, omics="RNA-seq")[0])
+    ].copy()
+
     if rnaseq_manifest.empty:
         raise ValueError(
             "No RNA-seq records found in the validation FASTQ manifest."
@@ -1246,19 +1250,21 @@ rule rnaseq_run_counts_validation:
 rule build_rnaseq_count_matrix:
     input:
         counts=lambda wildcards: get_rnaseq_run_counts_outputs(),
-        script="workflow/scripts/build_rnaseq_count_matrix.py"
+        script="workflow/scripts/build_rnaseq_count_matrix.py",
+        selection=list(SELECTION_FILES)
 
     output:
-        matrix=config["rnaseq"]["counts_matrix"]
+        matrix=config["rnaseq"]["counts_matrix"],
+        selection=config["rnaseq"]["counts_matrix"] + ".selection.tsv"
 
     conda:
         "../envs/reporting.yaml"
 
     shell:
         """
-        python {input.script} \
-            {output.matrix} \
-            {input.counts}
+        python {input.script:q} \
+            {output.matrix:q} \
+            {input.counts:q}
         """
 
 rule rnaseq_validation:
@@ -1320,4 +1326,49 @@ rule combine_featurecounts_qc:
         python {input.script} \
             {output.summary} \
             {input.metrics}
+        """
+
+# Explicit production targets: reconcile saved counts, then build the eligible matrix.
+# Existing default validation targets remain separate from the production matrix.
+def production_runs_root(wildcards):
+    root = config.get("rnaseq_production_runs_root", "")
+    if not root:
+        raise ValueError("Set --config rnaseq_production_runs_root=/absolute/path/to/production/runs")
+    return root
+
+checkpoint rnaseq_production_inventory:
+    input:
+        runs_root=production_runs_root,
+        selection=list(SELECTION_FILES),
+        script="workflow/scripts/inventory_selection_results.py"
+    output:
+        counts="results/rnaseq/production_selection/eligible_counts.list",
+        summary="results/rnaseq/production_selection/summary.json",
+        runs="results/rnaseq/production_selection/run_status.tsv",
+        missing="results/rnaseq/production_selection/missing_or_unverified.tsv",
+        files="results/rnaseq/production_selection/excluded_files.tsv"
+    shell:
+        """
+        python {input.script:q} --runs-root {input.runs_root:q} \\
+          --outdir results/rnaseq/production_selection --refresh
+        """
+
+def production_count_files(wildcards):
+    checked = checkpoints.rnaseq_production_inventory.get()
+    with open(checked.output.counts) as handle:
+        return [line.strip() for line in handle if line.strip()]
+
+rule rnaseq_production_count_matrix:
+    input:
+        counts=production_count_files,
+        counts_list=lambda wildcards: checkpoints.rnaseq_production_inventory.get().output.counts,
+        selection=list(SELECTION_FILES),
+        script="workflow/scripts/build_rnaseq_count_matrix.py"
+    output:
+        matrix="results/rnaseq/production_matrix/gene_counts.tsv",
+        selection="results/rnaseq/production_matrix/gene_counts.tsv.selection.tsv",
+        provenance="results/rnaseq/production_matrix/gene_counts.tsv.provenance.json"
+    shell:
+        """
+        python {input.script:q} {output.matrix:q} --counts-list {input.counts_list:q}
         """

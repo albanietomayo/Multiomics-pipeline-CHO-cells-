@@ -1,3 +1,8 @@
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path("workflow/scripts").resolve()))
+from selection_gate import decision as selection_decision, FILES as SELECTION_FILES
+
 import pandas as pd
 
 rule fastq_manifest:
@@ -20,10 +25,12 @@ checkpoint validation_fastq_manifest:
     input:
         manifest=config["fastq"]["manifest"],
         validation_runs=config["fastq"]["validation_runs"],
-        script="workflow/scripts/build_validation_manifest.py"
+        script="workflow/scripts/build_validation_manifest.py",
+        selection=list(SELECTION_FILES)
 
     output:
-        manifest=config["fastq"]["validation_manifest"]
+        manifest=config["fastq"]["validation_manifest"],
+        selection=config["fastq"]["validation_manifest"] + ".selection.tsv"
 
     shell:
         """

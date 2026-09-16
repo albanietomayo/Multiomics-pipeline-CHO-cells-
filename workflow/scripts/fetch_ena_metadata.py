@@ -16,6 +16,8 @@ import pandas as pd
 import requests
 import yaml
 
+from selection_policy import reclassify_dataframe, save_workflow_audit
+
 
 # ===================================================================
 # Paths - Localiza la raiz del proyecto y el archivo de configuracion
@@ -442,15 +444,6 @@ def apply_study_curation(metadata, curation_rules):
 
     return metadata
 
-def build_samples_table(dataframe, target_omics):
-    """Build the final table of target samples for downstream processing."""
-
-    samples = dataframe[
-        dataframe["omics"].isin(target_omics)
-        & (dataframe["target_status"] == "target")
-    ].copy()
-
-    return samples
 
 # ============================================================
 # Output
@@ -477,20 +470,6 @@ def save_metadata_table(dataframe, output_file, label):
         f"({len(dataframe)} records)"
     )
 
-def build_samples_table(dataframe, target_omics):
-    """
-    Build the final sample table used by downstream workflow steps.
-
-    Retain only records belonging to the target omics and finally
-    classified as target after study-specific curation.
-    """
-
-    samples = dataframe[
-        dataframe["omics"].isin(target_omics)
-        & (dataframe["target_status"] == "target")
-    ].copy()
-
-    return samples
 
 def build_samples_table(dataframe, target_omics):
     """
@@ -503,6 +482,7 @@ def build_samples_table(dataframe, target_omics):
     samples = dataframe[
         dataframe["omics"].isin(target_omics)
         & (dataframe["target_status"] == "target")
+        & (dataframe["selection_status"] == "retained_by_rules")
     ].copy()
 
     return samples
@@ -707,6 +687,27 @@ def main():
     metadata = apply_study_curation(
         metadata,
         curation_rules,
+    )
+
+    # Previous stage tables remain legacy diagnostic evidence. The final table
+    # independently resolves sample identity, conflicts and protocol eligibility.
+    metadata = reclassify_dataframe(
+        metadata, rules, curation_rules,
+        PROJECT_ROOT / "config" / "selection_decisions.tsv", target_omics,
+    )
+
+    save_workflow_audit(
+        metadata,
+        PROJECT_ROOT / config["metadata"].get("selection_audit_dir", "results/metadata/selection_audit"),
+        {
+            "fastq_metadata": fastq_output_file,
+            "classification_rules": rules_file,
+            "study_curation": curated_studies_file,
+            "run_decisions": PROJECT_ROOT / "config/selection_decisions.tsv",
+            "policy_code": PROJECT_ROOT / "workflow/scripts/selection_policy.py",
+            "config": PROJECT_ROOT / "config/config.yaml",
+        },
+        target_omics,
     )
 
     save_metadata_table(

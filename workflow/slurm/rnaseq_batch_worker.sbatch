@@ -14,7 +14,7 @@ if [[ ! "$BATCH_ID" =~ ^(SMALL|MEDIUM|LARGE|XLARGE|XXLARGE)_[0-9]{3}$ ]]; then
 fi
 
 PROJECT_HOME="${PROJECT_HOME:-$HOME/TFM_multiomics_pipeline_git}"
-PLAN_REL="benchmarks/rnaseq/2026-09-10/rnaseq_batches.tsv"
+PLAN_REL="${RNASEQ_PLAN_REL:-benchmarks/rnaseq/2026-09-10/rnaseq_batches.tsv}"
 SAVE_ROOT="${RNASEQ_SAVE_ROOT:-$HOME/hpc_rnaseq_production_results}"
 JOB_TAG="${SLURM_JOB_ID:-manual}"
 WORK="$TMPDIR/TFM_multiomics_pipeline_${BATCH_ID}"
@@ -76,30 +76,25 @@ if [[ ! -f "$PLAN_REL" ]]; then
     exit 2
 fi
 
-mapfile -t RUNS < <(
-    awk -F '\t' -v batch="$BATCH_ID" \
-        'NR > 1 && $1 == batch {print $2 "\t" $4}' "$PLAN_REL" \
-        | sort -n -k1,1 \
-        | cut -f2
-)
-
-if (( ${#RUNS[@]} == 0 )); then
-    echo "ERROR: no runs found for $BATCH_ID" >&2
-    exit 2
-fi
-
-if (( $(printf '%s\n' "${RUNS[@]}" | sort -u | wc -l) != ${#RUNS[@]} )); then
-    echo "ERROR: duplicate runs in $BATCH_ID" >&2
-    exit 2
-fi
-
+# Re-evaluate old plans before any environment setup or downloads.
+SELECTION_ARGS=()
 if [[ -n "${PILOT_RUN:-}" ]]; then
-    if ! printf '%s\n' "${RUNS[@]}" | grep -Fxq -- "$PILOT_RUN"; then
-        echo "ERROR: PILOT_RUN $PILOT_RUN does not belong to $BATCH_ID" >&2
-        exit 2
-    fi
-    RUNS=("$PILOT_RUN")
+    SELECTION_ARGS+=(--pilot "$PILOT_RUN")
 fi
+python3 workflow/scripts/selection_gate.py batch \
+    --plan "$PLAN_REL" --batch "$BATCH_ID" --runs-root "$RUNS_SAVE" \
+    --outdir "$BATCH_SAVE/selection" "${SELECTION_ARGS[@]}"
+mapfile -t RUNS < <(awk 'NR > 1' "$BATCH_SAVE/selection/runs.tsv")
+tar -czf "$BATCH_SAVE/selection_inputs.tar.gz" \
+    config/samples.tsv config/selection_audit_input_20260914.tsv \
+    config/classification_rules.tsv config/curated_studies.tsv \
+    config/selection_decisions.tsv workflow/scripts/selection_policy.py \
+    workflow/scripts/selection_gate.py
+if (( ${#RUNS[@]} == 0 )); then
+    printf 'status\tno_eligible_unverified_runs\n' > "$BATCH_SAVE/finished_no_eligible_work.tsv"
+    exit 0
+fi
+python3 workflow/scripts/selection_gate.py assert "$WARMUP_RUN" "${RUNS[@]}" --omics RNA-seq
 
 {
     printf 'run_accession\n'
@@ -142,6 +137,8 @@ SNAKEMAKE="$MAIN_ENV/bin/snakemake"
     -p \
     > "$BATCH_SAVE/validation_manifest_setup.log" 2>&1
 
+# Metadata may have changed during retrieval. Fail closed before computation.
+python workflow/scripts/selection_gate.py assert "$WARMUP_RUN" "${RUNS[@]}" --omics RNA-seq
 cp "$VALIDATION_MANIFEST_REL" "$BATCH_SAVE/validation_fastq_manifest.tsv"
 
 WARMUP_TARGET="results/rnaseq/counts_by_run/$WARMUP_RUN/gene_counts.tsv"

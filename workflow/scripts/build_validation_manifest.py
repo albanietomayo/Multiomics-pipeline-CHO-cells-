@@ -11,6 +11,7 @@ import argparse
 from pathlib import Path
 
 import pandas as pd
+from selection_gate import decision, write_rows
 
 
 def build_validation_manifest(manifest, validation_runs):
@@ -114,6 +115,13 @@ def main():
         dtype=str,
     ).fillna("")
 
+    selection = []
+    for acc in validation_runs["run_accession"].unique():
+        ok, reason = decision(acc)
+        selection.append(dict(run_accession=acc, status="INCLUDED" if ok else "BLOCKED", reason=reason))
+    write_rows(str(args.output) + ".selection.tsv", selection, ["run_accession", "status", "reason"])
+    allowed = {r["run_accession"] for r in selection if r["status"] == "INCLUDED"}
+    validation_runs = validation_runs[validation_runs["run_accession"].isin(allowed)]
     subset = build_validation_manifest(
         manifest,
         validation_runs,

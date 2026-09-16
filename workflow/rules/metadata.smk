@@ -6,6 +6,8 @@ rule metadata:
     input:
         classification_rules="config/classification_rules.tsv",
         curated_studies=config["metadata"]["curated_studies"],
+        selection_policy="workflow/scripts/selection_policy.py",
+        selection_decisions="config/selection_decisions.tsv",
         script="workflow/scripts/fetch_ena_metadata.py"
 
     output:
@@ -17,7 +19,10 @@ rule metadata:
         cell_type=config["metadata"]["cell_type_output"],
         external_rules=config["metadata"]["external_rules_output"],
         curated=config["metadata"]["curation_output"],
-        samples=config["metadata"]["output"]
+        samples=config["metadata"]["output"],
+        selection_summary=config["metadata"].get("selection_audit_dir", "results/metadata/selection_audit") + "/summary.json",
+        selection_excluded=config["metadata"].get("selection_audit_dir", "results/metadata/selection_audit") + "/excluded.tsv",
+        selection_review=config["metadata"].get("selection_audit_dir", "results/metadata/selection_audit") + "/review_required.tsv"
 
     params:
         target_name=config["target"]["name"],
