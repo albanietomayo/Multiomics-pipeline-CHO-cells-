@@ -86,8 +86,12 @@ they are not a resource benchmark or a portable scheduler profile.
 original checksums, code snapshot and provenance from job 10297369. Large BAMs,
 indexes, FASTQ, references and environments are not committed. The dated
 historical launcher/worker preserve exactly how that job ran, not the new rules.
-The new integrated validation has been tested on synthetic BAMs and on the
-persisted numeric TSS reports; it still needs to be run against the real Vera BAMs.
+The integrated validation also passed on the real persistent BAMs and TSS outputs
+for SRR12774931 and SRR12774932 in Vera job 10300242 (2026-09-16, COMPLETED 0:0,
+00:00:53), using commit 0c74840255e558e1726b90cb55f5067737db41f1.
+Only the two atacseq_validate_existing rules and their aggregate ran; alignment
+and TSS calculation were not repeated. Reports, input hashes and execution
+evidence are archived in benchmarks/atacseq/2026-09-16/verification_job_10300242.
 
 `benchmarks/atacseq/2026-09-14/paired_technical/` preserves the three supplied PE
 working files and patch on top of remote commit 354cf261. The old worker targets

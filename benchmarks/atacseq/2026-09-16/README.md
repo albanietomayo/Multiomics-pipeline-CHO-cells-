@@ -23,5 +23,9 @@ The separate evidence_SHA256SUMS.txt covers files included here.
 
 Historical code is deliberately retained byte-for-byte; its hardcoded old hashes
 and paths are provenance, not the current launcher. Use workflow/scripts/launch_atac_bulk.py.
-The new validation rules were not part of job 10297369. Their execution on the original
-BAMs remains to be run using atacseq_existing_all; local tests do not substitute for it.
+The new validation rules were not part of job 10297369. They subsequently passed
+on both original BAMs and TSS outputs through atacseq_existing_all in Vera job
+10300242 on 2026-09-16 (COMPLETED 0:0, 53 seconds, three completed steps).
+See verification_job_10300242/ for the reports, hashes and execution evidence.
+This is technical verification of existing outputs, not a new alignment or
+a completed biological quality assessment of the atlas.
