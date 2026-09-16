@@ -1,0 +1,30 @@
+{
+  "policy": "2026-09-14-proposal3",
+  "input_rows": 1983,
+  "scope": "Only the supplied input; previously excluded runs absent from it are not audited.",
+  "statuses": {
+    "retained_by_rules": 1883,
+    "excluded": 92,
+    "review_required": 8
+  },
+  "by_omics": {
+    "ATAC-seq": {
+      "excluded": 12,
+      "retained_by_rules": 2
+    },
+    "ChIP-seq": {
+      "retained_by_rules": 120
+    },
+    "RNA-seq": {
+      "retained_by_rules": 1761,
+      "excluded": 80,
+      "review_required": 8
+    }
+  },
+  "sha256_inputs": {
+    "input": "8611f84086b97074cc2271a331adc42442bb5ebf908ee5a736db49f4f94bd570",
+    "rules": "19a43f81f888ab36bed31753d577d47a4a9c2e62472e3f4e6f396e47540bd10a",
+    "curated": "2fec61c8c5f211e2e4d966f561f4e252663e3402aae6ba054f036bcf06f1871d",
+    "decisions": "de91245f4c22152fc1a54066d30dd282f82070676fb8cac5d82230f396c799f6"
+  }
+}
