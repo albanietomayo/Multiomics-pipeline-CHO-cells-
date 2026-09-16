@@ -1,0 +1,38 @@
+New version of client (18.37.0) available at https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets.
+[INFO] Reference directory ready: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0
+[INFO] Temporary workspace created: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0/.tmp_reference_qda7i0qf
+[INFO] Downloading reference assembly: GCF_003668045.3
+[INFO] Command: datasets download genome accession GCF_003668045.3 --include genome,gff3,gtf,seq-report --filename /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0/.tmp_reference_qda7i0qf/reference.zip --no-progressbar
+[INFO] Reference package downloaded: 779,672,090 bytes
+[INFO] Located fasta: GCF_003668045.3_CriGri-PICRH-1.0_genomic.fna (2,396,323,876 bytes)
+[INFO] Located gff3: genomic.gff (348,327,957 bytes)
+[INFO] Located gtf: genomic.gtf (474,171,214 bytes)
+[INFO] Located sequence_report: sequence_report.jsonl (195,537 bytes)
+[INFO] NCBI MD5 validation passed for 6 files.
+[INFO] Assembly metadata validated successfully.
+[INFO] Verified accession: GCF_003668045.3
+[INFO] Verified organism: Cricetulus griseus
+[INFO] Verified taxid: 10029
+[INFO] Verified assembly name: CriGri-PICRH-1.0
+[INFO] Verified paired GenBank accession: GCA_003668045.2
+[INFO] Copying fasta: GCF_003668045.3_CriGri-PICRH-1.0_genomic.fna -> genome.fa
+[INFO] Copying gff3: genomic.gff -> annotation.gff3
+[INFO] Copying gtf: genomic.gtf -> annotation.gtf
+[INFO] Copying sequence_report: sequence_report.jsonl -> sequence_report.jsonl
+[INFO] Installed fasta: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0/genome.fa (2,396,323,876 bytes)
+[INFO] Installed gff3: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0/annotation.gff3 (348,327,957 bytes)
+[INFO] Installed gtf: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0/annotation.gtf (474,171,214 bytes)
+[INFO] Installed sequence_report: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0/sequence_report.jsonl (195,537 bytes)
+[INFO] Temporary workspace cleaned successfully.
+[INFO] Reference metadata written: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0/reference_metadata.tsv
+[INFO] SHA-256 manifest written: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0/SHA256SUMS.txt
+[INFO] Reference genome acquisition completed successfully.
+[INFO] Reference configuration validated.
+[INFO] Species: Cricetulus griseus
+[INFO] Assembly: CriGri-PICRH-1.0
+[INFO] RefSeq accession: GCF_003668045.3
+[INFO] Annotation release: 104
+[INFO] Reference directory: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0
+[INFO] FASTA output: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0/genome.fa
+[INFO] GFF3 output: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0/annotation.gff3
+[INFO] GTF output: /local/tmp.10297460/chipseq-alignment/resources/reference/CriGri-PICRH-1.0/annotation.gtf

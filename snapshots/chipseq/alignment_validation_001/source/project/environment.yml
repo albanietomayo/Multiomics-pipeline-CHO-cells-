@@ -1,0 +1,13 @@
+name: cho-multiomics
+
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - python=3.14.7
+  - snakemake-minimal=9.25.2
+  - conda=26.7.2
+  - pandas=3.0.5
+  - requests=2.34.2
+  - pyyaml=6.0.3

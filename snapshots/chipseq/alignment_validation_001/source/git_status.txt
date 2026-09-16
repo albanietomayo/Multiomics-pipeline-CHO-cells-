@@ -1,0 +1,11 @@
+ M config/rnaseq_hpc_pilot_runs.tsv
+ M snapshots/2026-09-07/added_target_runs_since_2026-08-30.tsv
+ M snapshots/2026-09-07/snapshot_comparison_2026-08-30_to_2026-09-07.tsv
+?? .snakemake_chipseq_metadata/
+?? config/chipseq_alignment.json
+?? docs/chipseq_alignment_pilot.md
+?? workflow/envs/chipseq_alignment.yaml
+?? workflow/rules/chipseq_alignment.smk
+?? workflow/scripts/chipseq_alignment_support.py
+?? workflow/slurm/chipseq_alignment.sbatch
+?? workflow/slurm/submit_chipseq_alignment.py

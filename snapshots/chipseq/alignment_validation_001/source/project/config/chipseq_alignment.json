@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "source_project": "results/chipseq/preprocessing/slurm/submission_ouZEJU/project",
+  "source_checksums": "results/chipseq/preprocessing/slurm/submission_ouZEJU/job_10280363/output.sha256",
+  "source_job_status": "results/chipseq/preprocessing/slurm/submission_ouZEJU/job_10280363/job_status.tsv",
+  "mitochondrial_accession": "NC_007936.1",
+  "bowtie2_mode": "local",
+  "bowtie2_preset": "very-sensitive-local",
+  "bowtie2_seed": 0,
+  "diagnostic_mapq": 30,
+  "threads": 8,
+  "scope": "single_end_pilot_alignment_and_qc"
+}

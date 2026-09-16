@@ -1,0 +1,8 @@
+[WARNING] Failed to launch x86-64-v3 version, staying with default
+[WARNING] Failed to launch x86-64-v3 version, staying with default
+41724399 reads; of these:
+  41724399 (100.00%) were unpaired; of these:
+    251988 (0.60%) aligned 0 times
+    27796535 (66.62%) aligned exactly 1 time
+    13675876 (32.78%) aligned >1 times
+99.40% overall alignment rate

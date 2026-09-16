@@ -1,0 +1,30 @@
+{
+  "reports_sha256": {
+    "results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv": "d23b948312740481d3d3aca801c884aed570b2122da17fa704d2da6d85950775",
+    "results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv": "40cfb89eb32f89f42d496a5cbb68ed6215f2c22034613a9435c75eddd570f324"
+  },
+  "runs": [
+    {
+      "bytes": 2074896787,
+      "destination": "inputs/SRR20770287.fastq.gz",
+      "reads": 43830994,
+      "role": "input",
+      "run_accession": "SRR20770287",
+      "sha256": "deb4b7cdb29138a147f9f8eb520883d1e955d800770faa5a90a316fd13bd7a45",
+      "source_relative": "results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz"
+    },
+    {
+      "bytes": 1986651686,
+      "destination": "inputs/SRR20770297.fastq.gz",
+      "reads": 41724399,
+      "role": "ip",
+      "run_accession": "SRR20770297",
+      "sha256": "b69bbaeabca6bddcd06137219eae4f9e23f9f04de3be9408ea1a94f6fbea229c",
+      "source_relative": "results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz"
+    }
+  ],
+  "schema_version": 1,
+  "source_root": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq/results/chipseq/preprocessing/slurm/submission_ouZEJU/project",
+  "upstream_checksums_sha256": "ebd46e84698b77bb1e5478006950c486cc27407d6ff72bb852f7d8c711fff7f8",
+  "upstream_status_sha256": "4a347be82c3f3c8b4b9f6f9c2f1b424612c5b7e36b11010fedf38be8557681ae"
+}

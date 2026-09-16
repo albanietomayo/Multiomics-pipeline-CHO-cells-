@@ -1,0 +1,43 @@
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-09-16 10:47:49
+  Workflow ID: d39e70f2-7ce7-4230-abe9-c054eec096ca
+  Platform: Linux-5.14.0-687.33.1.el9_8.0.1.x86_64-x86_64-with-glibc2.34
+  Host: vera-r05-04
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /local/tmp.10297460/chipseq-alignment-env/bin/snakemake chipseq_experimental_eligibility --snakefile workflow/rules/chipseq_alignment.smk --cores 8 --use-conda --conda-prefix /local/tmp.10297460/chipseq-alignment-rule-envs --rerun-incomplete -p
+  Snakefile: /local/tmp.10297460/chipseq-alignment/workflow/rules/chipseq_alignment.smk
+  Base directory: /local/tmp.10297460/chipseq-alignment/workflow/rules
+  Run directory: /local/tmp.10297460/chipseq-alignment
+  Working directory: /local/tmp.10297460/chipseq-alignment
+  Config file(s): ['config/config.yaml']
+  Config MD5: 5520137b2755d8b38f50d163e3d67c0c
+
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                                 count
+--------------------------------  -------
+chipseq_experimental_eligibility        1
+total                                   1
+
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Sep 16 10:47:49 2026]
+localrule chipseq_experimental_eligibility:
+    input: config/chipseq_experimental_eligibility.json, config/samples.tsv, snapshots/chipseq/control_validation_001/chipseq_conditions.tsv, config/chipseq_pilot.json, snapshots/chipseq/control_validation_001/chipseq_conditions.tsv, snapshots/chipseq/control_validation_001/control_candidate_summary.json, snapshots/chipseq/control_validation_001/request_plan_provenance.json, workflow/scripts/validate_chipseq_eligibility.py
+    output: results/chipseq/alignment/pilot_eligibility.json
+    jobid: 0
+    reason: Missing output files: results/chipseq/alignment/pilot_eligibility.json
+    resources: tmpdir=/local/tmp.10297460
+Shell command: python3 workflow/scripts/validate_chipseq_eligibility.py --decisions config/chipseq_experimental_eligibility.json --samples config/samples.tsv --conditions snapshots/chipseq/control_validation_001/chipseq_conditions.tsv --pilot config/chipseq_pilot.json --report results/chipseq/alignment/pilot_eligibility.json
+[Wed Sep 16 10:47:49 2026]
+Finished jobid: 0 (Rule: chipseq_experimental_eligibility)
+1 of 1 steps (100%) done
+Complete log(s): /local/tmp.10297460/chipseq-alignment/.snakemake/log/2026-09-16T104749.111555.snakemake.log

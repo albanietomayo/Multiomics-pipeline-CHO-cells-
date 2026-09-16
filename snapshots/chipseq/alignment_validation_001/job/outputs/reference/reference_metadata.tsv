@@ -1,0 +1,13 @@
+field	value
+source	NCBI
+species	Cricetulus griseus
+taxid	10029
+assembly_name	CriGri-PICRH-1.0
+refseq_accession	GCF_003668045.3
+genbank_accession	GCA_003668045.2
+configured_annotation_release	104
+retrieval_timestamp_utc	2026-09-16T08:49:22.706740+00:00
+fasta	resources/reference/CriGri-PICRH-1.0/genome.fa
+gff3	resources/reference/CriGri-PICRH-1.0/annotation.gff3
+gtf	resources/reference/CriGri-PICRH-1.0/annotation.gtf
+sequence_report	resources/reference/CriGri-PICRH-1.0/sequence_report.jsonl

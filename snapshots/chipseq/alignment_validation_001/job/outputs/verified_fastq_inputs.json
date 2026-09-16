@@ -1,0 +1,12 @@
+{
+  "runs": [
+    {
+      "run_accession": "SRR20770287",
+      "sha256": "deb4b7cdb29138a147f9f8eb520883d1e955d800770faa5a90a316fd13bd7a45"
+    },
+    {
+      "run_accession": "SRR20770297",
+      "sha256": "b69bbaeabca6bddcd06137219eae4f9e23f9f04de3be9408ea1a94f6fbea229c"
+    }
+  ]
+}
