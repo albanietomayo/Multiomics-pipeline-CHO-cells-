@@ -1,0 +1,163 @@
+
+SNAKEMAKE
+=========
+  Date: 2026-09-16 14:06:36
+  Workflow ID: e824058e-11f9-4751-9c4b-cca4f36835a0
+  Platform: Linux-5.14.0-687.33.1.el9_8.0.1.x86_64-x86_64-with-glibc2.34
+  Host: vera-r06-05
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /local/tmp.10297738/chipseq-filtering-env/bin/snakemake chipseq_filtering_all --snakefile workflow/rules/chipseq_filtering.smk --cores 4 --resources mem_mb=20000 --use-conda --conda-prefix /local/tmp.10297738/chipseq-filtering-rule-envs --rerun-incomplete -n
+  Snakefile: /local/tmp.10297738/chipseq-filtering/workflow/rules/chipseq_filtering.smk
+  Base directory: /local/tmp.10297738/chipseq-filtering/workflow/rules
+  Run directory: /local/tmp.10297738/chipseq-filtering
+  Working directory: /local/tmp.10297738/chipseq-filtering
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Your conda installation is not configured to use strict channel priorities. This is however important for having robust and correct environments (for details, see https://conda-forge.org/docs/user/tipsandtricks.html). Please consider to configure strict priorities by executing 'conda config --set channel_priority strict'.
+Conda environment workflow/envs/chipseq_duplicates.yaml will be created.
+Conda environment workflow/envs/chipseq_filtering.yaml will be created.
+Job stats:
+job                          count
+-------------------------  -------
+chipseq_filter_stage             2
+chipseq_mark_duplicates          2
+chipseq_filter_bam               2
+chipseq_filtered_index           2
+chipseq_filtered_qc              2
+chipseq_filtering_summary        1
+chipseq_filtering_all            1
+total                           12
+
+
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_filter_stage:
+    input: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq/results/chipseq/alignment/slurm/submission__niyvyr2/job_10297460/outputs/SRR20770287/raw.sorted.bam, config/chipseq_filtering_inputs.json, config/chipseq_filtering.json, workflow/scripts/chipseq_filtering_support.py, inputs/reference/genome_plus_mt.fa.fai, results/chipseq/filtering/pilot_eligibility.json
+    output: inputs/SRR20770287/raw.sorted.bam, results/chipseq/filtering/SRR20770287/input_validation.json
+    log: results/chipseq/filtering/SRR20770287/stage.log
+    jobid: 3
+    reason: Missing output files: results/chipseq/filtering/SRR20770287/input_validation.json, inputs/SRR20770287/raw.sorted.bam
+    wildcards: run=SRR20770287
+    resources: tmpdir=/local/tmp.10297738
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_filter_stage:
+    input: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq/results/chipseq/alignment/slurm/submission__niyvyr2/job_10297460/outputs/SRR20770297/raw.sorted.bam, config/chipseq_filtering_inputs.json, config/chipseq_filtering.json, workflow/scripts/chipseq_filtering_support.py, inputs/reference/genome_plus_mt.fa.fai, results/chipseq/filtering/pilot_eligibility.json
+    output: inputs/SRR20770297/raw.sorted.bam, results/chipseq/filtering/SRR20770297/input_validation.json
+    log: results/chipseq/filtering/SRR20770297/stage.log
+    jobid: 7
+    reason: Missing output files: results/chipseq/filtering/SRR20770297/input_validation.json, inputs/SRR20770297/raw.sorted.bam
+    wildcards: run=SRR20770297
+    resources: tmpdir=/local/tmp.10297738
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_mark_duplicates:
+    input: inputs/SRR20770287/raw.sorted.bam, results/chipseq/filtering/SRR20770287/input_validation.json, config/chipseq_filtering.json
+    output: work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam, results/chipseq/filtering/SRR20770287/picard_metrics.txt
+    log: results/chipseq/filtering/SRR20770287/picard.log
+    jobid: 2
+    reason: Missing output files: results/chipseq/filtering/SRR20770287/picard_metrics.txt, work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam; Input files updated by another job: results/chipseq/filtering/SRR20770287/input_validation.json, inputs/SRR20770287/raw.sorted.bam
+    wildcards: run=SRR20770287
+    threads: 4
+    resources: tmpdir=/local/tmp.10297738, mem_mb=18000, mem=18 GB, mem_mib=17167
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_mark_duplicates:
+    input: inputs/SRR20770297/raw.sorted.bam, results/chipseq/filtering/SRR20770297/input_validation.json, config/chipseq_filtering.json
+    output: work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam, results/chipseq/filtering/SRR20770297/picard_metrics.txt
+    log: results/chipseq/filtering/SRR20770297/picard.log
+    jobid: 6
+    reason: Missing output files: results/chipseq/filtering/SRR20770297/picard_metrics.txt, work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam; Input files updated by another job: results/chipseq/filtering/SRR20770297/input_validation.json, inputs/SRR20770297/raw.sorted.bam
+    wildcards: run=SRR20770297
+    threads: 4
+    resources: tmpdir=/local/tmp.10297738, mem_mb=18000, mem=18 GB, mem_mib=17167
+Would remove temporary output inputs/SRR20770287/raw.sorted.bam
+Would remove temporary output inputs/SRR20770297/raw.sorted.bam
+
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_filter_bam:
+    input: work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam, results/chipseq/filtering/SRR20770297/picard_metrics.txt, workflow/scripts/chipseq_filtering_support.py, config/chipseq_filtering.json, config/chipseq_filtering_inputs.json
+    output: results/chipseq/filtering/SRR20770297/filtered.bam, results/chipseq/filtering/SRR20770297/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtering_flow.tsv
+    log: results/chipseq/filtering/SRR20770297/filtering.log
+    jobid: 5
+    reason: Missing output files: results/chipseq/filtering/SRR20770297/filtering_flow.tsv, results/chipseq/filtering/SRR20770297/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtered.bam; Input files updated by another job: work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam, results/chipseq/filtering/SRR20770297/picard_metrics.txt
+    wildcards: run=SRR20770297
+    resources: tmpdir=/local/tmp.10297738, mem_mb=2000, mem=2 GB, mem_mib=1908
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_filter_bam:
+    input: work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam, results/chipseq/filtering/SRR20770287/picard_metrics.txt, workflow/scripts/chipseq_filtering_support.py, config/chipseq_filtering.json, config/chipseq_filtering_inputs.json
+    output: results/chipseq/filtering/SRR20770287/filtered.bam, results/chipseq/filtering/SRR20770287/filtering_qc.json, results/chipseq/filtering/SRR20770287/filtering_flow.tsv
+    log: results/chipseq/filtering/SRR20770287/filtering.log
+    jobid: 1
+    reason: Missing output files: results/chipseq/filtering/SRR20770287/filtering_flow.tsv, results/chipseq/filtering/SRR20770287/filtering_qc.json, results/chipseq/filtering/SRR20770287/filtered.bam; Input files updated by another job: results/chipseq/filtering/SRR20770287/picard_metrics.txt, work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam
+    wildcards: run=SRR20770287
+    resources: tmpdir=/local/tmp.10297738, mem_mb=2000, mem=2 GB, mem_mib=1908
+Would remove temporary output work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam
+Would remove temporary output work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam
+
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_filtered_index:
+    input: results/chipseq/filtering/SRR20770297/filtered.bam
+    output: results/chipseq/filtering/SRR20770297/filtered.bam.csi
+    jobid: 9
+    reason: Missing output files: results/chipseq/filtering/SRR20770297/filtered.bam.csi; Input files updated by another job: results/chipseq/filtering/SRR20770297/filtered.bam
+    wildcards: run=SRR20770297
+    resources: tmpdir=/local/tmp.10297738
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_filtered_index:
+    input: results/chipseq/filtering/SRR20770287/filtered.bam
+    output: results/chipseq/filtering/SRR20770287/filtered.bam.csi
+    jobid: 8
+    reason: Missing output files: results/chipseq/filtering/SRR20770287/filtered.bam.csi; Input files updated by another job: results/chipseq/filtering/SRR20770287/filtered.bam
+    wildcards: run=SRR20770287
+    resources: tmpdir=/local/tmp.10297738
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_filtered_qc:
+    input: results/chipseq/filtering/SRR20770287/filtered.bam, results/chipseq/filtering/SRR20770287/filtered.bam.csi, results/chipseq/filtering/SRR20770287/filtering_qc.json, workflow/scripts/chipseq_filtering_support.py, config/chipseq_filtering.json
+    output: results/chipseq/filtering/SRR20770287/filtered_validation.json, results/chipseq/filtering/SRR20770287/flagstat.txt, results/chipseq/filtering/SRR20770287/idxstats.tsv, results/chipseq/filtering/SRR20770287/samtools_stats.txt
+    log: results/chipseq/filtering/SRR20770287/filtered_qc.log
+    jobid: 10
+    reason: Missing output files: results/chipseq/filtering/SRR20770287/filtered_validation.json, results/chipseq/filtering/SRR20770287/idxstats.tsv, results/chipseq/filtering/SRR20770287/flagstat.txt, results/chipseq/filtering/SRR20770287/samtools_stats.txt; Input files updated by another job: results/chipseq/filtering/SRR20770287/filtered.bam.csi, results/chipseq/filtering/SRR20770287/filtering_qc.json, results/chipseq/filtering/SRR20770287/filtered.bam
+    wildcards: run=SRR20770287
+    resources: tmpdir=/local/tmp.10297738
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_filtered_qc:
+    input: results/chipseq/filtering/SRR20770297/filtered.bam, results/chipseq/filtering/SRR20770297/filtered.bam.csi, results/chipseq/filtering/SRR20770297/filtering_qc.json, workflow/scripts/chipseq_filtering_support.py, config/chipseq_filtering.json
+    output: results/chipseq/filtering/SRR20770297/filtered_validation.json, results/chipseq/filtering/SRR20770297/flagstat.txt, results/chipseq/filtering/SRR20770297/idxstats.tsv, results/chipseq/filtering/SRR20770297/samtools_stats.txt
+    log: results/chipseq/filtering/SRR20770297/filtered_qc.log
+    jobid: 11
+    reason: Missing output files: results/chipseq/filtering/SRR20770297/filtered_validation.json, results/chipseq/filtering/SRR20770297/flagstat.txt, results/chipseq/filtering/SRR20770297/samtools_stats.txt, results/chipseq/filtering/SRR20770297/idxstats.tsv; Input files updated by another job: results/chipseq/filtering/SRR20770297/filtered.bam.csi, results/chipseq/filtering/SRR20770297/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtered.bam
+    wildcards: run=SRR20770297
+    resources: tmpdir=/local/tmp.10297738
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_filtering_summary:
+    input: results/chipseq/filtering/SRR20770287/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtering_qc.json, results/chipseq/filtering/SRR20770287/filtered_validation.json, results/chipseq/filtering/SRR20770297/filtered_validation.json, workflow/scripts/chipseq_filtering_support.py
+    output: results/chipseq/filtering/filtering_qc.tsv
+    jobid: 12
+    reason: Missing output files: results/chipseq/filtering/filtering_qc.tsv; Input files updated by another job: results/chipseq/filtering/SRR20770287/filtered_validation.json, results/chipseq/filtering/SRR20770287/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtered_validation.json
+    resources: tmpdir=/local/tmp.10297738
+[Wed Sep 16 14:06:37 2026]
+rule chipseq_filtering_all:
+    input: results/chipseq/filtering/SRR20770287/filtered.bam, results/chipseq/filtering/SRR20770297/filtered.bam, results/chipseq/filtering/SRR20770287/filtered.bam.csi, results/chipseq/filtering/SRR20770297/filtered.bam.csi, results/chipseq/filtering/SRR20770287/filtered_validation.json, results/chipseq/filtering/SRR20770297/filtered_validation.json, results/chipseq/filtering/SRR20770287/flagstat.txt, results/chipseq/filtering/SRR20770297/flagstat.txt, results/chipseq/filtering/SRR20770287/idxstats.tsv, results/chipseq/filtering/SRR20770297/idxstats.tsv, results/chipseq/filtering/SRR20770287/samtools_stats.txt, results/chipseq/filtering/SRR20770297/samtools_stats.txt, results/chipseq/filtering/SRR20770287/picard_metrics.txt, results/chipseq/filtering/SRR20770297/picard_metrics.txt, results/chipseq/filtering/SRR20770287/filtering_flow.tsv, results/chipseq/filtering/SRR20770297/filtering_flow.tsv, results/chipseq/filtering/filtering_qc.tsv
+    jobid: 0
+    reason: Input files updated by another job: results/chipseq/filtering/SRR20770287/picard_metrics.txt, results/chipseq/filtering/SRR20770287/filtered_validation.json, results/chipseq/filtering/SRR20770287/idxstats.tsv, results/chipseq/filtering/SRR20770297/filtered.bam.csi, results/chipseq/filtering/SRR20770287/filtering_flow.tsv, results/chipseq/filtering/SRR20770297/filtering_flow.tsv, results/chipseq/filtering/SRR20770287/samtools_stats.txt, results/chipseq/filtering/filtering_qc.tsv, results/chipseq/filtering/SRR20770297/idxstats.tsv, results/chipseq/filtering/SRR20770297/filtered_validation.json, results/chipseq/filtering/SRR20770297/picard_metrics.txt, results/chipseq/filtering/SRR20770297/samtools_stats.txt, results/chipseq/filtering/SRR20770287/filtered.bam, results/chipseq/filtering/SRR20770287/filtered.bam.csi, results/chipseq/filtering/SRR20770297/filtered.bam, results/chipseq/filtering/SRR20770297/flagstat.txt, results/chipseq/filtering/SRR20770287/flagstat.txt
+    resources: tmpdir=/local/tmp.10297738
+Job stats:
+job                          count
+-------------------------  -------
+chipseq_filter_stage             2
+chipseq_mark_duplicates          2
+chipseq_filter_bam               2
+chipseq_filtered_index           2
+chipseq_filtered_qc              2
+chipseq_filtering_summary        1
+chipseq_filtering_all            1
+total                           12
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        chipseq_filter_bam, chipseq_filtered_index, chipseq_filtered_qc, chipseq_filtering_all, chipseq_filtering_summary, chipseq_mark_duplicates
+    output files have to be generated:
+        chipseq_filter_bam, chipseq_filter_stage, chipseq_filtered_index, chipseq_filtered_qc, chipseq_filtering_summary, chipseq_mark_duplicates
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.

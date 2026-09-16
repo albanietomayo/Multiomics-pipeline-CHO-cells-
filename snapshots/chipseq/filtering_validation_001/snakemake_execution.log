@@ -1,0 +1,260 @@
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-09-16 14:06:38
+  Workflow ID: da1b7a3e-febf-44ca-a38d-a3df7043cd19
+  Platform: Linux-5.14.0-687.33.1.el9_8.0.1.x86_64-x86_64-with-glibc2.34
+  Host: vera-r06-05
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /local/tmp.10297738/chipseq-filtering-env/bin/snakemake chipseq_filtering_all --snakefile workflow/rules/chipseq_filtering.smk --cores 4 --resources mem_mb=20000 --use-conda --conda-prefix /local/tmp.10297738/chipseq-filtering-rule-envs --rerun-incomplete -p
+  Snakefile: /local/tmp.10297738/chipseq-filtering/workflow/rules/chipseq_filtering.smk
+  Base directory: /local/tmp.10297738/chipseq-filtering/workflow/rules
+  Run directory: /local/tmp.10297738/chipseq-filtering
+  Working directory: /local/tmp.10297738/chipseq-filtering
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Your conda installation is not configured to use strict channel priorities. This is however important for having robust and correct environments (for details, see https://conda-forge.org/docs/user/tipsandtricks.html). Please consider to configure strict priorities by executing 'conda config --set channel_priority strict'.
+Creating conda environment workflow/envs/chipseq_filtering.yaml...
+Downloading and installing remote packages.
+Cleaning up conda package tarballs.
+Environment for /local/tmp.10297738/chipseq-filtering/workflow/rules/../envs/chipseq_filtering.yaml created (location: ../chipseq-filtering-rule-envs/884853a52d9b9d1e54ab092c3c618817_)
+Creating conda environment workflow/envs/chipseq_duplicates.yaml...
+Downloading and installing remote packages.
+Cleaning up conda package tarballs.
+Environment for /local/tmp.10297738/chipseq-filtering/workflow/rules/../envs/chipseq_duplicates.yaml created (location: ../chipseq-filtering-rule-envs/0f4ca4515a3dd276ad079e2cde463162_)
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Provided resources: mem_mb=Resource("mem_mb", 20000)
+Job stats:
+job                          count
+-------------------------  -------
+chipseq_filter_stage             2
+chipseq_mark_duplicates          2
+chipseq_filter_bam               2
+chipseq_filtered_index           2
+chipseq_filtered_qc              2
+chipseq_filtering_summary        1
+chipseq_filtering_all            1
+total                           12
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Wed Sep 16 14:06:51 2026]
+localrule chipseq_filter_stage:
+    input: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq/results/chipseq/alignment/slurm/submission__niyvyr2/job_10297460/outputs/SRR20770287/raw.sorted.bam, config/chipseq_filtering_inputs.json, config/chipseq_filtering.json, workflow/scripts/chipseq_filtering_support.py, inputs/reference/genome_plus_mt.fa.fai, results/chipseq/filtering/pilot_eligibility.json
+    output: inputs/SRR20770287/raw.sorted.bam, results/chipseq/filtering/SRR20770287/input_validation.json
+    log: results/chipseq/filtering/SRR20770287/stage.log
+    jobid: 3
+    reason: Missing output files: inputs/SRR20770287/raw.sorted.bam, results/chipseq/filtering/SRR20770287/input_validation.json
+    wildcards: run=SRR20770287
+    resources: tmpdir=/local/tmp.10297738
+Shell command: python workflow/scripts/chipseq_filtering_support.py stage --run SRR20770287 --output inputs/SRR20770287/raw.sorted.bam --report results/chipseq/filtering/SRR20770287/input_validation.json > results/chipseq/filtering/SRR20770287/stage.log 2>&1
+Activating conda environment: ../chipseq-filtering-rule-envs/884853a52d9b9d1e54ab092c3c618817_
+
+[Wed Sep 16 14:06:51 2026]
+localrule chipseq_filter_stage:
+    input: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq/results/chipseq/alignment/slurm/submission__niyvyr2/job_10297460/outputs/SRR20770297/raw.sorted.bam, config/chipseq_filtering_inputs.json, config/chipseq_filtering.json, workflow/scripts/chipseq_filtering_support.py, inputs/reference/genome_plus_mt.fa.fai, results/chipseq/filtering/pilot_eligibility.json
+    output: inputs/SRR20770297/raw.sorted.bam, results/chipseq/filtering/SRR20770297/input_validation.json
+    log: results/chipseq/filtering/SRR20770297/stage.log
+    jobid: 7
+    reason: Missing output files: inputs/SRR20770297/raw.sorted.bam, results/chipseq/filtering/SRR20770297/input_validation.json
+    wildcards: run=SRR20770297
+    resources: tmpdir=/local/tmp.10297738
+Shell command: python workflow/scripts/chipseq_filtering_support.py stage --run SRR20770297 --output inputs/SRR20770297/raw.sorted.bam --report results/chipseq/filtering/SRR20770297/input_validation.json > results/chipseq/filtering/SRR20770297/stage.log 2>&1
+Activating conda environment: ../chipseq-filtering-rule-envs/884853a52d9b9d1e54ab092c3c618817_
+[Wed Sep 16 14:06:58 2026]
+Finished jobid: 7 (Rule: chipseq_filter_stage)
+1 of 12 steps (8%) done
+Select jobs to execute...
+[Wed Sep 16 14:06:58 2026]
+Finished jobid: 3 (Rule: chipseq_filter_stage)
+2 of 12 steps (17%) done
+Execute 1 jobs...
+
+[Wed Sep 16 14:06:58 2026]
+localrule chipseq_mark_duplicates:
+    input: inputs/SRR20770287/raw.sorted.bam, results/chipseq/filtering/SRR20770287/input_validation.json, config/chipseq_filtering.json
+    output: work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam, results/chipseq/filtering/SRR20770287/picard_metrics.txt
+    log: results/chipseq/filtering/SRR20770287/picard.log
+    jobid: 2
+    reason: Missing output files: work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam, results/chipseq/filtering/SRR20770287/picard_metrics.txt; Input files updated by another job: inputs/SRR20770287/raw.sorted.bam, results/chipseq/filtering/SRR20770287/input_validation.json
+    wildcards: run=SRR20770287
+    threads: 4
+    resources: tmpdir=/local/tmp.10297738, mem_mb=18000, mem=18 GB, mem_mib=17167
+Shell command: 
+        mkdir -p work/chipseq_filtering/SRR20770287/picard_tmp
+        picard -Xmx12000m -XX:ActiveProcessorCount=4 MarkDuplicates \
+            INPUT=inputs/SRR20770287/raw.sorted.bam OUTPUT=work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam METRICS_FILE=results/chipseq/filtering/SRR20770287/picard_metrics.txt \
+            TMP_DIR=work/chipseq_filtering/SRR20770287/picard_tmp REMOVE_DUPLICATES=false REMOVE_SEQUENCING_DUPLICATES=false \
+            READ_NAME_REGEX=null DUPLICATE_SCORING_STRATEGY=SUM_OF_BASE_QUALITIES \
+            CREATE_INDEX=false VALIDATION_STRINGENCY=STRICT \
+            MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=256 > results/chipseq/filtering/SRR20770287/picard.log 2>&1
+        
+Activating conda environment: ../chipseq-filtering-rule-envs/0f4ca4515a3dd276ad079e2cde463162_
+Select jobs to execute...
+[Wed Sep 16 14:12:18 2026]
+Finished jobid: 2 (Rule: chipseq_mark_duplicates)
+3 of 12 steps (25%) done
+Removing temporary output inputs/SRR20770287/raw.sorted.bam.
+Execute 1 jobs...
+
+[Wed Sep 16 14:12:18 2026]
+localrule chipseq_mark_duplicates:
+    input: inputs/SRR20770297/raw.sorted.bam, results/chipseq/filtering/SRR20770297/input_validation.json, config/chipseq_filtering.json
+    output: work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam, results/chipseq/filtering/SRR20770297/picard_metrics.txt
+    log: results/chipseq/filtering/SRR20770297/picard.log
+    jobid: 6
+    reason: Missing output files: results/chipseq/filtering/SRR20770297/picard_metrics.txt, work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam; Input files updated by another job: inputs/SRR20770297/raw.sorted.bam, results/chipseq/filtering/SRR20770297/input_validation.json
+    wildcards: run=SRR20770297
+    threads: 4
+    resources: tmpdir=/local/tmp.10297738, mem_mb=18000, mem=18 GB, mem_mib=17167
+Shell command: 
+        mkdir -p work/chipseq_filtering/SRR20770297/picard_tmp
+        picard -Xmx12000m -XX:ActiveProcessorCount=4 MarkDuplicates \
+            INPUT=inputs/SRR20770297/raw.sorted.bam OUTPUT=work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam METRICS_FILE=results/chipseq/filtering/SRR20770297/picard_metrics.txt \
+            TMP_DIR=work/chipseq_filtering/SRR20770297/picard_tmp REMOVE_DUPLICATES=false REMOVE_SEQUENCING_DUPLICATES=false \
+            READ_NAME_REGEX=null DUPLICATE_SCORING_STRATEGY=SUM_OF_BASE_QUALITIES \
+            CREATE_INDEX=false VALIDATION_STRINGENCY=STRICT \
+            MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=256 > results/chipseq/filtering/SRR20770297/picard.log 2>&1
+        
+Activating conda environment: ../chipseq-filtering-rule-envs/0f4ca4515a3dd276ad079e2cde463162_
+Select jobs to execute...
+[Wed Sep 16 14:17:15 2026]
+Finished jobid: 6 (Rule: chipseq_mark_duplicates)
+4 of 12 steps (33%) done
+Removing temporary output inputs/SRR20770297/raw.sorted.bam.
+Execute 2 jobs...
+
+[Wed Sep 16 14:17:15 2026]
+localrule chipseq_filter_bam:
+    input: work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam, results/chipseq/filtering/SRR20770287/picard_metrics.txt, workflow/scripts/chipseq_filtering_support.py, config/chipseq_filtering.json, config/chipseq_filtering_inputs.json
+    output: results/chipseq/filtering/SRR20770287/filtered.bam, results/chipseq/filtering/SRR20770287/filtering_qc.json, results/chipseq/filtering/SRR20770287/filtering_flow.tsv
+    log: results/chipseq/filtering/SRR20770287/filtering.log
+    jobid: 1
+    reason: Missing output files: results/chipseq/filtering/SRR20770287/filtering_qc.json, results/chipseq/filtering/SRR20770287/filtered.bam, results/chipseq/filtering/SRR20770287/filtering_flow.tsv; Input files updated by another job: work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam, results/chipseq/filtering/SRR20770287/picard_metrics.txt
+    wildcards: run=SRR20770287
+    resources: tmpdir=/local/tmp.10297738, mem_mb=2000, mem=2 GB, mem_mib=1908
+Shell command: python workflow/scripts/chipseq_filtering_support.py filter --run SRR20770287 --bam work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam --metrics results/chipseq/filtering/SRR20770287/picard_metrics.txt --output results/chipseq/filtering/SRR20770287/filtered.bam --report results/chipseq/filtering/SRR20770287/filtering_qc.json --flow results/chipseq/filtering/SRR20770287/filtering_flow.tsv > results/chipseq/filtering/SRR20770287/filtering.log 2>&1
+Activating conda environment: ../chipseq-filtering-rule-envs/884853a52d9b9d1e54ab092c3c618817_
+
+[Wed Sep 16 14:17:15 2026]
+localrule chipseq_filter_bam:
+    input: work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam, results/chipseq/filtering/SRR20770297/picard_metrics.txt, workflow/scripts/chipseq_filtering_support.py, config/chipseq_filtering.json, config/chipseq_filtering_inputs.json
+    output: results/chipseq/filtering/SRR20770297/filtered.bam, results/chipseq/filtering/SRR20770297/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtering_flow.tsv
+    log: results/chipseq/filtering/SRR20770297/filtering.log
+    jobid: 5
+    reason: Missing output files: results/chipseq/filtering/SRR20770297/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtered.bam, results/chipseq/filtering/SRR20770297/filtering_flow.tsv; Input files updated by another job: results/chipseq/filtering/SRR20770297/picard_metrics.txt, work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam
+    wildcards: run=SRR20770297
+    resources: tmpdir=/local/tmp.10297738, mem_mb=2000, mem=2 GB, mem_mib=1908
+Shell command: python workflow/scripts/chipseq_filtering_support.py filter --run SRR20770297 --bam work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam --metrics results/chipseq/filtering/SRR20770297/picard_metrics.txt --output results/chipseq/filtering/SRR20770297/filtered.bam --report results/chipseq/filtering/SRR20770297/filtering_qc.json --flow results/chipseq/filtering/SRR20770297/filtering_flow.tsv > results/chipseq/filtering/SRR20770297/filtering.log 2>&1
+Activating conda environment: ../chipseq-filtering-rule-envs/884853a52d9b9d1e54ab092c3c618817_
+[Wed Sep 16 14:23:01 2026]
+Finished jobid: 5 (Rule: chipseq_filter_bam)
+5 of 12 steps (42%) done
+Removing temporary output work/chipseq_filtering/SRR20770297/dupmarked.sorted.bam.
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep 16 14:23:01 2026]
+localrule chipseq_filtered_index:
+    input: results/chipseq/filtering/SRR20770297/filtered.bam
+    output: results/chipseq/filtering/SRR20770297/filtered.bam.csi
+    jobid: 9
+    reason: Missing output files: results/chipseq/filtering/SRR20770297/filtered.bam.csi; Input files updated by another job: results/chipseq/filtering/SRR20770297/filtered.bam
+    wildcards: run=SRR20770297
+    resources: tmpdir=/local/tmp.10297738
+Shell command: samtools index -c results/chipseq/filtering/SRR20770297/filtered.bam results/chipseq/filtering/SRR20770297/filtered.bam.csi
+Activating conda environment: ../chipseq-filtering-rule-envs/884853a52d9b9d1e54ab092c3c618817_
+[Wed Sep 16 14:23:09 2026]
+Finished jobid: 9 (Rule: chipseq_filtered_index)
+6 of 12 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep 16 14:23:09 2026]
+localrule chipseq_filtered_qc:
+    input: results/chipseq/filtering/SRR20770297/filtered.bam, results/chipseq/filtering/SRR20770297/filtered.bam.csi, results/chipseq/filtering/SRR20770297/filtering_qc.json, workflow/scripts/chipseq_filtering_support.py, config/chipseq_filtering.json
+    output: results/chipseq/filtering/SRR20770297/filtered_validation.json, results/chipseq/filtering/SRR20770297/flagstat.txt, results/chipseq/filtering/SRR20770297/idxstats.tsv, results/chipseq/filtering/SRR20770297/samtools_stats.txt
+    log: results/chipseq/filtering/SRR20770297/filtered_qc.log
+    jobid: 11
+    reason: Missing output files: results/chipseq/filtering/SRR20770297/idxstats.tsv, results/chipseq/filtering/SRR20770297/flagstat.txt, results/chipseq/filtering/SRR20770297/filtered_validation.json, results/chipseq/filtering/SRR20770297/samtools_stats.txt; Input files updated by another job: results/chipseq/filtering/SRR20770297/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtered.bam, results/chipseq/filtering/SRR20770297/filtered.bam.csi
+    wildcards: run=SRR20770297
+    resources: tmpdir=/local/tmp.10297738
+Shell command: samtools quickcheck -v results/chipseq/filtering/SRR20770297/filtered.bam 2> results/chipseq/filtering/SRR20770297/filtered_qc.log; samtools flagstat results/chipseq/filtering/SRR20770297/filtered.bam > results/chipseq/filtering/SRR20770297/flagstat.txt 2>> results/chipseq/filtering/SRR20770297/filtered_qc.log; samtools idxstats results/chipseq/filtering/SRR20770297/filtered.bam > results/chipseq/filtering/SRR20770297/idxstats.tsv 2>> results/chipseq/filtering/SRR20770297/filtered_qc.log; samtools stats results/chipseq/filtering/SRR20770297/filtered.bam > results/chipseq/filtering/SRR20770297/samtools_stats.txt 2>> results/chipseq/filtering/SRR20770297/filtered_qc.log; python workflow/scripts/chipseq_filtering_support.py verify --run SRR20770297 --bam results/chipseq/filtering/SRR20770297/filtered.bam --report results/chipseq/filtering/SRR20770297/filtering_qc.json --output results/chipseq/filtering/SRR20770297/filtered_validation.json >> results/chipseq/filtering/SRR20770297/filtered_qc.log 2>&1
+Activating conda environment: ../chipseq-filtering-rule-envs/884853a52d9b9d1e54ab092c3c618817_
+[Wed Sep 16 14:23:19 2026]
+Finished jobid: 1 (Rule: chipseq_filter_bam)
+7 of 12 steps (58%) done
+Removing temporary output work/chipseq_filtering/SRR20770287/dupmarked.sorted.bam.
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep 16 14:23:19 2026]
+localrule chipseq_filtered_index:
+    input: results/chipseq/filtering/SRR20770287/filtered.bam
+    output: results/chipseq/filtering/SRR20770287/filtered.bam.csi
+    jobid: 8
+    reason: Missing output files: results/chipseq/filtering/SRR20770287/filtered.bam.csi; Input files updated by another job: results/chipseq/filtering/SRR20770287/filtered.bam
+    wildcards: run=SRR20770287
+    resources: tmpdir=/local/tmp.10297738
+Shell command: samtools index -c results/chipseq/filtering/SRR20770287/filtered.bam results/chipseq/filtering/SRR20770287/filtered.bam.csi
+Activating conda environment: ../chipseq-filtering-rule-envs/884853a52d9b9d1e54ab092c3c618817_
+[Wed Sep 16 14:23:27 2026]
+Finished jobid: 8 (Rule: chipseq_filtered_index)
+8 of 12 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep 16 14:23:27 2026]
+localrule chipseq_filtered_qc:
+    input: results/chipseq/filtering/SRR20770287/filtered.bam, results/chipseq/filtering/SRR20770287/filtered.bam.csi, results/chipseq/filtering/SRR20770287/filtering_qc.json, workflow/scripts/chipseq_filtering_support.py, config/chipseq_filtering.json
+    output: results/chipseq/filtering/SRR20770287/filtered_validation.json, results/chipseq/filtering/SRR20770287/flagstat.txt, results/chipseq/filtering/SRR20770287/idxstats.tsv, results/chipseq/filtering/SRR20770287/samtools_stats.txt
+    log: results/chipseq/filtering/SRR20770287/filtered_qc.log
+    jobid: 10
+    reason: Missing output files: results/chipseq/filtering/SRR20770287/filtered_validation.json, results/chipseq/filtering/SRR20770287/flagstat.txt, results/chipseq/filtering/SRR20770287/samtools_stats.txt, results/chipseq/filtering/SRR20770287/idxstats.tsv; Input files updated by another job: results/chipseq/filtering/SRR20770287/filtering_qc.json, results/chipseq/filtering/SRR20770287/filtered.bam, results/chipseq/filtering/SRR20770287/filtered.bam.csi
+    wildcards: run=SRR20770287
+    resources: tmpdir=/local/tmp.10297738
+Shell command: samtools quickcheck -v results/chipseq/filtering/SRR20770287/filtered.bam 2> results/chipseq/filtering/SRR20770287/filtered_qc.log; samtools flagstat results/chipseq/filtering/SRR20770287/filtered.bam > results/chipseq/filtering/SRR20770287/flagstat.txt 2>> results/chipseq/filtering/SRR20770287/filtered_qc.log; samtools idxstats results/chipseq/filtering/SRR20770287/filtered.bam > results/chipseq/filtering/SRR20770287/idxstats.tsv 2>> results/chipseq/filtering/SRR20770287/filtered_qc.log; samtools stats results/chipseq/filtering/SRR20770287/filtered.bam > results/chipseq/filtering/SRR20770287/samtools_stats.txt 2>> results/chipseq/filtering/SRR20770287/filtered_qc.log; python workflow/scripts/chipseq_filtering_support.py verify --run SRR20770287 --bam results/chipseq/filtering/SRR20770287/filtered.bam --report results/chipseq/filtering/SRR20770287/filtering_qc.json --output results/chipseq/filtering/SRR20770287/filtered_validation.json >> results/chipseq/filtering/SRR20770287/filtered_qc.log 2>&1
+Activating conda environment: ../chipseq-filtering-rule-envs/884853a52d9b9d1e54ab092c3c618817_
+[Wed Sep 16 14:24:56 2026]
+Finished jobid: 11 (Rule: chipseq_filtered_qc)
+9 of 12 steps (75%) done
+[Wed Sep 16 14:25:20 2026]
+Finished jobid: 10 (Rule: chipseq_filtered_qc)
+10 of 12 steps (83%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep 16 14:25:20 2026]
+localrule chipseq_filtering_summary:
+    input: results/chipseq/filtering/SRR20770287/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtering_qc.json, results/chipseq/filtering/SRR20770287/filtered_validation.json, results/chipseq/filtering/SRR20770297/filtered_validation.json, workflow/scripts/chipseq_filtering_support.py
+    output: results/chipseq/filtering/filtering_qc.tsv
+    jobid: 12
+    reason: Missing output files: results/chipseq/filtering/filtering_qc.tsv; Input files updated by another job: results/chipseq/filtering/SRR20770287/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtering_qc.json, results/chipseq/filtering/SRR20770297/filtered_validation.json, results/chipseq/filtering/SRR20770287/filtered_validation.json
+    resources: tmpdir=/local/tmp.10297738
+Shell command: python workflow/scripts/chipseq_filtering_support.py summarize --output results/chipseq/filtering/filtering_qc.tsv results/chipseq/filtering/SRR20770287/filtering_qc.json results/chipseq/filtering/SRR20770297/filtering_qc.json
+Activating conda environment: ../chipseq-filtering-rule-envs/884853a52d9b9d1e54ab092c3c618817_
+[Wed Sep 16 14:25:21 2026]
+Finished jobid: 12 (Rule: chipseq_filtering_summary)
+11 of 12 steps (92%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep 16 14:25:21 2026]
+localrule chipseq_filtering_all:
+    input: results/chipseq/filtering/SRR20770287/filtered.bam, results/chipseq/filtering/SRR20770297/filtered.bam, results/chipseq/filtering/SRR20770287/filtered.bam.csi, results/chipseq/filtering/SRR20770297/filtered.bam.csi, results/chipseq/filtering/SRR20770287/filtered_validation.json, results/chipseq/filtering/SRR20770297/filtered_validation.json, results/chipseq/filtering/SRR20770287/flagstat.txt, results/chipseq/filtering/SRR20770297/flagstat.txt, results/chipseq/filtering/SRR20770287/idxstats.tsv, results/chipseq/filtering/SRR20770297/idxstats.tsv, results/chipseq/filtering/SRR20770287/samtools_stats.txt, results/chipseq/filtering/SRR20770297/samtools_stats.txt, results/chipseq/filtering/SRR20770287/picard_metrics.txt, results/chipseq/filtering/SRR20770297/picard_metrics.txt, results/chipseq/filtering/SRR20770287/filtering_flow.tsv, results/chipseq/filtering/SRR20770297/filtering_flow.tsv, results/chipseq/filtering/filtering_qc.tsv
+    jobid: 0
+    reason: Input files updated by another job: results/chipseq/filtering/SRR20770287/filtered.bam, results/chipseq/filtering/SRR20770297/samtools_stats.txt, results/chipseq/filtering/SRR20770287/filtered_validation.json, results/chipseq/filtering/SRR20770287/idxstats.tsv, results/chipseq/filtering/SRR20770297/filtered.bam.csi, results/chipseq/filtering/SRR20770297/filtered_validation.json, results/chipseq/filtering/SRR20770287/picard_metrics.txt, results/chipseq/filtering/SRR20770297/flagstat.txt, results/chipseq/filtering/SRR20770287/filtered.bam.csi, results/chipseq/filtering/SRR20770287/samtools_stats.txt, results/chipseq/filtering/SRR20770287/filtering_flow.tsv, results/chipseq/filtering/filtering_qc.tsv, results/chipseq/filtering/SRR20770297/filtered.bam, results/chipseq/filtering/SRR20770287/flagstat.txt, results/chipseq/filtering/SRR20770297/idxstats.tsv, results/chipseq/filtering/SRR20770297/picard_metrics.txt, results/chipseq/filtering/SRR20770297/filtering_flow.tsv
+    resources: tmpdir=/local/tmp.10297738
+Shell command: None
+[Wed Sep 16 14:25:21 2026]
+Finished jobid: 0 (Rule: chipseq_filtering_all)
+12 of 12 steps (100%) done
+Complete log(s): /local/tmp.10297738/chipseq-filtering/.snakemake/log/2026-09-16T140638.249681.snakemake.log

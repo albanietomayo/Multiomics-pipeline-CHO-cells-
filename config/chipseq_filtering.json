@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "source_job": "results/chipseq/alignment/slurm/submission__niyvyr2/job_10297460",
+  "alignment_evidence": "snapshots/chipseq/alignment_validation_001",
+  "min_mapq": 30,
+  "exclude_mapq_255": true,
+  "exclude_flags": 3844,
+  "mitochondrial_accession": "NC_007936.1",
+  "optical_duplicate_detection": false,
+  "duplicate_scoring_strategy": "SUM_OF_BASE_QUALITIES",
+  "threads": 4,
+  "picard_heap_mb": 12000,
+  "scope": "single_end_pilot_duplicate_marking_and_nuclear_filtering"
+}

@@ -1,0 +1,51 @@
+{
+  "alignment_evidence_sha256": "b657f91409b34c87d725058f2e93eec6aa796f2a038a0feff9017aee5a057efd",
+  "configuration_sha256": "cc7dd9e2059abab5e9960970d2ea87f83b83d7629ca8ced2981c611bd201c57a",
+  "reference_provenance": {
+    "annotation_release_independently_verified": false,
+    "configured_annotation_release": 104,
+    "mapping_sha256": "dfd445e136c4bc9c11f9616d251b86732d1aab0cbdbf9d1ababb8093f7430e94",
+    "mitochondrial_accession": "NC_007936.1",
+    "mitochondrial_length": 16284,
+    "mitochondrial_sha256": "b7ccf6b1c6981c2b4a0c9e57245bd6712a861e685571db56d274c04fc30ed37c",
+    "mitochondrial_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_007936.1&rettype=fasta&retmode=text",
+    "nuclear_accession": "GCF_003668045.3",
+    "nuclear_sequences": 647,
+    "nuclear_sha256": "5c81f08eafe8f5051704f692cc21a970f58b24b2bc1bedef82cb17ec7a2b4478",
+    "purpose": "ChIP-seq nuclear and mitochondrial mapping"
+  },
+  "runs": [
+    {
+      "bytes": 2249708246,
+      "input_reads": 43830994,
+      "mapped_reads": 43587639,
+      "nuclear_mapq_ge_threshold": 35761934,
+      "role": "input",
+      "run_accession": "SRR20770287",
+      "sha256": "6b7352b484f60fb614d23e32d373864775346f643a1a6b5cb7588dd423204bfd",
+      "source_relative": "outputs/SRR20770287/raw.sorted.bam"
+    },
+    {
+      "bytes": 2058015175,
+      "input_reads": 41724399,
+      "mapped_reads": 41472411,
+      "nuclear_mapq_ge_threshold": 35577583,
+      "role": "ip",
+      "run_accession": "SRR20770297",
+      "sha256": "71f1ba978e195c4e52c71e157243d43f9dd05b229335cd8df6a214b151282d63",
+      "source_relative": "outputs/SRR20770297/raw.sorted.bam"
+    }
+  ],
+  "schema_version": 1,
+  "small_files": {
+    "outputs/SRR20770287/alignment_qc.json": "a74b9da92e3080f44cfde937cbb4e202acde10b706bc9e1929601fc08085c044",
+    "outputs/SRR20770297/alignment_qc.json": "c616424f5383fa64f11ae76360b5e44fee5fd72cda4035e5571c2b0c1ae96006",
+    "outputs/alignment_parameters.json": "52d4f1203138d31f2c2f56087870524931288372dc4545f54bf8b0cf971806be",
+    "outputs/alignment_qc.tsv": "c6e37b21b7b64888240a4fc42cb9d67ff644548e821be4f40964febbf6ba367f",
+    "outputs/input_provenance.json": "cade9a8a6d2f8cb7b5d45b016e8ed9397661b1d1777670e595e1ff38de9446dd",
+    "outputs/reference/genome_plus_mt.fa.fai": "2dfb28d82459be6cbddb6e4be79e2c328c436654cc37f2e703c7abb9c50a0d57",
+    "outputs/reference/reference_provenance.json": "3646c60b547d946814704af383464807dda890cfd371ff78f24edf8307fd582f"
+  },
+  "source_manifest_sha256": "30843241e077a6e6b3f2ca7fcf78ac094d4ebe8e283772c0dff40450b7b987af",
+  "source_root": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq/results/chipseq/alignment/slurm/submission__niyvyr2/job_10297460"
+}
