@@ -70,10 +70,6 @@ def load_atacseq_validation_manifest():
         manifest["omics"] == "ATAC-seq"
     ].copy()
 
-    atacseq_manifest = atacseq_manifest[
-        atacseq_manifest["run_accession"].map(lambda acc: selection_decision(acc, omics="ATAC-seq")[0])
-    ].copy()
-
     if atacseq_manifest.empty:
         raise ValueError(
             "No ATAC-seq records found in the validation FASTQ manifest."
@@ -316,8 +312,8 @@ rule atacseq_filter_bam:
         ),
         min_mapq=config["atacseq"]["min_mapq"],
         single_exclude_flags=config["atacseq"]["single_exclude_flags"],
-        paired_require_flags=config["atacseq"].get("paired_require_flags", 3),
-        paired_exclude_flags=config["atacseq"].get("paired_exclude_flags", 3852),
+        paired_require_flags=config["atacseq"]["paired_require_flags"],
+        paired_exclude_flags=config["atacseq"]["paired_exclude_flags"],
         mitochondrial_accession=config["atacseq"]["mitochondrial_accession"]
 
     threads:
@@ -341,8 +337,6 @@ rule atacseq_filter_bam:
                 '$1 != mt && $1 != "*" {{print $1}}'
         )
 
-        [[ -n "$NUCLEAR_REFS" ]] || {{ echo "No nuclear reference sequences" >&2; exit 1; }}
-
         if [[ "{params.structure}" == "SINGLE" ]]; then
             samtools view \
               -b \
@@ -353,7 +347,7 @@ rule atacseq_filter_bam:
               $NUCLEAR_REFS
 
         elif [[ "{params.structure}" == "PAIRED" ]]; then
-            TMP_ROOT={resources.tmpdir:q}
+            TMP_ROOT="${{TMPDIR:-/tmp}}"
             TMP_DIR=$(
                 mktemp -d \
                   "$TMP_ROOT/atacseq_filter_{wildcards.run_accession}.XXXXXX"
@@ -432,15 +426,9 @@ rule atacseq_tss_reference:
           --summary {output.summary:q}
         """
 
-def get_atacseq_eligible_filtered_bam(wildcards):
-    from selection_gate import require
-    require(wildcards.run_accession, omics="ATAC-seq")
-    return config["atacseq"]["filtered_bam_dir"] + f"/{wildcards.run_accession}/filtered.bam"
-
-
 rule atacseq_tss_enrichment:
     input:
-        bam=get_atacseq_eligible_filtered_bam,
+        bam=config["atacseq"]["filtered_bam_dir"] + "/{run_accession}/filtered.bam",
         bai=config["atacseq"]["filtered_bam_dir"] + "/{run_accession}/filtered.bam.bai",
         tss=config["atacseq"]["tss_bed"],
         script="workflow/scripts/calculate_atac_tss_enrichment.py"
@@ -474,6 +462,3 @@ rule atacseq_tss_enrichment:
           --reverse-shift {params.reverse_shift} \
           --min-mapq {params.min_mapq}
         """
-
-
-include: "atacseq_validation.smk"

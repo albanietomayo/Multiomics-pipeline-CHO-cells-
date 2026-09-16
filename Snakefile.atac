@@ -1,0 +1,11 @@
+# Dedicated ATAC entry point: uses the same rules as the main Snakefile.
+configfile: "config/config.yaml"
+configfile: "config/atacseq_bulk.yaml"
+include: "workflow/rules/reference.smk"
+include: "workflow/rules/common.smk"
+include: "workflow/rules/atacseq.smk"
+
+rule atac_default:
+    input:
+        get_atacseq_verified_outputs
+    default_target: True

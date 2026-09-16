@@ -1,0 +1,12 @@
+# Current eligible bulk CHO cohort; does not replace the other validation lists.
+fastq:
+  validation_runs: "config/atacseq_validation_runs.tsv"
+  validation_manifest: "results/metadata/atacseq_validation_fastq_manifest.tsv"
+  validation_download_report: "results/metadata/reports/atacseq_validation_download_summary.tsv"
+atacseq:
+  paired_require_flags: 3
+  paired_exclude_flags: 3852
+  validation_runs: "config/atacseq_validation_runs.tsv"
+  verification_dir: "results/atacseq/qc/verification"
+# Opt-in, matching the PE scratch cleanup; permanent outputs are never temporary.
+hpc_validation_cleanup: false

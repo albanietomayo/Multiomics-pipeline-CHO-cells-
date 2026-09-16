@@ -1,0 +1,3 @@
+# Preserve raw patches and Picard's empty trailing TSV fields byte-for-byte.
+**/*.patch -whitespace
+**/duplication_metrics.txt -whitespace

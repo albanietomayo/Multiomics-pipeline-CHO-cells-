@@ -1,0 +1,9 @@
+results/atacseq/bowtie2/SRR12774931/bowtie2.log: OK
+results/atacseq/filtered_bam/SRR12774931/filtered.bam: OK
+results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai: OK
+results/atacseq/qc/SRR12774931/duplication_metrics.txt: OK
+results/atacseq/qc/SRR12774931/tss_enrichment_summary.tsv: OK
+results/atacseq/qc/SRR12774931/tss_profile.tsv: OK
+results/preprocessing/fastp/reports/SRR12774931/SINGLE/SRR12774931.fastp.html: OK
+results/preprocessing/fastp/reports/SRR12774931/SINGLE/SRR12774931.fastp.json: OK
+results/preprocessing/fastp/reports/SRR12774931/SINGLE/SRR12774931.fastp.log: OK

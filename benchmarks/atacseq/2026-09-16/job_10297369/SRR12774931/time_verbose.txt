@@ -1,0 +1,23 @@
+	Command being timed: "/local/tmp.10297369/atac-main-env/bin/snakemake results/atacseq/filtered_bam/SRR12774931/filtered.bam results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai results/atacseq/qc/SRR12774931/tss_profile.tsv results/atacseq/qc/SRR12774931/tss_enrichment_summary.tsv --snakefile Snakefile.atac_bulk --use-conda --conda-prefix /local/tmp.10297369/atac-rule-envs --cores 16 --resources mem_mb=90000 --default-resources tmpdir=/local/tmp.10297369 --rerun-incomplete --latency-wait 60 -p"
+	User time (seconds): 9320.11
+	System time (seconds): 154.86
+	Percent of CPU this job got: 554%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 28:29.35
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5959368
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 25038
+	Minor (reclaiming a frame) page faults: 1463581
+	Voluntary context switches: 2796940
+	Involuntary context switches: 16718
+	Swaps: 0
+	File system inputs: 120596208
+	File system outputs: 82068433
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
