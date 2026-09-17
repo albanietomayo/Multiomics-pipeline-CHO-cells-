@@ -112,40 +112,272 @@ class FilteringTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "excluded record"):
             S.verify(RUN, "filtered.bam", "qc.json", "verification.json")
 
-    def test_prepare_anchors_reports_to_archived_manifest(self):
+    def test_prepare_anchors_reports_to_dynamic_alignment_manifest(self):
         cfg = S.load(S.CONFIG)
-        source = Path(cfg["source_job"])
-        evidence = Path(cfg["alignment_evidence"])
-        source.mkdir(parents=True)
-        roles = {"SRR20770287": "input", RUN: "ip"}
-        S.dump("config/chipseq_pilot.json", {"input_run_accession": "SRR20770287", "ip_run_accession": RUN})
-        S.dump(source / "outputs/input_provenance.json", {"runs": [
-            {"run_accession": run, "role": role, "reads": 10} for run, role in roles.items()]})
-        S.dump(source / "outputs/reference/reference_provenance.json", {"mitochondrial_accession": MT})
-        (source / "outputs/reference/genome_plus_mt.fa.fai").write_text("chr1\t10000\n" + MT + "\t1000\n")
-        S.dump(source / "outputs/alignment_parameters.json", {})
-        (source / "outputs/alignment_qc.tsv").write_text("synthetic fixture\n")
+
+        pointer = Path(
+            cfg["alignment_latest_submission"]
+        )
+
+        parent = pointer.parent
+
+        parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        submission = (
+            parent
+            / "submission_TEST001"
+        )
+
+        job_id = "999001"
+
+        job = (
+            submission
+            / f"job_{job_id}"
+        )
+
+        job.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        (
+            submission
+            / "job_id.txt"
+        ).write_text(
+            job_id + "\n"
+        )
+
+        (
+            job
+            / "job_status.tsv"
+        ).write_text(
+            "stage\tcompleted\n"
+            "exit_status\t0\n"
+        )
+
+        (
+            job
+            / "output_copy_validation.log"
+        ).write_text(
+            "[OK] Outputs copied and SHA-256 verified: "
+            + str(job / "outputs")
+            + "\n"
+        )
+
+        roles = {
+            "SRR20770287": "input",
+            RUN: "ip",
+        }
+
+        S.dump(
+            job
+            / "outputs"
+            / "input_provenance.json",
+            {
+                "schema_version": 1,
+                "run_count": 2,
+                "role_counts": {
+                    "ip": 1,
+                    "input": 1,
+                },
+                "library_layout": "SINGLE",
+                "instrument_platform": "ILLUMINA",
+                "runs": [
+                    {
+                        "run_accession": run,
+                        "role": role,
+                        "reads": 10,
+                    }
+                    for run, role
+                    in roles.items()
+                ],
+            },
+        )
+
+        S.dump(
+            job
+            / "outputs"
+            / "reference"
+            / "reference_provenance.json",
+            {
+                "mitochondrial_accession": MT,
+            },
+        )
+
+        reference = (
+            job
+            / "outputs"
+            / "reference"
+            / "genome_plus_mt.fa.fai"
+        )
+
+        reference.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        reference.write_text(
+            "chr1\t10000\t0\t0\t0\n"
+            + MT
+            + "\t1000\t0\t0\t0\n"
+        )
+
+        S.dump(
+            job
+            / "outputs"
+            / "alignment_parameters.json",
+            {
+                "schema_version": 1,
+                "diagnostic_mapq": 30,
+                "mitochondrial_accession": MT,
+            },
+        )
+
+        (
+            job
+            / "outputs"
+            / "alignment_qc.tsv"
+        ).write_text(
+            "run_accession\trole\n"
+            "SRR20770287\tinput\n"
+            f"{RUN}\tip\n"
+        )
+
+        S.dump(
+            job
+            / "outputs"
+            / "verified_fastq_inputs.json",
+            {
+                "schema_version": 1,
+                "run_count": 2,
+            },
+        )
+
         for run, role in roles.items():
-            S.dump(source / f"outputs/{run}/alignment_qc.json", {
-                "run_accession": run, "role": role, "duplicate_marking": "not_performed",
-                "bam_filtering": "not_performed", "nonprimary_records": 0,
-                "primary_reads": 10, "alignment_records": 10, "diagnostic_mapq": 30,
-                "mapped_reads": 9, "nuclear_mapq_ge_threshold": 5})
-            shutil.copyfile("marked.bam", source / f"outputs/{run}/raw.sorted.bam")
-        (source / "job_status.tsv").write_text("stage\tcompleted\nexit_status\t0\n")
-        (source / "output.sha256").write_text("".join(
-            f"{S.sha(p)}  {p.relative_to(source).as_posix()}\n"
-            for p in sorted((source / "outputs").rglob("*")) if p.is_file()))
-        (evidence / "job").mkdir(parents=True)
-        for name in ("output.sha256", "job_status.tsv"):
-            shutil.copyfile(source / name, evidence / "job" / name)
-        (evidence / "SHA256SUMS.txt").write_text("".join(
-            f"{S.sha(p)}  {p.relative_to(evidence).as_posix()}\n"
-            for p in sorted((evidence / "job").rglob("*")) if p.is_file()))
-        self.assertEqual(len(S.prepare(Path.cwd())["runs"]), 2)
-        (source / "outputs/alignment_qc.tsv").write_text("changed report\n")
-        with self.assertRaisesRegex(ValueError, "SHA-256 mismatch"):
-            S.prepare(Path.cwd())
+
+            S.dump(
+                job
+                / "outputs"
+                / run
+                / "alignment_qc.json",
+                {
+                    "run_accession": run,
+                    "role": role,
+                    "duplicate_marking": "not_performed",
+                    "bam_filtering": "not_performed",
+                    "nonprimary_records": 0,
+                    "primary_reads": 10,
+                    "alignment_records": 10,
+                    "diagnostic_mapq": 30,
+                    "mapped_reads": 9,
+                    "nuclear_mapq_ge_threshold": 5,
+                },
+            )
+
+            bam = (
+                job
+                / "outputs"
+                / run
+                / "raw.sorted.bam"
+            )
+
+            bam.parent.mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+            shutil.copyfile(
+                "marked.bam",
+                bam,
+            )
+
+            (
+                job
+                / "outputs"
+                / run
+                / "raw.sorted.bam.csi"
+            ).write_bytes(
+                b"synthetic-csi\n"
+            )
+
+        (
+            job
+            / "output.sha256"
+        ).write_text(
+            "".join(
+                f"{S.sha(p)}  "
+                f"{p.relative_to(job).as_posix()}\n"
+                for p in sorted(
+                    (job / "outputs").rglob("*")
+                )
+                if p.is_file()
+            )
+        )
+
+        pointer.write_text(
+            str(
+                submission.resolve()
+            )
+            + "\n"
+        )
+
+        plan = S.prepare(
+            Path.cwd()
+        )
+
+        self.assertEqual(
+            len(
+                plan["runs"]
+            ),
+            2,
+        )
+
+        self.assertEqual(
+            plan["role_counts"],
+            {
+                "ip": 1,
+                "input": 1,
+            },
+        )
+
+        self.assertEqual(
+            plan["library_layout"],
+            "SINGLE",
+        )
+
+        self.assertEqual(
+            plan["instrument_platform"],
+            "ILLUMINA",
+        )
+
+        self.assertFalse(
+            plan[
+                "upstream_raw_bam_cleanup_authorized"
+            ]
+        )
+
+        # The scientific intent of the historical regression test is
+        # preserved: reports are anchored to output.sha256 and an
+        # unexpected post-publication change must be rejected.
+        (
+            job
+            / "outputs"
+            / "alignment_qc.tsv"
+        ).write_text(
+            "changed report\n"
+        )
+
+        with self.assertRaisesRegex(
+            ValueError,
+            "SHA-256 mismatch",
+        ):
+
+            S.prepare(
+                Path.cwd()
+            )
 
     def test_publish_copies_verified_filtered_outputs(self):
         self.filter()

@@ -58,71 +58,708 @@ def check(path, digest):
         raise ValueError(f"SHA-256 mismatch: {path}")
 
 
+def _job_status(path):
+    path = Path(path)
+
+    if not path.is_file():
+        raise ValueError(
+            f"Missing upstream alignment job status: {path}"
+        )
+
+    result = {}
+
+    for line in path.read_text(
+        encoding="utf-8"
+    ).splitlines():
+
+        if not line.strip():
+            continue
+
+        fields = line.split()
+
+        if len(fields) != 2:
+            raise ValueError(
+                f"Malformed upstream alignment job status: {line!r}"
+            )
+
+        key, value = fields
+
+        if key in result:
+            raise ValueError(
+                f"Duplicate upstream alignment job-status key: {key}"
+            )
+
+        result[key] = value
+
+    return result
+
+
 def configuration(root=Path(".")):
-    cfg = load(root / CONFIG)
-    if (cfg["schema_version"] != 1 or cfg["min_mapq"] != 30
-            or cfg["exclude_flags"] != 3844 or cfg["exclude_mapq_255"] is not True
-            or cfg["optical_duplicate_detection"] is not False
-            or cfg["duplicate_scoring_strategy"] != "SUM_OF_BASE_QUALITIES"
-            or cfg["threads"] != 4 or cfg["picard_heap_mb"] != 12000
-            or cfg["mitochondrial_accession"] != "NC_007936.1"):
-        raise ValueError("Unsupported pilot policy; review code and tests before changing it")
+    cfg = load(
+        Path(root)
+        / CONFIG
+    )
+
+    expected_scope = (
+        "dynamic_single_end_duplicate_marking_and_"
+        "nuclear_filtering"
+    )
+
+    if (
+        cfg["schema_version"] != 1
+        or cfg["min_mapq"] != 30
+        or cfg["exclude_flags"] != 3844
+        or cfg["exclude_mapq_255"] is not True
+        or cfg["optical_duplicate_detection"] is not False
+        or cfg["duplicate_scoring_strategy"] != "SUM_OF_BASE_QUALITIES"
+        or cfg["threads"] != 4
+        or cfg["picard_heap_mb"] != 12000
+        or cfg["mitochondrial_accession"] != "NC_007936.1"
+        or cfg.get("scope") != expected_scope
+    ):
+        raise ValueError(
+            "Unsupported filtering policy; review code and tests "
+            "before changing it"
+        )
+
+    pointer = cfg.get(
+        "alignment_latest_submission"
+    )
+
+    if not isinstance(
+        pointer,
+        str,
+    ):
+        raise ValueError(
+            "Filtering policy has no alignment_latest_submission"
+        )
+
+    relative(
+        pointer
+    )
+
     return cfg
 
 
 def prepare(root):
-    root = Path(root).resolve()
-    cfg = configuration(root)
-    source = root / relative(cfg["source_job"])
-    evidence = root / relative(cfg["alignment_evidence"])
-    # Anchor the live results to the previously archived validation evidence.
-    archived = checksums(evidence / "SHA256SUMS.txt")
-    for name in ("job/output.sha256", "job/job_status.tsv"):
-        check(evidence / name, archived[name])
-    check(source / "output.sha256", sha(evidence / "job/output.sha256"))
-    check(source / "job_status.tsv", sha(evidence / "job/job_status.tsv"))
-    status = dict(line.split() for line in (source / "job_status.tsv").read_text().splitlines())
-    if status.get("stage") != "completed" or status.get("exit_status") != "0":
-        raise ValueError("Upstream alignment did not complete successfully")
-    hashes = checksums(source / "output.sha256")
-    pilot = load(root / "config/chipseq_pilot.json")
-    roles = {pilot["input_run_accession"]: "input", pilot["ip_run_accession"]: "ip"}
-    if len(roles) != 2 or any(not re.fullmatch(r"[DES]RR[0-9]+", run) for run in roles):
-        raise ValueError("Expected one input and one distinct IP")
-    small = ["outputs/reference/reference_provenance.json", "outputs/reference/genome_plus_mt.fa.fai",
-             "outputs/input_provenance.json", "outputs/alignment_parameters.json", "outputs/alignment_qc.tsv"]
-    small += [f"outputs/{run}/alignment_qc.json" for run in roles]
-    for name in small:
-        check(source / name, hashes[name])
-    provenance = load(source / small[0])
-    if provenance["mitochondrial_accession"] != cfg["mitochondrial_accession"]:
-        raise ValueError("Unexpected mitochondrial accession")
-    upstream = load(source / "outputs/input_provenance.json")
-    if len(upstream["runs"]) != 2 or {r["run_accession"]: r["role"] for r in upstream["runs"]} != roles:
-        raise ValueError("Upstream BAM selection differs from the current pilot")
+    root = Path(
+        root
+    ).resolve()
+
+    cfg = configuration(
+        root
+    )
+
+    pointer = (
+        root
+        / relative(
+            cfg[
+                "alignment_latest_submission"
+            ]
+        )
+    )
+
+    if not pointer.is_file():
+        raise ValueError(
+            "No submitted dynamic ChIP alignment is available: "
+            f"{pointer}"
+        )
+
+    pointer_value = pointer.read_text(
+        encoding="utf-8"
+    ).strip()
+
+    if not pointer_value:
+        raise ValueError(
+            "Alignment latest-submission pointer is empty"
+        )
+
+    submission = Path(
+        pointer_value
+    )
+
+    if not submission.is_absolute():
+        raise ValueError(
+            "Alignment latest-submission pointer must be absolute"
+        )
+
+    submission = submission.resolve()
+
+    expected_parent = pointer.parent.resolve()
+
+    if (
+        submission.parent != expected_parent
+        or not re.fullmatch(
+            r"submission_[A-Za-z0-9_]+",
+            submission.name,
+        )
+    ):
+        raise ValueError(
+            "Alignment latest-submission pointer does not identify "
+            "a valid submission directory"
+        )
+
+    if not submission.is_dir():
+        raise ValueError(
+            f"Alignment submission directory is missing: {submission}"
+        )
+
+    job_id_file = (
+        submission
+        / "job_id.txt"
+    )
+
+    if not job_id_file.is_file():
+        raise ValueError(
+            "Latest alignment submission has no job_id.txt and "
+            "is therefore not a completed productive submission"
+        )
+
+    job_id = job_id_file.read_text(
+        encoding="utf-8"
+    ).strip()
+
+    if not re.fullmatch(
+        r"[0-9]+",
+        job_id,
+    ):
+        raise ValueError(
+            f"Invalid alignment job id: {job_id!r}"
+        )
+
+    source = (
+        submission
+        / f"job_{job_id}"
+    )
+
+    if not source.is_dir():
+        raise ValueError(
+            f"Alignment job directory is missing: {source}"
+        )
+
+    status_path = (
+        source
+        / "job_status.tsv"
+    )
+
+    status = _job_status(
+        status_path
+    )
+
+    if (
+        status.get("stage") != "completed"
+        or status.get("exit_status") != "0"
+    ):
+        raise ValueError(
+            "Upstream alignment did not complete successfully"
+        )
+
+    output_validation = (
+        source
+        / "output_copy_validation.log"
+    )
+
+    if not output_validation.is_file():
+        raise ValueError(
+            "Successful alignment publication log is missing"
+        )
+
+    if (
+        "[OK] Outputs copied and SHA-256 verified"
+        not in output_validation.read_text(
+            encoding="utf-8"
+        )
+    ):
+        raise ValueError(
+            "Alignment output publication was not verified"
+        )
+
+    manifest = (
+        source
+        / "output.sha256"
+    )
+
+    if not manifest.is_file():
+        raise ValueError(
+            "Successful alignment output manifest is missing"
+        )
+
+    hashes = checksums(
+        manifest
+    )
+
+    base_small = [
+        "outputs/reference/reference_provenance.json",
+        "outputs/reference/genome_plus_mt.fa.fai",
+        "outputs/input_provenance.json",
+        "outputs/alignment_parameters.json",
+        "outputs/alignment_qc.tsv",
+        "outputs/verified_fastq_inputs.json",
+    ]
+
+    for name in base_small:
+
+        if name not in hashes:
+            raise ValueError(
+                f"Alignment manifest is missing required output: {name}"
+            )
+
+        path = (
+            source
+            / name
+        )
+
+        if not path.is_file():
+            raise ValueError(
+                f"Alignment output is missing: {path}"
+            )
+
+        check(
+            path,
+            hashes[name],
+        )
+
+    provenance = load(
+        source
+        / "outputs/reference/reference_provenance.json"
+    )
+
+    if (
+        provenance.get(
+            "mitochondrial_accession"
+        )
+        != cfg[
+            "mitochondrial_accession"
+        ]
+    ):
+        raise ValueError(
+            "Unexpected mitochondrial accession in alignment provenance"
+        )
+
+    alignment_parameters = load(
+        source
+        / "outputs/alignment_parameters.json"
+    )
+
+    if (
+        alignment_parameters.get(
+            "diagnostic_mapq"
+        )
+        != cfg[
+            "min_mapq"
+        ]
+        or alignment_parameters.get(
+            "mitochondrial_accession"
+        )
+        != cfg[
+            "mitochondrial_accession"
+        ]
+    ):
+        raise ValueError(
+            "Alignment/filtering MAPQ or mitochondrial policy mismatch"
+        )
+
+    upstream = load(
+        source
+        / "outputs/input_provenance.json"
+    )
+
+    if upstream.get(
+        "schema_version"
+    ) != 1:
+        raise ValueError(
+            "Unsupported alignment input-provenance schema"
+        )
+
+    if upstream.get(
+        "library_layout"
+    ) != "SINGLE":
+        raise ValueError(
+            "Dynamic filtering currently requires SINGLE alignment input"
+        )
+
+    if upstream.get(
+        "instrument_platform"
+    ) != "ILLUMINA":
+        raise ValueError(
+            "Dynamic filtering currently requires ILLUMINA alignment input"
+        )
+
+    upstream_runs = upstream.get(
+        "runs"
+    )
+
+    if (
+        not isinstance(
+            upstream_runs,
+            list,
+        )
+        or not upstream_runs
+    ):
+        raise ValueError(
+            "Alignment input provenance contains no runs"
+        )
+
+    declared_run_count = upstream.get(
+        "run_count"
+    )
+
+    if (
+        declared_run_count is not None
+        and int(
+            declared_run_count
+        )
+        != len(
+            upstream_runs
+        )
+    ):
+        raise ValueError(
+            "Alignment input-provenance run_count does not match runs"
+        )
+
+    observed_roles = Counter()
+
+    seen = set()
+
     runs = []
-    for run, role in sorted(roles.items()):
-        qc = load(source / f"outputs/{run}/alignment_qc.json")
-        row = next(r for r in upstream["runs"] if r["run_accession"] == run)
-        if (qc["run_accession"] != run or qc["role"] != role
-                or qc["duplicate_marking"] != "not_performed" or qc["bam_filtering"] != "not_performed"
-                or qc["nonprimary_records"] != 0 or qc["primary_reads"] != row["reads"]
-                or qc["alignment_records"] != row["reads"] or row["reads"] <= 0
-                or qc["diagnostic_mapq"] != cfg["min_mapq"]):
-            raise ValueError(f"Unexpected upstream SINGLE pilot QC: {run}")
-        name = f"outputs/{run}/raw.sorted.bam"
-        bam = source / name
-        if not bam.is_file() or bam.stat().st_size <= 0:
-            raise ValueError(f"Missing upstream BAM: {bam}")
-        runs.append(dict(run_accession=run, role=role, source_relative=name,
-                         sha256=hashes[name], bytes=bam.stat().st_size,
-                         input_reads=row["reads"], mapped_reads=qc["mapped_reads"],
-                         nuclear_mapq_ge_threshold=qc["nuclear_mapq_ge_threshold"]))
-    return dict(schema_version=1, source_root=str(source), runs=runs,
-                configuration_sha256=sha(root / CONFIG), source_manifest_sha256=sha(source / "output.sha256"),
-                alignment_evidence_sha256=sha(evidence / "SHA256SUMS.txt"),
-                small_files={name: hashes[name] for name in small},
-                reference_provenance=provenance)
+
+    small = list(
+        base_small
+    )
+
+    for row in upstream_runs:
+
+        if not isinstance(
+            row,
+            dict,
+        ):
+            raise ValueError(
+                "Alignment run provenance entry must be an object"
+            )
+
+        run = row.get(
+            "run_accession"
+        )
+
+        role = row.get(
+            "role"
+        )
+
+        if (
+            not isinstance(
+                run,
+                str,
+            )
+            or not re.fullmatch(
+                r"[DES]RR[0-9]+",
+                run,
+            )
+        ):
+            raise ValueError(
+                f"Invalid alignment run accession: {run!r}"
+            )
+
+        if run in seen:
+            raise ValueError(
+                f"Duplicate alignment run: {run}"
+            )
+
+        seen.add(
+            run
+        )
+
+        if role not in {
+            "ip",
+            "input",
+        }:
+            raise ValueError(
+                f"Invalid alignment role for {run}: {role!r}"
+            )
+
+        observed_roles[
+            role
+        ] += 1
+
+        try:
+            input_reads = int(
+                row[
+                    "reads"
+                ]
+            )
+
+        except (
+            KeyError,
+            TypeError,
+            ValueError,
+        ) as exc:
+            raise ValueError(
+                f"Invalid alignment input read count for {run}"
+            ) from exc
+
+        if input_reads <= 0:
+            raise ValueError(
+                f"Non-positive alignment input read count for {run}"
+            )
+
+        qc_name = (
+            f"outputs/{run}/alignment_qc.json"
+        )
+
+        if qc_name not in hashes:
+            raise ValueError(
+                f"Alignment manifest is missing QC for {run}"
+            )
+
+        qc_path = (
+            source
+            / qc_name
+        )
+
+        if not qc_path.is_file():
+            raise ValueError(
+                f"Alignment QC output is missing: {qc_path}"
+            )
+
+        check(
+            qc_path,
+            hashes[
+                qc_name
+            ],
+        )
+
+        small.append(
+            qc_name
+        )
+
+        qc = load(
+            qc_path
+        )
+
+        try:
+            mapped_reads = int(
+                qc[
+                    "mapped_reads"
+                ]
+            )
+
+            nuclear_mapq = int(
+                qc[
+                    "nuclear_mapq_ge_threshold"
+                ]
+            )
+
+        except (
+            KeyError,
+            TypeError,
+            ValueError,
+        ) as exc:
+            raise ValueError(
+                f"Invalid alignment QC counts for {run}"
+            ) from exc
+
+        if (
+            qc.get(
+                "run_accession"
+            )
+            != run
+            or qc.get(
+                "role"
+            )
+            != role
+            or qc.get(
+                "duplicate_marking"
+            )
+            != "not_performed"
+            or qc.get(
+                "bam_filtering"
+            )
+            != "not_performed"
+            or int(
+                qc.get(
+                    "nonprimary_records",
+                    -1,
+                )
+            )
+            != 0
+            or int(
+                qc.get(
+                    "primary_reads",
+                    -1,
+                )
+            )
+            != input_reads
+            or int(
+                qc.get(
+                    "alignment_records",
+                    -1,
+                )
+            )
+            != input_reads
+            or qc.get(
+                "diagnostic_mapq"
+            )
+            != cfg[
+                "min_mapq"
+            ]
+        ):
+            raise ValueError(
+                f"Unexpected upstream SINGLE alignment QC: {run}"
+            )
+
+        if not (
+            0
+            <= mapped_reads
+            <= input_reads
+        ):
+            raise ValueError(
+                f"Invalid mapped-read count for {run}"
+            )
+
+        if not (
+            0
+            <= nuclear_mapq
+            <= mapped_reads
+        ):
+            raise ValueError(
+                f"Invalid nuclear MAPQ count for {run}"
+            )
+
+        bam_name = (
+            f"outputs/{run}/raw.sorted.bam"
+        )
+
+        index_name = (
+            f"outputs/{run}/raw.sorted.bam.csi"
+        )
+
+        for required in (
+            bam_name,
+            index_name,
+        ):
+
+            if required not in hashes:
+                raise ValueError(
+                    f"Alignment manifest is missing output: {required}"
+                )
+
+            candidate = (
+                source
+                / required
+            )
+
+            if (
+                not candidate.is_file()
+                or candidate.stat().st_size <= 0
+            ):
+                raise ValueError(
+                    f"Missing upstream alignment output: {candidate}"
+                )
+
+        bam = (
+            source
+            / bam_name
+        )
+
+        runs.append({
+            "run_accession": run,
+            "role": role,
+            "source_relative": bam_name,
+            "sha256": hashes[
+                bam_name
+            ],
+            "bytes": bam.stat().st_size,
+            "input_reads": input_reads,
+            "mapped_reads": mapped_reads,
+            "nuclear_mapq_ge_threshold": nuclear_mapq,
+        })
+
+    if observed_roles["ip"] < 1:
+        raise ValueError(
+            "Alignment cohort contains no IP runs"
+        )
+
+    if observed_roles["input"] < 1:
+        raise ValueError(
+            "Alignment cohort contains no Input runs"
+        )
+
+    declared_roles = upstream.get(
+        "role_counts"
+    )
+
+    if (
+        declared_roles is not None
+        and {
+            "ip": int(
+                declared_roles.get(
+                    "ip",
+                    -1,
+                )
+            ),
+            "input": int(
+                declared_roles.get(
+                    "input",
+                    -1,
+                )
+            ),
+        }
+        != {
+            "ip": observed_roles["ip"],
+            "input": observed_roles["input"],
+        }
+    ):
+        raise ValueError(
+            "Alignment input-provenance role_counts do not match runs"
+        )
+
+    return {
+        "schema_version": 1,
+        "source_root": str(
+            source
+        ),
+        "alignment_submission": str(
+            submission
+        ),
+        "alignment_job_id": job_id,
+        "library_layout": "SINGLE",
+        "instrument_platform": "ILLUMINA",
+        "run_count": len(
+            runs
+        ),
+        "role_counts": {
+            "ip": observed_roles[
+                "ip"
+            ],
+            "input": observed_roles[
+                "input"
+            ],
+        },
+        "runs": sorted(
+            runs,
+            key=lambda item: item[
+                "run_accession"
+            ],
+        ),
+        "configuration_sha256": sha(
+            root
+            / CONFIG
+        ),
+        "source_manifest_sha256": sha(
+            manifest
+        ),
+        "job_status_sha256": sha(
+            status_path
+        ),
+        "small_files": {
+            name: hashes[
+                name
+            ]
+            for name in small
+        },
+        "reference_provenance": provenance,
+        "full_bam_sha256_verification_deferred_to_compute": True,
+        "upstream_raw_bam_cleanup_authorized": False,
+    }
 
 
 def item_for(run):

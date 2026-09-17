@@ -1,0 +1,5 @@
+[OK] Dynamic ChIP filtering source snapshot and alignment upstream validated.
+FILTERING RUNS: 22 (IP=18, Input=4)
+UPSTREAM ALIGNMENT: /tmp/tmp.BWu9qMGLWD/project/results/chipseq/alignment/slurm/submission_SYNTH001
+CHECK DIRECTORY: /tmp/tmp.BWu9qMGLWD/project/results/chipseq/filtering/slurm/submission_o195w6q7
+[OK] Check only. No job submitted.

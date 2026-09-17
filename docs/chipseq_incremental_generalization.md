@@ -329,3 +329,69 @@ The existing filtering submitter, filtering SLURM wrapper and the
 pilot-specific upstream `prepare()` interface remain intentionally
 unchanged during Phase 5B. Their replacement by the verified dynamic
 alignment-submission contract is reserved for Phase 5C.
+
+## Dynamic alignment-to-filtering operational integration
+
+Phase 5C connects the generalized filtering runtime to the dynamic
+alignment submission layer.
+
+The filtering submission interface no longer consumes a frozen pilot
+alignment job, archived pilot eligibility or control-validation
+artifacts.
+
+Instead it resolves
+`results/chipseq/alignment/slurm/latest_submission.txt` and fails closed
+unless that submission has a numeric `job_id.txt`, a corresponding
+`job_<id>` directory, `job_status.tsv` with `stage=completed` and
+`exit_status=0`, a successful output-publication log and an
+`output.sha256` manifest.
+
+The latest-submission pointer alone is never treated as evidence of
+successful alignment.
+
+Small alignment provenance and QC outputs are SHA-256 revalidated before
+the filtering submission is created. The alignment input provenance,
+per-run alignment QC and reference provenance must agree on run
+accessions, IP/Input roles, SINGLE-end layout, ILLUMINA platform,
+diagnostic MAPQ and mitochondrial accession.
+
+For each run, the filtering plan records the upstream
+`outputs/<run>/raw.sorted.bam` SHA-256 digest, byte size, input-read
+count, mapped-read count and nuclear MAPQ>=30 count. Full BAM SHA-256
+verification remains deliberately deferred to the compute-node staging
+step to avoid reading all large BAMs on the login node.
+
+The filtering `--check` mode validates and snapshots this contract but
+does not call `sbatch`, create `job_id.txt` or update the filtering
+`latest_submission.txt` pointer.
+
+The filtering SLURM wrapper no longer executes pilot eligibility.
+It validates the dynamic filtering plan, performs the Snakemake dry-run,
+runs duplicate marking/filtering when productively submitted, publishes
+the verified filtered outputs and independently rechecks the final
+`output.sha256` manifest before setting `stage=completed`.
+
+### Upstream BAM retention policy
+
+Phase 5C does not automatically delete alignment `raw.sorted.bam`
+files.
+
+The staged filtering copies and duplicate-marked BAMs remain temporary
+node-local/Snakemake intermediates. The persistent scientific products
+are the verified filtered BAMs, CSI indexes, QC reports and provenance.
+
+Alignment raw BAMs become eligible for a separate storage-cleanup step
+only after a productive filtering job has:
+
+1. reached `stage=completed` with `exit_status=0`;
+2. published all filtered BAMs and CSI indexes;
+3. validated each filtered BAM by a complete read;
+4. generated `output.sha256`; and
+5. successfully revalidated that output manifest.
+
+Cleanup is therefore intentionally separated from the filtering job
+itself. A failed filtering run never deletes its alignment upstream.
+
+The current project still has no productive dynamic 22-run alignment
+submission, so Phase 5C validation uses synthetic alignment-output
+fixtures and executes no real duplicate marking or filtering.

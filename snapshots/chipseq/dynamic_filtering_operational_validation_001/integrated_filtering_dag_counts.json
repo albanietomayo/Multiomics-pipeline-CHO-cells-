@@ -1,0 +1,14 @@
+{
+  "pilot_eligibility_jobs": 0,
+  "planned_jobs_total": 112,
+  "planned_rule_jobs": {
+    "chipseq_filter_bam": 22,
+    "chipseq_filter_stage": 22,
+    "chipseq_filtered_index": 22,
+    "chipseq_filtered_qc": 22,
+    "chipseq_filtering_all": 1,
+    "chipseq_filtering_summary": 1,
+    "chipseq_mark_duplicates": 22
+  },
+  "schema_version": 1
+}

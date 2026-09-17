@@ -1,0 +1,1986 @@
+diff --git a/config/chipseq_filtering.json b/config/chipseq_filtering.json
+index 51cd354..3478923 100644
+--- a/config/chipseq_filtering.json
++++ b/config/chipseq_filtering.json
+@@ -1,7 +1,6 @@
+ {
+   "schema_version": 1,
+-  "source_job": "results/chipseq/alignment/slurm/submission__niyvyr2/job_10297460",
+-  "alignment_evidence": "snapshots/chipseq/alignment_validation_001",
++  "alignment_latest_submission": "results/chipseq/alignment/slurm/latest_submission.txt",
+   "min_mapq": 30,
+   "exclude_mapq_255": true,
+   "exclude_flags": 3844,
+@@ -10,5 +9,5 @@
+   "duplicate_scoring_strategy": "SUM_OF_BASE_QUALITIES",
+   "threads": 4,
+   "picard_heap_mb": 12000,
+-  "scope": "single_end_pilot_duplicate_marking_and_nuclear_filtering"
++  "scope": "dynamic_single_end_duplicate_marking_and_nuclear_filtering"
+ }
+diff --git a/docs/chipseq_incremental_generalization.md b/docs/chipseq_incremental_generalization.md
+index 5eca8e9..6a06e04 100644
+--- a/docs/chipseq_incremental_generalization.md
++++ b/docs/chipseq_incremental_generalization.md
+@@ -329,3 +329,69 @@ The existing filtering submitter, filtering SLURM wrapper and the
+ pilot-specific upstream `prepare()` interface remain intentionally
+ unchanged during Phase 5B. Their replacement by the verified dynamic
+ alignment-submission contract is reserved for Phase 5C.
++
++## Dynamic alignment-to-filtering operational integration
++
++Phase 5C connects the generalized filtering runtime to the dynamic
++alignment submission layer.
++
++The filtering submission interface no longer consumes a frozen pilot
++alignment job, archived pilot eligibility or control-validation
++artifacts.
++
++Instead it resolves
++`results/chipseq/alignment/slurm/latest_submission.txt` and fails closed
++unless that submission has a numeric `job_id.txt`, a corresponding
++`job_<id>` directory, `job_status.tsv` with `stage=completed` and
++`exit_status=0`, a successful output-publication log and an
++`output.sha256` manifest.
++
++The latest-submission pointer alone is never treated as evidence of
++successful alignment.
++
++Small alignment provenance and QC outputs are SHA-256 revalidated before
++the filtering submission is created. The alignment input provenance,
++per-run alignment QC and reference provenance must agree on run
++accessions, IP/Input roles, SINGLE-end layout, ILLUMINA platform,
++diagnostic MAPQ and mitochondrial accession.
++
++For each run, the filtering plan records the upstream
++`outputs/<run>/raw.sorted.bam` SHA-256 digest, byte size, input-read
++count, mapped-read count and nuclear MAPQ>=30 count. Full BAM SHA-256
++verification remains deliberately deferred to the compute-node staging
++step to avoid reading all large BAMs on the login node.
++
++The filtering `--check` mode validates and snapshots this contract but
++does not call `sbatch`, create `job_id.txt` or update the filtering
++`latest_submission.txt` pointer.
++
++The filtering SLURM wrapper no longer executes pilot eligibility.
++It validates the dynamic filtering plan, performs the Snakemake dry-run,
++runs duplicate marking/filtering when productively submitted, publishes
++the verified filtered outputs and independently rechecks the final
++`output.sha256` manifest before setting `stage=completed`.
++
++### Upstream BAM retention policy
++
++Phase 5C does not automatically delete alignment `raw.sorted.bam`
++files.
++
++The staged filtering copies and duplicate-marked BAMs remain temporary
++node-local/Snakemake intermediates. The persistent scientific products
++are the verified filtered BAMs, CSI indexes, QC reports and provenance.
++
++Alignment raw BAMs become eligible for a separate storage-cleanup step
++only after a productive filtering job has:
++
++1. reached `stage=completed` with `exit_status=0`;
++2. published all filtered BAMs and CSI indexes;
++3. validated each filtered BAM by a complete read;
++4. generated `output.sha256`; and
++5. successfully revalidated that output manifest.
++
++Cleanup is therefore intentionally separated from the filtering job
++itself. A failed filtering run never deletes its alignment upstream.
++
++The current project still has no productive dynamic 22-run alignment
++submission, so Phase 5C validation uses synthetic alignment-output
++fixtures and executes no real duplicate marking or filtering.
+diff --git a/workflow/scripts/chipseq_filtering_support.py b/workflow/scripts/chipseq_filtering_support.py
+index 65c5bc5..bb15301 100644
+--- a/workflow/scripts/chipseq_filtering_support.py
++++ b/workflow/scripts/chipseq_filtering_support.py
+@@ -58,71 +58,708 @@ def check(path, digest):
+         raise ValueError(f"SHA-256 mismatch: {path}")
+ 
+ 
++def _job_status(path):
++    path = Path(path)
++
++    if not path.is_file():
++        raise ValueError(
++            f"Missing upstream alignment job status: {path}"
++        )
++
++    result = {}
++
++    for line in path.read_text(
++        encoding="utf-8"
++    ).splitlines():
++
++        if not line.strip():
++            continue
++
++        fields = line.split()
++
++        if len(fields) != 2:
++            raise ValueError(
++                f"Malformed upstream alignment job status: {line!r}"
++            )
++
++        key, value = fields
++
++        if key in result:
++            raise ValueError(
++                f"Duplicate upstream alignment job-status key: {key}"
++            )
++
++        result[key] = value
++
++    return result
++
++
+ def configuration(root=Path(".")):
+-    cfg = load(root / CONFIG)
+-    if (cfg["schema_version"] != 1 or cfg["min_mapq"] != 30
+-            or cfg["exclude_flags"] != 3844 or cfg["exclude_mapq_255"] is not True
+-            or cfg["optical_duplicate_detection"] is not False
+-            or cfg["duplicate_scoring_strategy"] != "SUM_OF_BASE_QUALITIES"
+-            or cfg["threads"] != 4 or cfg["picard_heap_mb"] != 12000
+-            or cfg["mitochondrial_accession"] != "NC_007936.1"):
+-        raise ValueError("Unsupported pilot policy; review code and tests before changing it")
++    cfg = load(
++        Path(root)
++        / CONFIG
++    )
++
++    expected_scope = (
++        "dynamic_single_end_duplicate_marking_and_"
++        "nuclear_filtering"
++    )
++
++    if (
++        cfg["schema_version"] != 1
++        or cfg["min_mapq"] != 30
++        or cfg["exclude_flags"] != 3844
++        or cfg["exclude_mapq_255"] is not True
++        or cfg["optical_duplicate_detection"] is not False
++        or cfg["duplicate_scoring_strategy"] != "SUM_OF_BASE_QUALITIES"
++        or cfg["threads"] != 4
++        or cfg["picard_heap_mb"] != 12000
++        or cfg["mitochondrial_accession"] != "NC_007936.1"
++        or cfg.get("scope") != expected_scope
++    ):
++        raise ValueError(
++            "Unsupported filtering policy; review code and tests "
++            "before changing it"
++        )
++
++    pointer = cfg.get(
++        "alignment_latest_submission"
++    )
++
++    if not isinstance(
++        pointer,
++        str,
++    ):
++        raise ValueError(
++            "Filtering policy has no alignment_latest_submission"
++        )
++
++    relative(
++        pointer
++    )
++
+     return cfg
+ 
+ 
+ def prepare(root):
+-    root = Path(root).resolve()
+-    cfg = configuration(root)
+-    source = root / relative(cfg["source_job"])
+-    evidence = root / relative(cfg["alignment_evidence"])
+-    # Anchor the live results to the previously archived validation evidence.
+-    archived = checksums(evidence / "SHA256SUMS.txt")
+-    for name in ("job/output.sha256", "job/job_status.tsv"):
+-        check(evidence / name, archived[name])
+-    check(source / "output.sha256", sha(evidence / "job/output.sha256"))
+-    check(source / "job_status.tsv", sha(evidence / "job/job_status.tsv"))
+-    status = dict(line.split() for line in (source / "job_status.tsv").read_text().splitlines())
+-    if status.get("stage") != "completed" or status.get("exit_status") != "0":
+-        raise ValueError("Upstream alignment did not complete successfully")
+-    hashes = checksums(source / "output.sha256")
+-    pilot = load(root / "config/chipseq_pilot.json")
+-    roles = {pilot["input_run_accession"]: "input", pilot["ip_run_accession"]: "ip"}
+-    if len(roles) != 2 or any(not re.fullmatch(r"[DES]RR[0-9]+", run) for run in roles):
+-        raise ValueError("Expected one input and one distinct IP")
+-    small = ["outputs/reference/reference_provenance.json", "outputs/reference/genome_plus_mt.fa.fai",
+-             "outputs/input_provenance.json", "outputs/alignment_parameters.json", "outputs/alignment_qc.tsv"]
+-    small += [f"outputs/{run}/alignment_qc.json" for run in roles]
+-    for name in small:
+-        check(source / name, hashes[name])
+-    provenance = load(source / small[0])
+-    if provenance["mitochondrial_accession"] != cfg["mitochondrial_accession"]:
+-        raise ValueError("Unexpected mitochondrial accession")
+-    upstream = load(source / "outputs/input_provenance.json")
+-    if len(upstream["runs"]) != 2 or {r["run_accession"]: r["role"] for r in upstream["runs"]} != roles:
+-        raise ValueError("Upstream BAM selection differs from the current pilot")
++    root = Path(
++        root
++    ).resolve()
++
++    cfg = configuration(
++        root
++    )
++
++    pointer = (
++        root
++        / relative(
++            cfg[
++                "alignment_latest_submission"
++            ]
++        )
++    )
++
++    if not pointer.is_file():
++        raise ValueError(
++            "No submitted dynamic ChIP alignment is available: "
++            f"{pointer}"
++        )
++
++    pointer_value = pointer.read_text(
++        encoding="utf-8"
++    ).strip()
++
++    if not pointer_value:
++        raise ValueError(
++            "Alignment latest-submission pointer is empty"
++        )
++
++    submission = Path(
++        pointer_value
++    )
++
++    if not submission.is_absolute():
++        raise ValueError(
++            "Alignment latest-submission pointer must be absolute"
++        )
++
++    submission = submission.resolve()
++
++    expected_parent = pointer.parent.resolve()
++
++    if (
++        submission.parent != expected_parent
++        or not re.fullmatch(
++            r"submission_[A-Za-z0-9_]+",
++            submission.name,
++        )
++    ):
++        raise ValueError(
++            "Alignment latest-submission pointer does not identify "
++            "a valid submission directory"
++        )
++
++    if not submission.is_dir():
++        raise ValueError(
++            f"Alignment submission directory is missing: {submission}"
++        )
++
++    job_id_file = (
++        submission
++        / "job_id.txt"
++    )
++
++    if not job_id_file.is_file():
++        raise ValueError(
++            "Latest alignment submission has no job_id.txt and "
++            "is therefore not a completed productive submission"
++        )
++
++    job_id = job_id_file.read_text(
++        encoding="utf-8"
++    ).strip()
++
++    if not re.fullmatch(
++        r"[0-9]+",
++        job_id,
++    ):
++        raise ValueError(
++            f"Invalid alignment job id: {job_id!r}"
++        )
++
++    source = (
++        submission
++        / f"job_{job_id}"
++    )
++
++    if not source.is_dir():
++        raise ValueError(
++            f"Alignment job directory is missing: {source}"
++        )
++
++    status_path = (
++        source
++        / "job_status.tsv"
++    )
++
++    status = _job_status(
++        status_path
++    )
++
++    if (
++        status.get("stage") != "completed"
++        or status.get("exit_status") != "0"
++    ):
++        raise ValueError(
++            "Upstream alignment did not complete successfully"
++        )
++
++    output_validation = (
++        source
++        / "output_copy_validation.log"
++    )
++
++    if not output_validation.is_file():
++        raise ValueError(
++            "Successful alignment publication log is missing"
++        )
++
++    if (
++        "[OK] Outputs copied and SHA-256 verified"
++        not in output_validation.read_text(
++            encoding="utf-8"
++        )
++    ):
++        raise ValueError(
++            "Alignment output publication was not verified"
++        )
++
++    manifest = (
++        source
++        / "output.sha256"
++    )
++
++    if not manifest.is_file():
++        raise ValueError(
++            "Successful alignment output manifest is missing"
++        )
++
++    hashes = checksums(
++        manifest
++    )
++
++    base_small = [
++        "outputs/reference/reference_provenance.json",
++        "outputs/reference/genome_plus_mt.fa.fai",
++        "outputs/input_provenance.json",
++        "outputs/alignment_parameters.json",
++        "outputs/alignment_qc.tsv",
++        "outputs/verified_fastq_inputs.json",
++    ]
++
++    for name in base_small:
++
++        if name not in hashes:
++            raise ValueError(
++                f"Alignment manifest is missing required output: {name}"
++            )
++
++        path = (
++            source
++            / name
++        )
++
++        if not path.is_file():
++            raise ValueError(
++                f"Alignment output is missing: {path}"
++            )
++
++        check(
++            path,
++            hashes[name],
++        )
++
++    provenance = load(
++        source
++        / "outputs/reference/reference_provenance.json"
++    )
++
++    if (
++        provenance.get(
++            "mitochondrial_accession"
++        )
++        != cfg[
++            "mitochondrial_accession"
++        ]
++    ):
++        raise ValueError(
++            "Unexpected mitochondrial accession in alignment provenance"
++        )
++
++    alignment_parameters = load(
++        source
++        / "outputs/alignment_parameters.json"
++    )
++
++    if (
++        alignment_parameters.get(
++            "diagnostic_mapq"
++        )
++        != cfg[
++            "min_mapq"
++        ]
++        or alignment_parameters.get(
++            "mitochondrial_accession"
++        )
++        != cfg[
++            "mitochondrial_accession"
++        ]
++    ):
++        raise ValueError(
++            "Alignment/filtering MAPQ or mitochondrial policy mismatch"
++        )
++
++    upstream = load(
++        source
++        / "outputs/input_provenance.json"
++    )
++
++    if upstream.get(
++        "schema_version"
++    ) != 1:
++        raise ValueError(
++            "Unsupported alignment input-provenance schema"
++        )
++
++    if upstream.get(
++        "library_layout"
++    ) != "SINGLE":
++        raise ValueError(
++            "Dynamic filtering currently requires SINGLE alignment input"
++        )
++
++    if upstream.get(
++        "instrument_platform"
++    ) != "ILLUMINA":
++        raise ValueError(
++            "Dynamic filtering currently requires ILLUMINA alignment input"
++        )
++
++    upstream_runs = upstream.get(
++        "runs"
++    )
++
++    if (
++        not isinstance(
++            upstream_runs,
++            list,
++        )
++        or not upstream_runs
++    ):
++        raise ValueError(
++            "Alignment input provenance contains no runs"
++        )
++
++    declared_run_count = upstream.get(
++        "run_count"
++    )
++
++    if (
++        declared_run_count is not None
++        and int(
++            declared_run_count
++        )
++        != len(
++            upstream_runs
++        )
++    ):
++        raise ValueError(
++            "Alignment input-provenance run_count does not match runs"
++        )
++
++    observed_roles = Counter()
++
++    seen = set()
++
+     runs = []
+-    for run, role in sorted(roles.items()):
+-        qc = load(source / f"outputs/{run}/alignment_qc.json")
+-        row = next(r for r in upstream["runs"] if r["run_accession"] == run)
+-        if (qc["run_accession"] != run or qc["role"] != role
+-                or qc["duplicate_marking"] != "not_performed" or qc["bam_filtering"] != "not_performed"
+-                or qc["nonprimary_records"] != 0 or qc["primary_reads"] != row["reads"]
+-                or qc["alignment_records"] != row["reads"] or row["reads"] <= 0
+-                or qc["diagnostic_mapq"] != cfg["min_mapq"]):
+-            raise ValueError(f"Unexpected upstream SINGLE pilot QC: {run}")
+-        name = f"outputs/{run}/raw.sorted.bam"
+-        bam = source / name
+-        if not bam.is_file() or bam.stat().st_size <= 0:
+-            raise ValueError(f"Missing upstream BAM: {bam}")
+-        runs.append(dict(run_accession=run, role=role, source_relative=name,
+-                         sha256=hashes[name], bytes=bam.stat().st_size,
+-                         input_reads=row["reads"], mapped_reads=qc["mapped_reads"],
+-                         nuclear_mapq_ge_threshold=qc["nuclear_mapq_ge_threshold"]))
+-    return dict(schema_version=1, source_root=str(source), runs=runs,
+-                configuration_sha256=sha(root / CONFIG), source_manifest_sha256=sha(source / "output.sha256"),
+-                alignment_evidence_sha256=sha(evidence / "SHA256SUMS.txt"),
+-                small_files={name: hashes[name] for name in small},
+-                reference_provenance=provenance)
++
++    small = list(
++        base_small
++    )
++
++    for row in upstream_runs:
++
++        if not isinstance(
++            row,
++            dict,
++        ):
++            raise ValueError(
++                "Alignment run provenance entry must be an object"
++            )
++
++        run = row.get(
++            "run_accession"
++        )
++
++        role = row.get(
++            "role"
++        )
++
++        if (
++            not isinstance(
++                run,
++                str,
++            )
++            or not re.fullmatch(
++                r"[DES]RR[0-9]+",
++                run,
++            )
++        ):
++            raise ValueError(
++                f"Invalid alignment run accession: {run!r}"
++            )
++
++        if run in seen:
++            raise ValueError(
++                f"Duplicate alignment run: {run}"
++            )
++
++        seen.add(
++            run
++        )
++
++        if role not in {
++            "ip",
++            "input",
++        }:
++            raise ValueError(
++                f"Invalid alignment role for {run}: {role!r}"
++            )
++
++        observed_roles[
++            role
++        ] += 1
++
++        try:
++            input_reads = int(
++                row[
++                    "reads"
++                ]
++            )
++
++        except (
++            KeyError,
++            TypeError,
++            ValueError,
++        ) as exc:
++            raise ValueError(
++                f"Invalid alignment input read count for {run}"
++            ) from exc
++
++        if input_reads <= 0:
++            raise ValueError(
++                f"Non-positive alignment input read count for {run}"
++            )
++
++        qc_name = (
++            f"outputs/{run}/alignment_qc.json"
++        )
++
++        if qc_name not in hashes:
++            raise ValueError(
++                f"Alignment manifest is missing QC for {run}"
++            )
++
++        qc_path = (
++            source
++            / qc_name
++        )
++
++        if not qc_path.is_file():
++            raise ValueError(
++                f"Alignment QC output is missing: {qc_path}"
++            )
++
++        check(
++            qc_path,
++            hashes[
++                qc_name
++            ],
++        )
++
++        small.append(
++            qc_name
++        )
++
++        qc = load(
++            qc_path
++        )
++
++        try:
++            mapped_reads = int(
++                qc[
++                    "mapped_reads"
++                ]
++            )
++
++            nuclear_mapq = int(
++                qc[
++                    "nuclear_mapq_ge_threshold"
++                ]
++            )
++
++        except (
++            KeyError,
++            TypeError,
++            ValueError,
++        ) as exc:
++            raise ValueError(
++                f"Invalid alignment QC counts for {run}"
++            ) from exc
++
++        if (
++            qc.get(
++                "run_accession"
++            )
++            != run
++            or qc.get(
++                "role"
++            )
++            != role
++            or qc.get(
++                "duplicate_marking"
++            )
++            != "not_performed"
++            or qc.get(
++                "bam_filtering"
++            )
++            != "not_performed"
++            or int(
++                qc.get(
++                    "nonprimary_records",
++                    -1,
++                )
++            )
++            != 0
++            or int(
++                qc.get(
++                    "primary_reads",
++                    -1,
++                )
++            )
++            != input_reads
++            or int(
++                qc.get(
++                    "alignment_records",
++                    -1,
++                )
++            )
++            != input_reads
++            or qc.get(
++                "diagnostic_mapq"
++            )
++            != cfg[
++                "min_mapq"
++            ]
++        ):
++            raise ValueError(
++                f"Unexpected upstream SINGLE alignment QC: {run}"
++            )
++
++        if not (
++            0
++            <= mapped_reads
++            <= input_reads
++        ):
++            raise ValueError(
++                f"Invalid mapped-read count for {run}"
++            )
++
++        if not (
++            0
++            <= nuclear_mapq
++            <= mapped_reads
++        ):
++            raise ValueError(
++                f"Invalid nuclear MAPQ count for {run}"
++            )
++
++        bam_name = (
++            f"outputs/{run}/raw.sorted.bam"
++        )
++
++        index_name = (
++            f"outputs/{run}/raw.sorted.bam.csi"
++        )
++
++        for required in (
++            bam_name,
++            index_name,
++        ):
++
++            if required not in hashes:
++                raise ValueError(
++                    f"Alignment manifest is missing output: {required}"
++                )
++
++            candidate = (
++                source
++                / required
++            )
++
++            if (
++                not candidate.is_file()
++                or candidate.stat().st_size <= 0
++            ):
++                raise ValueError(
++                    f"Missing upstream alignment output: {candidate}"
++                )
++
++        bam = (
++            source
++            / bam_name
++        )
++
++        runs.append({
++            "run_accession": run,
++            "role": role,
++            "source_relative": bam_name,
++            "sha256": hashes[
++                bam_name
++            ],
++            "bytes": bam.stat().st_size,
++            "input_reads": input_reads,
++            "mapped_reads": mapped_reads,
++            "nuclear_mapq_ge_threshold": nuclear_mapq,
++        })
++
++    if observed_roles["ip"] < 1:
++        raise ValueError(
++            "Alignment cohort contains no IP runs"
++        )
++
++    if observed_roles["input"] < 1:
++        raise ValueError(
++            "Alignment cohort contains no Input runs"
++        )
++
++    declared_roles = upstream.get(
++        "role_counts"
++    )
++
++    if (
++        declared_roles is not None
++        and {
++            "ip": int(
++                declared_roles.get(
++                    "ip",
++                    -1,
++                )
++            ),
++            "input": int(
++                declared_roles.get(
++                    "input",
++                    -1,
++                )
++            ),
++        }
++        != {
++            "ip": observed_roles["ip"],
++            "input": observed_roles["input"],
++        }
++    ):
++        raise ValueError(
++            "Alignment input-provenance role_counts do not match runs"
++        )
++
++    return {
++        "schema_version": 1,
++        "source_root": str(
++            source
++        ),
++        "alignment_submission": str(
++            submission
++        ),
++        "alignment_job_id": job_id,
++        "library_layout": "SINGLE",
++        "instrument_platform": "ILLUMINA",
++        "run_count": len(
++            runs
++        ),
++        "role_counts": {
++            "ip": observed_roles[
++                "ip"
++            ],
++            "input": observed_roles[
++                "input"
++            ],
++        },
++        "runs": sorted(
++            runs,
++            key=lambda item: item[
++                "run_accession"
++            ],
++        ),
++        "configuration_sha256": sha(
++            root
++            / CONFIG
++        ),
++        "source_manifest_sha256": sha(
++            manifest
++        ),
++        "job_status_sha256": sha(
++            status_path
++        ),
++        "small_files": {
++            name: hashes[
++                name
++            ]
++            for name in small
++        },
++        "reference_provenance": provenance,
++        "full_bam_sha256_verification_deferred_to_compute": True,
++        "upstream_raw_bam_cleanup_authorized": False,
++    }
+ 
+ 
+ def item_for(run):
+diff --git a/workflow/slurm/chipseq_filtering.sbatch b/workflow/slurm/chipseq_filtering.sbatch
+old mode 100644
+new mode 100755
+index 682b106..b746c21
+--- a/workflow/slurm/chipseq_filtering.sbatch
++++ b/workflow/slurm/chipseq_filtering.sbatch
+@@ -5,64 +5,234 @@
+ #SBATCH --cpus-per-task=4
+ #SBATCH --mem=24G
+ #SBATCH --time=04:00:00
++
+ set -euo pipefail
++
+ : "${TMPDIR:?Node-local TMPDIR is required}"
++
+ CHIP_SOURCE="$PWD"
+ CHIP_SAVE="$(dirname "$CHIP_SOURCE")/job_${SLURM_JOB_ID}"
+ CHIP_WORK="$TMPDIR/chipseq-filtering"
+-mkdir -p "$CHIP_SAVE" "$CHIP_WORK"
++
++mkdir -p \
++    "$CHIP_SAVE" \
++    "$CHIP_WORK"
++
+ CHIP_STAGE=source_validation
++
+ finish() {
+     CHIP_EXIT=$?
++
+     trap - EXIT
+     set +e
++
+     if [[ -d "$CHIP_WORK/results/chipseq/filtering" && "$CHIP_EXIT" != 0 ]]; then
+-        rsync -a --exclude='*.bam' --exclude='*.csi' --exclude='*.part' \
+-            "$CHIP_WORK/results/chipseq/filtering/" "$CHIP_SAVE/failure_reports/" \
+-            > "$CHIP_SAVE/failure_copy.log" 2>&1
++
++        rsync -a \
++            --exclude='*.bam' \
++            --exclude='*.csi' \
++            --exclude='*.part' \
++            "$CHIP_WORK/results/chipseq/filtering/" \
++            "$CHIP_SAVE/failure_reports/" \
++            > "$CHIP_SAVE/failure_copy.log" \
++            2>&1
+     fi
++
+     if [[ -d "$CHIP_WORK/.snakemake/log" ]]; then
+-        rsync -a "$CHIP_WORK/.snakemake/log/" "$CHIP_SAVE/snakemake_logs/"
++
++        rsync -a \
++            "$CHIP_WORK/.snakemake/log/" \
++            "$CHIP_SAVE/snakemake_logs/"
+     fi
+-    printf 'stage\t%s\nexit_status\t%s\n' "$CHIP_STAGE" "$CHIP_EXIT" > "$CHIP_SAVE/job_status.tsv"
+-    echo "Filtering exit=$CHIP_EXIT; stage=$CHIP_STAGE; logs=$CHIP_SAVE"
++
++    printf \
++        'stage\t%s\nexit_status\t%s\n' \
++        "$CHIP_STAGE" \
++        "$CHIP_EXIT" \
++        > "$CHIP_SAVE/job_status.tsv"
++
++    echo \
++        "Filtering exit=$CHIP_EXIT; stage=$CHIP_STAGE; logs=$CHIP_SAVE"
++
+     exit "$CHIP_EXIT"
+ }
++
+ trap finish EXIT
+-sha256sum --check ../source.sha256 > "$CHIP_SAVE/source_validation.log"
+-rsync -a "$CHIP_SOURCE/" "$CHIP_WORK/"
++
++sha256sum \
++    --check ../source.sha256 \
++    > "$CHIP_SAVE/source_validation.log"
++
++rsync -a \
++    "$CHIP_SOURCE/" \
++    "$CHIP_WORK/"
++
+ cd "$CHIP_WORK"
++
+ module purge
+ module load Miniforge3/24.1.2-0
++
+ export CONDA_PKGS_DIRS="$TMPDIR/chipseq-filtering-conda-pkgs"
+ export XDG_CACHE_HOME="$TMPDIR/chipseq-filtering-cache"
+ export PYTHONDONTWRITEBYTECODE=1
++
+ CHIP_ENV="$TMPDIR/chipseq-filtering-env"
+ CHIP_RULE_ENVS="$TMPDIR/chipseq-filtering-rule-envs"
++
+ CHIP_STAGE=environment_creation
+-conda env create --prefix "$CHIP_ENV" --file environment.yml > "$CHIP_SAVE/environment_creation.log" 2>&1
++
++conda env create \
++    --prefix "$CHIP_ENV" \
++    --file environment.yml \
++    > "$CHIP_SAVE/environment_creation.log" \
++    2>&1
++
+ export PATH="$CHIP_ENV/bin:$PATH"
+-snakemake --version > "$CHIP_SAVE/snakemake_version.txt"
+-conda list --prefix "$CHIP_ENV" --explicit > "$CHIP_SAVE/environment_explicit.txt"
+-CHIP_ARGS=(--snakefile workflow/rules/chipseq_filtering.smk --cores "$SLURM_CPUS_PER_TASK"
+-    --resources mem_mb=20000 --use-conda --conda-prefix "$CHIP_RULE_ENVS" --rerun-incomplete)
+-CHIP_STAGE=eligibility
+-snakemake chipseq_experimental_eligibility "${CHIP_ARGS[@]}" -p > "$CHIP_SAVE/eligibility.log" 2>&1
++
++snakemake --version \
++    > "$CHIP_SAVE/snakemake_version.txt"
++
++conda list \
++    --prefix "$CHIP_ENV" \
++    --explicit \
++    > "$CHIP_SAVE/environment_explicit.txt"
++
++CHIP_ARGS=(
++    --snakefile workflow/rules/chipseq_filtering.smk
++    --cores "$SLURM_CPUS_PER_TASK"
++    --resources mem_mb=20000
++    --use-conda
++    --conda-prefix "$CHIP_RULE_ENVS"
++    --rerun-incomplete
++)
++
++CHIP_STAGE=filtering_plan_validation
++
++python - <<'PY' \
++    > "$CHIP_SAVE/filtering_plan_validation.log" \
++    2>&1
++import json
++from collections import Counter
++from pathlib import Path
++
++path = Path(
++    "config/chipseq_filtering_inputs.json"
++)
++
++obj = json.loads(
++    path.read_text(
++        encoding="utf-8"
++    )
++)
++
++assert obj["schema_version"] == 1
++assert obj["library_layout"] == "SINGLE"
++assert obj["instrument_platform"] == "ILLUMINA"
++
++runs = obj["runs"]
++
++assert runs
++
++accessions = [
++    row["run_accession"]
++    for row in runs
++]
++
++assert len(accessions) == len(set(accessions))
++
++roles = Counter(
++    row["role"]
++    for row in runs
++)
++
++assert roles["ip"] >= 1
++assert roles["input"] >= 1
++
++assert obj.get(
++    "upstream_raw_bam_cleanup_authorized"
++) is False
++
++print(
++    f"filtering_runs={len(runs)}"
++)
++
++print(
++    f"ip_runs={roles['ip']}"
++)
++
++print(
++    f"input_runs={roles['input']}"
++)
++
++print(
++    "upstream_raw_bam_cleanup_authorized=false"
++)
++
++print(
++    "FILTERING_PLAN_VALIDATION=PASS"
++)
++PY
++
+ CHIP_STAGE=dry_run
+-snakemake chipseq_filtering_all "${CHIP_ARGS[@]}" -n > "$CHIP_SAVE/dry_run.log" 2>&1
++
++snakemake \
++    chipseq_filtering_all \
++    "${CHIP_ARGS[@]}" \
++    -n \
++    -p \
++    > "$CHIP_SAVE/dry_run.log" \
++    2>&1
++
+ CHIP_STAGE=filtering
+-/usr/bin/time -v -o "$CHIP_SAVE/workflow_resources.txt" \
+-    snakemake chipseq_filtering_all "${CHIP_ARGS[@]}" -p > "$CHIP_SAVE/snakemake_execution.log" 2>&1
++
++/usr/bin/time \
++    -v \
++    -o "$CHIP_SAVE/workflow_resources.txt" \
++    snakemake \
++        chipseq_filtering_all \
++        "${CHIP_ARGS[@]}" \
++        -p \
++        > "$CHIP_SAVE/snakemake_execution.log" \
++        2>&1
++
+ CHIP_STAGE=environment_provenance
+-mkdir -p "$CHIP_SAVE/rule_environments"
+-for CHIP_RULE_ENV in "$CHIP_RULE_ENVS"/*; do
++
++mkdir -p \
++    "$CHIP_SAVE/rule_environments"
++
++for CHIP_RULE_ENV in "$CHIP_RULE_ENVS"/*
++do
++
+     if [[ -d "$CHIP_RULE_ENV/conda-meta" ]]; then
+-        conda list --prefix "$CHIP_RULE_ENV" --explicit \
++
++        conda list \
++            --prefix "$CHIP_RULE_ENV" \
++            --explicit \
+             > "$CHIP_SAVE/rule_environments/$(basename "$CHIP_RULE_ENV").txt"
+     fi
++
+ done
++
+ CHIP_STAGE=output_copy
+-python workflow/scripts/chipseq_filtering_support.py publish --save "$CHIP_SAVE" \
+-    > "$CHIP_SAVE/output_copy_validation.log" 2>&1
++
++python \
++    workflow/scripts/chipseq_filtering_support.py \
++    publish \
++    --save "$CHIP_SAVE" \
++    > "$CHIP_SAVE/output_copy_validation.log" \
++    2>&1
++
++CHIP_STAGE=output_validation
++
++(
++    cd "$CHIP_SAVE"
++
++    sha256sum \
++        --check output.sha256
++) > "$CHIP_SAVE/output_manifest_validation.log" \
++    2>&1
++
+ CHIP_STAGE=completed
+-echo "[OK] Duplicate marking, nuclear filtering and QC completed; outputs copied and verified."
++
++echo \
++    "[OK] Dynamic ChIP duplicate marking, nuclear filtering and QC completed; outputs copied and verified."
+diff --git a/workflow/slurm/submit_chipseq_filtering.py b/workflow/slurm/submit_chipseq_filtering.py
+old mode 100644
+new mode 100755
+index d0bea0f..e5d618a
+--- a/workflow/slurm/submit_chipseq_filtering.py
++++ b/workflow/slurm/submit_chipseq_filtering.py
+@@ -1,94 +1,464 @@
+ #!/usr/bin/env python3
+-"""Prepare an immutable SINGLE ChIP filtering submission; optionally submit it."""
++
++"""Prepare a dynamic ChIP-seq filtering submission.
++
++--check validates and snapshots the dynamic alignment upstream
++without calling sbatch.
++
++--submit performs the same validation and then submits filtering.
++"""
++
+ import argparse
+ import importlib.util
++import json
+ import re
+ import shutil
+ import subprocess
+ import tempfile
+ from pathlib import Path
+ 
+-ROOT = Path(__file__).resolve().parents[2]
++
++ROOT = Path(
++    __file__
++).resolve().parents[2]
++
++EXPECTED_BRANCH = (
++    "chipseq-incremental-generalization"
++)
++
+ FILES = [
+-    "environment.yml", "config/samples.tsv", "config/chipseq_pilot.json",
+-    "config/chipseq_experimental_eligibility.json", "config/chipseq_filtering.json",
+-    "workflow/rules/chipseq_eligibility.smk", "workflow/rules/chipseq_filtering.smk",
+-    "workflow/scripts/validate_chipseq_eligibility.py", "workflow/scripts/chipseq_filtering_support.py",
+-    "workflow/envs/chipseq_duplicates.yaml", "workflow/envs/chipseq_filtering.yaml",
+-    "workflow/slurm/chipseq_filtering.sbatch", "workflow/slurm/submit_chipseq_filtering.py",
+-    "workflow/tests/test_chipseq_filtering.py", "docs/chipseq_filtering_pilot.md",
+-    "snapshots/chipseq/control_validation_001/chipseq_conditions.tsv",
+-    "snapshots/chipseq/control_validation_001/control_candidate_summary.json",
+-    "snapshots/chipseq/control_validation_001/request_plan_provenance.json",
++    "environment.yml",
++    "config/chipseq_filtering.json",
++    "workflow/rules/chipseq_filtering.smk",
++    "workflow/scripts/chipseq_filtering_support.py",
++    "workflow/envs/chipseq_duplicates.yaml",
++    "workflow/envs/chipseq_filtering.yaml",
++    "workflow/slurm/chipseq_filtering.sbatch",
++    "workflow/slurm/submit_chipseq_filtering.py",
++    "workflow/tests/test_chipseq_filtering.py",
++    "workflow/tests/test_chipseq_filtering_dynamic_runtime.py",
++    "workflow/tests/test_chipseq_filtering_operational.py",
++    "docs/chipseq_incremental_generalization.md",
+ ]
+ 
+ 
++def load_support():
++    script = (
++        ROOT
++        / "workflow"
++        / "scripts"
++        / "chipseq_filtering_support.py"
++    )
++
++    spec = importlib.util.spec_from_file_location(
++        "chipseq_filtering_support",
++        script,
++    )
++
++    module = importlib.util.module_from_spec(
++        spec
++    )
++
++    spec.loader.exec_module(
++        module
++    )
++
++    return module
++
++
+ def main():
+-    parser = argparse.ArgumentParser(description=__doc__)
+-    modes = parser.add_mutually_exclusive_group(required=True)
+-    modes.add_argument("--check", action="store_true")
+-    modes.add_argument("--submit", action="store_true")
++    parser = argparse.ArgumentParser(
++        description=__doc__
++    )
++
++    modes = (
++        parser.add_mutually_exclusive_group(
++            required=True
++        )
++    )
++
++    modes.add_argument(
++        "--check",
++        action="store_true",
++    )
++
++    modes.add_argument(
++        "--submit",
++        action="store_true",
++    )
++
+     args = parser.parse_args()
+-    if subprocess.check_output(["git", "branch", "--show-current"], cwd=ROOT, text=True).strip() != "chipseq-metadata-audit":
+-        raise ValueError("Expected branch chipseq-metadata-audit")
+-    spec = importlib.util.spec_from_file_location("chip_filter_support", ROOT / "workflow/scripts/chipseq_filtering_support.py")
+-    support = importlib.util.module_from_spec(spec)
+-    spec.loader.exec_module(support)
+-    plan = support.prepare(ROOT)
+-    cfg = support.configuration(ROOT)
+-    evidence = support.relative(cfg["alignment_evidence"])
+-    files = FILES + [(evidence / name).as_posix() for name in ("SHA256SUMS.txt", "job/output.sha256", "job/job_status.tsv")]
+-    for name in files:
+-        if not (ROOT / name).is_file():
+-            raise ValueError(f"Missing source: {name}")
+-    subprocess.run(["bash", "-n", str(ROOT / "workflow/slurm/chipseq_filtering.sbatch")], check=True)
+-    parent = ROOT / "results/chipseq/filtering/slurm"
+-    parent.mkdir(parents=True, exist_ok=True)
+-    submission = Path(tempfile.mkdtemp(prefix="submission_", dir=parent))
+-    project = submission / "project"
+-    for name in files:
+-        target = project / name
+-        target.parent.mkdir(parents=True, exist_ok=True)
+-        shutil.copyfile(ROOT / name, target)
+-    support.dump(project / "config/chipseq_filtering_inputs.json", plan)
+-    for name, digest in plan["small_files"].items():
+-        relative = Path(name).relative_to("outputs")
+-        target = project / "inputs/upstream" / relative
+-        target.parent.mkdir(parents=True, exist_ok=True)
+-        shutil.copyfile(Path(plan["source_root"]) / name, target)
+-        support.check(target, digest)
+-        if relative.parts[0] == "reference":
+-            reference = project / "inputs" / relative
+-            reference.parent.mkdir(parents=True, exist_ok=True)
+-            shutil.copyfile(target, reference)
+-    for command, name in ((["git", "rev-parse", "HEAD"], "base_commit.txt"),
+-                          (["git", "status", "--short"], "git_status.txt"),
+-                          (["git", "diff", "--binary", "--", *files], "source_changes.patch")):
+-        (submission / name).write_bytes(subprocess.check_output(command, cwd=ROOT))
+-    hashes = "".join(f"{support.sha(p)}  {p.relative_to(project).as_posix()}\n"
+-                     for p in sorted(project.rglob("*")) if p.is_file())
+-    (submission / "source.sha256").write_text(hashes)
+-    subprocess.run(["python3", "workflow/scripts/validate_chipseq_eligibility.py",
+-                    "--decisions", "config/chipseq_experimental_eligibility.json",
+-                    "--samples", "config/samples.tsv", "--conditions",
+-                    "snapshots/chipseq/control_validation_001/chipseq_conditions.tsv",
+-                    "--pilot", "config/chipseq_pilot.json", "--report", str(submission / "eligibility_preflight.json")],
+-                   cwd=project, check=True)
+-    print("[OK] Eligibility, archived alignment evidence, reports and BAM availability checked.", flush=True)
+-    print("Full BAM hashes will be verified on the compute node before marking duplicates.", flush=True)
+-    print(f"LOGS: {submission}", flush=True)
++
++    branch = subprocess.check_output(
++        [
++            "git",
++            "branch",
++            "--show-current",
++        ],
++        cwd=ROOT,
++        text=True,
++    ).strip()
++
++    if branch != EXPECTED_BRANCH:
++        raise ValueError(
++            f"Expected branch {EXPECTED_BRANCH}; "
++            f"observed {branch}"
++        )
++
++    support = load_support()
++
++    plan = support.prepare(
++        ROOT
++    )
++
++    for name in FILES:
++
++        if not (
++            ROOT
++            / name
++        ).is_file():
++
++            raise ValueError(
++                f"Missing source: {name}"
++            )
++
++    subprocess.run(
++        [
++            "bash",
++            "-n",
++            str(
++                ROOT
++                / "workflow"
++                / "slurm"
++                / "chipseq_filtering.sbatch"
++            ),
++        ],
++        check=True,
++    )
++
++    parent = (
++        ROOT
++        / "results"
++        / "chipseq"
++        / "filtering"
++        / "slurm"
++    )
++
++    parent.mkdir(
++        parents=True,
++        exist_ok=True,
++    )
++
++    submission = Path(
++        tempfile.mkdtemp(
++            prefix="submission_",
++            dir=parent,
++        )
++    )
++
++    project = (
++        submission
++        / "project"
++    )
++
++    for name in FILES:
++
++        source = (
++            ROOT
++            / name
++        )
++
++        target = (
++            project
++            / name
++        )
++
++        target.parent.mkdir(
++            parents=True,
++            exist_ok=True,
++        )
++
++        shutil.copyfile(
++            source,
++            target,
++        )
++
++    support.dump(
++        project
++        / "config"
++        / "chipseq_filtering_inputs.json",
++        plan,
++    )
++
++    source_root = Path(
++        plan[
++            "source_root"
++        ]
++    )
++
++    for name, digest in sorted(
++        plan[
++            "small_files"
++        ].items()
++    ):
++
++        relative = Path(
++            name
++        ).relative_to(
++            "outputs"
++        )
++
++        source = (
++            source_root
++            / name
++        )
++
++        target = (
++            project
++            / "inputs"
++            / "upstream"
++            / relative
++        )
++
++        target.parent.mkdir(
++            parents=True,
++            exist_ok=True,
++        )
++
++        shutil.copyfile(
++            source,
++            target,
++        )
++
++        support.check(
++            target,
++            digest,
++        )
++
++        if (
++            relative.parts
++            and relative.parts[0]
++            == "reference"
++        ):
++
++            reference = (
++                project
++                / "inputs"
++                / relative
++            )
++
++            reference.parent.mkdir(
++                parents=True,
++                exist_ok=True,
++            )
++
++            shutil.copyfile(
++                target,
++                reference,
++            )
++
++            support.check(
++                reference,
++                digest,
++            )
++
++    upstream_record = {
++        "schema_version": 1,
++        "alignment_submission": plan[
++            "alignment_submission"
++        ],
++        "alignment_job_id": plan[
++            "alignment_job_id"
++        ],
++        "alignment_job_directory": plan[
++            "source_root"
++        ],
++        "alignment_source_manifest_sha256": plan[
++            "source_manifest_sha256"
++        ],
++        "alignment_job_status_sha256": plan[
++            "job_status_sha256"
++        ],
++        "alignment_run_count": plan[
++            "run_count"
++        ],
++        "alignment_role_counts": plan[
++            "role_counts"
++        ],
++        "library_layout": plan[
++            "library_layout"
++        ],
++        "instrument_platform": plan[
++            "instrument_platform"
++        ],
++        "full_bam_sha256_verification_deferred_to_compute": True,
++        "upstream_raw_bam_cleanup_authorized": False,
++    }
++
++    support.dump(
++        submission
++        / "upstream_alignment.json",
++        upstream_record,
++    )
++
++    commands = (
++        (
++            [
++                "git",
++                "rev-parse",
++                "HEAD",
++            ],
++            "base_commit.txt",
++        ),
++        (
++            [
++                "git",
++                "status",
++                "--short",
++            ],
++            "git_status.txt",
++        ),
++        (
++            [
++                "git",
++                "diff",
++                "--binary",
++                "--",
++                *FILES,
++            ],
++            "source_changes.patch",
++        ),
++    )
++
++    for command, name in commands:
++
++        (
++            submission
++            / name
++        ).write_bytes(
++            subprocess.check_output(
++                command,
++                cwd=ROOT,
++            )
++        )
++
++    hashes = "".join(
++        (
++            f"{support.sha(path)}  "
++            f"{path.relative_to(project).as_posix()}\n"
++        )
++        for path in sorted(
++            project.rglob("*")
++        )
++        if path.is_file()
++    )
++
++    (
++        submission
++        / "source.sha256"
++    ).write_text(
++        hashes,
++        encoding="utf-8",
++    )
++
++    print(
++        "[OK] Dynamic ChIP filtering source snapshot "
++        "and alignment upstream validated.",
++        flush=True,
++    )
++
++    print(
++        "FILTERING RUNS: "
++        f"{plan['run_count']} "
++        f"(IP={plan['role_counts']['ip']}, "
++        f"Input={plan['role_counts']['input']})",
++        flush=True,
++    )
++
++    print(
++        "UPSTREAM ALIGNMENT: "
++        + plan[
++            "alignment_submission"
++        ],
++        flush=True,
++    )
++
+     if args.check:
+-        print("[OK] Check only; no job submitted. VERA workflow validation remains pending.")
++
++        print(
++            f"CHECK DIRECTORY: {submission}",
++            flush=True,
++        )
++
++        print(
++            "[OK] Check only. No job submitted.",
++            flush=True,
++        )
++
+         return
+-    result = subprocess.check_output(["sbatch", "--parsable", f"--chdir={project}",
+-        f"--output={submission}/slurm_%j.out", str(project / "workflow/slurm/chipseq_filtering.sbatch")], text=True).strip()
+-    job = result.split(";")[0]
+-    if not re.fullmatch(r"[0-9]+", job):
+-        raise ValueError(f"Unexpected sbatch response: {result}")
+-    (submission / "job_id.txt").write_text(job + "\n")
+-    (parent / "latest_submission.txt").write_text(str(submission) + "\n")
+-    print(f"JOB SUBMITTED: {job}", flush=True)
+-    subprocess.run(["squeue", "-j", job, "-o", "%.18i %.26j %.12T %.10M %R"], check=False)
++
++    result = subprocess.check_output(
++        [
++            "sbatch",
++            "--parsable",
++            f"--chdir={project}",
++            f"--output={submission}/slurm_%j.out",
++            str(
++                project
++                / "workflow"
++                / "slurm"
++                / "chipseq_filtering.sbatch"
++            ),
++        ],
++        text=True,
++    ).strip()
++
++    job = result.split(
++        ";"
++    )[0]
++
++    if not re.fullmatch(
++        r"[0-9]+",
++        job,
++    ):
++        raise ValueError(
++            f"Unexpected sbatch response: {result}"
++        )
++
++    (
++        submission
++        / "job_id.txt"
++    ).write_text(
++        job + "\n",
++        encoding="utf-8",
++    )
++
++    (
++        parent
++        / "latest_submission.txt"
++    ).write_text(
++        str(
++            submission
++        )
++        + "\n",
++        encoding="utf-8",
++    )
++
++    print(
++        f"JOB SUBMITTED: {job}",
++        flush=True,
++    )
++
++    subprocess.run(
++        [
++            "squeue",
++            "-j",
++            job,
++            "-o",
++            "%.18i %.26j %.12T %.10M %R",
++        ],
++        check=False,
++    )
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/workflow/tests/test_chipseq_filtering.py b/workflow/tests/test_chipseq_filtering.py
+index 3fc5333..0f5c090 100644
+--- a/workflow/tests/test_chipseq_filtering.py
++++ b/workflow/tests/test_chipseq_filtering.py
+@@ -112,40 +112,272 @@ class FilteringTests(unittest.TestCase):
+         with self.assertRaisesRegex(ValueError, "excluded record"):
+             S.verify(RUN, "filtered.bam", "qc.json", "verification.json")
+ 
+-    def test_prepare_anchors_reports_to_archived_manifest(self):
++    def test_prepare_anchors_reports_to_dynamic_alignment_manifest(self):
+         cfg = S.load(S.CONFIG)
+-        source = Path(cfg["source_job"])
+-        evidence = Path(cfg["alignment_evidence"])
+-        source.mkdir(parents=True)
+-        roles = {"SRR20770287": "input", RUN: "ip"}
+-        S.dump("config/chipseq_pilot.json", {"input_run_accession": "SRR20770287", "ip_run_accession": RUN})
+-        S.dump(source / "outputs/input_provenance.json", {"runs": [
+-            {"run_accession": run, "role": role, "reads": 10} for run, role in roles.items()]})
+-        S.dump(source / "outputs/reference/reference_provenance.json", {"mitochondrial_accession": MT})
+-        (source / "outputs/reference/genome_plus_mt.fa.fai").write_text("chr1\t10000\n" + MT + "\t1000\n")
+-        S.dump(source / "outputs/alignment_parameters.json", {})
+-        (source / "outputs/alignment_qc.tsv").write_text("synthetic fixture\n")
++
++        pointer = Path(
++            cfg["alignment_latest_submission"]
++        )
++
++        parent = pointer.parent
++
++        parent.mkdir(
++            parents=True,
++            exist_ok=True,
++        )
++
++        submission = (
++            parent
++            / "submission_TEST001"
++        )
++
++        job_id = "999001"
++
++        job = (
++            submission
++            / f"job_{job_id}"
++        )
++
++        job.mkdir(
++            parents=True,
++            exist_ok=True,
++        )
++
++        (
++            submission
++            / "job_id.txt"
++        ).write_text(
++            job_id + "\n"
++        )
++
++        (
++            job
++            / "job_status.tsv"
++        ).write_text(
++            "stage\tcompleted\n"
++            "exit_status\t0\n"
++        )
++
++        (
++            job
++            / "output_copy_validation.log"
++        ).write_text(
++            "[OK] Outputs copied and SHA-256 verified: "
++            + str(job / "outputs")
++            + "\n"
++        )
++
++        roles = {
++            "SRR20770287": "input",
++            RUN: "ip",
++        }
++
++        S.dump(
++            job
++            / "outputs"
++            / "input_provenance.json",
++            {
++                "schema_version": 1,
++                "run_count": 2,
++                "role_counts": {
++                    "ip": 1,
++                    "input": 1,
++                },
++                "library_layout": "SINGLE",
++                "instrument_platform": "ILLUMINA",
++                "runs": [
++                    {
++                        "run_accession": run,
++                        "role": role,
++                        "reads": 10,
++                    }
++                    for run, role
++                    in roles.items()
++                ],
++            },
++        )
++
++        S.dump(
++            job
++            / "outputs"
++            / "reference"
++            / "reference_provenance.json",
++            {
++                "mitochondrial_accession": MT,
++            },
++        )
++
++        reference = (
++            job
++            / "outputs"
++            / "reference"
++            / "genome_plus_mt.fa.fai"
++        )
++
++        reference.parent.mkdir(
++            parents=True,
++            exist_ok=True,
++        )
++
++        reference.write_text(
++            "chr1\t10000\t0\t0\t0\n"
++            + MT
++            + "\t1000\t0\t0\t0\n"
++        )
++
++        S.dump(
++            job
++            / "outputs"
++            / "alignment_parameters.json",
++            {
++                "schema_version": 1,
++                "diagnostic_mapq": 30,
++                "mitochondrial_accession": MT,
++            },
++        )
++
++        (
++            job
++            / "outputs"
++            / "alignment_qc.tsv"
++        ).write_text(
++            "run_accession\trole\n"
++            "SRR20770287\tinput\n"
++            f"{RUN}\tip\n"
++        )
++
++        S.dump(
++            job
++            / "outputs"
++            / "verified_fastq_inputs.json",
++            {
++                "schema_version": 1,
++                "run_count": 2,
++            },
++        )
++
+         for run, role in roles.items():
+-            S.dump(source / f"outputs/{run}/alignment_qc.json", {
+-                "run_accession": run, "role": role, "duplicate_marking": "not_performed",
+-                "bam_filtering": "not_performed", "nonprimary_records": 0,
+-                "primary_reads": 10, "alignment_records": 10, "diagnostic_mapq": 30,
+-                "mapped_reads": 9, "nuclear_mapq_ge_threshold": 5})
+-            shutil.copyfile("marked.bam", source / f"outputs/{run}/raw.sorted.bam")
+-        (source / "job_status.tsv").write_text("stage\tcompleted\nexit_status\t0\n")
+-        (source / "output.sha256").write_text("".join(
+-            f"{S.sha(p)}  {p.relative_to(source).as_posix()}\n"
+-            for p in sorted((source / "outputs").rglob("*")) if p.is_file()))
+-        (evidence / "job").mkdir(parents=True)
+-        for name in ("output.sha256", "job_status.tsv"):
+-            shutil.copyfile(source / name, evidence / "job" / name)
+-        (evidence / "SHA256SUMS.txt").write_text("".join(
+-            f"{S.sha(p)}  {p.relative_to(evidence).as_posix()}\n"
+-            for p in sorted((evidence / "job").rglob("*")) if p.is_file()))
+-        self.assertEqual(len(S.prepare(Path.cwd())["runs"]), 2)
+-        (source / "outputs/alignment_qc.tsv").write_text("changed report\n")
+-        with self.assertRaisesRegex(ValueError, "SHA-256 mismatch"):
+-            S.prepare(Path.cwd())
++
++            S.dump(
++                job
++                / "outputs"
++                / run
++                / "alignment_qc.json",
++                {
++                    "run_accession": run,
++                    "role": role,
++                    "duplicate_marking": "not_performed",
++                    "bam_filtering": "not_performed",
++                    "nonprimary_records": 0,
++                    "primary_reads": 10,
++                    "alignment_records": 10,
++                    "diagnostic_mapq": 30,
++                    "mapped_reads": 9,
++                    "nuclear_mapq_ge_threshold": 5,
++                },
++            )
++
++            bam = (
++                job
++                / "outputs"
++                / run
++                / "raw.sorted.bam"
++            )
++
++            bam.parent.mkdir(
++                parents=True,
++                exist_ok=True,
++            )
++
++            shutil.copyfile(
++                "marked.bam",
++                bam,
++            )
++
++            (
++                job
++                / "outputs"
++                / run
++                / "raw.sorted.bam.csi"
++            ).write_bytes(
++                b"synthetic-csi\n"
++            )
++
++        (
++            job
++            / "output.sha256"
++        ).write_text(
++            "".join(
++                f"{S.sha(p)}  "
++                f"{p.relative_to(job).as_posix()}\n"
++                for p in sorted(
++                    (job / "outputs").rglob("*")
++                )
++                if p.is_file()
++            )
++        )
++
++        pointer.write_text(
++            str(
++                submission.resolve()
++            )
++            + "\n"
++        )
++
++        plan = S.prepare(
++            Path.cwd()
++        )
++
++        self.assertEqual(
++            len(
++                plan["runs"]
++            ),
++            2,
++        )
++
++        self.assertEqual(
++            plan["role_counts"],
++            {
++                "ip": 1,
++                "input": 1,
++            },
++        )
++
++        self.assertEqual(
++            plan["library_layout"],
++            "SINGLE",
++        )
++
++        self.assertEqual(
++            plan["instrument_platform"],
++            "ILLUMINA",
++        )
++
++        self.assertFalse(
++            plan[
++                "upstream_raw_bam_cleanup_authorized"
++            ]
++        )
++
++        # The scientific intent of the historical regression test is
++        # preserved: reports are anchored to output.sha256 and an
++        # unexpected post-publication change must be rejected.
++        (
++            job
++            / "outputs"
++            / "alignment_qc.tsv"
++        ).write_text(
++            "changed report\n"
++        )
++
++        with self.assertRaisesRegex(
++            ValueError,
++            "SHA-256 mismatch",
++        ):
++
++            S.prepare(
++                Path.cwd()
++            )
+ 
+     def test_publish_copies_verified_filtered_outputs(self):
+         self.filter()

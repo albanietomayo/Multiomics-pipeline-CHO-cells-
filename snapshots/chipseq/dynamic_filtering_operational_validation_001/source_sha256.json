@@ -1,0 +1,9 @@
+{
+  "config/chipseq_filtering.json": "82f754f7617fe9b793e6d7d2d209edaa7155779c7749712e9f9d6059ae4d9b22",
+  "docs/chipseq_incremental_generalization.md": "fdc0bad6a85a3bcee250630befd524e54d9ef42ce126fce48d5edaccaa17a64e",
+  "workflow/scripts/chipseq_filtering_support.py": "6fc9950e3da1c591ff3a2ee588d926aee6908de52b51a884040ff5483c750500",
+  "workflow/slurm/chipseq_filtering.sbatch": "a8e4a53f62f65d7cf2f5b7449ae94b712d6413c3f39e853a046a07f4db6f0922",
+  "workflow/slurm/submit_chipseq_filtering.py": "78697c0de91d0da419c7443e381f7d9b1e32d28fee2b08cd1352d84644e6a8cf",
+  "workflow/tests/test_chipseq_filtering.py": "74b6f447bae3d64114691cb95471c5ca16d14da5824fd11ba1f67e3d84755096",
+  "workflow/tests/test_chipseq_filtering_operational.py": "34b7dd7d967ccdf76b4f69f409cd02a6888688719fb3177012424c2eee73ae3f"
+}

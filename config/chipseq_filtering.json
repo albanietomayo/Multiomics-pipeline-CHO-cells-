@@ -1,7 +1,6 @@
 {
   "schema_version": 1,
-  "source_job": "results/chipseq/alignment/slurm/submission__niyvyr2/job_10297460",
-  "alignment_evidence": "snapshots/chipseq/alignment_validation_001",
+  "alignment_latest_submission": "results/chipseq/alignment/slurm/latest_submission.txt",
   "min_mapq": 30,
   "exclude_mapq_255": true,
   "exclude_flags": 3844,
@@ -10,5 +9,5 @@
   "duplicate_scoring_strategy": "SUM_OF_BASE_QUALITIES",
   "threads": 4,
   "picard_heap_mb": 12000,
-  "scope": "single_end_pilot_duplicate_marking_and_nuclear_filtering"
+  "scope": "dynamic_single_end_duplicate_marking_and_nuclear_filtering"
 }

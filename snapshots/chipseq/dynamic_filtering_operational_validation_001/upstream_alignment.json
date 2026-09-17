@@ -1,0 +1,17 @@
+{
+  "alignment_job_directory": "/tmp/tmp.BWu9qMGLWD/project/results/chipseq/alignment/slurm/submission_SYNTH001/job_999001",
+  "alignment_job_id": "999001",
+  "alignment_job_status_sha256": "9c7db1b10258e1b2f001c4ec51047198a383faac6d80573bcd2c9945a3b0572e",
+  "alignment_role_counts": {
+    "input": 4,
+    "ip": 18
+  },
+  "alignment_run_count": 22,
+  "alignment_source_manifest_sha256": "755219e04a25fe3dc3980162ed4236bd0b9a59faed16b78b0abffd52ddfa8e66",
+  "alignment_submission": "/tmp/tmp.BWu9qMGLWD/project/results/chipseq/alignment/slurm/submission_SYNTH001",
+  "full_bam_sha256_verification_deferred_to_compute": true,
+  "instrument_platform": "ILLUMINA",
+  "library_layout": "SINGLE",
+  "schema_version": 1,
+  "upstream_raw_bam_cleanup_authorized": false
+}
