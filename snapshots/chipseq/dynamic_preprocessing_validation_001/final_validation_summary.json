@@ -1,0 +1,37 @@
+{
+  "fastq_files_created": 0,
+  "full_22_run_preprocessing_execution": false,
+  "full_live_ena_refresh_executed_in_this_validation": false,
+  "generic_preprocessing_core_modified": false,
+  "job_id_created": false,
+  "library_layout": {
+    "SINGLE": 22
+  },
+  "physical_fastq_files": 22,
+  "pilot_specific_preprocessing_dependency": false,
+  "planned_jobs_total": 93,
+  "planned_rule_jobs": {
+    "chipseq_preprocessing_all": 1,
+    "download_validation_fastq": 22,
+    "fastp_paired": 0,
+    "fastp_single": 22,
+    "fastqc_post": 22,
+    "fastqc_raw": 22,
+    "multiqc_post": 1,
+    "multiqc_raw": 1,
+    "summarize_preprocessing_qc": 1,
+    "validation_download_report": 1
+  },
+  "preprocessing_dry_run_passed": true,
+  "processing_runs": 22,
+  "production_execution": false,
+  "sbatch_called": false,
+  "schema_version": 1,
+  "scope": "chipseq_dynamic_preprocessing_validation",
+  "single_end_current_cohort": true,
+  "source_hash_validation_passed": true,
+  "submitter_check_passed": true,
+  "total_fastq_gib": 36.434,
+  "validated_base_commit": "37f787825056075cfee6af86c17e86f69e189c6d",
+  "wildcard_worker_expansion": true
+}

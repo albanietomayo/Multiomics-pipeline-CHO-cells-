@@ -1,0 +1,1391 @@
+
+SNAKEMAKE
+=========
+  Date: 2026-09-17 20:13:33
+  Workflow ID: 4c0d9570-71ae-4c31-bfbf-7d35e5e79d45
+  Platform: Linux-5.14.0-687.41.1.el9_8.x86_64-x86_64-with-glibc2.34
+  Host: vera1
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /tmp/tmp.7D8WFtIJbc/runtime/bin/snakemake --snakefile workflow/rules/chipseq_preprocessing.smk --cores 4 --rerun-incomplete -n -p chipseq_preprocessing_all
+  Snakefile: /tmp/tmp.7D8WFtIJbc/project/workflow/rules/chipseq_preprocessing.smk
+  Base directory: /tmp/tmp.7D8WFtIJbc/project/workflow/rules
+  Run directory: /tmp/tmp.7D8WFtIJbc/project
+  Working directory: /tmp/tmp.7D8WFtIJbc/project
+  Config file(s): ['config/config.yaml']
+  Config MD5: 3805f04208d7824a5ee79670ee71c690
+
+Building DAG of jobs...
+Updating checkpoint dependencies.
+Job stats:
+job                           count
+--------------------------  -------
+download_validation_fastq        22
+fastp_single                     22
+fastqc_raw                       22
+validation_download_report        1
+fastqc_post                      22
+multiqc_raw                       1
+multiqc_post                      1
+summarize_preprocessing_qc        1
+chipseq_preprocessing_all         1
+total                            93
+
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868154/ERR868154.fastq.gz
+    jobid: 15
+    reason: Missing output files: data/raw/fastq/ERR868154/ERR868154.fastq.gz
+    wildcards: run_accession=ERR868154, filename=ERR868154.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868154             --filename ERR868154.fastq.gz             --output data/raw/fastq/ERR868154/ERR868154.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868151/ERR868151.fastq.gz
+    jobid: 12
+    reason: Missing output files: data/raw/fastq/ERR868151/ERR868151.fastq.gz
+    wildcards: run_accession=ERR868151, filename=ERR868151.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868151             --filename ERR868151.fastq.gz             --output data/raw/fastq/ERR868151/ERR868151.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868172/ERR868172.fastq.gz
+    jobid: 19
+    reason: Missing output files: data/raw/fastq/ERR868172/ERR868172.fastq.gz
+    wildcards: run_accession=ERR868172, filename=ERR868172.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868172             --filename ERR868172.fastq.gz             --output data/raw/fastq/ERR868172/ERR868172.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/SRR20770293/SRR20770293.fastq.gz
+    jobid: 28
+    reason: Missing output files: data/raw/fastq/SRR20770293/SRR20770293.fastq.gz
+    wildcards: run_accession=SRR20770293, filename=SRR20770293.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession SRR20770293             --filename SRR20770293.fastq.gz             --output data/raw/fastq/SRR20770293/SRR20770293.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868176/ERR868176.fastq.gz
+    jobid: 23
+    reason: Missing output files: data/raw/fastq/ERR868176/ERR868176.fastq.gz
+    wildcards: run_accession=ERR868176, filename=ERR868176.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868176             --filename ERR868176.fastq.gz             --output data/raw/fastq/ERR868176/ERR868176.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868155/ERR868155.fastq.gz
+    jobid: 16
+    reason: Missing output files: data/raw/fastq/ERR868155/ERR868155.fastq.gz
+    wildcards: run_accession=ERR868155, filename=ERR868155.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868155             --filename ERR868155.fastq.gz             --output data/raw/fastq/ERR868155/ERR868155.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868152/ERR868152.fastq.gz
+    jobid: 13
+    reason: Missing output files: data/raw/fastq/ERR868152/ERR868152.fastq.gz
+    wildcards: run_accession=ERR868152, filename=ERR868152.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868152             --filename ERR868152.fastq.gz             --output data/raw/fastq/ERR868152/ERR868152.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868153/ERR868153.fastq.gz
+    jobid: 14
+    reason: Missing output files: data/raw/fastq/ERR868153/ERR868153.fastq.gz
+    wildcards: run_accession=ERR868153, filename=ERR868153.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868153             --filename ERR868153.fastq.gz             --output data/raw/fastq/ERR868153/ERR868153.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/SRR20770294/SRR20770294.fastq.gz
+    jobid: 29
+    reason: Missing output files: data/raw/fastq/SRR20770294/SRR20770294.fastq.gz
+    wildcards: run_accession=SRR20770294, filename=SRR20770294.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession SRR20770294             --filename SRR20770294.fastq.gz             --output data/raw/fastq/SRR20770294/SRR20770294.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868173/ERR868173.fastq.gz
+    jobid: 20
+    reason: Missing output files: data/raw/fastq/ERR868173/ERR868173.fastq.gz
+    wildcards: run_accession=ERR868173, filename=ERR868173.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868173             --filename ERR868173.fastq.gz             --output data/raw/fastq/ERR868173/ERR868173.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868177/ERR868177.fastq.gz
+    jobid: 24
+    reason: Missing output files: data/raw/fastq/ERR868177/ERR868177.fastq.gz
+    wildcards: run_accession=ERR868177, filename=ERR868177.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868177             --filename ERR868177.fastq.gz             --output data/raw/fastq/ERR868177/ERR868177.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/SRR20770296/SRR20770296.fastq.gz
+    jobid: 31
+    reason: Missing output files: data/raw/fastq/SRR20770296/SRR20770296.fastq.gz
+    wildcards: run_accession=SRR20770296, filename=SRR20770296.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession SRR20770296             --filename SRR20770296.fastq.gz             --output data/raw/fastq/SRR20770296/SRR20770296.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868156/ERR868156.fastq.gz
+    jobid: 17
+    reason: Missing output files: data/raw/fastq/ERR868156/ERR868156.fastq.gz
+    wildcards: run_accession=ERR868156, filename=ERR868156.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868156             --filename ERR868156.fastq.gz             --output data/raw/fastq/ERR868156/ERR868156.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/SRR20770291/SRR20770291.fastq.gz
+    jobid: 26
+    reason: Missing output files: data/raw/fastq/SRR20770291/SRR20770291.fastq.gz
+    wildcards: run_accession=SRR20770291, filename=SRR20770291.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession SRR20770291             --filename SRR20770291.fastq.gz             --output data/raw/fastq/SRR20770291/SRR20770291.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868174/ERR868174.fastq.gz
+    jobid: 21
+    reason: Missing output files: data/raw/fastq/ERR868174/ERR868174.fastq.gz
+    wildcards: run_accession=ERR868174, filename=ERR868174.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868174             --filename ERR868174.fastq.gz             --output data/raw/fastq/ERR868174/ERR868174.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/SRR20770295/SRR20770295.fastq.gz
+    jobid: 30
+    reason: Missing output files: data/raw/fastq/SRR20770295/SRR20770295.fastq.gz
+    wildcards: run_accession=SRR20770295, filename=SRR20770295.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession SRR20770295             --filename SRR20770295.fastq.gz             --output data/raw/fastq/SRR20770295/SRR20770295.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    jobid: 25
+    reason: Missing output files: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    wildcards: run_accession=SRR20770287, filename=SRR20770287.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession SRR20770287             --filename SRR20770287.fastq.gz             --output data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    jobid: 32
+    reason: Missing output files: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    wildcards: run_accession=SRR20770297, filename=SRR20770297.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession SRR20770297             --filename SRR20770297.fastq.gz             --output data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868150/ERR868150.fastq.gz
+    jobid: 11
+    reason: Missing output files: data/raw/fastq/ERR868150/ERR868150.fastq.gz
+    wildcards: run_accession=ERR868150, filename=ERR868150.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868150             --filename ERR868150.fastq.gz             --output data/raw/fastq/ERR868150/ERR868150.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868171/ERR868171.fastq.gz
+    jobid: 18
+    reason: Missing output files: data/raw/fastq/ERR868171/ERR868171.fastq.gz
+    wildcards: run_accession=ERR868171, filename=ERR868171.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868171             --filename ERR868171.fastq.gz             --output data/raw/fastq/ERR868171/ERR868171.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/SRR20770292/SRR20770292.fastq.gz
+    jobid: 27
+    reason: Missing output files: data/raw/fastq/SRR20770292/SRR20770292.fastq.gz
+    wildcards: run_accession=SRR20770292, filename=SRR20770292.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession SRR20770292             --filename SRR20770292.fastq.gz             --output data/raw/fastq/SRR20770292/SRR20770292.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule download_validation_fastq:
+    input: results/metadata/validation_fastq_manifest.tsv, workflow/scripts/download_fastq.py
+    output: data/raw/fastq/ERR868175/ERR868175.fastq.gz
+    jobid: 22
+    reason: Missing output files: data/raw/fastq/ERR868175/ERR868175.fastq.gz
+    wildcards: run_accession=ERR868175, filename=ERR868175.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_fastq.py             --manifest results/metadata/validation_fastq_manifest.tsv             --run-accession ERR868175             --filename ERR868175.fastq.gz             --output data/raw/fastq/ERR868175/ERR868175.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868150/ERR868150.fastq.gz
+    output: results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.html, results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.zip
+    jobid: 33
+    reason: Missing output files: results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.zip, results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.html; Input files updated by another job: data/raw/fastq/ERR868150/ERR868150.fastq.gz
+    wildcards: run_accession=ERR868150, basename=ERR868150
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868150
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868150             data/raw/fastq/ERR868150/ERR868150.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    output: results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip
+    jobid: 47
+    reason: Missing output files: results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip; Input files updated by another job: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    wildcards: run_accession=SRR20770287, basename=SRR20770287
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/SRR20770287
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/SRR20770287             data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868174/ERR868174.fastq.gz
+    output: results/preprocessing/fastp/ERR868174/SINGLE/ERR868174.fastq.gz, results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.json, results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.log
+    jobid: 65
+    reason: Missing output files: results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.html, results/preprocessing/fastp/ERR868174/SINGLE/ERR868174.fastq.gz, results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.json; Input files updated by another job: data/raw/fastq/ERR868174/ERR868174.fastq.gz
+    wildcards: run_accession=ERR868174, fastq_role=SINGLE, basename=ERR868174
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868174/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868174/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868174/ERR868174.fastq.gz             --out1 results/preprocessing/fastp/ERR868174/SINGLE/ERR868174.fastq.gz             --json results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.json             --html results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/SRR20770293/SRR20770293.fastq.gz
+    output: results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.html, results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.zip
+    jobid: 50
+    reason: Missing output files: results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.zip, results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.html; Input files updated by another job: data/raw/fastq/SRR20770293/SRR20770293.fastq.gz
+    wildcards: run_accession=SRR20770293, basename=SRR20770293
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/SRR20770293
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/SRR20770293             data/raw/fastq/SRR20770293/SRR20770293.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868154/ERR868154.fastq.gz
+    output: results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.html, results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.zip
+    jobid: 37
+    reason: Missing output files: results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.html, results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.zip; Input files updated by another job: data/raw/fastq/ERR868154/ERR868154.fastq.gz
+    wildcards: run_accession=ERR868154, basename=ERR868154
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868154
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868154             data/raw/fastq/ERR868154/ERR868154.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868156/ERR868156.fastq.gz
+    output: results/preprocessing/fastp/ERR868156/SINGLE/ERR868156.fastq.gz, results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.json, results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.log
+    jobid: 61
+    reason: Missing output files: results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.html, results/preprocessing/fastp/ERR868156/SINGLE/ERR868156.fastq.gz, results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.json; Input files updated by another job: data/raw/fastq/ERR868156/ERR868156.fastq.gz
+    wildcards: run_accession=ERR868156, fastq_role=SINGLE, basename=ERR868156
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868156/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868156/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868156/ERR868156.fastq.gz             --out1 results/preprocessing/fastp/ERR868156/SINGLE/ERR868156.fastq.gz             --json results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.json             --html results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868177/ERR868177.fastq.gz
+    output: results/preprocessing/fastp/ERR868177/SINGLE/ERR868177.fastq.gz, results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.json, results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.log
+    jobid: 68
+    reason: Missing output files: results/preprocessing/fastp/ERR868177/SINGLE/ERR868177.fastq.gz, results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.json, results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.html; Input files updated by another job: data/raw/fastq/ERR868177/ERR868177.fastq.gz
+    wildcards: run_accession=ERR868177, fastq_role=SINGLE, basename=ERR868177
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868177/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868177/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868177/ERR868177.fastq.gz             --out1 results/preprocessing/fastp/ERR868177/SINGLE/ERR868177.fastq.gz             --json results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.json             --html results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    output: results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip
+    jobid: 54
+    reason: Missing output files: results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip; Input files updated by another job: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    wildcards: run_accession=SRR20770297, basename=SRR20770297
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/SRR20770297
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/SRR20770297             data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868176/ERR868176.fastq.gz
+    output: results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.html, results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.zip
+    jobid: 45
+    reason: Missing output files: results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.html, results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.zip; Input files updated by another job: data/raw/fastq/ERR868176/ERR868176.fastq.gz
+    wildcards: run_accession=ERR868176, basename=ERR868176
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868176
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868176             data/raw/fastq/ERR868176/ERR868176.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868175/ERR868175.fastq.gz
+    output: results/preprocessing/fastp/ERR868175/SINGLE/ERR868175.fastq.gz, results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.json, results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.log
+    jobid: 66
+    reason: Missing output files: results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.html, results/preprocessing/fastp/ERR868175/SINGLE/ERR868175.fastq.gz, results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.json; Input files updated by another job: data/raw/fastq/ERR868175/ERR868175.fastq.gz
+    wildcards: run_accession=ERR868175, fastq_role=SINGLE, basename=ERR868175
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868175/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868175/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868175/ERR868175.fastq.gz             --out1 results/preprocessing/fastp/ERR868175/SINGLE/ERR868175.fastq.gz             --json results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.json             --html results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/SRR20770296/SRR20770296.fastq.gz
+    output: results/preprocessing/fastp/SRR20770296/SINGLE/SRR20770296.fastq.gz, results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.json, results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.html
+    log: results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.log
+    jobid: 75
+    reason: Missing output files: results/preprocessing/fastp/SRR20770296/SINGLE/SRR20770296.fastq.gz, results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.json, results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.html; Input files updated by another job: data/raw/fastq/SRR20770296/SRR20770296.fastq.gz
+    wildcards: run_accession=SRR20770296, fastq_role=SINGLE, basename=SRR20770296
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/SRR20770296/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/SRR20770296/SINGLE
+
+        fastp             --in1 data/raw/fastq/SRR20770296/SRR20770296.fastq.gz             --out1 results/preprocessing/fastp/SRR20770296/SINGLE/SRR20770296.fastq.gz             --json results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.json             --html results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868173/ERR868173.fastq.gz
+    output: results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.html, results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.zip
+    jobid: 42
+    reason: Missing output files: results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.html, results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.zip; Input files updated by another job: data/raw/fastq/ERR868173/ERR868173.fastq.gz
+    wildcards: run_accession=ERR868173, basename=ERR868173
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868173
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868173             data/raw/fastq/ERR868173/ERR868173.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868151/ERR868151.fastq.gz
+    output: results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.html, results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.zip
+    jobid: 34
+    reason: Missing output files: results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.html, results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.zip; Input files updated by another job: data/raw/fastq/ERR868151/ERR868151.fastq.gz
+    wildcards: run_accession=ERR868151, basename=ERR868151
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868151
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868151             data/raw/fastq/ERR868151/ERR868151.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868171/ERR868171.fastq.gz
+    output: results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.html, results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.zip
+    jobid: 40
+    reason: Missing output files: results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.html, results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.zip; Input files updated by another job: data/raw/fastq/ERR868171/ERR868171.fastq.gz
+    wildcards: run_accession=ERR868171, basename=ERR868171
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868171
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868171             data/raw/fastq/ERR868171/ERR868171.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868171/ERR868171.fastq.gz
+    output: results/preprocessing/fastp/ERR868171/SINGLE/ERR868171.fastq.gz, results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.json, results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.log
+    jobid: 62
+    reason: Missing output files: results/preprocessing/fastp/ERR868171/SINGLE/ERR868171.fastq.gz, results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.html, results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.json; Input files updated by another job: data/raw/fastq/ERR868171/ERR868171.fastq.gz
+    wildcards: run_accession=ERR868171, fastq_role=SINGLE, basename=ERR868171
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868171/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868171/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868171/ERR868171.fastq.gz             --out1 results/preprocessing/fastp/ERR868171/SINGLE/ERR868171.fastq.gz             --json results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.json             --html results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/SRR20770291/SRR20770291.fastq.gz
+    output: results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.html, results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.zip
+    jobid: 48
+    reason: Missing output files: results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.zip, results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.html; Input files updated by another job: data/raw/fastq/SRR20770291/SRR20770291.fastq.gz
+    wildcards: run_accession=SRR20770291, basename=SRR20770291
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/SRR20770291
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/SRR20770291             data/raw/fastq/SRR20770291/SRR20770291.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/SRR20770294/SRR20770294.fastq.gz
+    output: results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.html, results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.zip
+    jobid: 51
+    reason: Missing output files: results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.html, results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.zip; Input files updated by another job: data/raw/fastq/SRR20770294/SRR20770294.fastq.gz
+    wildcards: run_accession=SRR20770294, basename=SRR20770294
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/SRR20770294
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/SRR20770294             data/raw/fastq/SRR20770294/SRR20770294.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868155/ERR868155.fastq.gz
+    output: results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.html, results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.zip
+    jobid: 38
+    reason: Missing output files: results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.html, results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.zip; Input files updated by another job: data/raw/fastq/ERR868155/ERR868155.fastq.gz
+    wildcards: run_accession=ERR868155, basename=ERR868155
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868155
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868155             data/raw/fastq/ERR868155/ERR868155.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    output: results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.json, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.html
+    log: results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.log
+    jobid: 69
+    reason: Missing output files: results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.html, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.json, results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz; Input files updated by another job: data/raw/fastq/SRR20770287/SRR20770287.fastq.gz
+    wildcards: run_accession=SRR20770287, fastq_role=SINGLE, basename=SRR20770287
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/SRR20770287/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/SRR20770287/SINGLE
+
+        fastp             --in1 data/raw/fastq/SRR20770287/SRR20770287.fastq.gz             --out1 results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz             --json results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.json             --html results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868150/ERR868150.fastq.gz
+    output: results/preprocessing/fastp/ERR868150/SINGLE/ERR868150.fastq.gz, results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.json, results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.log
+    jobid: 55
+    reason: Missing output files: results/preprocessing/fastp/ERR868150/SINGLE/ERR868150.fastq.gz, results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.html, results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.json; Input files updated by another job: data/raw/fastq/ERR868150/ERR868150.fastq.gz
+    wildcards: run_accession=ERR868150, fastq_role=SINGLE, basename=ERR868150
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868150/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868150/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868150/ERR868150.fastq.gz             --out1 results/preprocessing/fastp/ERR868150/SINGLE/ERR868150.fastq.gz             --json results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.json             --html results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868177/ERR868177.fastq.gz
+    output: results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.html, results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.zip
+    jobid: 46
+    reason: Missing output files: results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.zip, results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.html; Input files updated by another job: data/raw/fastq/ERR868177/ERR868177.fastq.gz
+    wildcards: run_accession=ERR868177, basename=ERR868177
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868177
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868177             data/raw/fastq/ERR868177/ERR868177.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    output: results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.json, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.html
+    log: results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.log
+    jobid: 76
+    reason: Missing output files: results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.html, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.json, results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz; Input files updated by another job: data/raw/fastq/SRR20770297/SRR20770297.fastq.gz
+    wildcards: run_accession=SRR20770297, fastq_role=SINGLE, basename=SRR20770297
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/SRR20770297/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/SRR20770297/SINGLE
+
+        fastp             --in1 data/raw/fastq/SRR20770297/SRR20770297.fastq.gz             --out1 results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz             --json results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.json             --html results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868152/ERR868152.fastq.gz
+    output: results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.html, results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.zip
+    jobid: 35
+    reason: Missing output files: results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.zip, results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.html; Input files updated by another job: data/raw/fastq/ERR868152/ERR868152.fastq.gz
+    wildcards: run_accession=ERR868152, basename=ERR868152
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868152
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868152             data/raw/fastq/ERR868152/ERR868152.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868154/ERR868154.fastq.gz
+    output: results/preprocessing/fastp/ERR868154/SINGLE/ERR868154.fastq.gz, results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.json, results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.log
+    jobid: 59
+    reason: Missing output files: results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.json, results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.html, results/preprocessing/fastp/ERR868154/SINGLE/ERR868154.fastq.gz; Input files updated by another job: data/raw/fastq/ERR868154/ERR868154.fastq.gz
+    wildcards: run_accession=ERR868154, fastq_role=SINGLE, basename=ERR868154
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868154/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868154/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868154/ERR868154.fastq.gz             --out1 results/preprocessing/fastp/ERR868154/SINGLE/ERR868154.fastq.gz             --json results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.json             --html results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868172/ERR868172.fastq.gz
+    output: results/preprocessing/fastp/ERR868172/SINGLE/ERR868172.fastq.gz, results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.json, results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.log
+    jobid: 63
+    reason: Missing output files: results/preprocessing/fastp/ERR868172/SINGLE/ERR868172.fastq.gz, results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.json, results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.html; Input files updated by another job: data/raw/fastq/ERR868172/ERR868172.fastq.gz
+    wildcards: run_accession=ERR868172, fastq_role=SINGLE, basename=ERR868172
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868172/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868172/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868172/ERR868172.fastq.gz             --out1 results/preprocessing/fastp/ERR868172/SINGLE/ERR868172.fastq.gz             --json results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.json             --html results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/SRR20770295/SRR20770295.fastq.gz
+    output: results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.html, results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.zip
+    jobid: 52
+    reason: Missing output files: results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.html, results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.zip; Input files updated by another job: data/raw/fastq/SRR20770295/SRR20770295.fastq.gz
+    wildcards: run_accession=SRR20770295, basename=SRR20770295
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/SRR20770295
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/SRR20770295             data/raw/fastq/SRR20770295/SRR20770295.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868174/ERR868174.fastq.gz
+    output: results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.html, results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.zip
+    jobid: 43
+    reason: Missing output files: results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.zip, results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.html; Input files updated by another job: data/raw/fastq/ERR868174/ERR868174.fastq.gz
+    wildcards: run_accession=ERR868174, basename=ERR868174
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868174
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868174             data/raw/fastq/ERR868174/ERR868174.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868156/ERR868156.fastq.gz
+    output: results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.html, results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.zip
+    jobid: 39
+    reason: Missing output files: results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.html, results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.zip; Input files updated by another job: data/raw/fastq/ERR868156/ERR868156.fastq.gz
+    wildcards: run_accession=ERR868156, basename=ERR868156
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868156
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868156             data/raw/fastq/ERR868156/ERR868156.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/SRR20770293/SRR20770293.fastq.gz
+    output: results/preprocessing/fastp/SRR20770293/SINGLE/SRR20770293.fastq.gz, results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.json, results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.html
+    log: results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.log
+    jobid: 72
+    reason: Missing output files: results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.json, results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.html, results/preprocessing/fastp/SRR20770293/SINGLE/SRR20770293.fastq.gz; Input files updated by another job: data/raw/fastq/SRR20770293/SRR20770293.fastq.gz
+    wildcards: run_accession=SRR20770293, fastq_role=SINGLE, basename=SRR20770293
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/SRR20770293/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/SRR20770293/SINGLE
+
+        fastp             --in1 data/raw/fastq/SRR20770293/SRR20770293.fastq.gz             --out1 results/preprocessing/fastp/SRR20770293/SINGLE/SRR20770293.fastq.gz             --json results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.json             --html results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/SRR20770291/SRR20770291.fastq.gz
+    output: results/preprocessing/fastp/SRR20770291/SINGLE/SRR20770291.fastq.gz, results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.json, results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.html
+    log: results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.log
+    jobid: 70
+    reason: Missing output files: results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.html, results/preprocessing/fastp/SRR20770291/SINGLE/SRR20770291.fastq.gz, results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.json; Input files updated by another job: data/raw/fastq/SRR20770291/SRR20770291.fastq.gz
+    wildcards: run_accession=SRR20770291, fastq_role=SINGLE, basename=SRR20770291
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/SRR20770291/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/SRR20770291/SINGLE
+
+        fastp             --in1 data/raw/fastq/SRR20770291/SRR20770291.fastq.gz             --out1 results/preprocessing/fastp/SRR20770291/SINGLE/SRR20770291.fastq.gz             --json results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.json             --html results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868152/ERR868152.fastq.gz
+    output: results/preprocessing/fastp/ERR868152/SINGLE/ERR868152.fastq.gz, results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.json, results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.log
+    jobid: 57
+    reason: Missing output files: results/preprocessing/fastp/ERR868152/SINGLE/ERR868152.fastq.gz, results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.html, results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.json; Input files updated by another job: data/raw/fastq/ERR868152/ERR868152.fastq.gz
+    wildcards: run_accession=ERR868152, fastq_role=SINGLE, basename=ERR868152
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868152/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868152/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868152/ERR868152.fastq.gz             --out1 results/preprocessing/fastp/ERR868152/SINGLE/ERR868152.fastq.gz             --json results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.json             --html results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule validation_download_report:
+    input: results/metadata/validation_fastq_manifest.tsv, data/raw/fastq/ERR868150/ERR868150.fastq.gz, data/raw/fastq/ERR868151/ERR868151.fastq.gz, data/raw/fastq/ERR868152/ERR868152.fastq.gz, data/raw/fastq/ERR868153/ERR868153.fastq.gz, data/raw/fastq/ERR868154/ERR868154.fastq.gz, data/raw/fastq/ERR868155/ERR868155.fastq.gz, data/raw/fastq/ERR868156/ERR868156.fastq.gz, data/raw/fastq/ERR868171/ERR868171.fastq.gz, data/raw/fastq/ERR868172/ERR868172.fastq.gz, data/raw/fastq/ERR868173/ERR868173.fastq.gz, data/raw/fastq/ERR868174/ERR868174.fastq.gz, data/raw/fastq/ERR868175/ERR868175.fastq.gz, data/raw/fastq/ERR868176/ERR868176.fastq.gz, data/raw/fastq/ERR868177/ERR868177.fastq.gz, data/raw/fastq/SRR20770287/SRR20770287.fastq.gz, data/raw/fastq/SRR20770291/SRR20770291.fastq.gz, data/raw/fastq/SRR20770292/SRR20770292.fastq.gz, data/raw/fastq/SRR20770293/SRR20770293.fastq.gz, data/raw/fastq/SRR20770294/SRR20770294.fastq.gz, data/raw/fastq/SRR20770295/SRR20770295.fastq.gz, data/raw/fastq/SRR20770296/SRR20770296.fastq.gz, data/raw/fastq/SRR20770297/SRR20770297.fastq.gz, workflow/scripts/download_validation_subset.py
+    output: results/metadata/reports/validation_download_summary.tsv
+    jobid: 1
+    reason: Missing output files: results/metadata/reports/validation_download_summary.tsv; Input files updated by another job: data/raw/fastq/ERR868150/ERR868150.fastq.gz, data/raw/fastq/SRR20770292/SRR20770292.fastq.gz, data/raw/fastq/ERR868175/ERR868175.fastq.gz, data/raw/fastq/SRR20770295/SRR20770295.fastq.gz, data/raw/fastq/ERR868177/ERR868177.fastq.gz, data/raw/fastq/ERR868156/ERR868156.fastq.gz, data/raw/fastq/SRR20770297/SRR20770297.fastq.gz, data/raw/fastq/ERR868155/ERR868155.fastq.gz, data/raw/fastq/SRR20770296/SRR20770296.fastq.gz, data/raw/fastq/ERR868152/ERR868152.fastq.gz, data/raw/fastq/ERR868154/ERR868154.fastq.gz, data/raw/fastq/SRR20770291/SRR20770291.fastq.gz, data/raw/fastq/SRR20770294/SRR20770294.fastq.gz, data/raw/fastq/ERR868176/ERR868176.fastq.gz, data/raw/fastq/ERR868171/ERR868171.fastq.gz, data/raw/fastq/SRR20770287/SRR20770287.fastq.gz, data/raw/fastq/SRR20770293/SRR20770293.fastq.gz, data/raw/fastq/ERR868151/ERR868151.fastq.gz, data/raw/fastq/ERR868173/ERR868173.fastq.gz, data/raw/fastq/ERR868174/ERR868174.fastq.gz, data/raw/fastq/ERR868172/ERR868172.fastq.gz, data/raw/fastq/ERR868153/ERR868153.fastq.gz
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/download_validation_subset.py             --manifest results/metadata/validation_fastq_manifest.tsv             --output-dir data/raw/fastq             --report results/metadata/reports/validation_download_summary.tsv
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868173/ERR868173.fastq.gz
+    output: results/preprocessing/fastp/ERR868173/SINGLE/ERR868173.fastq.gz, results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.json, results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.log
+    jobid: 64
+    reason: Missing output files: results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.json, results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.html, results/preprocessing/fastp/ERR868173/SINGLE/ERR868173.fastq.gz; Input files updated by another job: data/raw/fastq/ERR868173/ERR868173.fastq.gz
+    wildcards: run_accession=ERR868173, fastq_role=SINGLE, basename=ERR868173
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868173/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868173/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868173/ERR868173.fastq.gz             --out1 results/preprocessing/fastp/ERR868173/SINGLE/ERR868173.fastq.gz             --json results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.json             --html results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/SRR20770292/SRR20770292.fastq.gz
+    output: results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.html, results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.zip
+    jobid: 49
+    reason: Missing output files: results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.zip, results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.html; Input files updated by another job: data/raw/fastq/SRR20770292/SRR20770292.fastq.gz
+    wildcards: run_accession=SRR20770292, basename=SRR20770292
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/SRR20770292
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/SRR20770292             data/raw/fastq/SRR20770292/SRR20770292.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868153/ERR868153.fastq.gz
+    output: results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.html, results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.zip
+    jobid: 36
+    reason: Missing output files: results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.zip, results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.html; Input files updated by another job: data/raw/fastq/ERR868153/ERR868153.fastq.gz
+    wildcards: run_accession=ERR868153, basename=ERR868153
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868153
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868153             data/raw/fastq/ERR868153/ERR868153.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868155/ERR868155.fastq.gz
+    output: results/preprocessing/fastp/ERR868155/SINGLE/ERR868155.fastq.gz, results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.json, results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.log
+    jobid: 60
+    reason: Missing output files: results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.json, results/preprocessing/fastp/ERR868155/SINGLE/ERR868155.fastq.gz, results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.html; Input files updated by another job: data/raw/fastq/ERR868155/ERR868155.fastq.gz
+    wildcards: run_accession=ERR868155, fastq_role=SINGLE, basename=ERR868155
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868155/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868155/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868155/ERR868155.fastq.gz             --out1 results/preprocessing/fastp/ERR868155/SINGLE/ERR868155.fastq.gz             --json results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.json             --html results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/SRR20770294/SRR20770294.fastq.gz
+    output: results/preprocessing/fastp/SRR20770294/SINGLE/SRR20770294.fastq.gz, results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.json, results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.html
+    log: results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.log
+    jobid: 73
+    reason: Missing output files: results/preprocessing/fastp/SRR20770294/SINGLE/SRR20770294.fastq.gz, results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.html, results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.json; Input files updated by another job: data/raw/fastq/SRR20770294/SRR20770294.fastq.gz
+    wildcards: run_accession=SRR20770294, fastq_role=SINGLE, basename=SRR20770294
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/SRR20770294/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/SRR20770294/SINGLE
+
+        fastp             --in1 data/raw/fastq/SRR20770294/SRR20770294.fastq.gz             --out1 results/preprocessing/fastp/SRR20770294/SINGLE/SRR20770294.fastq.gz             --json results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.json             --html results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868176/ERR868176.fastq.gz
+    output: results/preprocessing/fastp/ERR868176/SINGLE/ERR868176.fastq.gz, results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.json, results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.log
+    jobid: 67
+    reason: Missing output files: results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.html, results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.json, results/preprocessing/fastp/ERR868176/SINGLE/ERR868176.fastq.gz; Input files updated by another job: data/raw/fastq/ERR868176/ERR868176.fastq.gz
+    wildcards: run_accession=ERR868176, fastq_role=SINGLE, basename=ERR868176
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868176/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868176/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868176/ERR868176.fastq.gz             --out1 results/preprocessing/fastp/ERR868176/SINGLE/ERR868176.fastq.gz             --json results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.json             --html results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/SRR20770296/SRR20770296.fastq.gz
+    output: results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.html, results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.zip
+    jobid: 53
+    reason: Missing output files: results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.zip, results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.html; Input files updated by another job: data/raw/fastq/SRR20770296/SRR20770296.fastq.gz
+    wildcards: run_accession=SRR20770296, basename=SRR20770296
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/SRR20770296
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/SRR20770296             data/raw/fastq/SRR20770296/SRR20770296.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868175/ERR868175.fastq.gz
+    output: results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.html, results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.zip
+    jobid: 44
+    reason: Missing output files: results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.html, results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.zip; Input files updated by another job: data/raw/fastq/ERR868175/ERR868175.fastq.gz
+    wildcards: run_accession=ERR868175, basename=ERR868175
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868175
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868175             data/raw/fastq/ERR868175/ERR868175.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868151/ERR868151.fastq.gz
+    output: results/preprocessing/fastp/ERR868151/SINGLE/ERR868151.fastq.gz, results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.json, results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.log
+    jobid: 56
+    reason: Missing output files: results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.json, results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.html, results/preprocessing/fastp/ERR868151/SINGLE/ERR868151.fastq.gz; Input files updated by another job: data/raw/fastq/ERR868151/ERR868151.fastq.gz
+    wildcards: run_accession=ERR868151, fastq_role=SINGLE, basename=ERR868151
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868151/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868151/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868151/ERR868151.fastq.gz             --out1 results/preprocessing/fastp/ERR868151/SINGLE/ERR868151.fastq.gz             --json results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.json             --html results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/SRR20770295/SRR20770295.fastq.gz
+    output: results/preprocessing/fastp/SRR20770295/SINGLE/SRR20770295.fastq.gz, results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.json, results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.html
+    log: results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.log
+    jobid: 74
+    reason: Missing output files: results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.json, results/preprocessing/fastp/SRR20770295/SINGLE/SRR20770295.fastq.gz, results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.html; Input files updated by another job: data/raw/fastq/SRR20770295/SRR20770295.fastq.gz
+    wildcards: run_accession=SRR20770295, fastq_role=SINGLE, basename=SRR20770295
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/SRR20770295/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/SRR20770295/SINGLE
+
+        fastp             --in1 data/raw/fastq/SRR20770295/SRR20770295.fastq.gz             --out1 results/preprocessing/fastp/SRR20770295/SINGLE/SRR20770295.fastq.gz             --json results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.json             --html results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_raw:
+    input: data/raw/fastq/ERR868172/ERR868172.fastq.gz
+    output: results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.html, results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.zip
+    jobid: 41
+    reason: Missing output files: results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.zip, results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.html; Input files updated by another job: data/raw/fastq/ERR868172/ERR868172.fastq.gz
+    wildcards: run_accession=ERR868172, basename=ERR868172
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/fastqc/ERR868172
+
+        fastqc             --threads 1             --outdir results/qc/raw/fastqc/ERR868172             data/raw/fastq/ERR868172/ERR868172.fastq.gz
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/SRR20770292/SRR20770292.fastq.gz
+    output: results/preprocessing/fastp/SRR20770292/SINGLE/SRR20770292.fastq.gz, results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.json, results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.html
+    log: results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.log
+    jobid: 71
+    reason: Missing output files: results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.json, results/preprocessing/fastp/SRR20770292/SINGLE/SRR20770292.fastq.gz, results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.html; Input files updated by another job: data/raw/fastq/SRR20770292/SRR20770292.fastq.gz
+    wildcards: run_accession=SRR20770292, fastq_role=SINGLE, basename=SRR20770292
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/SRR20770292/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/SRR20770292/SINGLE
+
+        fastp             --in1 data/raw/fastq/SRR20770292/SRR20770292.fastq.gz             --out1 results/preprocessing/fastp/SRR20770292/SINGLE/SRR20770292.fastq.gz             --json results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.json             --html results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastp_single:
+    input: data/raw/fastq/ERR868153/ERR868153.fastq.gz
+    output: results/preprocessing/fastp/ERR868153/SINGLE/ERR868153.fastq.gz, results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.json, results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.html
+    log: results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.log
+    jobid: 58
+    reason: Missing output files: results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.json, results/preprocessing/fastp/ERR868153/SINGLE/ERR868153.fastq.gz, results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.html; Input files updated by another job: data/raw/fastq/ERR868153/ERR868153.fastq.gz
+    wildcards: run_accession=ERR868153, fastq_role=SINGLE, basename=ERR868153
+    threads: 4
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/preprocessing/fastp/ERR868153/SINGLE
+        mkdir -p results/preprocessing/fastp/reports/ERR868153/SINGLE
+
+        fastp             --in1 data/raw/fastq/ERR868153/ERR868153.fastq.gz             --out1 results/preprocessing/fastp/ERR868153/SINGLE/ERR868153.fastq.gz             --json results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.json             --html results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.html             --thread 4             -Q             -L             -G > results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz
+    output: results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip
+    log: results/qc/post/fastqc/SRR20770287/SRR20770287.fastqc.log
+    jobid: 91
+    reason: Missing output files: results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz
+    wildcards: run_accession=SRR20770287, basename=SRR20770287
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/SRR20770287
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/SRR20770287             results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz             > results/qc/post/fastqc/SRR20770287/SRR20770287.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868154/SINGLE/ERR868154.fastq.gz
+    output: results/qc/post/fastqc/ERR868154/ERR868154_fastqc.html, results/qc/post/fastqc/ERR868154/ERR868154_fastqc.zip
+    log: results/qc/post/fastqc/ERR868154/ERR868154.fastqc.log
+    jobid: 81
+    reason: Missing output files: results/qc/post/fastqc/ERR868154/ERR868154_fastqc.html, results/qc/post/fastqc/ERR868154/ERR868154_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/ERR868154/SINGLE/ERR868154.fastq.gz
+    wildcards: run_accession=ERR868154, basename=ERR868154
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868154
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868154             results/preprocessing/fastp/ERR868154/SINGLE/ERR868154.fastq.gz             > results/qc/post/fastqc/ERR868154/ERR868154.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868153/SINGLE/ERR868153.fastq.gz
+    output: results/qc/post/fastqc/ERR868153/ERR868153_fastqc.html, results/qc/post/fastqc/ERR868153/ERR868153_fastqc.zip
+    log: results/qc/post/fastqc/ERR868153/ERR868153.fastqc.log
+    jobid: 80
+    reason: Missing output files: results/qc/post/fastqc/ERR868153/ERR868153_fastqc.html, results/qc/post/fastqc/ERR868153/ERR868153_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/ERR868153/SINGLE/ERR868153.fastq.gz
+    wildcards: run_accession=ERR868153, basename=ERR868153
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868153
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868153             results/preprocessing/fastp/ERR868153/SINGLE/ERR868153.fastq.gz             > results/qc/post/fastqc/ERR868153/ERR868153.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule multiqc_raw:
+    input: results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.html, results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.zip, results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.html, results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.zip, results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.html, results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.zip, results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.html, results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.zip, results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.html, results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.zip, results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.html, results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.zip, results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.html, results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.zip, results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.html, results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.zip, results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.html, results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.zip, results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.html, results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.zip, results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.html, results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.zip, results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.html, results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.zip, results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.html, results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.zip, results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.html, results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.zip, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.html, results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.zip, results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.html, results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.zip, results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.html, results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.zip, results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.html, results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.zip, results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.html, results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.zip, results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.html, results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.zip, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip
+    output: results/qc/raw/multiqc/multiqc_report.html, results/qc/raw/multiqc/multiqc_report_data
+    jobid: 5
+    reason: Missing output files: results/qc/raw/multiqc/multiqc_report.html; Input files updated by another job: results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.zip, results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.html, results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.html, results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.html, results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.zip, results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.zip, results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.html, results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.html, results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.html, results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.zip, results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.zip, results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.zip, results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.html, results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.html, results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.zip, results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.zip, results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.zip, results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.html, results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.zip, results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.html, results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.zip, results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.html, results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.html, results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.zip, results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.zip, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip, results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.zip, results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.zip, results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.zip, results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.html, results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.zip, results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.html, results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.zip, results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.zip, results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.zip, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.html, results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.html, results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.html, results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.html
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/raw/multiqc
+
+        multiqc             results/qc/raw/fastqc             --outdir results/qc/raw/multiqc             --filename multiqc_report.html             --force
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868150/SINGLE/ERR868150.fastq.gz
+    output: results/qc/post/fastqc/ERR868150/ERR868150_fastqc.html, results/qc/post/fastqc/ERR868150/ERR868150_fastqc.zip
+    log: results/qc/post/fastqc/ERR868150/ERR868150.fastqc.log
+    jobid: 77
+    reason: Missing output files: results/qc/post/fastqc/ERR868150/ERR868150_fastqc.zip, results/qc/post/fastqc/ERR868150/ERR868150_fastqc.html; Input files updated by another job: results/preprocessing/fastp/ERR868150/SINGLE/ERR868150.fastq.gz
+    wildcards: run_accession=ERR868150, basename=ERR868150
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868150
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868150             results/preprocessing/fastp/ERR868150/SINGLE/ERR868150.fastq.gz             > results/qc/post/fastqc/ERR868150/ERR868150.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/SRR20770292/SINGLE/SRR20770292.fastq.gz
+    output: results/qc/post/fastqc/SRR20770292/SRR20770292_fastqc.html, results/qc/post/fastqc/SRR20770292/SRR20770292_fastqc.zip
+    log: results/qc/post/fastqc/SRR20770292/SRR20770292.fastqc.log
+    jobid: 93
+    reason: Missing output files: results/qc/post/fastqc/SRR20770292/SRR20770292_fastqc.html, results/qc/post/fastqc/SRR20770292/SRR20770292_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/SRR20770292/SINGLE/SRR20770292.fastq.gz
+    wildcards: run_accession=SRR20770292, basename=SRR20770292
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/SRR20770292
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/SRR20770292             results/preprocessing/fastp/SRR20770292/SINGLE/SRR20770292.fastq.gz             > results/qc/post/fastqc/SRR20770292/SRR20770292.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/SRR20770291/SINGLE/SRR20770291.fastq.gz
+    output: results/qc/post/fastqc/SRR20770291/SRR20770291_fastqc.html, results/qc/post/fastqc/SRR20770291/SRR20770291_fastqc.zip
+    log: results/qc/post/fastqc/SRR20770291/SRR20770291.fastqc.log
+    jobid: 92
+    reason: Missing output files: results/qc/post/fastqc/SRR20770291/SRR20770291_fastqc.html, results/qc/post/fastqc/SRR20770291/SRR20770291_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/SRR20770291/SINGLE/SRR20770291.fastq.gz
+    wildcards: run_accession=SRR20770291, basename=SRR20770291
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/SRR20770291
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/SRR20770291             results/preprocessing/fastp/SRR20770291/SINGLE/SRR20770291.fastq.gz             > results/qc/post/fastqc/SRR20770291/SRR20770291.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868156/SINGLE/ERR868156.fastq.gz
+    output: results/qc/post/fastqc/ERR868156/ERR868156_fastqc.html, results/qc/post/fastqc/ERR868156/ERR868156_fastqc.zip
+    log: results/qc/post/fastqc/ERR868156/ERR868156.fastqc.log
+    jobid: 83
+    reason: Missing output files: results/qc/post/fastqc/ERR868156/ERR868156_fastqc.html, results/qc/post/fastqc/ERR868156/ERR868156_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/ERR868156/SINGLE/ERR868156.fastq.gz
+    wildcards: run_accession=ERR868156, basename=ERR868156
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868156
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868156             results/preprocessing/fastp/ERR868156/SINGLE/ERR868156.fastq.gz             > results/qc/post/fastqc/ERR868156/ERR868156.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868173/SINGLE/ERR868173.fastq.gz
+    output: results/qc/post/fastqc/ERR868173/ERR868173_fastqc.html, results/qc/post/fastqc/ERR868173/ERR868173_fastqc.zip
+    log: results/qc/post/fastqc/ERR868173/ERR868173.fastqc.log
+    jobid: 86
+    reason: Missing output files: results/qc/post/fastqc/ERR868173/ERR868173_fastqc.zip, results/qc/post/fastqc/ERR868173/ERR868173_fastqc.html; Input files updated by another job: results/preprocessing/fastp/ERR868173/SINGLE/ERR868173.fastq.gz
+    wildcards: run_accession=ERR868173, basename=ERR868173
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868173
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868173             results/preprocessing/fastp/ERR868173/SINGLE/ERR868173.fastq.gz             > results/qc/post/fastqc/ERR868173/ERR868173.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868171/SINGLE/ERR868171.fastq.gz
+    output: results/qc/post/fastqc/ERR868171/ERR868171_fastqc.html, results/qc/post/fastqc/ERR868171/ERR868171_fastqc.zip
+    log: results/qc/post/fastqc/ERR868171/ERR868171.fastqc.log
+    jobid: 84
+    reason: Missing output files: results/qc/post/fastqc/ERR868171/ERR868171_fastqc.html, results/qc/post/fastqc/ERR868171/ERR868171_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/ERR868171/SINGLE/ERR868171.fastq.gz
+    wildcards: run_accession=ERR868171, basename=ERR868171
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868171
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868171             results/preprocessing/fastp/ERR868171/SINGLE/ERR868171.fastq.gz             > results/qc/post/fastqc/ERR868171/ERR868171.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868175/SINGLE/ERR868175.fastq.gz
+    output: results/qc/post/fastqc/ERR868175/ERR868175_fastqc.html, results/qc/post/fastqc/ERR868175/ERR868175_fastqc.zip
+    log: results/qc/post/fastqc/ERR868175/ERR868175.fastqc.log
+    jobid: 88
+    reason: Missing output files: results/qc/post/fastqc/ERR868175/ERR868175_fastqc.zip, results/qc/post/fastqc/ERR868175/ERR868175_fastqc.html; Input files updated by another job: results/preprocessing/fastp/ERR868175/SINGLE/ERR868175.fastq.gz
+    wildcards: run_accession=ERR868175, basename=ERR868175
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868175
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868175             results/preprocessing/fastp/ERR868175/SINGLE/ERR868175.fastq.gz             > results/qc/post/fastqc/ERR868175/ERR868175.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/SRR20770295/SINGLE/SRR20770295.fastq.gz
+    output: results/qc/post/fastqc/SRR20770295/SRR20770295_fastqc.html, results/qc/post/fastqc/SRR20770295/SRR20770295_fastqc.zip
+    log: results/qc/post/fastqc/SRR20770295/SRR20770295.fastqc.log
+    jobid: 96
+    reason: Missing output files: results/qc/post/fastqc/SRR20770295/SRR20770295_fastqc.zip, results/qc/post/fastqc/SRR20770295/SRR20770295_fastqc.html; Input files updated by another job: results/preprocessing/fastp/SRR20770295/SINGLE/SRR20770295.fastq.gz
+    wildcards: run_accession=SRR20770295, basename=SRR20770295
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/SRR20770295
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/SRR20770295             results/preprocessing/fastp/SRR20770295/SINGLE/SRR20770295.fastq.gz             > results/qc/post/fastqc/SRR20770295/SRR20770295.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868151/SINGLE/ERR868151.fastq.gz
+    output: results/qc/post/fastqc/ERR868151/ERR868151_fastqc.html, results/qc/post/fastqc/ERR868151/ERR868151_fastqc.zip
+    log: results/qc/post/fastqc/ERR868151/ERR868151.fastqc.log
+    jobid: 78
+    reason: Missing output files: results/qc/post/fastqc/ERR868151/ERR868151_fastqc.zip, results/qc/post/fastqc/ERR868151/ERR868151_fastqc.html; Input files updated by another job: results/preprocessing/fastp/ERR868151/SINGLE/ERR868151.fastq.gz
+    wildcards: run_accession=ERR868151, basename=ERR868151
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868151
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868151             results/preprocessing/fastp/ERR868151/SINGLE/ERR868151.fastq.gz             > results/qc/post/fastqc/ERR868151/ERR868151.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/SRR20770293/SINGLE/SRR20770293.fastq.gz
+    output: results/qc/post/fastqc/SRR20770293/SRR20770293_fastqc.html, results/qc/post/fastqc/SRR20770293/SRR20770293_fastqc.zip
+    log: results/qc/post/fastqc/SRR20770293/SRR20770293.fastqc.log
+    jobid: 94
+    reason: Missing output files: results/qc/post/fastqc/SRR20770293/SRR20770293_fastqc.html, results/qc/post/fastqc/SRR20770293/SRR20770293_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/SRR20770293/SINGLE/SRR20770293.fastq.gz
+    wildcards: run_accession=SRR20770293, basename=SRR20770293
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/SRR20770293
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/SRR20770293             results/preprocessing/fastp/SRR20770293/SINGLE/SRR20770293.fastq.gz             > results/qc/post/fastqc/SRR20770293/SRR20770293.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868172/SINGLE/ERR868172.fastq.gz
+    output: results/qc/post/fastqc/ERR868172/ERR868172_fastqc.html, results/qc/post/fastqc/ERR868172/ERR868172_fastqc.zip
+    log: results/qc/post/fastqc/ERR868172/ERR868172.fastqc.log
+    jobid: 85
+    reason: Missing output files: results/qc/post/fastqc/ERR868172/ERR868172_fastqc.zip, results/qc/post/fastqc/ERR868172/ERR868172_fastqc.html; Input files updated by another job: results/preprocessing/fastp/ERR868172/SINGLE/ERR868172.fastq.gz
+    wildcards: run_accession=ERR868172, basename=ERR868172
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868172
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868172             results/preprocessing/fastp/ERR868172/SINGLE/ERR868172.fastq.gz             > results/qc/post/fastqc/ERR868172/ERR868172.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868155/SINGLE/ERR868155.fastq.gz
+    output: results/qc/post/fastqc/ERR868155/ERR868155_fastqc.html, results/qc/post/fastqc/ERR868155/ERR868155_fastqc.zip
+    log: results/qc/post/fastqc/ERR868155/ERR868155.fastqc.log
+    jobid: 82
+    reason: Missing output files: results/qc/post/fastqc/ERR868155/ERR868155_fastqc.zip, results/qc/post/fastqc/ERR868155/ERR868155_fastqc.html; Input files updated by another job: results/preprocessing/fastp/ERR868155/SINGLE/ERR868155.fastq.gz
+    wildcards: run_accession=ERR868155, basename=ERR868155
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868155
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868155             results/preprocessing/fastp/ERR868155/SINGLE/ERR868155.fastq.gz             > results/qc/post/fastqc/ERR868155/ERR868155.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868176/SINGLE/ERR868176.fastq.gz
+    output: results/qc/post/fastqc/ERR868176/ERR868176_fastqc.html, results/qc/post/fastqc/ERR868176/ERR868176_fastqc.zip
+    log: results/qc/post/fastqc/ERR868176/ERR868176.fastqc.log
+    jobid: 89
+    reason: Missing output files: results/qc/post/fastqc/ERR868176/ERR868176_fastqc.html, results/qc/post/fastqc/ERR868176/ERR868176_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/ERR868176/SINGLE/ERR868176.fastq.gz
+    wildcards: run_accession=ERR868176, basename=ERR868176
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868176
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868176             results/preprocessing/fastp/ERR868176/SINGLE/ERR868176.fastq.gz             > results/qc/post/fastqc/ERR868176/ERR868176.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868177/SINGLE/ERR868177.fastq.gz
+    output: results/qc/post/fastqc/ERR868177/ERR868177_fastqc.html, results/qc/post/fastqc/ERR868177/ERR868177_fastqc.zip
+    log: results/qc/post/fastqc/ERR868177/ERR868177.fastqc.log
+    jobid: 90
+    reason: Missing output files: results/qc/post/fastqc/ERR868177/ERR868177_fastqc.zip, results/qc/post/fastqc/ERR868177/ERR868177_fastqc.html; Input files updated by another job: results/preprocessing/fastp/ERR868177/SINGLE/ERR868177.fastq.gz
+    wildcards: run_accession=ERR868177, basename=ERR868177
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868177
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868177             results/preprocessing/fastp/ERR868177/SINGLE/ERR868177.fastq.gz             > results/qc/post/fastqc/ERR868177/ERR868177.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/SRR20770296/SINGLE/SRR20770296.fastq.gz
+    output: results/qc/post/fastqc/SRR20770296/SRR20770296_fastqc.html, results/qc/post/fastqc/SRR20770296/SRR20770296_fastqc.zip
+    log: results/qc/post/fastqc/SRR20770296/SRR20770296.fastqc.log
+    jobid: 97
+    reason: Missing output files: results/qc/post/fastqc/SRR20770296/SRR20770296_fastqc.zip, results/qc/post/fastqc/SRR20770296/SRR20770296_fastqc.html; Input files updated by another job: results/preprocessing/fastp/SRR20770296/SINGLE/SRR20770296.fastq.gz
+    wildcards: run_accession=SRR20770296, basename=SRR20770296
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/SRR20770296
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/SRR20770296             results/preprocessing/fastp/SRR20770296/SINGLE/SRR20770296.fastq.gz             > results/qc/post/fastqc/SRR20770296/SRR20770296.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868174/SINGLE/ERR868174.fastq.gz
+    output: results/qc/post/fastqc/ERR868174/ERR868174_fastqc.html, results/qc/post/fastqc/ERR868174/ERR868174_fastqc.zip
+    log: results/qc/post/fastqc/ERR868174/ERR868174.fastqc.log
+    jobid: 87
+    reason: Missing output files: results/qc/post/fastqc/ERR868174/ERR868174_fastqc.html, results/qc/post/fastqc/ERR868174/ERR868174_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/ERR868174/SINGLE/ERR868174.fastq.gz
+    wildcards: run_accession=ERR868174, basename=ERR868174
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868174
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868174             results/preprocessing/fastp/ERR868174/SINGLE/ERR868174.fastq.gz             > results/qc/post/fastqc/ERR868174/ERR868174.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/ERR868152/SINGLE/ERR868152.fastq.gz
+    output: results/qc/post/fastqc/ERR868152/ERR868152_fastqc.html, results/qc/post/fastqc/ERR868152/ERR868152_fastqc.zip
+    log: results/qc/post/fastqc/ERR868152/ERR868152.fastqc.log
+    jobid: 79
+    reason: Missing output files: results/qc/post/fastqc/ERR868152/ERR868152_fastqc.zip, results/qc/post/fastqc/ERR868152/ERR868152_fastqc.html; Input files updated by another job: results/preprocessing/fastp/ERR868152/SINGLE/ERR868152.fastq.gz
+    wildcards: run_accession=ERR868152, basename=ERR868152
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/ERR868152
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/ERR868152             results/preprocessing/fastp/ERR868152/SINGLE/ERR868152.fastq.gz             > results/qc/post/fastqc/ERR868152/ERR868152.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/SRR20770294/SINGLE/SRR20770294.fastq.gz
+    output: results/qc/post/fastqc/SRR20770294/SRR20770294_fastqc.html, results/qc/post/fastqc/SRR20770294/SRR20770294_fastqc.zip
+    log: results/qc/post/fastqc/SRR20770294/SRR20770294.fastqc.log
+    jobid: 95
+    reason: Missing output files: results/qc/post/fastqc/SRR20770294/SRR20770294_fastqc.html, results/qc/post/fastqc/SRR20770294/SRR20770294_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/SRR20770294/SINGLE/SRR20770294.fastq.gz
+    wildcards: run_accession=SRR20770294, basename=SRR20770294
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/SRR20770294
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/SRR20770294             results/preprocessing/fastp/SRR20770294/SINGLE/SRR20770294.fastq.gz             > results/qc/post/fastqc/SRR20770294/SRR20770294.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule fastqc_post:
+    input: results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz
+    output: results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip
+    log: results/qc/post/fastqc/SRR20770297/SRR20770297.fastqc.log
+    jobid: 98
+    reason: Missing output files: results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip; Input files updated by another job: results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz
+    wildcards: run_accession=SRR20770297, basename=SRR20770297
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/qc/post/fastqc/SRR20770297
+
+        fastqc             --threads 1             --outdir results/qc/post/fastqc/SRR20770297             results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz             > results/qc/post/fastqc/SRR20770297/SRR20770297.fastqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule summarize_preprocessing_qc:
+    input: results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.html, results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.zip, results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.html, results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.zip, results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.html, results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.zip, results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.html, results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.zip, results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.html, results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.zip, results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.html, results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.zip, results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.html, results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.zip, results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.html, results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.zip, results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.html, results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.zip, results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.html, results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.zip, results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.html, results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.zip, results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.html, results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.zip, results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.html, results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.zip, results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.html, results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.zip, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.html, results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.zip, results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.html, results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.zip, results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.html, results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.zip, results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.html, results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.zip, results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.html, results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.zip, results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.html, results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.zip, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip, results/preprocessing/fastp/ERR868150/SINGLE/ERR868150.fastq.gz, results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.json, results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.html, results/preprocessing/fastp/ERR868151/SINGLE/ERR868151.fastq.gz, results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.json, results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.html, results/preprocessing/fastp/ERR868152/SINGLE/ERR868152.fastq.gz, results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.json, results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.html, results/preprocessing/fastp/ERR868153/SINGLE/ERR868153.fastq.gz, results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.json, results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.html, results/preprocessing/fastp/ERR868154/SINGLE/ERR868154.fastq.gz, results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.json, results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.html, results/preprocessing/fastp/ERR868155/SINGLE/ERR868155.fastq.gz, results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.json, results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.html, results/preprocessing/fastp/ERR868156/SINGLE/ERR868156.fastq.gz, results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.json, results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.html, results/preprocessing/fastp/ERR868171/SINGLE/ERR868171.fastq.gz, results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.json, results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.html, results/preprocessing/fastp/ERR868172/SINGLE/ERR868172.fastq.gz, results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.json, results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.html, results/preprocessing/fastp/ERR868173/SINGLE/ERR868173.fastq.gz, results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.json, results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.html, results/preprocessing/fastp/ERR868174/SINGLE/ERR868174.fastq.gz, results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.json, results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.html, results/preprocessing/fastp/ERR868175/SINGLE/ERR868175.fastq.gz, results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.json, results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.html, results/preprocessing/fastp/ERR868176/SINGLE/ERR868176.fastq.gz, results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.json, results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.html, results/preprocessing/fastp/ERR868177/SINGLE/ERR868177.fastq.gz, results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.json, results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.html, results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.json, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.html, results/preprocessing/fastp/SRR20770291/SINGLE/SRR20770291.fastq.gz, results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.json, results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.html, results/preprocessing/fastp/SRR20770292/SINGLE/SRR20770292.fastq.gz, results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.json, results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.html, results/preprocessing/fastp/SRR20770293/SINGLE/SRR20770293.fastq.gz, results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.json, results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.html, results/preprocessing/fastp/SRR20770294/SINGLE/SRR20770294.fastq.gz, results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.json, results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.html, results/preprocessing/fastp/SRR20770295/SINGLE/SRR20770295.fastq.gz, results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.json, results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.html, results/preprocessing/fastp/SRR20770296/SINGLE/SRR20770296.fastq.gz, results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.json, results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.html, results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.json, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.html, results/qc/post/fastqc/ERR868150/ERR868150_fastqc.html, results/qc/post/fastqc/ERR868150/ERR868150_fastqc.zip, results/qc/post/fastqc/ERR868151/ERR868151_fastqc.html, results/qc/post/fastqc/ERR868151/ERR868151_fastqc.zip, results/qc/post/fastqc/ERR868152/ERR868152_fastqc.html, results/qc/post/fastqc/ERR868152/ERR868152_fastqc.zip, results/qc/post/fastqc/ERR868153/ERR868153_fastqc.html, results/qc/post/fastqc/ERR868153/ERR868153_fastqc.zip, results/qc/post/fastqc/ERR868154/ERR868154_fastqc.html, results/qc/post/fastqc/ERR868154/ERR868154_fastqc.zip, results/qc/post/fastqc/ERR868155/ERR868155_fastqc.html, results/qc/post/fastqc/ERR868155/ERR868155_fastqc.zip, results/qc/post/fastqc/ERR868156/ERR868156_fastqc.html, results/qc/post/fastqc/ERR868156/ERR868156_fastqc.zip, results/qc/post/fastqc/ERR868171/ERR868171_fastqc.html, results/qc/post/fastqc/ERR868171/ERR868171_fastqc.zip, results/qc/post/fastqc/ERR868172/ERR868172_fastqc.html, results/qc/post/fastqc/ERR868172/ERR868172_fastqc.zip, results/qc/post/fastqc/ERR868173/ERR868173_fastqc.html, results/qc/post/fastqc/ERR868173/ERR868173_fastqc.zip, results/qc/post/fastqc/ERR868174/ERR868174_fastqc.html, results/qc/post/fastqc/ERR868174/ERR868174_fastqc.zip, results/qc/post/fastqc/ERR868175/ERR868175_fastqc.html, results/qc/post/fastqc/ERR868175/ERR868175_fastqc.zip, results/qc/post/fastqc/ERR868176/ERR868176_fastqc.html, results/qc/post/fastqc/ERR868176/ERR868176_fastqc.zip, results/qc/post/fastqc/ERR868177/ERR868177_fastqc.html, results/qc/post/fastqc/ERR868177/ERR868177_fastqc.zip, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/post/fastqc/SRR20770291/SRR20770291_fastqc.html, results/qc/post/fastqc/SRR20770291/SRR20770291_fastqc.zip, results/qc/post/fastqc/SRR20770292/SRR20770292_fastqc.html, results/qc/post/fastqc/SRR20770292/SRR20770292_fastqc.zip, results/qc/post/fastqc/SRR20770293/SRR20770293_fastqc.html, results/qc/post/fastqc/SRR20770293/SRR20770293_fastqc.zip, results/qc/post/fastqc/SRR20770294/SRR20770294_fastqc.html, results/qc/post/fastqc/SRR20770294/SRR20770294_fastqc.zip, results/qc/post/fastqc/SRR20770295/SRR20770295_fastqc.html, results/qc/post/fastqc/SRR20770295/SRR20770295_fastqc.zip, results/qc/post/fastqc/SRR20770296/SRR20770296_fastqc.html, results/qc/post/fastqc/SRR20770296/SRR20770296_fastqc.zip, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip, workflow/scripts/summarize_preprocessing_qc.py
+    output: results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv
+    log: results/preprocessing/fastp/reports/summarize_preprocessing_qc.log
+    jobid: 4
+    reason: Missing output files: results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv; Input files updated by another job: results/preprocessing/fastp/ERR868156/SINGLE/ERR868156.fastq.gz, results/qc/post/fastqc/SRR20770296/SRR20770296_fastqc.zip, results/qc/post/fastqc/ERR868176/ERR868176_fastqc.zip, results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.html, results/qc/post/fastqc/ERR868174/ERR868174_fastqc.zip, results/preprocessing/fastp/ERR868173/SINGLE/ERR868173.fastq.gz, results/preprocessing/fastp/reports/SRR20770293/SINGLE/SRR20770293.fastp.json, results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.html, results/qc/post/fastqc/SRR20770294/SRR20770294_fastqc.html, results/qc/post/fastqc/SRR20770293/SRR20770293_fastqc.html, results/qc/post/fastqc/SRR20770294/SRR20770294_fastqc.zip, results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.html, results/preprocessing/fastp/ERR868150/SINGLE/ERR868150.fastq.gz, results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.json, results/qc/post/fastqc/ERR868175/ERR868175_fastqc.zip, results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.zip, results/preprocessing/fastp/ERR868153/SINGLE/ERR868153.fastq.gz, results/preprocessing/fastp/SRR20770292/SINGLE/SRR20770292.fastq.gz, results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.json, results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.html, results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.html, results/qc/post/fastqc/ERR868150/ERR868150_fastqc.html, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.html, results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.html, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.zip, results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.html, results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.json, results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.html, results/qc/post/fastqc/SRR20770291/SRR20770291_fastqc.html, results/qc/post/fastqc/ERR868156/ERR868156_fastqc.html, results/qc/post/fastqc/ERR868152/ERR868152_fastqc.zip, results/qc/post/fastqc/ERR868175/ERR868175_fastqc.html, results/qc/post/fastqc/SRR20770291/SRR20770291_fastqc.zip, results/qc/raw/fastqc/SRR20770297/SRR20770297_fastqc.html, results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.json, results/qc/post/fastqc/ERR868156/ERR868156_fastqc.zip, results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.html, results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.html, results/preprocessing/fastp/ERR868152/SINGLE/ERR868152.fastq.gz, results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.zip, results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.html, results/qc/post/fastqc/SRR20770295/SRR20770295_fastqc.html, results/qc/post/fastqc/ERR868153/ERR868153_fastqc.zip, results/qc/post/fastqc/ERR868154/ERR868154_fastqc.zip, results/preprocessing/fastp/reports/SRR20770295/SINGLE/SRR20770295.fastp.json, results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.zip, results/preprocessing/fastp/reports/ERR868153/SINGLE/ERR868153.fastp.json, results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.html, results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.html, results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.html, results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.zip, results/qc/post/fastqc/ERR868172/ERR868172_fastqc.zip, results/qc/post/fastqc/ERR868172/ERR868172_fastqc.html, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.html, results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.zip, results/preprocessing/fastp/SRR20770291/SINGLE/SRR20770291.fastq.gz, results/preprocessing/fastp/ERR868155/SINGLE/ERR868155.fastq.gz, results/qc/post/fastqc/SRR20770293/SRR20770293_fastqc.zip, results/preprocessing/fastp/ERR868175/SINGLE/ERR868175.fastq.gz, results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.zip, results/qc/raw/fastqc/SRR20770293/SRR20770293_fastqc.html, results/qc/raw/fastqc/ERR868172/ERR868172_fastqc.html, results/qc/raw/fastqc/SRR20770291/SRR20770291_fastqc.zip, results/qc/raw/fastqc/ERR868156/ERR868156_fastqc.zip, results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.zip, results/preprocessing/fastp/SRR20770294/SINGLE/SRR20770294.fastq.gz, results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.zip, results/qc/post/fastqc/ERR868151/ERR868151_fastqc.html, results/preprocessing/fastp/SRR20770297/SINGLE/SRR20770297.fastq.gz, results/preprocessing/fastp/reports/ERR868177/SINGLE/ERR868177.fastp.json, results/preprocessing/fastp/ERR868151/SINGLE/ERR868151.fastq.gz, results/preprocessing/fastp/reports/ERR868175/SINGLE/ERR868175.fastp.json, results/preprocessing/fastp/SRR20770293/SINGLE/SRR20770293.fastq.gz, results/preprocessing/fastp/ERR868177/SINGLE/ERR868177.fastq.gz, results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.html, results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.html, results/qc/post/fastqc/ERR868176/ERR868176_fastqc.html, results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.html, results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.html, results/qc/post/fastqc/SRR20770292/SRR20770292_fastqc.zip, results/qc/raw/fastqc/ERR868174/ERR868174_fastqc.zip, results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.json, results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.html, results/qc/post/fastqc/ERR868171/ERR868171_fastqc.zip, results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.html, results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.zip, results/qc/post/fastqc/ERR868155/ERR868155_fastqc.zip, results/qc/post/fastqc/ERR868155/ERR868155_fastqc.html, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.json, results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.html, results/qc/raw/fastqc/SRR20770294/SRR20770294_fastqc.zip, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.html, results/preprocessing/fastp/reports/ERR868154/SINGLE/ERR868154.fastp.html, results/qc/raw/fastqc/ERR868151/ERR868151_fastqc.zip, results/qc/post/fastqc/ERR868177/ERR868177_fastqc.html, results/preprocessing/fastp/reports/ERR868171/SINGLE/ERR868171.fastp.json, results/qc/post/fastqc/ERR868173/ERR868173_fastqc.zip, results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.zip, results/qc/raw/fastqc/ERR868177/ERR868177_fastqc.html, results/qc/post/fastqc/ERR868171/ERR868171_fastqc.html, results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.zip, results/qc/post/fastqc/ERR868173/ERR868173_fastqc.html, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/preprocessing/fastp/reports/ERR868173/SINGLE/ERR868173.fastp.html, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip, results/qc/post/fastqc/ERR868150/ERR868150_fastqc.zip, results/qc/raw/fastqc/ERR868154/ERR868154_fastqc.html, results/qc/post/fastqc/ERR868151/ERR868151_fastqc.zip, results/preprocessing/fastp/reports/ERR868172/SINGLE/ERR868172.fastp.html, results/qc/raw/fastqc/ERR868155/ERR868155_fastqc.zip, results/qc/raw/fastqc/ERR868173/ERR868173_fastqc.html, results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.json, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.html, results/preprocessing/fastp/ERR868154/SINGLE/ERR868154.fastq.gz, results/preprocessing/fastp/SRR20770287/SINGLE/SRR20770287.fastq.gz, results/qc/post/fastqc/ERR868153/ERR868153_fastqc.html, results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.html, results/qc/post/fastqc/ERR868154/ERR868154_fastqc.html, results/preprocessing/fastp/reports/SRR20770294/SINGLE/SRR20770294.fastp.json, results/preprocessing/fastp/reports/ERR868151/SINGLE/ERR868151.fastp.json, results/qc/raw/fastqc/ERR868153/ERR868153_fastqc.html, results/preprocessing/fastp/reports/SRR20770297/SINGLE/SRR20770297.fastp.json, results/preprocessing/fastp/ERR868172/SINGLE/ERR868172.fastq.gz, results/preprocessing/fastp/reports/ERR868155/SINGLE/ERR868155.fastp.html, results/preprocessing/fastp/ERR868176/SINGLE/ERR868176.fastq.gz, results/qc/post/fastqc/ERR868174/ERR868174_fastqc.html, results/preprocessing/fastp/reports/ERR868176/SINGLE/ERR868176.fastp.json, results/qc/raw/fastqc/ERR868171/ERR868171_fastqc.html, results/qc/raw/fastqc/SRR20770296/SRR20770296_fastqc.html, results/qc/raw/fastqc/ERR868152/ERR868152_fastqc.zip, results/preprocessing/fastp/reports/SRR20770296/SINGLE/SRR20770296.fastp.json, results/preprocessing/fastp/SRR20770296/SINGLE/SRR20770296.fastq.gz, results/qc/post/fastqc/SRR20770295/SRR20770295_fastqc.zip, results/qc/raw/fastqc/ERR868150/ERR868150_fastqc.html, results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.json, results/preprocessing/fastp/reports/ERR868152/SINGLE/ERR868152.fastp.html, results/qc/raw/fastqc/ERR868176/ERR868176_fastqc.zip, results/qc/post/fastqc/ERR868177/ERR868177_fastqc.zip, results/preprocessing/fastp/reports/ERR868174/SINGLE/ERR868174.fastp.json, results/qc/raw/fastqc/SRR20770292/SRR20770292_fastqc.zip, results/preprocessing/fastp/reports/ERR868156/SINGLE/ERR868156.fastp.html, results/preprocessing/fastp/reports/ERR868150/SINGLE/ERR868150.fastp.html, results/qc/post/fastqc/SRR20770292/SRR20770292_fastqc.html, results/preprocessing/fastp/SRR20770295/SINGLE/SRR20770295.fastq.gz, results/qc/raw/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/preprocessing/fastp/ERR868174/SINGLE/ERR868174.fastq.gz, results/preprocessing/fastp/reports/SRR20770287/SINGLE/SRR20770287.fastp.html, results/preprocessing/fastp/ERR868171/SINGLE/ERR868171.fastq.gz, results/preprocessing/fastp/reports/SRR20770291/SINGLE/SRR20770291.fastp.json, results/preprocessing/fastp/reports/SRR20770292/SINGLE/SRR20770292.fastp.json, results/qc/post/fastqc/SRR20770296/SRR20770296_fastqc.html, results/qc/raw/fastqc/SRR20770295/SRR20770295_fastqc.html, results/qc/raw/fastqc/ERR868175/ERR868175_fastqc.html, results/qc/post/fastqc/ERR868152/ERR868152_fastqc.html
+    resources: tmpdir=/tmp
+Shell command: 
+        python workflow/scripts/summarize_preprocessing_qc.py > results/preprocessing/fastp/reports/summarize_preprocessing_qc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule multiqc_post:
+    input: results/qc/post/fastqc/ERR868150/ERR868150_fastqc.zip, results/qc/post/fastqc/ERR868151/ERR868151_fastqc.zip, results/qc/post/fastqc/ERR868152/ERR868152_fastqc.zip, results/qc/post/fastqc/ERR868153/ERR868153_fastqc.zip, results/qc/post/fastqc/ERR868154/ERR868154_fastqc.zip, results/qc/post/fastqc/ERR868155/ERR868155_fastqc.zip, results/qc/post/fastqc/ERR868156/ERR868156_fastqc.zip, results/qc/post/fastqc/ERR868171/ERR868171_fastqc.zip, results/qc/post/fastqc/ERR868172/ERR868172_fastqc.zip, results/qc/post/fastqc/ERR868173/ERR868173_fastqc.zip, results/qc/post/fastqc/ERR868174/ERR868174_fastqc.zip, results/qc/post/fastqc/ERR868175/ERR868175_fastqc.zip, results/qc/post/fastqc/ERR868176/ERR868176_fastqc.zip, results/qc/post/fastqc/ERR868177/ERR868177_fastqc.zip, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/post/fastqc/SRR20770291/SRR20770291_fastqc.zip, results/qc/post/fastqc/SRR20770292/SRR20770292_fastqc.zip, results/qc/post/fastqc/SRR20770293/SRR20770293_fastqc.zip, results/qc/post/fastqc/SRR20770294/SRR20770294_fastqc.zip, results/qc/post/fastqc/SRR20770295/SRR20770295_fastqc.zip, results/qc/post/fastqc/SRR20770296/SRR20770296_fastqc.zip, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip
+    output: results/qc/post/multiqc/multiqc_report.html, results/qc/post/multiqc/multiqc_report_data
+    log: results/qc/post/multiqc/multiqc.log
+    jobid: 6
+    reason: Missing output files: results/qc/post/multiqc/multiqc_report.html; Input files updated by another job: results/qc/post/fastqc/SRR20770295/SRR20770295_fastqc.zip, results/qc/post/fastqc/SRR20770296/SRR20770296_fastqc.zip, results/qc/post/fastqc/ERR868176/ERR868176_fastqc.zip, results/qc/post/fastqc/ERR868153/ERR868153_fastqc.zip, results/qc/post/fastqc/ERR868154/ERR868154_fastqc.zip, results/qc/post/fastqc/ERR868173/ERR868173_fastqc.zip, results/qc/post/fastqc/ERR868174/ERR868174_fastqc.zip, results/qc/post/fastqc/SRR20770292/SRR20770292_fastqc.zip, results/qc/post/fastqc/ERR868177/ERR868177_fastqc.zip, results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip, results/qc/post/fastqc/ERR868172/ERR868172_fastqc.zip, results/qc/post/fastqc/ERR868152/ERR868152_fastqc.zip, results/qc/post/fastqc/ERR868171/ERR868171_fastqc.zip, results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip, results/qc/post/fastqc/ERR868150/ERR868150_fastqc.zip, results/qc/post/fastqc/ERR868155/ERR868155_fastqc.zip, results/qc/post/fastqc/SRR20770291/SRR20770291_fastqc.zip, results/qc/post/fastqc/ERR868151/ERR868151_fastqc.zip, results/qc/post/fastqc/SRR20770294/SRR20770294_fastqc.zip, results/qc/post/fastqc/ERR868156/ERR868156_fastqc.zip, results/qc/post/fastqc/SRR20770293/SRR20770293_fastqc.zip, results/qc/post/fastqc/ERR868175/ERR868175_fastqc.zip
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p $(dirname results/qc/post/multiqc/multiqc_report.html)
+
+        multiqc             results/qc/post/fastqc/ERR868150/ERR868150_fastqc.zip results/qc/post/fastqc/ERR868151/ERR868151_fastqc.zip results/qc/post/fastqc/ERR868152/ERR868152_fastqc.zip results/qc/post/fastqc/ERR868153/ERR868153_fastqc.zip results/qc/post/fastqc/ERR868154/ERR868154_fastqc.zip results/qc/post/fastqc/ERR868155/ERR868155_fastqc.zip results/qc/post/fastqc/ERR868156/ERR868156_fastqc.zip results/qc/post/fastqc/ERR868171/ERR868171_fastqc.zip results/qc/post/fastqc/ERR868172/ERR868172_fastqc.zip results/qc/post/fastqc/ERR868173/ERR868173_fastqc.zip results/qc/post/fastqc/ERR868174/ERR868174_fastqc.zip results/qc/post/fastqc/ERR868175/ERR868175_fastqc.zip results/qc/post/fastqc/ERR868176/ERR868176_fastqc.zip results/qc/post/fastqc/ERR868177/ERR868177_fastqc.zip results/qc/post/fastqc/SRR20770287/SRR20770287_fastqc.zip results/qc/post/fastqc/SRR20770291/SRR20770291_fastqc.zip results/qc/post/fastqc/SRR20770292/SRR20770292_fastqc.zip results/qc/post/fastqc/SRR20770293/SRR20770293_fastqc.zip results/qc/post/fastqc/SRR20770294/SRR20770294_fastqc.zip results/qc/post/fastqc/SRR20770295/SRR20770295_fastqc.zip results/qc/post/fastqc/SRR20770296/SRR20770296_fastqc.zip results/qc/post/fastqc/SRR20770297/SRR20770297_fastqc.zip             --outdir $(dirname results/qc/post/multiqc/multiqc_report.html)             --filename multiqc_report.html             --force             > results/qc/post/multiqc/multiqc.log 2>&1
+        
+
+[Thu Sep 17 20:13:33 2026]
+rule chipseq_preprocessing_all:
+    input: results/metadata/chipseq/ena_snapshot_001/analysis_plan/chipseq_processing_runs.tsv, results/metadata/chipseq/ena_snapshot_001/analysis_plan/processing_run_summary.json, results/metadata/reports/validation_download_summary.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv, results/qc/raw/multiqc/multiqc_report.html, results/qc/post/multiqc/multiqc_report.html
+    jobid: 0
+    reason: Input files updated by another job: results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv, results/qc/post/multiqc/multiqc_report.html, results/metadata/reports/validation_download_summary.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv, results/qc/raw/multiqc/multiqc_report.html
+    resources: tmpdir=/tmp
+Shell command: None
+Job stats:
+job                           count
+--------------------------  -------
+download_validation_fastq        22
+fastp_single                     22
+fastqc_raw                       22
+validation_download_report        1
+fastqc_post                      22
+multiqc_raw                       1
+multiqc_post                      1
+summarize_preprocessing_qc        1
+chipseq_preprocessing_all         1
+total                            93
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        chipseq_preprocessing_all, fastp_single, fastqc_post, fastqc_raw, multiqc_post, multiqc_raw, summarize_preprocessing_qc, validation_download_report
+    output files have to be generated:
+        download_validation_fastq, fastp_single, fastqc_post, fastqc_raw, multiqc_post, multiqc_raw, summarize_preprocessing_qc, validation_download_report
+2 jobs have missing provenance/metadata so that it in part cannot be used to trigger re-runs.
+Rules with missing metadata: fastq_manifest validation_fastq_manifest
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.

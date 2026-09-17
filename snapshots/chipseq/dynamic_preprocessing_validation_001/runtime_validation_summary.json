@@ -1,0 +1,26 @@
+{
+  "fastq_files_created": 0,
+  "library_layout": {
+    "SINGLE": 22
+  },
+  "physical_fastq_files": 22,
+  "planned_jobs_total": 93,
+  "planned_rule_jobs": {
+    "chipseq_preprocessing_all": 1,
+    "download_validation_fastq": 22,
+    "fastp_paired": 0,
+    "fastp_single": 22,
+    "fastqc_post": 22,
+    "fastqc_raw": 22,
+    "multiqc_post": 1,
+    "multiqc_raw": 1,
+    "summarize_preprocessing_qc": 1,
+    "validation_download_report": 1
+  },
+  "processing_runs": 22,
+  "production_execution": false,
+  "schema_version": 1,
+  "scope": "chipseq_dynamic_preprocessing_runtime_validation",
+  "slurm_submission": false,
+  "total_fastq_gib": 36.434
+}
