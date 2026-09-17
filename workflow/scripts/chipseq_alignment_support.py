@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage verified pilot FASTQs, construct mapping reference and audit alignments."""
+"""Stage verified ChIP-seq FASTQs, construct mapping reference and audit alignments."""
 import argparse
 import csv
 import gzip
@@ -104,21 +104,135 @@ def prepare(root):
 
 
 def stage():
-    plan = json.loads(Path("config/chipseq_alignment_inputs.json").read_text())
+    plan = json.loads(
+        Path("config/chipseq_alignment_inputs.json").read_text()
+    )
+
+    if plan.get("schema_version") != 1:
+        raise ValueError("Unsupported alignment input-plan schema")
+
+    rows = plan.get("runs")
+
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("Alignment input plan must contain runs")
+
+    source_root = Path(plan["source_root"])
+
     verified = []
-    for row in plan["runs"]:
-        source = Path(plan["source_root"]) / relative_path(row["source_relative"])
-        target = relative_path(row["destination"])
-        target.parent.mkdir(parents=True, exist_ok=True)
-        temporary = target.with_suffix(".part")
-        shutil.copyfile(source, temporary)
-        check(temporary, row["sha256"])
-        if temporary.stat().st_size != row["bytes"]:
-            raise ValueError(f"Unexpected FASTQ size: {source}")
-        temporary.replace(target)
-        verified.append({"run_accession": row["run_accession"], "sha256": row["sha256"]})
-        print(f"[OK] Processed FASTQ copied and verified: {row['run_accession']}")
-    dump("inputs/verified.json", {"runs": verified})
+    seen = set()
+
+    for row in rows:
+        run = row["run_accession"]
+
+        if (
+            not re.fullmatch(r"[DES]RR[0-9]+", run)
+            or run in seen
+        ):
+            raise ValueError(
+                f"Invalid or duplicate alignment run: {run}"
+            )
+
+        seen.add(run)
+
+        if row.get("role") not in {"ip", "input"}:
+            raise ValueError(
+                f"Unsupported alignment role for {run}"
+            )
+
+        if (
+            "library_layout" in row
+            and row["library_layout"] != "SINGLE"
+        ):
+            raise ValueError(
+                f"Automatic alignment supports SINGLE only: {run}"
+            )
+
+        if (
+            "instrument_platform" in row
+            and row["instrument_platform"] != "ILLUMINA"
+        ):
+            raise ValueError(
+                f"Automatic alignment supports ILLUMINA only: {run}"
+            )
+
+        expected_destination = f"inputs/{run}.fastq.gz"
+
+        if row.get("destination") != expected_destination:
+            raise ValueError(
+                f"Unexpected staged destination for {run}: "
+                f"{row.get('destination')}"
+            )
+
+        source = (
+            source_root
+            / relative_path(
+                row["source_relative"]
+            )
+        )
+
+        target = relative_path(
+            row["destination"]
+        )
+
+        if not source.is_file():
+            raise ValueError(
+                f"Missing processed FASTQ: {source}"
+            )
+
+        target.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        temporary = target.with_name(
+            target.name + ".part"
+        )
+
+        shutil.copyfile(
+            source,
+            temporary,
+        )
+
+        check(
+            temporary,
+            row["sha256"],
+        )
+
+        if temporary.stat().st_size != int(
+            row["bytes"]
+        ):
+            raise ValueError(
+                f"Unexpected FASTQ size: {source}"
+            )
+
+        temporary.replace(
+            target
+        )
+
+        verified.append({
+            "run_accession": run,
+            "role": row["role"],
+            "sha256": row["sha256"],
+            "bytes": int(row["bytes"]),
+        })
+
+        print(
+            "[OK] Processed FASTQ copied and verified: "
+            f"{run}"
+        )
+
+    dump(
+        "inputs/verified.json",
+        {
+            "schema_version": 1,
+            "run_count": len(verified),
+            "runs": verified,
+        },
+    )
+
+    print(
+        f"[OK] Verified alignment FASTQ cohort: {len(verified)} runs"
+    )
 
 
 def mapping_reference():
@@ -192,7 +306,7 @@ def scan_sam(lines, mt, threshold):
             continue
         counts["primary_reads"] += 1
         if flag & 1:
-            raise ValueError("Unexpected paired record in SINGLE pilot")
+            raise ValueError("Unexpected paired record in SINGLE alignment input")
         if flag & 4:
             counts["unmapped_reads"] += 1
             continue

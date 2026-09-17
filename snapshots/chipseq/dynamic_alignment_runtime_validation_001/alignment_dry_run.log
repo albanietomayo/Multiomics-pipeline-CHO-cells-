@@ -1,0 +1,1035 @@
+
+SNAKEMAKE
+=========
+  Date: 2026-09-17 20:41:18
+  Workflow ID: 8afb417e-d5e7-43fb-83eb-5936daa1b601
+  Platform: Linux-5.14.0-687.41.1.el9_8.x86_64-x86_64-with-glibc2.34
+  Host: vera1
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /tmp/tmp.g09pekqlk2/runtime/bin/snakemake --snakefile workflow/rules/chipseq_alignment.smk --cores 8 --rerun-incomplete -n -p chipseq_alignment_all
+  Snakefile: /tmp/tmp.g09pekqlk2/project/workflow/rules/chipseq_alignment.smk
+  Base directory: /tmp/tmp.g09pekqlk2/project/workflow/rules
+  Run directory: /tmp/tmp.g09pekqlk2/project
+  Working directory: /tmp/tmp.g09pekqlk2/project
+  Config file(s): ['config/config.yaml']
+  Config MD5: 5520137b2755d8b38f50d163e3d67c0c
+
+Building DAG of jobs...
+Job stats:
+job                          count
+-------------------------  -------
+chipseq_nuclear_reference        1
+chipseq_mapping_reference        1
+chipseq_bowtie2_index            1
+chipseq_fasta_index              1
+chipseq_align_run               22
+chipseq_bam_index               22
+chipseq_alignment_metrics       22
+chipseq_alignment_summary        1
+chipseq_alignment_all            1
+total                           72
+
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_nuclear_reference:
+    input: workflow/scripts/fetch_reference_genome.py, config/config.yaml
+    output: resources/reference/CriGri-PICRH-1.0/genome.fa, resources/reference/CriGri-PICRH-1.0/annotation.gff3, resources/reference/CriGri-PICRH-1.0/annotation.gtf, resources/reference/CriGri-PICRH-1.0/sequence_report.jsonl, resources/reference/CriGri-PICRH-1.0/reference_metadata.tsv, resources/reference/CriGri-PICRH-1.0/SHA256SUMS.txt
+    log: results/chipseq/alignment/logs/nuclear_reference.log
+    jobid: 4
+    reason: Missing output files: resources/reference/CriGri-PICRH-1.0/SHA256SUMS.txt, resources/reference/CriGri-PICRH-1.0/genome.fa, resources/reference/CriGri-PICRH-1.0/reference_metadata.tsv
+    resources: tmpdir=/tmp
+Shell command: python workflow/scripts/fetch_reference_genome.py > results/chipseq/alignment/logs/nuclear_reference.log 2>&1
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_mapping_reference:
+    input: resources/reference/CriGri-PICRH-1.0/genome.fa, resources/reference/CriGri-PICRH-1.0/SHA256SUMS.txt, resources/reference/CriGri-PICRH-1.0/reference_metadata.tsv, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment.json
+    output: resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa, resources/reference/CriGri-PICRH-1.0/chipseq/mitochondrial.fa, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    log: results/chipseq/alignment/logs/mapping_reference.log
+    jobid: 3
+    reason: Missing output files: resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/reference_metadata.tsv, resources/reference/CriGri-PICRH-1.0/genome.fa, resources/reference/CriGri-PICRH-1.0/SHA256SUMS.txt
+    resources: tmpdir=/tmp
+Shell command: python workflow/scripts/chipseq_alignment_support.py reference > results/chipseq/alignment/logs/mapping_reference.log 2>&1
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_fasta_index:
+    input: resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa
+    output: resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa.fai
+    jobid: 71
+    reason: Missing output files: resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa.fai; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa
+    resources: tmpdir=/tmp
+Shell command: samtools faidx resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bowtie2_index:
+    input: resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    output: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l
+    log: results/chipseq/alignment/logs/bowtie2_build.log
+    jobid: 2
+    reason: Missing output files: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: mkdir -p resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index; bowtie2-build --large-index --threads 8 resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt > results/chipseq/alignment/logs/bowtie2_build.log 2>&1
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868175.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868175/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868175/bowtie2.log, results/chipseq/alignment/ERR868175/sort.log
+    jobid: 15
+    reason: Missing output files: results/chipseq/alignment/ERR868175/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868175
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868175
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868175.fastq.gz \
+            --rg-id ERR868175 --rg SM:ERR868175 --rg LB:ERR868175 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868175/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868175/sort_tmp \
+                -o results/chipseq/alignment/ERR868175/raw.sorted.bam - 2> results/chipseq/alignment/ERR868175/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868175/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868154.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868154/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868154/bowtie2.log, results/chipseq/alignment/ERR868154/sort.log
+    jobid: 8
+    reason: Missing output files: results/chipseq/alignment/ERR868154/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868154
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868154
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868154.fastq.gz \
+            --rg-id ERR868154 --rg SM:ERR868154 --rg LB:ERR868154 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868154/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868154/sort_tmp \
+                -o results/chipseq/alignment/ERR868154/raw.sorted.bam - 2> results/chipseq/alignment/ERR868154/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868154/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/SRR20770293.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770293/raw.sorted.bam
+    log: results/chipseq/alignment/SRR20770293/bowtie2.log, results/chipseq/alignment/SRR20770293/sort.log
+    jobid: 21
+    reason: Missing output files: results/chipseq/alignment/SRR20770293/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=SRR20770293
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/SRR20770293
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/SRR20770293.fastq.gz \
+            --rg-id SRR20770293 --rg SM:SRR20770293 --rg LB:SRR20770293 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/SRR20770293/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/SRR20770293/sort_tmp \
+                -o results/chipseq/alignment/SRR20770293/raw.sorted.bam - 2> results/chipseq/alignment/SRR20770293/sort.log
+        samtools quickcheck -v results/chipseq/alignment/SRR20770293/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868172.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868172/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868172/bowtie2.log, results/chipseq/alignment/ERR868172/sort.log
+    jobid: 12
+    reason: Missing output files: results/chipseq/alignment/ERR868172/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868172
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868172
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868172.fastq.gz \
+            --rg-id ERR868172 --rg SM:ERR868172 --rg LB:ERR868172 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868172/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868172/sort_tmp \
+                -o results/chipseq/alignment/ERR868172/raw.sorted.bam - 2> results/chipseq/alignment/ERR868172/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868172/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868152.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868152/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868152/bowtie2.log, results/chipseq/alignment/ERR868152/sort.log
+    jobid: 6
+    reason: Missing output files: results/chipseq/alignment/ERR868152/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868152
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868152
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868152.fastq.gz \
+            --rg-id ERR868152 --rg SM:ERR868152 --rg LB:ERR868152 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868152/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868152/sort_tmp \
+                -o results/chipseq/alignment/ERR868152/raw.sorted.bam - 2> results/chipseq/alignment/ERR868152/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868152/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868176.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868176/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868176/bowtie2.log, results/chipseq/alignment/ERR868176/sort.log
+    jobid: 16
+    reason: Missing output files: results/chipseq/alignment/ERR868176/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868176
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868176
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868176.fastq.gz \
+            --rg-id ERR868176 --rg SM:ERR868176 --rg LB:ERR868176 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868176/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868176/sort_tmp \
+                -o results/chipseq/alignment/ERR868176/raw.sorted.bam - 2> results/chipseq/alignment/ERR868176/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868176/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868151.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868151/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868151/bowtie2.log, results/chipseq/alignment/ERR868151/sort.log
+    jobid: 5
+    reason: Missing output files: results/chipseq/alignment/ERR868151/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868151
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868151
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868151.fastq.gz \
+            --rg-id ERR868151 --rg SM:ERR868151 --rg LB:ERR868151 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868151/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868151/sort_tmp \
+                -o results/chipseq/alignment/ERR868151/raw.sorted.bam - 2> results/chipseq/alignment/ERR868151/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868151/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868155.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868155/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868155/bowtie2.log, results/chipseq/alignment/ERR868155/sort.log
+    jobid: 9
+    reason: Missing output files: results/chipseq/alignment/ERR868155/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868155
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868155
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868155.fastq.gz \
+            --rg-id ERR868155 --rg SM:ERR868155 --rg LB:ERR868155 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868155/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868155/sort_tmp \
+                -o results/chipseq/alignment/ERR868155/raw.sorted.bam - 2> results/chipseq/alignment/ERR868155/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868155/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/SRR20770294.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770294/raw.sorted.bam
+    log: results/chipseq/alignment/SRR20770294/bowtie2.log, results/chipseq/alignment/SRR20770294/sort.log
+    jobid: 22
+    reason: Missing output files: results/chipseq/alignment/SRR20770294/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=SRR20770294
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/SRR20770294
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/SRR20770294.fastq.gz \
+            --rg-id SRR20770294 --rg SM:SRR20770294 --rg LB:SRR20770294 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/SRR20770294/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/SRR20770294/sort_tmp \
+                -o results/chipseq/alignment/SRR20770294/raw.sorted.bam - 2> results/chipseq/alignment/SRR20770294/sort.log
+        samtools quickcheck -v results/chipseq/alignment/SRR20770294/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868173.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868173/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868173/bowtie2.log, results/chipseq/alignment/ERR868173/sort.log
+    jobid: 13
+    reason: Missing output files: results/chipseq/alignment/ERR868173/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868173
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868173
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868173.fastq.gz \
+            --rg-id ERR868173 --rg SM:ERR868173 --rg LB:ERR868173 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868173/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868173/sort_tmp \
+                -o results/chipseq/alignment/ERR868173/raw.sorted.bam - 2> results/chipseq/alignment/ERR868173/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868173/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868150.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868150/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868150/bowtie2.log, results/chipseq/alignment/ERR868150/sort.log
+    jobid: 1
+    reason: Missing output files: results/chipseq/alignment/ERR868150/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868150
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868150
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868150.fastq.gz \
+            --rg-id ERR868150 --rg SM:ERR868150 --rg LB:ERR868150 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868150/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868150/sort_tmp \
+                -o results/chipseq/alignment/ERR868150/raw.sorted.bam - 2> results/chipseq/alignment/ERR868150/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868150/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868177.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868177/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868177/bowtie2.log, results/chipseq/alignment/ERR868177/sort.log
+    jobid: 17
+    reason: Missing output files: results/chipseq/alignment/ERR868177/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868177
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868177
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868177.fastq.gz \
+            --rg-id ERR868177 --rg SM:ERR868177 --rg LB:ERR868177 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868177/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868177/sort_tmp \
+                -o results/chipseq/alignment/ERR868177/raw.sorted.bam - 2> results/chipseq/alignment/ERR868177/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868177/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868156.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868156/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868156/bowtie2.log, results/chipseq/alignment/ERR868156/sort.log
+    jobid: 10
+    reason: Missing output files: results/chipseq/alignment/ERR868156/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868156
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868156
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868156.fastq.gz \
+            --rg-id ERR868156 --rg SM:ERR868156 --rg LB:ERR868156 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868156/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868156/sort_tmp \
+                -o results/chipseq/alignment/ERR868156/raw.sorted.bam - 2> results/chipseq/alignment/ERR868156/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868156/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/SRR20770291.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770291/raw.sorted.bam
+    log: results/chipseq/alignment/SRR20770291/bowtie2.log, results/chipseq/alignment/SRR20770291/sort.log
+    jobid: 19
+    reason: Missing output files: results/chipseq/alignment/SRR20770291/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=SRR20770291
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/SRR20770291
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/SRR20770291.fastq.gz \
+            --rg-id SRR20770291 --rg SM:SRR20770291 --rg LB:SRR20770291 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/SRR20770291/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/SRR20770291/sort_tmp \
+                -o results/chipseq/alignment/SRR20770291/raw.sorted.bam - 2> results/chipseq/alignment/SRR20770291/sort.log
+        samtools quickcheck -v results/chipseq/alignment/SRR20770291/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/SRR20770295.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770295/raw.sorted.bam
+    log: results/chipseq/alignment/SRR20770295/bowtie2.log, results/chipseq/alignment/SRR20770295/sort.log
+    jobid: 23
+    reason: Missing output files: results/chipseq/alignment/SRR20770295/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=SRR20770295
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/SRR20770295
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/SRR20770295.fastq.gz \
+            --rg-id SRR20770295 --rg SM:SRR20770295 --rg LB:SRR20770295 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/SRR20770295/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/SRR20770295/sort_tmp \
+                -o results/chipseq/alignment/SRR20770295/raw.sorted.bam - 2> results/chipseq/alignment/SRR20770295/sort.log
+        samtools quickcheck -v results/chipseq/alignment/SRR20770295/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868174.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868174/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868174/bowtie2.log, results/chipseq/alignment/ERR868174/sort.log
+    jobid: 14
+    reason: Missing output files: results/chipseq/alignment/ERR868174/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868174
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868174
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868174.fastq.gz \
+            --rg-id ERR868174 --rg SM:ERR868174 --rg LB:ERR868174 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868174/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868174/sort_tmp \
+                -o results/chipseq/alignment/ERR868174/raw.sorted.bam - 2> results/chipseq/alignment/ERR868174/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868174/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/SRR20770297.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770297/raw.sorted.bam
+    log: results/chipseq/alignment/SRR20770297/bowtie2.log, results/chipseq/alignment/SRR20770297/sort.log
+    jobid: 25
+    reason: Missing output files: results/chipseq/alignment/SRR20770297/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=SRR20770297
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/SRR20770297
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/SRR20770297.fastq.gz \
+            --rg-id SRR20770297 --rg SM:SRR20770297 --rg LB:SRR20770297 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/SRR20770297/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/SRR20770297/sort_tmp \
+                -o results/chipseq/alignment/SRR20770297/raw.sorted.bam - 2> results/chipseq/alignment/SRR20770297/sort.log
+        samtools quickcheck -v results/chipseq/alignment/SRR20770297/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/SRR20770287.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770287/raw.sorted.bam
+    log: results/chipseq/alignment/SRR20770287/bowtie2.log, results/chipseq/alignment/SRR20770287/sort.log
+    jobid: 18
+    reason: Missing output files: results/chipseq/alignment/SRR20770287/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=SRR20770287
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/SRR20770287
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/SRR20770287.fastq.gz \
+            --rg-id SRR20770287 --rg SM:SRR20770287 --rg LB:SRR20770287 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/SRR20770287/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/SRR20770287/sort_tmp \
+                -o results/chipseq/alignment/SRR20770287/raw.sorted.bam - 2> results/chipseq/alignment/SRR20770287/sort.log
+        samtools quickcheck -v results/chipseq/alignment/SRR20770287/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868153.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868153/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868153/bowtie2.log, results/chipseq/alignment/ERR868153/sort.log
+    jobid: 7
+    reason: Missing output files: results/chipseq/alignment/ERR868153/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868153
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868153
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868153.fastq.gz \
+            --rg-id ERR868153 --rg SM:ERR868153 --rg LB:ERR868153 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868153/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868153/sort_tmp \
+                -o results/chipseq/alignment/ERR868153/raw.sorted.bam - 2> results/chipseq/alignment/ERR868153/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868153/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/ERR868171.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868171/raw.sorted.bam
+    log: results/chipseq/alignment/ERR868171/bowtie2.log, results/chipseq/alignment/ERR868171/sort.log
+    jobid: 11
+    reason: Missing output files: results/chipseq/alignment/ERR868171/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=ERR868171
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/ERR868171
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/ERR868171.fastq.gz \
+            --rg-id ERR868171 --rg SM:ERR868171 --rg LB:ERR868171 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/ERR868171/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/ERR868171/sort_tmp \
+                -o results/chipseq/alignment/ERR868171/raw.sorted.bam - 2> results/chipseq/alignment/ERR868171/sort.log
+        samtools quickcheck -v results/chipseq/alignment/ERR868171/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/SRR20770292.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770292/raw.sorted.bam
+    log: results/chipseq/alignment/SRR20770292/bowtie2.log, results/chipseq/alignment/SRR20770292/sort.log
+    jobid: 20
+    reason: Missing output files: results/chipseq/alignment/SRR20770292/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=SRR20770292
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/SRR20770292
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/SRR20770292.fastq.gz \
+            --rg-id SRR20770292 --rg SM:SRR20770292 --rg LB:SRR20770292 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/SRR20770292/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/SRR20770292/sort_tmp \
+                -o results/chipseq/alignment/SRR20770292/raw.sorted.bam - 2> results/chipseq/alignment/SRR20770292/sort.log
+        samtools quickcheck -v results/chipseq/alignment/SRR20770292/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_align_run:
+    input: inputs/SRR20770296.fastq.gz, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, config/chipseq_alignment_inputs.json, inputs/verified.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770296/raw.sorted.bam
+    log: results/chipseq/alignment/SRR20770296/bowtie2.log, results/chipseq/alignment/SRR20770296/sort.log
+    jobid: 24
+    reason: Missing output files: results/chipseq/alignment/SRR20770296/raw.sorted.bam; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.4.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.3.bt2l, resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt.1.bt2l
+    wildcards: run=SRR20770296
+    threads: 8
+    resources: tmpdir=/tmp
+Shell command: 
+        mkdir -p results/chipseq/alignment/SRR20770296
+        bowtie2 --local --very-sensitive-local --seed 0 \
+            -p 6 -x resources/reference/CriGri-PICRH-1.0/chipseq/bowtie2_index/genome_plus_mt -U inputs/SRR20770296.fastq.gz \
+            --rg-id SRR20770296 --rg SM:SRR20770296 --rg LB:SRR20770296 --rg PL:ILLUMINA \
+            2> results/chipseq/alignment/SRR20770296/bowtie2.log | \
+            samtools sort -@ 1 -m 768M -T results/chipseq/alignment/SRR20770296/sort_tmp \
+                -o results/chipseq/alignment/SRR20770296/raw.sorted.bam - 2> results/chipseq/alignment/SRR20770296/sort.log
+        samtools quickcheck -v results/chipseq/alignment/SRR20770296/raw.sorted.bam
+        
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868150/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868150/raw.sorted.bam.csi
+    jobid: 26
+    reason: Missing output files: results/chipseq/alignment/ERR868150/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868150/raw.sorted.bam
+    wildcards: run=ERR868150
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868150/raw.sorted.bam results/chipseq/alignment/ERR868150/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868175/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868175/raw.sorted.bam.csi
+    jobid: 37
+    reason: Missing output files: results/chipseq/alignment/ERR868175/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868175/raw.sorted.bam
+    wildcards: run=ERR868175
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868175/raw.sorted.bam results/chipseq/alignment/ERR868175/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868154/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868154/raw.sorted.bam.csi
+    jobid: 30
+    reason: Missing output files: results/chipseq/alignment/ERR868154/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868154/raw.sorted.bam
+    wildcards: run=ERR868154
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868154/raw.sorted.bam results/chipseq/alignment/ERR868154/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/SRR20770291/raw.sorted.bam
+    output: results/chipseq/alignment/SRR20770291/raw.sorted.bam.csi
+    jobid: 41
+    reason: Missing output files: results/chipseq/alignment/SRR20770291/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/SRR20770291/raw.sorted.bam
+    wildcards: run=SRR20770291
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/SRR20770291/raw.sorted.bam results/chipseq/alignment/SRR20770291/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/SRR20770293/raw.sorted.bam
+    output: results/chipseq/alignment/SRR20770293/raw.sorted.bam.csi
+    jobid: 43
+    reason: Missing output files: results/chipseq/alignment/SRR20770293/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/SRR20770293/raw.sorted.bam
+    wildcards: run=SRR20770293
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/SRR20770293/raw.sorted.bam results/chipseq/alignment/SRR20770293/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/SRR20770296/raw.sorted.bam
+    output: results/chipseq/alignment/SRR20770296/raw.sorted.bam.csi
+    jobid: 46
+    reason: Missing output files: results/chipseq/alignment/SRR20770296/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/SRR20770296/raw.sorted.bam
+    wildcards: run=SRR20770296
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/SRR20770296/raw.sorted.bam results/chipseq/alignment/SRR20770296/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868172/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868172/raw.sorted.bam.csi
+    jobid: 34
+    reason: Missing output files: results/chipseq/alignment/ERR868172/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868172/raw.sorted.bam
+    wildcards: run=ERR868172
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868172/raw.sorted.bam results/chipseq/alignment/ERR868172/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868151/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868151/raw.sorted.bam.csi
+    jobid: 27
+    reason: Missing output files: results/chipseq/alignment/ERR868151/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868151/raw.sorted.bam
+    wildcards: run=ERR868151
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868151/raw.sorted.bam results/chipseq/alignment/ERR868151/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868176/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868176/raw.sorted.bam.csi
+    jobid: 38
+    reason: Missing output files: results/chipseq/alignment/ERR868176/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868176/raw.sorted.bam
+    wildcards: run=ERR868176
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868176/raw.sorted.bam results/chipseq/alignment/ERR868176/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868155/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868155/raw.sorted.bam.csi
+    jobid: 31
+    reason: Missing output files: results/chipseq/alignment/ERR868155/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868155/raw.sorted.bam
+    wildcards: run=ERR868155
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868155/raw.sorted.bam results/chipseq/alignment/ERR868155/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/SRR20770292/raw.sorted.bam
+    output: results/chipseq/alignment/SRR20770292/raw.sorted.bam.csi
+    jobid: 42
+    reason: Missing output files: results/chipseq/alignment/SRR20770292/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/SRR20770292/raw.sorted.bam
+    wildcards: run=SRR20770292
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/SRR20770292/raw.sorted.bam results/chipseq/alignment/SRR20770292/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/SRR20770294/raw.sorted.bam
+    output: results/chipseq/alignment/SRR20770294/raw.sorted.bam.csi
+    jobid: 44
+    reason: Missing output files: results/chipseq/alignment/SRR20770294/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/SRR20770294/raw.sorted.bam
+    wildcards: run=SRR20770294
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/SRR20770294/raw.sorted.bam results/chipseq/alignment/SRR20770294/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/SRR20770297/raw.sorted.bam
+    output: results/chipseq/alignment/SRR20770297/raw.sorted.bam.csi
+    jobid: 47
+    reason: Missing output files: results/chipseq/alignment/SRR20770297/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/SRR20770297/raw.sorted.bam
+    wildcards: run=SRR20770297
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/SRR20770297/raw.sorted.bam results/chipseq/alignment/SRR20770297/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868173/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868173/raw.sorted.bam.csi
+    jobid: 35
+    reason: Missing output files: results/chipseq/alignment/ERR868173/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868173/raw.sorted.bam
+    wildcards: run=ERR868173
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868173/raw.sorted.bam results/chipseq/alignment/ERR868173/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868152/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868152/raw.sorted.bam.csi
+    jobid: 28
+    reason: Missing output files: results/chipseq/alignment/ERR868152/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868152/raw.sorted.bam
+    wildcards: run=ERR868152
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868152/raw.sorted.bam results/chipseq/alignment/ERR868152/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868177/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868177/raw.sorted.bam.csi
+    jobid: 39
+    reason: Missing output files: results/chipseq/alignment/ERR868177/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868177/raw.sorted.bam
+    wildcards: run=ERR868177
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868177/raw.sorted.bam results/chipseq/alignment/ERR868177/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868156/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868156/raw.sorted.bam.csi
+    jobid: 32
+    reason: Missing output files: results/chipseq/alignment/ERR868156/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868156/raw.sorted.bam
+    wildcards: run=ERR868156
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868156/raw.sorted.bam results/chipseq/alignment/ERR868156/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/SRR20770295/raw.sorted.bam
+    output: results/chipseq/alignment/SRR20770295/raw.sorted.bam.csi
+    jobid: 45
+    reason: Missing output files: results/chipseq/alignment/SRR20770295/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/SRR20770295/raw.sorted.bam
+    wildcards: run=SRR20770295
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/SRR20770295/raw.sorted.bam results/chipseq/alignment/SRR20770295/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868174/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868174/raw.sorted.bam.csi
+    jobid: 36
+    reason: Missing output files: results/chipseq/alignment/ERR868174/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868174/raw.sorted.bam
+    wildcards: run=ERR868174
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868174/raw.sorted.bam results/chipseq/alignment/ERR868174/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868153/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868153/raw.sorted.bam.csi
+    jobid: 29
+    reason: Missing output files: results/chipseq/alignment/ERR868153/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868153/raw.sorted.bam
+    wildcards: run=ERR868153
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868153/raw.sorted.bam results/chipseq/alignment/ERR868153/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/SRR20770287/raw.sorted.bam
+    output: results/chipseq/alignment/SRR20770287/raw.sorted.bam.csi
+    jobid: 40
+    reason: Missing output files: results/chipseq/alignment/SRR20770287/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/SRR20770287/raw.sorted.bam
+    wildcards: run=SRR20770287
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/SRR20770287/raw.sorted.bam results/chipseq/alignment/SRR20770287/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_bam_index:
+    input: results/chipseq/alignment/ERR868171/raw.sorted.bam
+    output: results/chipseq/alignment/ERR868171/raw.sorted.bam.csi
+    jobid: 33
+    reason: Missing output files: results/chipseq/alignment/ERR868171/raw.sorted.bam.csi; Input files updated by another job: results/chipseq/alignment/ERR868171/raw.sorted.bam
+    wildcards: run=ERR868171
+    resources: tmpdir=/tmp
+Shell command: samtools index -c results/chipseq/alignment/ERR868171/raw.sorted.bam results/chipseq/alignment/ERR868171/raw.sorted.bam.csi
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868173/raw.sorted.bam, results/chipseq/alignment/ERR868173/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868173/flagstat.txt, results/chipseq/alignment/ERR868173/idxstats.tsv, results/chipseq/alignment/ERR868173/samtools_stats.txt, results/chipseq/alignment/ERR868173/alignment_qc.json
+    log: results/chipseq/alignment/ERR868173/qc.log
+    jobid: 57
+    reason: Missing output files: results/chipseq/alignment/ERR868173/flagstat.txt, results/chipseq/alignment/ERR868173/alignment_qc.json, results/chipseq/alignment/ERR868173/samtools_stats.txt, results/chipseq/alignment/ERR868173/idxstats.tsv; Input files updated by another job: results/chipseq/alignment/ERR868173/raw.sorted.bam, results/chipseq/alignment/ERR868173/raw.sorted.bam.csi, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868173
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868173/raw.sorted.bam > results/chipseq/alignment/ERR868173/flagstat.txt 2> results/chipseq/alignment/ERR868173/qc.log; samtools idxstats results/chipseq/alignment/ERR868173/raw.sorted.bam > results/chipseq/alignment/ERR868173/idxstats.tsv 2>> results/chipseq/alignment/ERR868173/qc.log; samtools stats results/chipseq/alignment/ERR868173/raw.sorted.bam > results/chipseq/alignment/ERR868173/samtools_stats.txt 2>> results/chipseq/alignment/ERR868173/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868173 --bam results/chipseq/alignment/ERR868173/raw.sorted.bam --output results/chipseq/alignment/ERR868173/alignment_qc.json 2>> results/chipseq/alignment/ERR868173/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868150/raw.sorted.bam, results/chipseq/alignment/ERR868150/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868150/flagstat.txt, results/chipseq/alignment/ERR868150/idxstats.tsv, results/chipseq/alignment/ERR868150/samtools_stats.txt, results/chipseq/alignment/ERR868150/alignment_qc.json
+    log: results/chipseq/alignment/ERR868150/qc.log
+    jobid: 48
+    reason: Missing output files: results/chipseq/alignment/ERR868150/alignment_qc.json, results/chipseq/alignment/ERR868150/flagstat.txt, results/chipseq/alignment/ERR868150/idxstats.tsv, results/chipseq/alignment/ERR868150/samtools_stats.txt; Input files updated by another job: results/chipseq/alignment/ERR868150/raw.sorted.bam, results/chipseq/alignment/ERR868150/raw.sorted.bam.csi, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868150
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868150/raw.sorted.bam > results/chipseq/alignment/ERR868150/flagstat.txt 2> results/chipseq/alignment/ERR868150/qc.log; samtools idxstats results/chipseq/alignment/ERR868150/raw.sorted.bam > results/chipseq/alignment/ERR868150/idxstats.tsv 2>> results/chipseq/alignment/ERR868150/qc.log; samtools stats results/chipseq/alignment/ERR868150/raw.sorted.bam > results/chipseq/alignment/ERR868150/samtools_stats.txt 2>> results/chipseq/alignment/ERR868150/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868150 --bam results/chipseq/alignment/ERR868150/raw.sorted.bam --output results/chipseq/alignment/ERR868150/alignment_qc.json 2>> results/chipseq/alignment/ERR868150/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/SRR20770292/raw.sorted.bam, results/chipseq/alignment/SRR20770292/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770292/flagstat.txt, results/chipseq/alignment/SRR20770292/idxstats.tsv, results/chipseq/alignment/SRR20770292/samtools_stats.txt, results/chipseq/alignment/SRR20770292/alignment_qc.json
+    log: results/chipseq/alignment/SRR20770292/qc.log
+    jobid: 64
+    reason: Missing output files: results/chipseq/alignment/SRR20770292/samtools_stats.txt, results/chipseq/alignment/SRR20770292/alignment_qc.json, results/chipseq/alignment/SRR20770292/idxstats.tsv, results/chipseq/alignment/SRR20770292/flagstat.txt; Input files updated by another job: results/chipseq/alignment/SRR20770292/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770292/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=SRR20770292
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/SRR20770292/raw.sorted.bam > results/chipseq/alignment/SRR20770292/flagstat.txt 2> results/chipseq/alignment/SRR20770292/qc.log; samtools idxstats results/chipseq/alignment/SRR20770292/raw.sorted.bam > results/chipseq/alignment/SRR20770292/idxstats.tsv 2>> results/chipseq/alignment/SRR20770292/qc.log; samtools stats results/chipseq/alignment/SRR20770292/raw.sorted.bam > results/chipseq/alignment/SRR20770292/samtools_stats.txt 2>> results/chipseq/alignment/SRR20770292/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run SRR20770292 --bam results/chipseq/alignment/SRR20770292/raw.sorted.bam --output results/chipseq/alignment/SRR20770292/alignment_qc.json 2>> results/chipseq/alignment/SRR20770292/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/SRR20770293/raw.sorted.bam, results/chipseq/alignment/SRR20770293/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770293/flagstat.txt, results/chipseq/alignment/SRR20770293/idxstats.tsv, results/chipseq/alignment/SRR20770293/samtools_stats.txt, results/chipseq/alignment/SRR20770293/alignment_qc.json
+    log: results/chipseq/alignment/SRR20770293/qc.log
+    jobid: 65
+    reason: Missing output files: results/chipseq/alignment/SRR20770293/samtools_stats.txt, results/chipseq/alignment/SRR20770293/alignment_qc.json, results/chipseq/alignment/SRR20770293/flagstat.txt, results/chipseq/alignment/SRR20770293/idxstats.tsv; Input files updated by another job: results/chipseq/alignment/SRR20770293/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770293/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=SRR20770293
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/SRR20770293/raw.sorted.bam > results/chipseq/alignment/SRR20770293/flagstat.txt 2> results/chipseq/alignment/SRR20770293/qc.log; samtools idxstats results/chipseq/alignment/SRR20770293/raw.sorted.bam > results/chipseq/alignment/SRR20770293/idxstats.tsv 2>> results/chipseq/alignment/SRR20770293/qc.log; samtools stats results/chipseq/alignment/SRR20770293/raw.sorted.bam > results/chipseq/alignment/SRR20770293/samtools_stats.txt 2>> results/chipseq/alignment/SRR20770293/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run SRR20770293 --bam results/chipseq/alignment/SRR20770293/raw.sorted.bam --output results/chipseq/alignment/SRR20770293/alignment_qc.json 2>> results/chipseq/alignment/SRR20770293/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868152/raw.sorted.bam, results/chipseq/alignment/ERR868152/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868152/flagstat.txt, results/chipseq/alignment/ERR868152/idxstats.tsv, results/chipseq/alignment/ERR868152/samtools_stats.txt, results/chipseq/alignment/ERR868152/alignment_qc.json
+    log: results/chipseq/alignment/ERR868152/qc.log
+    jobid: 50
+    reason: Missing output files: results/chipseq/alignment/ERR868152/samtools_stats.txt, results/chipseq/alignment/ERR868152/alignment_qc.json, results/chipseq/alignment/ERR868152/flagstat.txt, results/chipseq/alignment/ERR868152/idxstats.tsv; Input files updated by another job: results/chipseq/alignment/ERR868152/raw.sorted.bam.csi, results/chipseq/alignment/ERR868152/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868152
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868152/raw.sorted.bam > results/chipseq/alignment/ERR868152/flagstat.txt 2> results/chipseq/alignment/ERR868152/qc.log; samtools idxstats results/chipseq/alignment/ERR868152/raw.sorted.bam > results/chipseq/alignment/ERR868152/idxstats.tsv 2>> results/chipseq/alignment/ERR868152/qc.log; samtools stats results/chipseq/alignment/ERR868152/raw.sorted.bam > results/chipseq/alignment/ERR868152/samtools_stats.txt 2>> results/chipseq/alignment/ERR868152/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868152 --bam results/chipseq/alignment/ERR868152/raw.sorted.bam --output results/chipseq/alignment/ERR868152/alignment_qc.json 2>> results/chipseq/alignment/ERR868152/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868177/raw.sorted.bam, results/chipseq/alignment/ERR868177/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868177/flagstat.txt, results/chipseq/alignment/ERR868177/idxstats.tsv, results/chipseq/alignment/ERR868177/samtools_stats.txt, results/chipseq/alignment/ERR868177/alignment_qc.json
+    log: results/chipseq/alignment/ERR868177/qc.log
+    jobid: 61
+    reason: Missing output files: results/chipseq/alignment/ERR868177/samtools_stats.txt, results/chipseq/alignment/ERR868177/flagstat.txt, results/chipseq/alignment/ERR868177/idxstats.tsv, results/chipseq/alignment/ERR868177/alignment_qc.json; Input files updated by another job: results/chipseq/alignment/ERR868177/raw.sorted.bam, results/chipseq/alignment/ERR868177/raw.sorted.bam.csi, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868177
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868177/raw.sorted.bam > results/chipseq/alignment/ERR868177/flagstat.txt 2> results/chipseq/alignment/ERR868177/qc.log; samtools idxstats results/chipseq/alignment/ERR868177/raw.sorted.bam > results/chipseq/alignment/ERR868177/idxstats.tsv 2>> results/chipseq/alignment/ERR868177/qc.log; samtools stats results/chipseq/alignment/ERR868177/raw.sorted.bam > results/chipseq/alignment/ERR868177/samtools_stats.txt 2>> results/chipseq/alignment/ERR868177/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868177 --bam results/chipseq/alignment/ERR868177/raw.sorted.bam --output results/chipseq/alignment/ERR868177/alignment_qc.json 2>> results/chipseq/alignment/ERR868177/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/SRR20770297/raw.sorted.bam, results/chipseq/alignment/SRR20770297/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770297/flagstat.txt, results/chipseq/alignment/SRR20770297/idxstats.tsv, results/chipseq/alignment/SRR20770297/samtools_stats.txt, results/chipseq/alignment/SRR20770297/alignment_qc.json
+    log: results/chipseq/alignment/SRR20770297/qc.log
+    jobid: 69
+    reason: Missing output files: results/chipseq/alignment/SRR20770297/flagstat.txt, results/chipseq/alignment/SRR20770297/alignment_qc.json, results/chipseq/alignment/SRR20770297/idxstats.tsv, results/chipseq/alignment/SRR20770297/samtools_stats.txt; Input files updated by another job: results/chipseq/alignment/SRR20770297/raw.sorted.bam.csi, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, results/chipseq/alignment/SRR20770297/raw.sorted.bam
+    wildcards: run=SRR20770297
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/SRR20770297/raw.sorted.bam > results/chipseq/alignment/SRR20770297/flagstat.txt 2> results/chipseq/alignment/SRR20770297/qc.log; samtools idxstats results/chipseq/alignment/SRR20770297/raw.sorted.bam > results/chipseq/alignment/SRR20770297/idxstats.tsv 2>> results/chipseq/alignment/SRR20770297/qc.log; samtools stats results/chipseq/alignment/SRR20770297/raw.sorted.bam > results/chipseq/alignment/SRR20770297/samtools_stats.txt 2>> results/chipseq/alignment/SRR20770297/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run SRR20770297 --bam results/chipseq/alignment/SRR20770297/raw.sorted.bam --output results/chipseq/alignment/SRR20770297/alignment_qc.json 2>> results/chipseq/alignment/SRR20770297/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868156/raw.sorted.bam, results/chipseq/alignment/ERR868156/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868156/flagstat.txt, results/chipseq/alignment/ERR868156/idxstats.tsv, results/chipseq/alignment/ERR868156/samtools_stats.txt, results/chipseq/alignment/ERR868156/alignment_qc.json
+    log: results/chipseq/alignment/ERR868156/qc.log
+    jobid: 54
+    reason: Missing output files: results/chipseq/alignment/ERR868156/idxstats.tsv, results/chipseq/alignment/ERR868156/flagstat.txt, results/chipseq/alignment/ERR868156/samtools_stats.txt, results/chipseq/alignment/ERR868156/alignment_qc.json; Input files updated by another job: results/chipseq/alignment/ERR868156/raw.sorted.bam.csi, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, results/chipseq/alignment/ERR868156/raw.sorted.bam
+    wildcards: run=ERR868156
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868156/raw.sorted.bam > results/chipseq/alignment/ERR868156/flagstat.txt 2> results/chipseq/alignment/ERR868156/qc.log; samtools idxstats results/chipseq/alignment/ERR868156/raw.sorted.bam > results/chipseq/alignment/ERR868156/idxstats.tsv 2>> results/chipseq/alignment/ERR868156/qc.log; samtools stats results/chipseq/alignment/ERR868156/raw.sorted.bam > results/chipseq/alignment/ERR868156/samtools_stats.txt 2>> results/chipseq/alignment/ERR868156/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868156 --bam results/chipseq/alignment/ERR868156/raw.sorted.bam --output results/chipseq/alignment/ERR868156/alignment_qc.json 2>> results/chipseq/alignment/ERR868156/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868174/raw.sorted.bam, results/chipseq/alignment/ERR868174/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868174/flagstat.txt, results/chipseq/alignment/ERR868174/idxstats.tsv, results/chipseq/alignment/ERR868174/samtools_stats.txt, results/chipseq/alignment/ERR868174/alignment_qc.json
+    log: results/chipseq/alignment/ERR868174/qc.log
+    jobid: 58
+    reason: Missing output files: results/chipseq/alignment/ERR868174/flagstat.txt, results/chipseq/alignment/ERR868174/samtools_stats.txt, results/chipseq/alignment/ERR868174/idxstats.tsv, results/chipseq/alignment/ERR868174/alignment_qc.json; Input files updated by another job: results/chipseq/alignment/ERR868174/raw.sorted.bam, results/chipseq/alignment/ERR868174/raw.sorted.bam.csi, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868174
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868174/raw.sorted.bam > results/chipseq/alignment/ERR868174/flagstat.txt 2> results/chipseq/alignment/ERR868174/qc.log; samtools idxstats results/chipseq/alignment/ERR868174/raw.sorted.bam > results/chipseq/alignment/ERR868174/idxstats.tsv 2>> results/chipseq/alignment/ERR868174/qc.log; samtools stats results/chipseq/alignment/ERR868174/raw.sorted.bam > results/chipseq/alignment/ERR868174/samtools_stats.txt 2>> results/chipseq/alignment/ERR868174/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868174 --bam results/chipseq/alignment/ERR868174/raw.sorted.bam --output results/chipseq/alignment/ERR868174/alignment_qc.json 2>> results/chipseq/alignment/ERR868174/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868151/raw.sorted.bam, results/chipseq/alignment/ERR868151/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868151/flagstat.txt, results/chipseq/alignment/ERR868151/idxstats.tsv, results/chipseq/alignment/ERR868151/samtools_stats.txt, results/chipseq/alignment/ERR868151/alignment_qc.json
+    log: results/chipseq/alignment/ERR868151/qc.log
+    jobid: 49
+    reason: Missing output files: results/chipseq/alignment/ERR868151/idxstats.tsv, results/chipseq/alignment/ERR868151/samtools_stats.txt, results/chipseq/alignment/ERR868151/flagstat.txt, results/chipseq/alignment/ERR868151/alignment_qc.json; Input files updated by another job: results/chipseq/alignment/ERR868151/raw.sorted.bam.csi, results/chipseq/alignment/ERR868151/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868151
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868151/raw.sorted.bam > results/chipseq/alignment/ERR868151/flagstat.txt 2> results/chipseq/alignment/ERR868151/qc.log; samtools idxstats results/chipseq/alignment/ERR868151/raw.sorted.bam > results/chipseq/alignment/ERR868151/idxstats.tsv 2>> results/chipseq/alignment/ERR868151/qc.log; samtools stats results/chipseq/alignment/ERR868151/raw.sorted.bam > results/chipseq/alignment/ERR868151/samtools_stats.txt 2>> results/chipseq/alignment/ERR868151/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868151 --bam results/chipseq/alignment/ERR868151/raw.sorted.bam --output results/chipseq/alignment/ERR868151/alignment_qc.json 2>> results/chipseq/alignment/ERR868151/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/SRR20770294/raw.sorted.bam, results/chipseq/alignment/SRR20770294/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770294/flagstat.txt, results/chipseq/alignment/SRR20770294/idxstats.tsv, results/chipseq/alignment/SRR20770294/samtools_stats.txt, results/chipseq/alignment/SRR20770294/alignment_qc.json
+    log: results/chipseq/alignment/SRR20770294/qc.log
+    jobid: 66
+    reason: Missing output files: results/chipseq/alignment/SRR20770294/samtools_stats.txt, results/chipseq/alignment/SRR20770294/alignment_qc.json, results/chipseq/alignment/SRR20770294/idxstats.tsv, results/chipseq/alignment/SRR20770294/flagstat.txt; Input files updated by another job: results/chipseq/alignment/SRR20770294/raw.sorted.bam.csi, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, results/chipseq/alignment/SRR20770294/raw.sorted.bam
+    wildcards: run=SRR20770294
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/SRR20770294/raw.sorted.bam > results/chipseq/alignment/SRR20770294/flagstat.txt 2> results/chipseq/alignment/SRR20770294/qc.log; samtools idxstats results/chipseq/alignment/SRR20770294/raw.sorted.bam > results/chipseq/alignment/SRR20770294/idxstats.tsv 2>> results/chipseq/alignment/SRR20770294/qc.log; samtools stats results/chipseq/alignment/SRR20770294/raw.sorted.bam > results/chipseq/alignment/SRR20770294/samtools_stats.txt 2>> results/chipseq/alignment/SRR20770294/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run SRR20770294 --bam results/chipseq/alignment/SRR20770294/raw.sorted.bam --output results/chipseq/alignment/SRR20770294/alignment_qc.json 2>> results/chipseq/alignment/SRR20770294/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868153/raw.sorted.bam, results/chipseq/alignment/ERR868153/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868153/flagstat.txt, results/chipseq/alignment/ERR868153/idxstats.tsv, results/chipseq/alignment/ERR868153/samtools_stats.txt, results/chipseq/alignment/ERR868153/alignment_qc.json
+    log: results/chipseq/alignment/ERR868153/qc.log
+    jobid: 51
+    reason: Missing output files: results/chipseq/alignment/ERR868153/flagstat.txt, results/chipseq/alignment/ERR868153/idxstats.tsv, results/chipseq/alignment/ERR868153/samtools_stats.txt, results/chipseq/alignment/ERR868153/alignment_qc.json; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, results/chipseq/alignment/ERR868153/raw.sorted.bam.csi, results/chipseq/alignment/ERR868153/raw.sorted.bam
+    wildcards: run=ERR868153
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868153/raw.sorted.bam > results/chipseq/alignment/ERR868153/flagstat.txt 2> results/chipseq/alignment/ERR868153/qc.log; samtools idxstats results/chipseq/alignment/ERR868153/raw.sorted.bam > results/chipseq/alignment/ERR868153/idxstats.tsv 2>> results/chipseq/alignment/ERR868153/qc.log; samtools stats results/chipseq/alignment/ERR868153/raw.sorted.bam > results/chipseq/alignment/ERR868153/samtools_stats.txt 2>> results/chipseq/alignment/ERR868153/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868153 --bam results/chipseq/alignment/ERR868153/raw.sorted.bam --output results/chipseq/alignment/ERR868153/alignment_qc.json 2>> results/chipseq/alignment/ERR868153/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/SRR20770287/raw.sorted.bam, results/chipseq/alignment/SRR20770287/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770287/flagstat.txt, results/chipseq/alignment/SRR20770287/idxstats.tsv, results/chipseq/alignment/SRR20770287/samtools_stats.txt, results/chipseq/alignment/SRR20770287/alignment_qc.json
+    log: results/chipseq/alignment/SRR20770287/qc.log
+    jobid: 62
+    reason: Missing output files: results/chipseq/alignment/SRR20770287/idxstats.tsv, results/chipseq/alignment/SRR20770287/samtools_stats.txt, results/chipseq/alignment/SRR20770287/flagstat.txt, results/chipseq/alignment/SRR20770287/alignment_qc.json; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, results/chipseq/alignment/SRR20770287/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770287/raw.sorted.bam
+    wildcards: run=SRR20770287
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/SRR20770287/raw.sorted.bam > results/chipseq/alignment/SRR20770287/flagstat.txt 2> results/chipseq/alignment/SRR20770287/qc.log; samtools idxstats results/chipseq/alignment/SRR20770287/raw.sorted.bam > results/chipseq/alignment/SRR20770287/idxstats.tsv 2>> results/chipseq/alignment/SRR20770287/qc.log; samtools stats results/chipseq/alignment/SRR20770287/raw.sorted.bam > results/chipseq/alignment/SRR20770287/samtools_stats.txt 2>> results/chipseq/alignment/SRR20770287/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run SRR20770287 --bam results/chipseq/alignment/SRR20770287/raw.sorted.bam --output results/chipseq/alignment/SRR20770287/alignment_qc.json 2>> results/chipseq/alignment/SRR20770287/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868171/raw.sorted.bam, results/chipseq/alignment/ERR868171/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868171/flagstat.txt, results/chipseq/alignment/ERR868171/idxstats.tsv, results/chipseq/alignment/ERR868171/samtools_stats.txt, results/chipseq/alignment/ERR868171/alignment_qc.json
+    log: results/chipseq/alignment/ERR868171/qc.log
+    jobid: 55
+    reason: Missing output files: results/chipseq/alignment/ERR868171/idxstats.tsv, results/chipseq/alignment/ERR868171/flagstat.txt, results/chipseq/alignment/ERR868171/samtools_stats.txt, results/chipseq/alignment/ERR868171/alignment_qc.json; Input files updated by another job: results/chipseq/alignment/ERR868171/raw.sorted.bam.csi, results/chipseq/alignment/ERR868171/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868171
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868171/raw.sorted.bam > results/chipseq/alignment/ERR868171/flagstat.txt 2> results/chipseq/alignment/ERR868171/qc.log; samtools idxstats results/chipseq/alignment/ERR868171/raw.sorted.bam > results/chipseq/alignment/ERR868171/idxstats.tsv 2>> results/chipseq/alignment/ERR868171/qc.log; samtools stats results/chipseq/alignment/ERR868171/raw.sorted.bam > results/chipseq/alignment/ERR868171/samtools_stats.txt 2>> results/chipseq/alignment/ERR868171/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868171 --bam results/chipseq/alignment/ERR868171/raw.sorted.bam --output results/chipseq/alignment/ERR868171/alignment_qc.json 2>> results/chipseq/alignment/ERR868171/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868175/raw.sorted.bam, results/chipseq/alignment/ERR868175/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868175/flagstat.txt, results/chipseq/alignment/ERR868175/idxstats.tsv, results/chipseq/alignment/ERR868175/samtools_stats.txt, results/chipseq/alignment/ERR868175/alignment_qc.json
+    log: results/chipseq/alignment/ERR868175/qc.log
+    jobid: 59
+    reason: Missing output files: results/chipseq/alignment/ERR868175/idxstats.tsv, results/chipseq/alignment/ERR868175/alignment_qc.json, results/chipseq/alignment/ERR868175/samtools_stats.txt, results/chipseq/alignment/ERR868175/flagstat.txt; Input files updated by another job: results/chipseq/alignment/ERR868175/raw.sorted.bam.csi, results/chipseq/alignment/ERR868175/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868175
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868175/raw.sorted.bam > results/chipseq/alignment/ERR868175/flagstat.txt 2> results/chipseq/alignment/ERR868175/qc.log; samtools idxstats results/chipseq/alignment/ERR868175/raw.sorted.bam > results/chipseq/alignment/ERR868175/idxstats.tsv 2>> results/chipseq/alignment/ERR868175/qc.log; samtools stats results/chipseq/alignment/ERR868175/raw.sorted.bam > results/chipseq/alignment/ERR868175/samtools_stats.txt 2>> results/chipseq/alignment/ERR868175/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868175 --bam results/chipseq/alignment/ERR868175/raw.sorted.bam --output results/chipseq/alignment/ERR868175/alignment_qc.json 2>> results/chipseq/alignment/ERR868175/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/SRR20770295/raw.sorted.bam, results/chipseq/alignment/SRR20770295/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770295/flagstat.txt, results/chipseq/alignment/SRR20770295/idxstats.tsv, results/chipseq/alignment/SRR20770295/samtools_stats.txt, results/chipseq/alignment/SRR20770295/alignment_qc.json
+    log: results/chipseq/alignment/SRR20770295/qc.log
+    jobid: 67
+    reason: Missing output files: results/chipseq/alignment/SRR20770295/flagstat.txt, results/chipseq/alignment/SRR20770295/samtools_stats.txt, results/chipseq/alignment/SRR20770295/idxstats.tsv, results/chipseq/alignment/SRR20770295/alignment_qc.json; Input files updated by another job: results/chipseq/alignment/SRR20770295/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770295/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=SRR20770295
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/SRR20770295/raw.sorted.bam > results/chipseq/alignment/SRR20770295/flagstat.txt 2> results/chipseq/alignment/SRR20770295/qc.log; samtools idxstats results/chipseq/alignment/SRR20770295/raw.sorted.bam > results/chipseq/alignment/SRR20770295/idxstats.tsv 2>> results/chipseq/alignment/SRR20770295/qc.log; samtools stats results/chipseq/alignment/SRR20770295/raw.sorted.bam > results/chipseq/alignment/SRR20770295/samtools_stats.txt 2>> results/chipseq/alignment/SRR20770295/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run SRR20770295 --bam results/chipseq/alignment/SRR20770295/raw.sorted.bam --output results/chipseq/alignment/SRR20770295/alignment_qc.json 2>> results/chipseq/alignment/SRR20770295/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868154/raw.sorted.bam, results/chipseq/alignment/ERR868154/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868154/flagstat.txt, results/chipseq/alignment/ERR868154/idxstats.tsv, results/chipseq/alignment/ERR868154/samtools_stats.txt, results/chipseq/alignment/ERR868154/alignment_qc.json
+    log: results/chipseq/alignment/ERR868154/qc.log
+    jobid: 52
+    reason: Missing output files: results/chipseq/alignment/ERR868154/idxstats.tsv, results/chipseq/alignment/ERR868154/flagstat.txt, results/chipseq/alignment/ERR868154/samtools_stats.txt, results/chipseq/alignment/ERR868154/alignment_qc.json; Input files updated by another job: results/chipseq/alignment/ERR868154/raw.sorted.bam.csi, results/chipseq/alignment/ERR868154/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868154
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868154/raw.sorted.bam > results/chipseq/alignment/ERR868154/flagstat.txt 2> results/chipseq/alignment/ERR868154/qc.log; samtools idxstats results/chipseq/alignment/ERR868154/raw.sorted.bam > results/chipseq/alignment/ERR868154/idxstats.tsv 2>> results/chipseq/alignment/ERR868154/qc.log; samtools stats results/chipseq/alignment/ERR868154/raw.sorted.bam > results/chipseq/alignment/ERR868154/samtools_stats.txt 2>> results/chipseq/alignment/ERR868154/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868154 --bam results/chipseq/alignment/ERR868154/raw.sorted.bam --output results/chipseq/alignment/ERR868154/alignment_qc.json 2>> results/chipseq/alignment/ERR868154/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/SRR20770291/raw.sorted.bam, results/chipseq/alignment/SRR20770291/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770291/flagstat.txt, results/chipseq/alignment/SRR20770291/idxstats.tsv, results/chipseq/alignment/SRR20770291/samtools_stats.txt, results/chipseq/alignment/SRR20770291/alignment_qc.json
+    log: results/chipseq/alignment/SRR20770291/qc.log
+    jobid: 63
+    reason: Missing output files: results/chipseq/alignment/SRR20770291/samtools_stats.txt, results/chipseq/alignment/SRR20770291/idxstats.tsv, results/chipseq/alignment/SRR20770291/flagstat.txt, results/chipseq/alignment/SRR20770291/alignment_qc.json; Input files updated by another job: results/chipseq/alignment/SRR20770291/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, results/chipseq/alignment/SRR20770291/raw.sorted.bam.csi
+    wildcards: run=SRR20770291
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/SRR20770291/raw.sorted.bam > results/chipseq/alignment/SRR20770291/flagstat.txt 2> results/chipseq/alignment/SRR20770291/qc.log; samtools idxstats results/chipseq/alignment/SRR20770291/raw.sorted.bam > results/chipseq/alignment/SRR20770291/idxstats.tsv 2>> results/chipseq/alignment/SRR20770291/qc.log; samtools stats results/chipseq/alignment/SRR20770291/raw.sorted.bam > results/chipseq/alignment/SRR20770291/samtools_stats.txt 2>> results/chipseq/alignment/SRR20770291/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run SRR20770291 --bam results/chipseq/alignment/SRR20770291/raw.sorted.bam --output results/chipseq/alignment/SRR20770291/alignment_qc.json 2>> results/chipseq/alignment/SRR20770291/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868172/raw.sorted.bam, results/chipseq/alignment/ERR868172/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868172/flagstat.txt, results/chipseq/alignment/ERR868172/idxstats.tsv, results/chipseq/alignment/ERR868172/samtools_stats.txt, results/chipseq/alignment/ERR868172/alignment_qc.json
+    log: results/chipseq/alignment/ERR868172/qc.log
+    jobid: 56
+    reason: Missing output files: results/chipseq/alignment/ERR868172/flagstat.txt, results/chipseq/alignment/ERR868172/samtools_stats.txt, results/chipseq/alignment/ERR868172/idxstats.tsv, results/chipseq/alignment/ERR868172/alignment_qc.json; Input files updated by another job: results/chipseq/alignment/ERR868172/raw.sorted.bam, results/chipseq/alignment/ERR868172/raw.sorted.bam.csi, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868172
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868172/raw.sorted.bam > results/chipseq/alignment/ERR868172/flagstat.txt 2> results/chipseq/alignment/ERR868172/qc.log; samtools idxstats results/chipseq/alignment/ERR868172/raw.sorted.bam > results/chipseq/alignment/ERR868172/idxstats.tsv 2>> results/chipseq/alignment/ERR868172/qc.log; samtools stats results/chipseq/alignment/ERR868172/raw.sorted.bam > results/chipseq/alignment/ERR868172/samtools_stats.txt 2>> results/chipseq/alignment/ERR868172/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868172 --bam results/chipseq/alignment/ERR868172/raw.sorted.bam --output results/chipseq/alignment/ERR868172/alignment_qc.json 2>> results/chipseq/alignment/ERR868172/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868176/raw.sorted.bam, results/chipseq/alignment/ERR868176/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868176/flagstat.txt, results/chipseq/alignment/ERR868176/idxstats.tsv, results/chipseq/alignment/ERR868176/samtools_stats.txt, results/chipseq/alignment/ERR868176/alignment_qc.json
+    log: results/chipseq/alignment/ERR868176/qc.log
+    jobid: 60
+    reason: Missing output files: results/chipseq/alignment/ERR868176/idxstats.tsv, results/chipseq/alignment/ERR868176/flagstat.txt, results/chipseq/alignment/ERR868176/alignment_qc.json, results/chipseq/alignment/ERR868176/samtools_stats.txt; Input files updated by another job: results/chipseq/alignment/ERR868176/raw.sorted.bam, results/chipseq/alignment/ERR868176/raw.sorted.bam.csi, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868176
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868176/raw.sorted.bam > results/chipseq/alignment/ERR868176/flagstat.txt 2> results/chipseq/alignment/ERR868176/qc.log; samtools idxstats results/chipseq/alignment/ERR868176/raw.sorted.bam > results/chipseq/alignment/ERR868176/idxstats.tsv 2>> results/chipseq/alignment/ERR868176/qc.log; samtools stats results/chipseq/alignment/ERR868176/raw.sorted.bam > results/chipseq/alignment/ERR868176/samtools_stats.txt 2>> results/chipseq/alignment/ERR868176/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868176 --bam results/chipseq/alignment/ERR868176/raw.sorted.bam --output results/chipseq/alignment/ERR868176/alignment_qc.json 2>> results/chipseq/alignment/ERR868176/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/SRR20770296/raw.sorted.bam, results/chipseq/alignment/SRR20770296/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/SRR20770296/flagstat.txt, results/chipseq/alignment/SRR20770296/idxstats.tsv, results/chipseq/alignment/SRR20770296/samtools_stats.txt, results/chipseq/alignment/SRR20770296/alignment_qc.json
+    log: results/chipseq/alignment/SRR20770296/qc.log
+    jobid: 68
+    reason: Missing output files: results/chipseq/alignment/SRR20770296/samtools_stats.txt, results/chipseq/alignment/SRR20770296/flagstat.txt, results/chipseq/alignment/SRR20770296/idxstats.tsv, results/chipseq/alignment/SRR20770296/alignment_qc.json; Input files updated by another job: results/chipseq/alignment/SRR20770296/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770296/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=SRR20770296
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/SRR20770296/raw.sorted.bam > results/chipseq/alignment/SRR20770296/flagstat.txt 2> results/chipseq/alignment/SRR20770296/qc.log; samtools idxstats results/chipseq/alignment/SRR20770296/raw.sorted.bam > results/chipseq/alignment/SRR20770296/idxstats.tsv 2>> results/chipseq/alignment/SRR20770296/qc.log; samtools stats results/chipseq/alignment/SRR20770296/raw.sorted.bam > results/chipseq/alignment/SRR20770296/samtools_stats.txt 2>> results/chipseq/alignment/SRR20770296/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run SRR20770296 --bam results/chipseq/alignment/SRR20770296/raw.sorted.bam --output results/chipseq/alignment/SRR20770296/alignment_qc.json 2>> results/chipseq/alignment/SRR20770296/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_metrics:
+    input: results/chipseq/alignment/ERR868155/raw.sorted.bam, results/chipseq/alignment/ERR868155/raw.sorted.bam.csi, workflow/scripts/chipseq_alignment_support.py, config/chipseq_alignment_inputs.json, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, config/chipseq_alignment.json
+    output: results/chipseq/alignment/ERR868155/flagstat.txt, results/chipseq/alignment/ERR868155/idxstats.tsv, results/chipseq/alignment/ERR868155/samtools_stats.txt, results/chipseq/alignment/ERR868155/alignment_qc.json
+    log: results/chipseq/alignment/ERR868155/qc.log
+    jobid: 53
+    reason: Missing output files: results/chipseq/alignment/ERR868155/samtools_stats.txt, results/chipseq/alignment/ERR868155/alignment_qc.json, results/chipseq/alignment/ERR868155/flagstat.txt, results/chipseq/alignment/ERR868155/idxstats.tsv; Input files updated by another job: results/chipseq/alignment/ERR868155/raw.sorted.bam.csi, results/chipseq/alignment/ERR868155/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    wildcards: run=ERR868155
+    resources: tmpdir=/tmp
+Shell command: samtools flagstat results/chipseq/alignment/ERR868155/raw.sorted.bam > results/chipseq/alignment/ERR868155/flagstat.txt 2> results/chipseq/alignment/ERR868155/qc.log; samtools idxstats results/chipseq/alignment/ERR868155/raw.sorted.bam > results/chipseq/alignment/ERR868155/idxstats.tsv 2>> results/chipseq/alignment/ERR868155/qc.log; samtools stats results/chipseq/alignment/ERR868155/raw.sorted.bam > results/chipseq/alignment/ERR868155/samtools_stats.txt 2>> results/chipseq/alignment/ERR868155/qc.log; python workflow/scripts/chipseq_alignment_support.py qc --run ERR868155 --bam results/chipseq/alignment/ERR868155/raw.sorted.bam --output results/chipseq/alignment/ERR868155/alignment_qc.json 2>> results/chipseq/alignment/ERR868155/qc.log
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_summary:
+    input: results/chipseq/alignment/ERR868150/alignment_qc.json, results/chipseq/alignment/ERR868151/alignment_qc.json, results/chipseq/alignment/ERR868152/alignment_qc.json, results/chipseq/alignment/ERR868153/alignment_qc.json, results/chipseq/alignment/ERR868154/alignment_qc.json, results/chipseq/alignment/ERR868155/alignment_qc.json, results/chipseq/alignment/ERR868156/alignment_qc.json, results/chipseq/alignment/ERR868171/alignment_qc.json, results/chipseq/alignment/ERR868172/alignment_qc.json, results/chipseq/alignment/ERR868173/alignment_qc.json, results/chipseq/alignment/ERR868174/alignment_qc.json, results/chipseq/alignment/ERR868175/alignment_qc.json, results/chipseq/alignment/ERR868176/alignment_qc.json, results/chipseq/alignment/ERR868177/alignment_qc.json, results/chipseq/alignment/SRR20770287/alignment_qc.json, results/chipseq/alignment/SRR20770291/alignment_qc.json, results/chipseq/alignment/SRR20770292/alignment_qc.json, results/chipseq/alignment/SRR20770293/alignment_qc.json, results/chipseq/alignment/SRR20770294/alignment_qc.json, results/chipseq/alignment/SRR20770295/alignment_qc.json, results/chipseq/alignment/SRR20770296/alignment_qc.json, results/chipseq/alignment/SRR20770297/alignment_qc.json, workflow/scripts/chipseq_alignment_support.py
+    output: results/chipseq/alignment/alignment_qc.tsv
+    jobid: 70
+    reason: Missing output files: results/chipseq/alignment/alignment_qc.tsv; Input files updated by another job: results/chipseq/alignment/ERR868153/alignment_qc.json, results/chipseq/alignment/ERR868152/alignment_qc.json, results/chipseq/alignment/ERR868156/alignment_qc.json, results/chipseq/alignment/SRR20770291/alignment_qc.json, results/chipseq/alignment/SRR20770293/alignment_qc.json, results/chipseq/alignment/ERR868174/alignment_qc.json, results/chipseq/alignment/SRR20770294/alignment_qc.json, results/chipseq/alignment/ERR868154/alignment_qc.json, results/chipseq/alignment/SRR20770297/alignment_qc.json, results/chipseq/alignment/ERR868150/alignment_qc.json, results/chipseq/alignment/ERR868173/alignment_qc.json, results/chipseq/alignment/ERR868175/alignment_qc.json, results/chipseq/alignment/ERR868176/alignment_qc.json, results/chipseq/alignment/SRR20770287/alignment_qc.json, results/chipseq/alignment/SRR20770296/alignment_qc.json, results/chipseq/alignment/ERR868177/alignment_qc.json, results/chipseq/alignment/ERR868172/alignment_qc.json, results/chipseq/alignment/SRR20770292/alignment_qc.json, results/chipseq/alignment/SRR20770295/alignment_qc.json, results/chipseq/alignment/ERR868155/alignment_qc.json, results/chipseq/alignment/ERR868171/alignment_qc.json, results/chipseq/alignment/ERR868151/alignment_qc.json
+    resources: tmpdir=/tmp
+Shell command: python workflow/scripts/chipseq_alignment_support.py summarize --output results/chipseq/alignment/alignment_qc.tsv results/chipseq/alignment/ERR868150/alignment_qc.json results/chipseq/alignment/ERR868151/alignment_qc.json results/chipseq/alignment/ERR868152/alignment_qc.json results/chipseq/alignment/ERR868153/alignment_qc.json results/chipseq/alignment/ERR868154/alignment_qc.json results/chipseq/alignment/ERR868155/alignment_qc.json results/chipseq/alignment/ERR868156/alignment_qc.json results/chipseq/alignment/ERR868171/alignment_qc.json results/chipseq/alignment/ERR868172/alignment_qc.json results/chipseq/alignment/ERR868173/alignment_qc.json results/chipseq/alignment/ERR868174/alignment_qc.json results/chipseq/alignment/ERR868175/alignment_qc.json results/chipseq/alignment/ERR868176/alignment_qc.json results/chipseq/alignment/ERR868177/alignment_qc.json results/chipseq/alignment/SRR20770287/alignment_qc.json results/chipseq/alignment/SRR20770291/alignment_qc.json results/chipseq/alignment/SRR20770292/alignment_qc.json results/chipseq/alignment/SRR20770293/alignment_qc.json results/chipseq/alignment/SRR20770294/alignment_qc.json results/chipseq/alignment/SRR20770295/alignment_qc.json results/chipseq/alignment/SRR20770296/alignment_qc.json results/chipseq/alignment/SRR20770297/alignment_qc.json
+
+[Thu Sep 17 20:41:18 2026]
+rule chipseq_alignment_all:
+    input: results/chipseq/alignment/ERR868150/raw.sorted.bam, results/chipseq/alignment/ERR868151/raw.sorted.bam, results/chipseq/alignment/ERR868152/raw.sorted.bam, results/chipseq/alignment/ERR868153/raw.sorted.bam, results/chipseq/alignment/ERR868154/raw.sorted.bam, results/chipseq/alignment/ERR868155/raw.sorted.bam, results/chipseq/alignment/ERR868156/raw.sorted.bam, results/chipseq/alignment/ERR868171/raw.sorted.bam, results/chipseq/alignment/ERR868172/raw.sorted.bam, results/chipseq/alignment/ERR868173/raw.sorted.bam, results/chipseq/alignment/ERR868174/raw.sorted.bam, results/chipseq/alignment/ERR868175/raw.sorted.bam, results/chipseq/alignment/ERR868176/raw.sorted.bam, results/chipseq/alignment/ERR868177/raw.sorted.bam, results/chipseq/alignment/SRR20770287/raw.sorted.bam, results/chipseq/alignment/SRR20770291/raw.sorted.bam, results/chipseq/alignment/SRR20770292/raw.sorted.bam, results/chipseq/alignment/SRR20770293/raw.sorted.bam, results/chipseq/alignment/SRR20770294/raw.sorted.bam, results/chipseq/alignment/SRR20770295/raw.sorted.bam, results/chipseq/alignment/SRR20770296/raw.sorted.bam, results/chipseq/alignment/SRR20770297/raw.sorted.bam, results/chipseq/alignment/ERR868150/raw.sorted.bam.csi, results/chipseq/alignment/ERR868151/raw.sorted.bam.csi, results/chipseq/alignment/ERR868152/raw.sorted.bam.csi, results/chipseq/alignment/ERR868153/raw.sorted.bam.csi, results/chipseq/alignment/ERR868154/raw.sorted.bam.csi, results/chipseq/alignment/ERR868155/raw.sorted.bam.csi, results/chipseq/alignment/ERR868156/raw.sorted.bam.csi, results/chipseq/alignment/ERR868171/raw.sorted.bam.csi, results/chipseq/alignment/ERR868172/raw.sorted.bam.csi, results/chipseq/alignment/ERR868173/raw.sorted.bam.csi, results/chipseq/alignment/ERR868174/raw.sorted.bam.csi, results/chipseq/alignment/ERR868175/raw.sorted.bam.csi, results/chipseq/alignment/ERR868176/raw.sorted.bam.csi, results/chipseq/alignment/ERR868177/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770287/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770291/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770292/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770293/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770294/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770295/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770296/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770297/raw.sorted.bam.csi, results/chipseq/alignment/ERR868150/flagstat.txt, results/chipseq/alignment/ERR868151/flagstat.txt, results/chipseq/alignment/ERR868152/flagstat.txt, results/chipseq/alignment/ERR868153/flagstat.txt, results/chipseq/alignment/ERR868154/flagstat.txt, results/chipseq/alignment/ERR868155/flagstat.txt, results/chipseq/alignment/ERR868156/flagstat.txt, results/chipseq/alignment/ERR868171/flagstat.txt, results/chipseq/alignment/ERR868172/flagstat.txt, results/chipseq/alignment/ERR868173/flagstat.txt, results/chipseq/alignment/ERR868174/flagstat.txt, results/chipseq/alignment/ERR868175/flagstat.txt, results/chipseq/alignment/ERR868176/flagstat.txt, results/chipseq/alignment/ERR868177/flagstat.txt, results/chipseq/alignment/SRR20770287/flagstat.txt, results/chipseq/alignment/SRR20770291/flagstat.txt, results/chipseq/alignment/SRR20770292/flagstat.txt, results/chipseq/alignment/SRR20770293/flagstat.txt, results/chipseq/alignment/SRR20770294/flagstat.txt, results/chipseq/alignment/SRR20770295/flagstat.txt, results/chipseq/alignment/SRR20770296/flagstat.txt, results/chipseq/alignment/SRR20770297/flagstat.txt, results/chipseq/alignment/ERR868150/idxstats.tsv, results/chipseq/alignment/ERR868151/idxstats.tsv, results/chipseq/alignment/ERR868152/idxstats.tsv, results/chipseq/alignment/ERR868153/idxstats.tsv, results/chipseq/alignment/ERR868154/idxstats.tsv, results/chipseq/alignment/ERR868155/idxstats.tsv, results/chipseq/alignment/ERR868156/idxstats.tsv, results/chipseq/alignment/ERR868171/idxstats.tsv, results/chipseq/alignment/ERR868172/idxstats.tsv, results/chipseq/alignment/ERR868173/idxstats.tsv, results/chipseq/alignment/ERR868174/idxstats.tsv, results/chipseq/alignment/ERR868175/idxstats.tsv, results/chipseq/alignment/ERR868176/idxstats.tsv, results/chipseq/alignment/ERR868177/idxstats.tsv, results/chipseq/alignment/SRR20770287/idxstats.tsv, results/chipseq/alignment/SRR20770291/idxstats.tsv, results/chipseq/alignment/SRR20770292/idxstats.tsv, results/chipseq/alignment/SRR20770293/idxstats.tsv, results/chipseq/alignment/SRR20770294/idxstats.tsv, results/chipseq/alignment/SRR20770295/idxstats.tsv, results/chipseq/alignment/SRR20770296/idxstats.tsv, results/chipseq/alignment/SRR20770297/idxstats.tsv, results/chipseq/alignment/ERR868150/samtools_stats.txt, results/chipseq/alignment/ERR868151/samtools_stats.txt, results/chipseq/alignment/ERR868152/samtools_stats.txt, results/chipseq/alignment/ERR868153/samtools_stats.txt, results/chipseq/alignment/ERR868154/samtools_stats.txt, results/chipseq/alignment/ERR868155/samtools_stats.txt, results/chipseq/alignment/ERR868156/samtools_stats.txt, results/chipseq/alignment/ERR868171/samtools_stats.txt, results/chipseq/alignment/ERR868172/samtools_stats.txt, results/chipseq/alignment/ERR868173/samtools_stats.txt, results/chipseq/alignment/ERR868174/samtools_stats.txt, results/chipseq/alignment/ERR868175/samtools_stats.txt, results/chipseq/alignment/ERR868176/samtools_stats.txt, results/chipseq/alignment/ERR868177/samtools_stats.txt, results/chipseq/alignment/SRR20770287/samtools_stats.txt, results/chipseq/alignment/SRR20770291/samtools_stats.txt, results/chipseq/alignment/SRR20770292/samtools_stats.txt, results/chipseq/alignment/SRR20770293/samtools_stats.txt, results/chipseq/alignment/SRR20770294/samtools_stats.txt, results/chipseq/alignment/SRR20770295/samtools_stats.txt, results/chipseq/alignment/SRR20770296/samtools_stats.txt, results/chipseq/alignment/SRR20770297/samtools_stats.txt, results/chipseq/alignment/ERR868150/alignment_qc.json, results/chipseq/alignment/ERR868151/alignment_qc.json, results/chipseq/alignment/ERR868152/alignment_qc.json, results/chipseq/alignment/ERR868153/alignment_qc.json, results/chipseq/alignment/ERR868154/alignment_qc.json, results/chipseq/alignment/ERR868155/alignment_qc.json, results/chipseq/alignment/ERR868156/alignment_qc.json, results/chipseq/alignment/ERR868171/alignment_qc.json, results/chipseq/alignment/ERR868172/alignment_qc.json, results/chipseq/alignment/ERR868173/alignment_qc.json, results/chipseq/alignment/ERR868174/alignment_qc.json, results/chipseq/alignment/ERR868175/alignment_qc.json, results/chipseq/alignment/ERR868176/alignment_qc.json, results/chipseq/alignment/ERR868177/alignment_qc.json, results/chipseq/alignment/SRR20770287/alignment_qc.json, results/chipseq/alignment/SRR20770291/alignment_qc.json, results/chipseq/alignment/SRR20770292/alignment_qc.json, results/chipseq/alignment/SRR20770293/alignment_qc.json, results/chipseq/alignment/SRR20770294/alignment_qc.json, results/chipseq/alignment/SRR20770295/alignment_qc.json, results/chipseq/alignment/SRR20770296/alignment_qc.json, results/chipseq/alignment/SRR20770297/alignment_qc.json, results/chipseq/alignment/alignment_qc.tsv, resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa.fai, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json
+    jobid: 0
+    reason: Input files updated by another job: results/chipseq/alignment/ERR868152/samtools_stats.txt, results/chipseq/alignment/ERR868171/samtools_stats.txt, results/chipseq/alignment/ERR868174/raw.sorted.bam, results/chipseq/alignment/ERR868155/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770295/samtools_stats.txt, results/chipseq/alignment/ERR868171/raw.sorted.bam, results/chipseq/alignment/ERR868151/raw.sorted.bam, results/chipseq/alignment/ERR868174/alignment_qc.json, results/chipseq/alignment/ERR868154/alignment_qc.json, results/chipseq/alignment/SRR20770295/raw.sorted.bam.csi, results/chipseq/alignment/ERR868151/raw.sorted.bam.csi, results/chipseq/alignment/ERR868171/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770297/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770293/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770287/alignment_qc.json, results/chipseq/alignment/SRR20770294/raw.sorted.bam.csi, results/chipseq/alignment/ERR868175/raw.sorted.bam, results/chipseq/alignment/ERR868155/raw.sorted.bam, results/chipseq/alignment/ERR868177/alignment_qc.json, results/chipseq/alignment/SRR20770297/flagstat.txt, resources/reference/CriGri-PICRH-1.0/chipseq/genome_plus_mt.fa.fai, results/chipseq/alignment/ERR868151/samtools_stats.txt, results/chipseq/alignment/ERR868151/alignment_qc.json, results/chipseq/alignment/ERR868172/raw.sorted.bam, results/chipseq/alignment/alignment_qc.tsv, results/chipseq/alignment/ERR868151/idxstats.tsv, results/chipseq/alignment/ERR868173/raw.sorted.bam, resources/reference/CriGri-PICRH-1.0/chipseq/reference_provenance.json, results/chipseq/alignment/SRR20770295/idxstats.tsv, results/chipseq/alignment/SRR20770287/samtools_stats.txt, results/chipseq/alignment/ERR868156/idxstats.tsv, results/chipseq/alignment/ERR868153/raw.sorted.bam, results/chipseq/alignment/SRR20770287/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770291/raw.sorted.bam.csi, results/chipseq/alignment/ERR868172/raw.sorted.bam.csi, results/chipseq/alignment/ERR868175/samtools_stats.txt, results/chipseq/alignment/ERR868150/alignment_qc.json, results/chipseq/alignment/ERR868154/raw.sorted.bam, results/chipseq/alignment/ERR868176/idxstats.tsv, results/chipseq/alignment/ERR868150/samtools_stats.txt, results/chipseq/alignment/ERR868153/idxstats.tsv, results/chipseq/alignment/SRR20770296/idxstats.tsv, results/chipseq/alignment/SRR20770296/raw.sorted.bam.csi, results/chipseq/alignment/ERR868177/flagstat.txt, results/chipseq/alignment/ERR868174/flagstat.txt, results/chipseq/alignment/SRR20770293/samtools_stats.txt, results/chipseq/alignment/SRR20770294/idxstats.tsv, results/chipseq/alignment/ERR868171/flagstat.txt, results/chipseq/alignment/ERR868176/alignment_qc.json, results/chipseq/alignment/SRR20770296/alignment_qc.json, results/chipseq/alignment/ERR868177/samtools_stats.txt, results/chipseq/alignment/ERR868176/flagstat.txt, results/chipseq/alignment/ERR868173/idxstats.tsv, results/chipseq/alignment/ERR868155/alignment_qc.json, results/chipseq/alignment/ERR868171/alignment_qc.json, results/chipseq/alignment/ERR868156/raw.sorted.bam, results/chipseq/alignment/ERR868152/raw.sorted.bam, results/chipseq/alignment/ERR868153/alignment_qc.json, results/chipseq/alignment/ERR868176/raw.sorted.bam, results/chipseq/alignment/ERR868150/raw.sorted.bam.csi, results/chipseq/alignment/ERR868154/flagstat.txt, results/chipseq/alignment/ERR868156/alignment_qc.json, results/chipseq/alignment/SRR20770287/flagstat.txt, results/chipseq/alignment/ERR868155/samtools_stats.txt, results/chipseq/alignment/SRR20770291/idxstats.tsv, results/chipseq/alignment/ERR868177/raw.sorted.bam.csi, results/chipseq/alignment/ERR868154/idxstats.tsv, results/chipseq/alignment/ERR868156/flagstat.txt, results/chipseq/alignment/SRR20770297/raw.sorted.bam, results/chipseq/alignment/SRR20770291/samtools_stats.txt, results/chipseq/alignment/ERR868172/idxstats.tsv, results/chipseq/alignment/SRR20770296/flagstat.txt, results/chipseq/alignment/ERR868152/flagstat.txt, results/chipseq/alignment/ERR868174/idxstats.tsv, results/chipseq/alignment/SRR20770287/raw.sorted.bam, results/chipseq/alignment/SRR20770293/idxstats.tsv, results/chipseq/alignment/SRR20770292/samtools_stats.txt, results/chipseq/alignment/ERR868177/raw.sorted.bam, results/chipseq/alignment/SRR20770292/raw.sorted.bam, results/chipseq/alignment/ERR868154/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770294/raw.sorted.bam, results/chipseq/alignment/ERR868173/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770293/raw.sorted.bam, results/chipseq/alignment/SRR20770291/flagstat.txt, results/chipseq/alignment/SRR20770293/alignment_qc.json, results/chipseq/alignment/SRR20770293/flagstat.txt, results/chipseq/alignment/ERR868151/flagstat.txt, results/chipseq/alignment/ERR868172/samtools_stats.txt, results/chipseq/alignment/ERR868156/samtools_stats.txt, results/chipseq/alignment/ERR868175/flagstat.txt, results/chipseq/alignment/ERR868176/samtools_stats.txt, results/chipseq/alignment/SRR20770297/alignment_qc.json, results/chipseq/alignment/SRR20770292/flagstat.txt, results/chipseq/alignment/ERR868175/alignment_qc.json, results/chipseq/alignment/SRR20770297/idxstats.tsv, results/chipseq/alignment/ERR868153/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770295/flagstat.txt, results/chipseq/alignment/ERR868150/raw.sorted.bam, results/chipseq/alignment/SRR20770296/raw.sorted.bam, results/chipseq/alignment/ERR868176/raw.sorted.bam.csi, results/chipseq/alignment/ERR868177/idxstats.tsv, results/chipseq/alignment/ERR868171/idxstats.tsv, results/chipseq/alignment/SRR20770297/samtools_stats.txt, results/chipseq/alignment/ERR868173/flagstat.txt, results/chipseq/alignment/ERR868152/alignment_qc.json, results/chipseq/alignment/SRR20770292/raw.sorted.bam.csi, results/chipseq/alignment/ERR868156/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770294/alignment_qc.json, results/chipseq/alignment/SRR20770295/raw.sorted.bam, results/chipseq/alignment/ERR868154/samtools_stats.txt, results/chipseq/alignment/ERR868153/flagstat.txt, results/chipseq/alignment/ERR868173/alignment_qc.json, results/chipseq/alignment/ERR868152/idxstats.tsv, results/chipseq/alignment/ERR868150/idxstats.tsv, results/chipseq/alignment/ERR868173/samtools_stats.txt, results/chipseq/alignment/ERR868175/raw.sorted.bam.csi, results/chipseq/alignment/ERR868174/samtools_stats.txt, results/chipseq/alignment/SRR20770292/alignment_qc.json, results/chipseq/alignment/SRR20770295/alignment_qc.json, results/chipseq/alignment/ERR868155/idxstats.tsv, results/chipseq/alignment/SRR20770294/samtools_stats.txt, results/chipseq/alignment/SRR20770291/raw.sorted.bam, results/chipseq/alignment/ERR868174/raw.sorted.bam.csi, results/chipseq/alignment/SRR20770292/idxstats.tsv, results/chipseq/alignment/ERR868175/idxstats.tsv, results/chipseq/alignment/SRR20770291/alignment_qc.json, results/chipseq/alignment/SRR20770296/samtools_stats.txt, results/chipseq/alignment/SRR20770294/flagstat.txt, results/chipseq/alignment/SRR20770287/idxstats.tsv, results/chipseq/alignment/ERR868153/samtools_stats.txt, results/chipseq/alignment/ERR868150/flagstat.txt, results/chipseq/alignment/ERR868152/raw.sorted.bam.csi, results/chipseq/alignment/ERR868172/flagstat.txt, results/chipseq/alignment/ERR868172/alignment_qc.json, results/chipseq/alignment/ERR868155/flagstat.txt
+    resources: tmpdir=/tmp
+Shell command: None
+Job stats:
+job                          count
+-------------------------  -------
+chipseq_nuclear_reference        1
+chipseq_mapping_reference        1
+chipseq_bowtie2_index            1
+chipseq_fasta_index              1
+chipseq_align_run               22
+chipseq_bam_index               22
+chipseq_alignment_metrics       22
+chipseq_alignment_summary        1
+chipseq_alignment_all            1
+total                           72
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        chipseq_align_run, chipseq_alignment_all, chipseq_alignment_metrics, chipseq_alignment_summary, chipseq_bam_index, chipseq_bowtie2_index, chipseq_fasta_index, chipseq_mapping_reference
+    output files have to be generated:
+        chipseq_align_run, chipseq_alignment_metrics, chipseq_alignment_summary, chipseq_bam_index, chipseq_bowtie2_index, chipseq_fasta_index, chipseq_mapping_reference, chipseq_nuclear_reference
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.

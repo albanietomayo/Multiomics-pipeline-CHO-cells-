@@ -1,0 +1,3 @@
+host_python=Python 3.9.25
+validation_python=Python 3.14.7
+validation_snakemake=9.25.2

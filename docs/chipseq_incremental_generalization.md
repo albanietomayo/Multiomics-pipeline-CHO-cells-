@@ -215,3 +215,42 @@ Phase 4A does not yet alter the validated Bowtie2 Snakefile, alignment
 parameters, SLURM wrapper or reference-building logic. Those runtime
 changes are deferred until the dynamic input contract has been validated
 independently.
+
+## Dynamic alignment runtime core
+
+After independent validation of the dynamic alignment-input planner,
+the ChIP-seq alignment Snakefile was generalized from the original
+two-run pilot to an arbitrary non-empty set of validated run
+accessions.
+
+The validated alignment method itself was not changed. Current
+SINGLE-end runs continue to use Bowtie2 with local alignment,
+the `very-sensitive-local` preset and seed 0, followed by coordinate
+sorting with samtools and the existing alignment QC calculations.
+
+The alignment input plan is validated before DAG construction. Run
+accessions must be unique and syntactically valid; biological roles
+must be `ip` or `input`; staged destinations must follow the canonical
+`inputs/<run>.fastq.gz` contract; and, when layout and platform fields
+are present, only SINGLE-end ILLUMINA inputs are accepted
+automatically.
+
+FASTQ staging was also generalized so that any number of planned runs
+can be copied from a preprocessing project, verified against recorded
+SHA-256 digests and byte sizes, and recorded in
+`inputs/verified.json`.
+
+The alignment Snakefile no longer imports or depends on the original
+pilot eligibility workflow. The validated dynamic alignment input plan
+is now the execution-level cohort contract, while the reference and
+Bowtie2 index remain cohort-independent and therefore reusable across
+different validated ChIP-seq cohorts.
+
+Phase 4B deliberately leaves the production alignment submitter and
+SLURM wrapper unchanged. Their replacement of pilot-specific
+preprocessing discovery and eligibility checks is deferred to the
+submission-layer integration phase.
+
+The dynamic alignment runtime is validated with synthetic FASTQ
+fixtures and a Snakemake dry-run. No Bowtie2 alignment is executed in
+this phase.

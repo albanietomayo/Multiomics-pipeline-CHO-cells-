@@ -1,0 +1,5 @@
+ M docs/chipseq_incremental_generalization.md
+ M workflow/rules/chipseq_alignment.smk
+ M workflow/scripts/chipseq_alignment_support.py
+?? snapshots/chipseq/dynamic_alignment_runtime_validation_001/
+?? workflow/tests/test_chipseq_alignment_dynamic_runtime.py

@@ -5,11 +5,68 @@ configfile: "config/config.yaml"
 
 with open("config/chipseq_alignment.json") as handle:
     CA = json.load(handle)
-with open("config/chipseq_alignment_inputs.json") as handle:
+ALIGNMENT_PLAN = "config/chipseq_alignment_inputs.json"
+
+with open(ALIGNMENT_PLAN) as handle:
     ALIGN_INPUTS = json.load(handle)
-RUNS = [item["run_accession"] for item in ALIGN_INPUTS["runs"]]
-if len(RUNS) != 2 or len(set(RUNS)) != 2 or any(not re.fullmatch(r"[DES]RR[0-9]+", r) for r in RUNS):
-    raise ValueError("Expected exactly two distinct pilot runs")
+ALIGN_RUNS = ALIGN_INPUTS.get("runs")
+
+if ALIGN_INPUTS.get("schema_version") != 1:
+    raise ValueError("Unsupported alignment input-plan schema")
+
+if not isinstance(ALIGN_RUNS, list) or not ALIGN_RUNS:
+    raise ValueError("Alignment input plan must contain at least one run")
+
+RUNS = [item["run_accession"] for item in ALIGN_RUNS]
+
+if (
+    len(RUNS) != len(set(RUNS))
+    or any(
+        not re.fullmatch(r"[DES]RR[0-9]+", run)
+        for run in RUNS
+    )
+):
+    raise ValueError(
+        "Alignment input plan contains invalid or duplicate run accessions"
+    )
+
+for item in ALIGN_RUNS:
+    run = item["run_accession"]
+
+    if item.get("role") not in {"ip", "input"}:
+        raise ValueError(
+            f"Unsupported alignment role for {run}: {item.get('role')}"
+        )
+
+    if item.get("destination") != f"inputs/{run}.fastq.gz":
+        raise ValueError(
+            f"Unexpected staged FASTQ destination for {run}"
+        )
+
+    if "library_layout" in item and item["library_layout"] != "SINGLE":
+        raise ValueError(
+            f"Automatic ChIP alignment currently supports SINGLE only: {run}"
+        )
+
+    if (
+        "instrument_platform" in item
+        and item["instrument_platform"] != "ILLUMINA"
+    ):
+        raise ValueError(
+            f"Automatic ChIP alignment currently supports ILLUMINA only: {run}"
+        )
+
+    try:
+        reads = int(item["reads"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError(
+            f"Invalid processed read count for {run}"
+        ) from exc
+
+    if reads <= 0:
+        raise ValueError(
+            f"Processed read count must be positive for {run}"
+        )
 if CA["schema_version"] != 1 or CA["bowtie2_mode"] != "local" or CA["bowtie2_preset"] != "very-sensitive-local":
     raise ValueError("Unsupported alignment configuration; review before changing mode")
 REF = config["reference"]
@@ -19,13 +76,6 @@ PREFIX = RDIR + "/bowtie2_index/genome_plus_mt"
 INDEX = [PREFIX + suffix for suffix in (".1.bt2l", ".2.bt2l", ".3.bt2l", ".4.bt2l", ".rev.1.bt2l", ".rev.2.bt2l")]
 OUT = "results/chipseq/alignment"
 CODE = "workflow/scripts/chipseq_alignment_support.py"
-CHIP_ELIGIBILITY_SAMPLES = "config/samples.tsv"
-CHIP_ELIGIBILITY_CONDITIONS = "snapshots/chipseq/control_validation_001/chipseq_conditions.tsv"
-CHIP_ELIGIBILITY_PILOT = "config/chipseq_pilot.json"
-CHIP_ELIGIBILITY_REPORT = OUT + "/pilot_eligibility.json"
-
-include: "chipseq_eligibility.smk"
-
 rule chipseq_alignment_all:
     input:
         expand(OUT + "/{run}/raw.sorted.bam", run=RUNS),
@@ -42,8 +92,7 @@ rule chipseq_alignment_all:
 rule chipseq_nuclear_reference:
     input:
         script="workflow/scripts/fetch_reference_genome.py",
-        configuration="config/config.yaml",
-        eligible=CHIP_ELIGIBILITY_REPORT
+        configuration="config/config.yaml"
     output:
         fasta=REF["fasta"], gff3=REF["gff3"], gtf=REF["gtf"],
         sequence_report=REF["sequence_report"], metadata=REF["metadata"], sha256=REF["sha256"]
@@ -78,10 +127,13 @@ rule chipseq_fasta_index:
     conda: "../envs/chipseq_alignment.yaml"
     shell: "samtools faidx {input:q}"
 
-rule chipseq_align_pilot_run:
+rule chipseq_align_run:
     input:
-        fastq="inputs/{run}.fastq.gz", index=INDEX, eligible=CHIP_ELIGIBILITY_REPORT,
-        verified="inputs/verified.json", configuration="config/chipseq_alignment.json"
+        fastq="inputs/{run}.fastq.gz",
+        index=INDEX,
+        plan=ALIGNMENT_PLAN,
+        verified="inputs/verified.json",
+        configuration="config/chipseq_alignment.json"
     output: bam=OUT + "/{run}/raw.sorted.bam"
     wildcard_constraints: run="|".join(RUNS)
     params:
@@ -111,7 +163,7 @@ rule chipseq_bam_index:
 rule chipseq_alignment_metrics:
     input:
         bam=OUT + "/{run}/raw.sorted.bam", index=OUT + "/{run}/raw.sorted.bam.csi",
-        code=CODE, plan="config/chipseq_alignment_inputs.json", reference=RDIR + "/reference_provenance.json",
+        code=CODE, plan=ALIGNMENT_PLAN, reference=RDIR + "/reference_provenance.json",
         configuration="config/chipseq_alignment.json"
     output:
         flagstat=OUT + "/{run}/flagstat.txt", idxstats=OUT + "/{run}/idxstats.tsv",

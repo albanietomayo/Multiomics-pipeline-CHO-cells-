@@ -1,0 +1,344 @@
+diff --git a/docs/chipseq_incremental_generalization.md b/docs/chipseq_incremental_generalization.md
+index 1ce6923..d450799 100644
+--- a/docs/chipseq_incremental_generalization.md
++++ b/docs/chipseq_incremental_generalization.md
+@@ -215,3 +215,42 @@ Phase 4A does not yet alter the validated Bowtie2 Snakefile, alignment
+ parameters, SLURM wrapper or reference-building logic. Those runtime
+ changes are deferred until the dynamic input contract has been validated
+ independently.
++
++## Dynamic alignment runtime core
++
++After independent validation of the dynamic alignment-input planner,
++the ChIP-seq alignment Snakefile was generalized from the original
++two-run pilot to an arbitrary non-empty set of validated run
++accessions.
++
++The validated alignment method itself was not changed. Current
++SINGLE-end runs continue to use Bowtie2 with local alignment,
++the `very-sensitive-local` preset and seed 0, followed by coordinate
++sorting with samtools and the existing alignment QC calculations.
++
++The alignment input plan is validated before DAG construction. Run
++accessions must be unique and syntactically valid; biological roles
++must be `ip` or `input`; staged destinations must follow the canonical
++`inputs/<run>.fastq.gz` contract; and, when layout and platform fields
++are present, only SINGLE-end ILLUMINA inputs are accepted
++automatically.
++
++FASTQ staging was also generalized so that any number of planned runs
++can be copied from a preprocessing project, verified against recorded
++SHA-256 digests and byte sizes, and recorded in
++`inputs/verified.json`.
++
++The alignment Snakefile no longer imports or depends on the original
++pilot eligibility workflow. The validated dynamic alignment input plan
++is now the execution-level cohort contract, while the reference and
++Bowtie2 index remain cohort-independent and therefore reusable across
++different validated ChIP-seq cohorts.
++
++Phase 4B deliberately leaves the production alignment submitter and
++SLURM wrapper unchanged. Their replacement of pilot-specific
++preprocessing discovery and eligibility checks is deferred to the
++submission-layer integration phase.
++
++The dynamic alignment runtime is validated with synthetic FASTQ
++fixtures and a Snakemake dry-run. No Bowtie2 alignment is executed in
++this phase.
+diff --git a/workflow/rules/chipseq_alignment.smk b/workflow/rules/chipseq_alignment.smk
+index 48e6df7..3b3687f 100644
+--- a/workflow/rules/chipseq_alignment.smk
++++ b/workflow/rules/chipseq_alignment.smk
+@@ -5,11 +5,68 @@ configfile: "config/config.yaml"
+ 
+ with open("config/chipseq_alignment.json") as handle:
+     CA = json.load(handle)
+-with open("config/chipseq_alignment_inputs.json") as handle:
++ALIGNMENT_PLAN = "config/chipseq_alignment_inputs.json"
++
++with open(ALIGNMENT_PLAN) as handle:
+     ALIGN_INPUTS = json.load(handle)
+-RUNS = [item["run_accession"] for item in ALIGN_INPUTS["runs"]]
+-if len(RUNS) != 2 or len(set(RUNS)) != 2 or any(not re.fullmatch(r"[DES]RR[0-9]+", r) for r in RUNS):
+-    raise ValueError("Expected exactly two distinct pilot runs")
++ALIGN_RUNS = ALIGN_INPUTS.get("runs")
++
++if ALIGN_INPUTS.get("schema_version") != 1:
++    raise ValueError("Unsupported alignment input-plan schema")
++
++if not isinstance(ALIGN_RUNS, list) or not ALIGN_RUNS:
++    raise ValueError("Alignment input plan must contain at least one run")
++
++RUNS = [item["run_accession"] for item in ALIGN_RUNS]
++
++if (
++    len(RUNS) != len(set(RUNS))
++    or any(
++        not re.fullmatch(r"[DES]RR[0-9]+", run)
++        for run in RUNS
++    )
++):
++    raise ValueError(
++        "Alignment input plan contains invalid or duplicate run accessions"
++    )
++
++for item in ALIGN_RUNS:
++    run = item["run_accession"]
++
++    if item.get("role") not in {"ip", "input"}:
++        raise ValueError(
++            f"Unsupported alignment role for {run}: {item.get('role')}"
++        )
++
++    if item.get("destination") != f"inputs/{run}.fastq.gz":
++        raise ValueError(
++            f"Unexpected staged FASTQ destination for {run}"
++        )
++
++    if "library_layout" in item and item["library_layout"] != "SINGLE":
++        raise ValueError(
++            f"Automatic ChIP alignment currently supports SINGLE only: {run}"
++        )
++
++    if (
++        "instrument_platform" in item
++        and item["instrument_platform"] != "ILLUMINA"
++    ):
++        raise ValueError(
++            f"Automatic ChIP alignment currently supports ILLUMINA only: {run}"
++        )
++
++    try:
++        reads = int(item["reads"])
++    except (KeyError, TypeError, ValueError) as exc:
++        raise ValueError(
++            f"Invalid processed read count for {run}"
++        ) from exc
++
++    if reads <= 0:
++        raise ValueError(
++            f"Processed read count must be positive for {run}"
++        )
+ if CA["schema_version"] != 1 or CA["bowtie2_mode"] != "local" or CA["bowtie2_preset"] != "very-sensitive-local":
+     raise ValueError("Unsupported alignment configuration; review before changing mode")
+ REF = config["reference"]
+@@ -19,13 +76,6 @@ PREFIX = RDIR + "/bowtie2_index/genome_plus_mt"
+ INDEX = [PREFIX + suffix for suffix in (".1.bt2l", ".2.bt2l", ".3.bt2l", ".4.bt2l", ".rev.1.bt2l", ".rev.2.bt2l")]
+ OUT = "results/chipseq/alignment"
+ CODE = "workflow/scripts/chipseq_alignment_support.py"
+-CHIP_ELIGIBILITY_SAMPLES = "config/samples.tsv"
+-CHIP_ELIGIBILITY_CONDITIONS = "snapshots/chipseq/control_validation_001/chipseq_conditions.tsv"
+-CHIP_ELIGIBILITY_PILOT = "config/chipseq_pilot.json"
+-CHIP_ELIGIBILITY_REPORT = OUT + "/pilot_eligibility.json"
+-
+-include: "chipseq_eligibility.smk"
+-
+ rule chipseq_alignment_all:
+     input:
+         expand(OUT + "/{run}/raw.sorted.bam", run=RUNS),
+@@ -42,8 +92,7 @@ rule chipseq_alignment_all:
+ rule chipseq_nuclear_reference:
+     input:
+         script="workflow/scripts/fetch_reference_genome.py",
+-        configuration="config/config.yaml",
+-        eligible=CHIP_ELIGIBILITY_REPORT
++        configuration="config/config.yaml"
+     output:
+         fasta=REF["fasta"], gff3=REF["gff3"], gtf=REF["gtf"],
+         sequence_report=REF["sequence_report"], metadata=REF["metadata"], sha256=REF["sha256"]
+@@ -78,10 +127,13 @@ rule chipseq_fasta_index:
+     conda: "../envs/chipseq_alignment.yaml"
+     shell: "samtools faidx {input:q}"
+ 
+-rule chipseq_align_pilot_run:
++rule chipseq_align_run:
+     input:
+-        fastq="inputs/{run}.fastq.gz", index=INDEX, eligible=CHIP_ELIGIBILITY_REPORT,
+-        verified="inputs/verified.json", configuration="config/chipseq_alignment.json"
++        fastq="inputs/{run}.fastq.gz",
++        index=INDEX,
++        plan=ALIGNMENT_PLAN,
++        verified="inputs/verified.json",
++        configuration="config/chipseq_alignment.json"
+     output: bam=OUT + "/{run}/raw.sorted.bam"
+     wildcard_constraints: run="|".join(RUNS)
+     params:
+@@ -111,7 +163,7 @@ rule chipseq_bam_index:
+ rule chipseq_alignment_metrics:
+     input:
+         bam=OUT + "/{run}/raw.sorted.bam", index=OUT + "/{run}/raw.sorted.bam.csi",
+-        code=CODE, plan="config/chipseq_alignment_inputs.json", reference=RDIR + "/reference_provenance.json",
++        code=CODE, plan=ALIGNMENT_PLAN, reference=RDIR + "/reference_provenance.json",
+         configuration="config/chipseq_alignment.json"
+     output:
+         flagstat=OUT + "/{run}/flagstat.txt", idxstats=OUT + "/{run}/idxstats.tsv",
+diff --git a/workflow/scripts/chipseq_alignment_support.py b/workflow/scripts/chipseq_alignment_support.py
+index 2eadd7c..a795eb1 100644
+--- a/workflow/scripts/chipseq_alignment_support.py
++++ b/workflow/scripts/chipseq_alignment_support.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Stage verified pilot FASTQs, construct mapping reference and audit alignments."""
++"""Stage verified ChIP-seq FASTQs, construct mapping reference and audit alignments."""
+ import argparse
+ import csv
+ import gzip
+@@ -104,21 +104,135 @@ def prepare(root):
+ 
+ 
+ def stage():
+-    plan = json.loads(Path("config/chipseq_alignment_inputs.json").read_text())
++    plan = json.loads(
++        Path("config/chipseq_alignment_inputs.json").read_text()
++    )
++
++    if plan.get("schema_version") != 1:
++        raise ValueError("Unsupported alignment input-plan schema")
++
++    rows = plan.get("runs")
++
++    if not isinstance(rows, list) or not rows:
++        raise ValueError("Alignment input plan must contain runs")
++
++    source_root = Path(plan["source_root"])
++
+     verified = []
+-    for row in plan["runs"]:
+-        source = Path(plan["source_root"]) / relative_path(row["source_relative"])
+-        target = relative_path(row["destination"])
+-        target.parent.mkdir(parents=True, exist_ok=True)
+-        temporary = target.with_suffix(".part")
+-        shutil.copyfile(source, temporary)
+-        check(temporary, row["sha256"])
+-        if temporary.stat().st_size != row["bytes"]:
+-            raise ValueError(f"Unexpected FASTQ size: {source}")
+-        temporary.replace(target)
+-        verified.append({"run_accession": row["run_accession"], "sha256": row["sha256"]})
+-        print(f"[OK] Processed FASTQ copied and verified: {row['run_accession']}")
+-    dump("inputs/verified.json", {"runs": verified})
++    seen = set()
++
++    for row in rows:
++        run = row["run_accession"]
++
++        if (
++            not re.fullmatch(r"[DES]RR[0-9]+", run)
++            or run in seen
++        ):
++            raise ValueError(
++                f"Invalid or duplicate alignment run: {run}"
++            )
++
++        seen.add(run)
++
++        if row.get("role") not in {"ip", "input"}:
++            raise ValueError(
++                f"Unsupported alignment role for {run}"
++            )
++
++        if (
++            "library_layout" in row
++            and row["library_layout"] != "SINGLE"
++        ):
++            raise ValueError(
++                f"Automatic alignment supports SINGLE only: {run}"
++            )
++
++        if (
++            "instrument_platform" in row
++            and row["instrument_platform"] != "ILLUMINA"
++        ):
++            raise ValueError(
++                f"Automatic alignment supports ILLUMINA only: {run}"
++            )
++
++        expected_destination = f"inputs/{run}.fastq.gz"
++
++        if row.get("destination") != expected_destination:
++            raise ValueError(
++                f"Unexpected staged destination for {run}: "
++                f"{row.get('destination')}"
++            )
++
++        source = (
++            source_root
++            / relative_path(
++                row["source_relative"]
++            )
++        )
++
++        target = relative_path(
++            row["destination"]
++        )
++
++        if not source.is_file():
++            raise ValueError(
++                f"Missing processed FASTQ: {source}"
++            )
++
++        target.parent.mkdir(
++            parents=True,
++            exist_ok=True,
++        )
++
++        temporary = target.with_name(
++            target.name + ".part"
++        )
++
++        shutil.copyfile(
++            source,
++            temporary,
++        )
++
++        check(
++            temporary,
++            row["sha256"],
++        )
++
++        if temporary.stat().st_size != int(
++            row["bytes"]
++        ):
++            raise ValueError(
++                f"Unexpected FASTQ size: {source}"
++            )
++
++        temporary.replace(
++            target
++        )
++
++        verified.append({
++            "run_accession": run,
++            "role": row["role"],
++            "sha256": row["sha256"],
++            "bytes": int(row["bytes"]),
++        })
++
++        print(
++            "[OK] Processed FASTQ copied and verified: "
++            f"{run}"
++        )
++
++    dump(
++        "inputs/verified.json",
++        {
++            "schema_version": 1,
++            "run_count": len(verified),
++            "runs": verified,
++        },
++    )
++
++    print(
++        f"[OK] Verified alignment FASTQ cohort: {len(verified)} runs"
++    )
+ 
+ 
+ def mapping_reference():
+@@ -192,7 +306,7 @@ def scan_sam(lines, mt, threshold):
+             continue
+         counts["primary_reads"] += 1
+         if flag & 1:
+-            raise ValueError("Unexpected paired record in SINGLE pilot")
++            raise ValueError("Unexpected paired record in SINGLE alignment input")
+         if flag & 4:
+             counts["unmapped_reads"] += 1
+             continue
