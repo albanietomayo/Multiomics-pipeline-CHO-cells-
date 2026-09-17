@@ -1,0 +1,13 @@
+{
+  "active_run_count": 120,
+  "baseline_preserved": true,
+  "baseline_run_count": 120,
+  "decision_origin_counts": {
+    "baseline_curated_review": 120
+  },
+  "eligibility_counts": {
+    "retained_by_rules": 120
+  },
+  "new_run_count": 0,
+  "schema_version": 1
+}

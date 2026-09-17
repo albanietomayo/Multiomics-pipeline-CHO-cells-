@@ -71,3 +71,47 @@ PRJNA865478 is not treated as a universal ChIP-seq default.
 Peak-calling parameter generalization is handled separately after
 analysis-pair generalization, allowing assay/study-specific policies to
 be introduced without altering the biological pairing logic.
+
+## Incremental experimental eligibility
+
+The second generalization layer replaces the assumption that the active
+ChIP-seq catalogue must contain exactly the runs present in the original
+curated eligibility review.
+
+Previously reviewed runs retain their curated decision unchanged.
+
+For a previously unseen run, automatic protocol eligibility is deliberately
+restricted to the experimentally reviewed envelope. A new run is retained
+automatically only when its study, library role, histone target and resolved
+condition exactly match a combination already represented by a retained
+baseline run from a study explicitly enabled for incremental classification.
+
+Therefore, the incremental eligibility layer supports new sequencing runs
+or later ENA depositions belonging to an already reviewed experimental
+design without extending the biological interpretation beyond the available
+evidence.
+
+A new study, new experimental condition, new histone target, unresolved
+label or documented issue is assigned `review_required`.
+
+This distinction is deliberate: automatic catalogue refresh does not imply
+automatic scientific approval of previously unseen experimental designs.
+
+## Eligibility does not imply control pairing
+
+Incremental protocol eligibility and IP/Input pairing are intentionally
+separate decisions.
+
+A newly discovered run may fall inside the reviewed protocol envelope and
+therefore be eligible for processing while still failing automatic control
+pairing. For example, if an ENA refresh introduces an additional Input
+compatible with an experimental condition that already has an Input, the
+control-candidate layer may convert the corresponding pairing from unique
+to ambiguous.
+
+Such cases remain `review_required`; incremental eligibility never grants
+permission to select arbitrarily among multiple compatible controls.
+
+Conversely, a new IP deposited for an already reviewed condition can reuse
+an existing unique compatible Input when the control-candidate rules resolve
+that association deterministically.

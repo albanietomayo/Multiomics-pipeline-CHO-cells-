@@ -1,0 +1,16 @@
+{
+  "analysis_status": "ready",
+  "analysis_status_counts": {
+    "blocked_no_control": 90,
+    "ready": 19,
+    "review_required": 6
+  },
+  "candidate_status": "single_candidate_needs_review",
+  "incremental_eligibility": "retained_by_rules",
+  "resolved_existing_input": "SRR20770287",
+  "result": "pass",
+  "scenario": "new_ip_inside_reviewed_protocol_envelope",
+  "schema_version": 1,
+  "synthetic_ip": "SYNTH_NEW_IP",
+  "total_ip_analyses": 115
+}

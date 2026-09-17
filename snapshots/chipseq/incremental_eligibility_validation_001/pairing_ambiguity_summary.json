@@ -1,0 +1,13 @@
+{
+  "automatic_pairing_allowed": false,
+  "candidate_input_runs": [
+    "SRR20770287",
+    "SYNTH_SECOND_INPUT"
+  ],
+  "candidate_status": "multiple_candidates_needs_review",
+  "expected_downstream_state": "review_required",
+  "result": "pass",
+  "scenario": "additional_compatible_input_introduced",
+  "schema_version": 1,
+  "synthetic_ip": "SYNTH_NEW_IP"
+}

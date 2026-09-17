@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "scope": "incremental_experimental_protocol_eligibility",
+  "strategy": "reviewed_protocol_envelope",
+  "require_resolved_labels": true,
+  "require_resolved_conditions": true,
+  "reject_documented_issues_for_new_runs": true,
+  "default_new_run_status": "review_required",
+  "automatic_studies": {
+    "PRJEB9291": {
+      "automatic_new_runs": true,
+      "required_evidence_type": "archived_ena_xml"
+    },
+    "PRJNA865478": {
+      "automatic_new_runs": true,
+      "required_evidence_type": "publication_methods"
+    }
+  }
+}
