@@ -1,0 +1,10 @@
+failed_job=10303688
+failed_submission=/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq/results/chipseq/peak_calling/slurm/submission_2lw0hhph
+workflow_status=completed_6_of_6_exit_0
+slurm_status=FAILED_120
+failure_stage=output_copy
+reason=home_quota_exhaustion_during_publish
+deleted_file=/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq/results/chipseq/peak_calling/slurm/submission_2lw0hhph/job_10303688/outputs/peaks/H3K4me3_day3_control_lambda.bdg
+deleted_file_bytes=2574249984
+action=remove_large_published_copy_from_failed_incomplete_job_before_rerun
+timestamp_utc=2026-09-17T10:03:59Z
