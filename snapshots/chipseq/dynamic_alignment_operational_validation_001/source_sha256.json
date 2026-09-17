@@ -1,0 +1,8 @@
+{
+  "config/chipseq_alignment.json": "0b97f4af0d758882c0d7f3b6cac26135c6d17ec1f01ff8b946c179f1a2ca1aee",
+  "docs/chipseq_incremental_generalization.md": "219852033c4eb70651fd172751eb46cfbdc85f86df1688daa26f03db33d44d19",
+  "workflow/scripts/chipseq_alignment_support.py": "583c532cb22a0d22ca3e92e660569b890d0b336670ba94ecbc7bd67096194e99",
+  "workflow/slurm/chipseq_alignment.sbatch": "66eac42a2894cb17376781be9ee7b310127d592dfe4a44ce13ec7d0819bb74ac",
+  "workflow/slurm/submit_chipseq_alignment.py": "291c0eab6bca56fe6e3c9a5ed1b9f5a35e0f475c851d698c740ff2e4fcb6b7cc",
+  "workflow/tests/test_chipseq_alignment_operational.py": "1730f754ec8f5239f6736368c5cc77b36002293bb29b3bd6ec0238bed0f3711d"
+}

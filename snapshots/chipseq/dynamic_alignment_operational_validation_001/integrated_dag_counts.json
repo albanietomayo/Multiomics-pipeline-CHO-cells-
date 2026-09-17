@@ -1,0 +1,17 @@
+{
+  "planned_jobs_total": 72,
+  "planned_rule_jobs": {
+    "chipseq_align_pilot_run": 0,
+    "chipseq_align_run": 22,
+    "chipseq_alignment_all": 1,
+    "chipseq_alignment_metrics": 22,
+    "chipseq_alignment_summary": 1,
+    "chipseq_bam_index": 22,
+    "chipseq_bowtie2_index": 1,
+    "chipseq_experimental_eligibility": 0,
+    "chipseq_fasta_index": 1,
+    "chipseq_mapping_reference": 1,
+    "chipseq_nuclear_reference": 1
+  },
+  "schema_version": 1
+}

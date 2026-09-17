@@ -58,50 +58,6 @@ def check(path, expected):
         raise ValueError(f"SHA-256 mismatch: {path}")
 
 
-def prepare(root):
-    root = Path(root).resolve()
-    config = json.loads((root / "config/chipseq_alignment.json").read_text())
-    if config["schema_version"] != 1:
-        raise ValueError("Unsupported schema")
-    source = root / relative_path(config["source_project"])
-    hashfile = root / relative_path(config["source_checksums"])
-    statusfile = root / relative_path(config["source_job_status"])
-    status = dict(line.split() for line in statusfile.read_text().splitlines() if line.strip())
-    if status.get("exit_status") != "0" or status.get("workflow_exit_status") != "0":
-        raise ValueError("Upstream preprocessing job did not complete successfully")
-    hashes = checksums(hashfile)
-    report = "results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv"
-    job_report = "results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv"
-    for name in (report, job_report):
-        check(source / name, hashes[name])
-    rows, jobs = table(source / report), table(source / job_report)
-    pilot = json.loads((root / "config/chipseq_pilot.json").read_text())
-    roles = {pilot["ip_run_accession"]: "ip", pilot["input_run_accession"]: "input"}
-    for collection in (rows, jobs):
-        if len(collection) != 2 or {r["run_accession"] for r in collection} != set(roles):
-            raise ValueError("Upstream QC tables do not match the current pilot")
-    plan = []
-    for row in sorted(rows, key=lambda r: r["run_accession"]):
-        run = row["run_accession"]
-        if not re.fullmatch(r"[DES]RR[0-9]+", run) or row["fastq_role"] != "SINGLE":
-            raise ValueError("This pilot workflow currently supports SINGLE runs only")
-        job = next(r for r in jobs if r["run_accession"] == run)
-        if row["study_accession"] != pilot["study_accession"] or row["omics"] != "ChIP-seq":
-            raise ValueError("Upstream study or modality mismatch")
-        processed = str(relative_path(row["processed_fastq"]))
-        fastq = source / processed
-        if not fastq.is_file() or fastq.stat().st_size <= 0:
-            raise ValueError(f"Missing processed FASTQ: {fastq}")
-        reads = int(job["reads_after"])
-        if reads <= 0 or reads != int(row["post_total_sequences"]):
-            raise ValueError("Inconsistent processed read count")
-        plan.append(dict(run_accession=run, role=roles[run], source_relative=processed,
-                         sha256=hashes[processed], bytes=fastq.stat().st_size, reads=reads,
-                         destination=f"inputs/{run}.fastq.gz"))
-    return dict(schema_version=1, source_root=str(source.resolve()), runs=plan,
-                upstream_checksums_sha256=sha(hashfile), upstream_status_sha256=sha(statusfile),
-                reports_sha256={name: hashes[name] for name in (report, job_report)})
-
 
 def stage():
     plan = json.loads(
@@ -400,14 +356,12 @@ def publish(save):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="action", required=True)
-    p = sub.add_parser("prepare"); p.add_argument("--root", required=True); p.add_argument("--output", required=True)
     sub.add_parser("stage"); sub.add_parser("reference")
     p = sub.add_parser("qc"); p.add_argument("--run", required=True); p.add_argument("--bam", required=True); p.add_argument("--output", required=True)
     p = sub.add_parser("summarize"); p.add_argument("--output", required=True); p.add_argument("reports", nargs="+")
     p = sub.add_parser("publish"); p.add_argument("--save", required=True)
     args = parser.parse_args()
-    if args.action == "prepare": dump(args.output, prepare(args.root))
-    elif args.action == "stage": stage()
+    if args.action == "stage": stage()
     elif args.action == "reference": mapping_reference()
     elif args.action == "qc": qc(args.run, args.bam, args.output)
     elif args.action == "publish": publish(args.save)

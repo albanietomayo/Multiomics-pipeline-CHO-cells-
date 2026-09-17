@@ -1,0 +1,13 @@
+config/chipseq_alignment.json: OK
+config/chipseq_alignment_inputs.json: OK
+config/config.yaml: OK
+docs/chipseq_incremental_generalization.md: OK
+environment.yml: OK
+workflow/envs/chipseq_alignment.yaml: OK
+workflow/envs/reference.yaml: OK
+workflow/rules/chipseq_alignment.smk: OK
+workflow/scripts/chipseq_alignment_support.py: OK
+workflow/scripts/fetch_reference_genome.py: OK
+workflow/scripts/prepare_chipseq_alignment_inputs.py: OK
+workflow/slurm/chipseq_alignment.sbatch: OK
+workflow/slurm/submit_chipseq_alignment.py: OK

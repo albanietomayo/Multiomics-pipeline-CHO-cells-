@@ -254,3 +254,37 @@ submission-layer integration phase.
 The dynamic alignment runtime is validated with synthetic FASTQ
 fixtures and a Snakemake dry-run. No Bowtie2 alignment is executed in
 this phase.
+
+## Dynamic alignment operational integration
+
+The alignment submission layer resolves its upstream data from the
+latest submitted dynamic ChIP-seq preprocessing workflow, but does not
+assume that the latest submission completed successfully.
+
+Before an alignment submission can be prepared, the operational layer
+requires the preprocessing submission to contain a numeric `job_id.txt`,
+a corresponding `job_<id>/job_status.tsv` with both workflow and final
+exit status equal to zero, and `job_<id>/output.sha256`.
+
+The complete preprocessing output manifest is revalidated against the
+preprocessing submission `project/` directory. The dynamic processing
+run table and both preprocessing QC tables are then required explicitly.
+
+Only after those checks does the Phase 4A planner construct
+`config/chipseq_alignment_inputs.json`. The generated plan therefore
+binds the alignment submission to one verified preprocessing project,
+its dynamic run cohort and the SHA-256-verified processed FASTQ files.
+
+The legacy pilot-specific `support.prepare()` interface, frozen
+`submission_ouZEJU` paths, `chipseq_pilot.json` dependency and pilot
+eligibility preflight are no longer part of the operational alignment
+path.
+
+The alignment SLURM wrapper now validates the generated dynamic plan,
+stages and SHA-256-verifies all planned FASTQs, performs a full Snakemake
+dry-run and only then enters the real alignment stage.
+
+Operational validation of Phase 4C uses an isolated synthetic successful
+preprocessing submission. The production 22-run preprocessing workflow
+has not yet been executed, so the real project is expected to fail
+closed until a successful dynamic preprocessing submission exists.

@@ -1,0 +1,14 @@
+{
+  "alignment_run_count": 22,
+  "instrument_platform": "ILLUMINA",
+  "library_layout": "SINGLE",
+  "pilot_regression_subset_present": true,
+  "role_counts": {
+    "input": 4,
+    "ip": 18
+  },
+  "schema_version": 1,
+  "source_root_matches_verified_preprocessing_project": true,
+  "upstream_job_status_success": true,
+  "upstream_output_manifest_verified": true
+}

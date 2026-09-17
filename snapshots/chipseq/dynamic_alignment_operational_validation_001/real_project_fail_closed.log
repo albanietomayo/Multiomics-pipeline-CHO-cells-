@@ -1,0 +1,2 @@
+EXPECTED_FAIL_CLOSED_REASON=No submitted dynamic ChIP preprocessing is available: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq_generalization/results/chipseq/preprocessing/slurm/latest_submission.txt
+REAL_PROJECT_WITHOUT_DYNAMIC_PREPROCESSING=FAIL_CLOSED_PASS

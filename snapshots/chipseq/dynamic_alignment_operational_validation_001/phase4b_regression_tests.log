@@ -1,0 +1,9 @@
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.003s
+
+OK
+[OK] Processed FASTQ copied and verified: SRR100
+[OK] Processed FASTQ copied and verified: SRR101
+[OK] Processed FASTQ copied and verified: SRR102
+[OK] Verified alignment FASTQ cohort: 3 runs

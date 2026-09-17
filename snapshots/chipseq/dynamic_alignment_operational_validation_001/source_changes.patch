@@ -1,0 +1,1342 @@
+diff --git a/config/chipseq_alignment.json b/config/chipseq_alignment.json
+index 784185e..f907ded 100644
+--- a/config/chipseq_alignment.json
++++ b/config/chipseq_alignment.json
+@@ -1,13 +1,14 @@
+ {
+-  "schema_version": 1,
+-  "source_project": "results/chipseq/preprocessing/slurm/submission_ouZEJU/project",
+-  "source_checksums": "results/chipseq/preprocessing/slurm/submission_ouZEJU/job_10280363/output.sha256",
+-  "source_job_status": "results/chipseq/preprocessing/slurm/submission_ouZEJU/job_10280363/job_status.tsv",
+-  "mitochondrial_accession": "NC_007936.1",
+   "bowtie2_mode": "local",
+   "bowtie2_preset": "very-sensitive-local",
+   "bowtie2_seed": 0,
+   "diagnostic_mapq": 30,
+-  "threads": 8,
+-  "scope": "single_end_pilot_alignment_and_qc"
++  "mitochondrial_accession": "NC_007936.1",
++  "preprocessing_latest_submission": "results/chipseq/preprocessing/slurm/latest_submission.txt",
++  "processing_runs": "results/metadata/chipseq/ena_snapshot_001/analysis_plan/chipseq_processing_runs.tsv",
++  "qc_by_fastq": "results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv",
++  "qc_by_job": "results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv",
++  "schema_version": 1,
++  "scope": "dynamic_single_end_alignment_and_qc",
++  "threads": 8
+ }
+diff --git a/docs/chipseq_incremental_generalization.md b/docs/chipseq_incremental_generalization.md
+index d450799..4083f86 100644
+--- a/docs/chipseq_incremental_generalization.md
++++ b/docs/chipseq_incremental_generalization.md
+@@ -254,3 +254,37 @@ submission-layer integration phase.
+ The dynamic alignment runtime is validated with synthetic FASTQ
+ fixtures and a Snakemake dry-run. No Bowtie2 alignment is executed in
+ this phase.
++
++## Dynamic alignment operational integration
++
++The alignment submission layer resolves its upstream data from the
++latest submitted dynamic ChIP-seq preprocessing workflow, but does not
++assume that the latest submission completed successfully.
++
++Before an alignment submission can be prepared, the operational layer
++requires the preprocessing submission to contain a numeric `job_id.txt`,
++a corresponding `job_<id>/job_status.tsv` with both workflow and final
++exit status equal to zero, and `job_<id>/output.sha256`.
++
++The complete preprocessing output manifest is revalidated against the
++preprocessing submission `project/` directory. The dynamic processing
++run table and both preprocessing QC tables are then required explicitly.
++
++Only after those checks does the Phase 4A planner construct
++`config/chipseq_alignment_inputs.json`. The generated plan therefore
++binds the alignment submission to one verified preprocessing project,
++its dynamic run cohort and the SHA-256-verified processed FASTQ files.
++
++The legacy pilot-specific `support.prepare()` interface, frozen
++`submission_ouZEJU` paths, `chipseq_pilot.json` dependency and pilot
++eligibility preflight are no longer part of the operational alignment
++path.
++
++The alignment SLURM wrapper now validates the generated dynamic plan,
++stages and SHA-256-verifies all planned FASTQs, performs a full Snakemake
++dry-run and only then enters the real alignment stage.
++
++Operational validation of Phase 4C uses an isolated synthetic successful
++preprocessing submission. The production 22-run preprocessing workflow
++has not yet been executed, so the real project is expected to fail
++closed until a successful dynamic preprocessing submission exists.
+diff --git a/workflow/scripts/chipseq_alignment_support.py b/workflow/scripts/chipseq_alignment_support.py
+index a795eb1..4001544 100644
+--- a/workflow/scripts/chipseq_alignment_support.py
++++ b/workflow/scripts/chipseq_alignment_support.py
+@@ -58,50 +58,6 @@ def check(path, expected):
+         raise ValueError(f"SHA-256 mismatch: {path}")
+ 
+ 
+-def prepare(root):
+-    root = Path(root).resolve()
+-    config = json.loads((root / "config/chipseq_alignment.json").read_text())
+-    if config["schema_version"] != 1:
+-        raise ValueError("Unsupported schema")
+-    source = root / relative_path(config["source_project"])
+-    hashfile = root / relative_path(config["source_checksums"])
+-    statusfile = root / relative_path(config["source_job_status"])
+-    status = dict(line.split() for line in statusfile.read_text().splitlines() if line.strip())
+-    if status.get("exit_status") != "0" or status.get("workflow_exit_status") != "0":
+-        raise ValueError("Upstream preprocessing job did not complete successfully")
+-    hashes = checksums(hashfile)
+-    report = "results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv"
+-    job_report = "results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv"
+-    for name in (report, job_report):
+-        check(source / name, hashes[name])
+-    rows, jobs = table(source / report), table(source / job_report)
+-    pilot = json.loads((root / "config/chipseq_pilot.json").read_text())
+-    roles = {pilot["ip_run_accession"]: "ip", pilot["input_run_accession"]: "input"}
+-    for collection in (rows, jobs):
+-        if len(collection) != 2 or {r["run_accession"] for r in collection} != set(roles):
+-            raise ValueError("Upstream QC tables do not match the current pilot")
+-    plan = []
+-    for row in sorted(rows, key=lambda r: r["run_accession"]):
+-        run = row["run_accession"]
+-        if not re.fullmatch(r"[DES]RR[0-9]+", run) or row["fastq_role"] != "SINGLE":
+-            raise ValueError("This pilot workflow currently supports SINGLE runs only")
+-        job = next(r for r in jobs if r["run_accession"] == run)
+-        if row["study_accession"] != pilot["study_accession"] or row["omics"] != "ChIP-seq":
+-            raise ValueError("Upstream study or modality mismatch")
+-        processed = str(relative_path(row["processed_fastq"]))
+-        fastq = source / processed
+-        if not fastq.is_file() or fastq.stat().st_size <= 0:
+-            raise ValueError(f"Missing processed FASTQ: {fastq}")
+-        reads = int(job["reads_after"])
+-        if reads <= 0 or reads != int(row["post_total_sequences"]):
+-            raise ValueError("Inconsistent processed read count")
+-        plan.append(dict(run_accession=run, role=roles[run], source_relative=processed,
+-                         sha256=hashes[processed], bytes=fastq.stat().st_size, reads=reads,
+-                         destination=f"inputs/{run}.fastq.gz"))
+-    return dict(schema_version=1, source_root=str(source.resolve()), runs=plan,
+-                upstream_checksums_sha256=sha(hashfile), upstream_status_sha256=sha(statusfile),
+-                reports_sha256={name: hashes[name] for name in (report, job_report)})
+-
+ 
+ def stage():
+     plan = json.loads(
+@@ -400,14 +356,12 @@ def publish(save):
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     sub = parser.add_subparsers(dest="action", required=True)
+-    p = sub.add_parser("prepare"); p.add_argument("--root", required=True); p.add_argument("--output", required=True)
+     sub.add_parser("stage"); sub.add_parser("reference")
+     p = sub.add_parser("qc"); p.add_argument("--run", required=True); p.add_argument("--bam", required=True); p.add_argument("--output", required=True)
+     p = sub.add_parser("summarize"); p.add_argument("--output", required=True); p.add_argument("reports", nargs="+")
+     p = sub.add_parser("publish"); p.add_argument("--save", required=True)
+     args = parser.parse_args()
+-    if args.action == "prepare": dump(args.output, prepare(args.root))
+-    elif args.action == "stage": stage()
++    if args.action == "stage": stage()
+     elif args.action == "reference": mapping_reference()
+     elif args.action == "qc": qc(args.run, args.bam, args.output)
+     elif args.action == "publish": publish(args.save)
+diff --git a/workflow/slurm/chipseq_alignment.sbatch b/workflow/slurm/chipseq_alignment.sbatch
+old mode 100644
+new mode 100755
+index 137a829..67afb76
+--- a/workflow/slurm/chipseq_alignment.sbatch
++++ b/workflow/slurm/chipseq_alignment.sbatch
+@@ -5,66 +5,269 @@
+ #SBATCH --cpus-per-task=8
+ #SBATCH --mem=32G
+ #SBATCH --time=06:00:00
++
+ set -euo pipefail
++
+ : "${TMPDIR:?Node-local TMPDIR required}"
++
+ CHIP_SOURCE="$PWD"
+ CHIP_SAVE="$(dirname "$CHIP_SOURCE")/job_${SLURM_JOB_ID}"
+ CHIP_WORK="$TMPDIR/chipseq-alignment"
+-mkdir -p "$CHIP_SAVE" "$CHIP_WORK"
+ CHIP_STAGE=source_validation
++
++mkdir -p \
++    "$CHIP_SAVE" \
++    "$CHIP_WORK"
++
+ finish() {
+     CHIP_EXIT=$?
++
+     trap - EXIT
+     set +e
++
+     if [[ -d "$CHIP_WORK/results/chipseq/alignment" && "$CHIP_EXIT" != 0 ]]; then
+-        rsync -a --exclude='*.bam' --exclude='*.csi' --exclude='*.gz' \
+-            "$CHIP_WORK/results/chipseq/alignment/" "$CHIP_SAVE/failure_reports/" \
+-            > "$CHIP_SAVE/failure_copy.log" 2>&1
++
++        rsync -a \
++            --exclude='*.bam' \
++            --exclude='*.csi' \
++            --exclude='*.gz' \
++            "$CHIP_WORK/results/chipseq/alignment/" \
++            "$CHIP_SAVE/failure_reports/" \
++            > "$CHIP_SAVE/failure_copy.log" \
++            2>&1
+     fi
++
+     if [[ -d "$CHIP_WORK/.snakemake/log" ]]; then
+-        rsync -a "$CHIP_WORK/.snakemake/log/" "$CHIP_SAVE/snakemake_logs/"
++        rsync -a \
++            "$CHIP_WORK/.snakemake/log/" \
++            "$CHIP_SAVE/snakemake_logs/"
+     fi
+-    printf 'stage\t%s\nexit_status\t%s\n' "$CHIP_STAGE" "$CHIP_EXIT" > "$CHIP_SAVE/job_status.tsv"
+-    echo "Alignment exit=$CHIP_EXIT; stage=$CHIP_STAGE; logs=$CHIP_SAVE"
++
++    printf \
++        'stage\t%s\nexit_status\t%s\n' \
++        "$CHIP_STAGE" \
++        "$CHIP_EXIT" \
++        > "$CHIP_SAVE/job_status.tsv"
++
++    echo \
++        "Alignment exit=$CHIP_EXIT; stage=$CHIP_STAGE; logs=$CHIP_SAVE"
++
+     exit "$CHIP_EXIT"
+ }
++
+ trap finish EXIT
+-sha256sum --check ../source.sha256 > "$CHIP_SAVE/source_validation.log"
+-rsync -a "$CHIP_SOURCE/" "$CHIP_WORK/"
++
++sha256sum \
++    --check ../source.sha256 \
++    > "$CHIP_SAVE/source_validation.log"
++
++rsync -a \
++    "$CHIP_SOURCE/" \
++    "$CHIP_WORK/"
++
+ cd "$CHIP_WORK"
++
+ module purge
+ module load Miniforge3/24.1.2-0
++
+ export CONDA_PKGS_DIRS="$TMPDIR/chipseq-alignment-conda-pkgs"
+ export XDG_CACHE_HOME="$TMPDIR/chipseq-alignment-cache"
+ export PYTHONDONTWRITEBYTECODE=1
++
++mkdir -p \
++    "$CONDA_PKGS_DIRS" \
++    "$XDG_CACHE_HOME"
++
+ CHIP_ENV="$TMPDIR/chipseq-alignment-env"
+ CHIP_RULE_ENVS="$TMPDIR/chipseq-alignment-rule-envs"
++
+ CHIP_STAGE=environment_creation
+-conda env create --prefix "$CHIP_ENV" --file environment.yml > "$CHIP_SAVE/environment_creation.log" 2>&1
++
++conda env create \
++    --prefix "$CHIP_ENV" \
++    --file environment.yml \
++    > "$CHIP_SAVE/environment_creation.log" \
++    2>&1
++
+ export PATH="$CHIP_ENV/bin:$PATH"
+-snakemake --version > "$CHIP_SAVE/snakemake_version.txt"
+-conda list --prefix "$CHIP_ENV" --explicit > "$CHIP_SAVE/environment_explicit.txt"
+-CHIP_ARGS=(--snakefile workflow/rules/chipseq_alignment.smk --cores "$SLURM_CPUS_PER_TASK"
+-    --use-conda --conda-prefix "$CHIP_RULE_ENVS" --rerun-incomplete)
+-CHIP_STAGE=eligibility
+-snakemake chipseq_experimental_eligibility "${CHIP_ARGS[@]}" -p > "$CHIP_SAVE/eligibility.log" 2>&1
++
++snakemake --version \
++    > "$CHIP_SAVE/snakemake_version.txt"
++
++python --version \
++    > "$CHIP_SAVE/python_version.txt" \
++    2>&1
++
++conda list \
++    --prefix "$CHIP_ENV" \
++    --explicit \
++    > "$CHIP_SAVE/environment_explicit.txt"
++
++CHIP_ARGS=(
++    --snakefile workflow/rules/chipseq_alignment.smk
++    --cores "$SLURM_CPUS_PER_TASK"
++    --use-conda
++    --conda-prefix "$CHIP_RULE_ENVS"
++    --rerun-incomplete
++)
++
++CHIP_STAGE=alignment_plan_validation
++
++python - <<'PY' \
++    > "$CHIP_SAVE/alignment_plan_validation.log"
++import json
++from collections import Counter
++from pathlib import Path
++
++path = Path(
++    "config/chipseq_alignment_inputs.json"
++)
++
++obj = json.loads(
++    path.read_text(
++        encoding="utf-8"
++    )
++)
++
++if obj.get("schema_version") != 1:
++    raise ValueError(
++        "Unsupported alignment-plan schema"
++    )
++
++runs = obj.get(
++    "runs"
++)
++
++if not isinstance(
++    runs,
++    list,
++) or not runs:
++    raise ValueError(
++        "Alignment plan contains no runs"
++    )
++
++accessions = [
++    row["run_accession"]
++    for row in runs
++]
++
++if len(accessions) != len(
++    set(accessions)
++):
++    raise ValueError(
++        "Duplicate run accessions in alignment plan"
++    )
++
++roles = Counter(
++    row["role"]
++    for row in runs
++)
++
++if set(roles) - {
++    "ip",
++    "input",
++}:
++    raise ValueError(
++        f"Unexpected roles: {dict(roles)}"
++    )
++
++if roles["ip"] < 1:
++    raise ValueError(
++        "Alignment plan contains no IP runs"
++    )
++
++if roles["input"] < 1:
++    raise ValueError(
++        "Alignment plan contains no Input runs"
++    )
++
++if obj.get(
++    "library_layout"
++) != "SINGLE":
++    raise ValueError(
++        "Operational alignment supports SINGLE only"
++    )
++
++if obj.get(
++    "instrument_platform"
++) != "ILLUMINA":
++    raise ValueError(
++        "Operational alignment supports ILLUMINA only"
++    )
++
++print(
++    f"alignment_runs={len(runs)}"
++)
++
++print(
++    f"ip_runs={roles['ip']}"
++)
++
++print(
++    f"input_runs={roles['input']}"
++)
++
++print(
++    "DYNAMIC_ALIGNMENT_PLAN_VALIDATION=PASS"
++)
++PY
++
+ CHIP_STAGE=verified_fastq_copy
+-python workflow/scripts/chipseq_alignment_support.py stage > "$CHIP_SAVE/fastq_copy_validation.log" 2>&1
++
++python \
++    workflow/scripts/chipseq_alignment_support.py \
++    stage \
++    > "$CHIP_SAVE/fastq_copy_validation.log" \
++    2>&1
++
+ CHIP_STAGE=dry_run
+-snakemake chipseq_alignment_all "${CHIP_ARGS[@]}" -n > "$CHIP_SAVE/dry_run.log" 2>&1
++
++snakemake \
++    chipseq_alignment_all \
++    "${CHIP_ARGS[@]}" \
++    -n \
++    -p \
++    > "$CHIP_SAVE/dry_run.log" \
++    2>&1
++
+ CHIP_STAGE=alignment
+-/usr/bin/time -v -o "$CHIP_SAVE/workflow_resources.txt" \
+-    snakemake chipseq_alignment_all "${CHIP_ARGS[@]}" -p > "$CHIP_SAVE/snakemake_execution.log" 2>&1
++
++/usr/bin/time \
++    -v \
++    -o "$CHIP_SAVE/workflow_resources.txt" \
++    snakemake \
++        chipseq_alignment_all \
++        "${CHIP_ARGS[@]}" \
++        -p \
++        > "$CHIP_SAVE/snakemake_execution.log" \
++        2>&1
++
+ CHIP_STAGE=environment_provenance
+-mkdir -p "$CHIP_SAVE/rule_environments"
+-for CHIP_RULE_ENV in "$CHIP_RULE_ENVS"/*; do
++
++mkdir -p \
++    "$CHIP_SAVE/rule_environments"
++
++for CHIP_RULE_ENV in "$CHIP_RULE_ENVS"/*
++do
+     if [[ -d "$CHIP_RULE_ENV/conda-meta" ]]; then
+-        conda list --prefix "$CHIP_RULE_ENV" --explicit \
++
++        conda list \
++            --prefix "$CHIP_RULE_ENV" \
++            --explicit \
+             > "$CHIP_SAVE/rule_environments/$(basename "$CHIP_RULE_ENV").txt"
+     fi
+ done
++
+ CHIP_STAGE=output_copy
+-python workflow/scripts/chipseq_alignment_support.py publish --save "$CHIP_SAVE" \
+-    > "$CHIP_SAVE/output_copy_validation.log" 2>&1
++
++python \
++    workflow/scripts/chipseq_alignment_support.py \
++    publish \
++    --save "$CHIP_SAVE" \
++    > "$CHIP_SAVE/output_copy_validation.log" \
++    2>&1
++
+ CHIP_STAGE=completed
+-echo "[OK] Pilot alignment and QC completed; outputs copied and verified."
++
++echo \
++    "[OK] Dynamic ChIP alignment and QC completed; outputs copied and verified."
+diff --git a/workflow/slurm/submit_chipseq_alignment.py b/workflow/slurm/submit_chipseq_alignment.py
+old mode 100644
+new mode 100755
+index 44f8c75..4511dff
+--- a/workflow/slurm/submit_chipseq_alignment.py
++++ b/workflow/slurm/submit_chipseq_alignment.py
+@@ -1,85 +1,833 @@
+ #!/usr/bin/env python3
+-"""Snapshot and validate a ChIP pilot alignment submission; optionally submit."""
++
++"""
++Create a reproducible dynamic ChIP-seq alignment submission.
++
++The alignment input plan is generated from the latest successfully
++completed dynamic ChIP-seq preprocessing submission.
++
++--check validates and snapshots the submission without calling sbatch.
++--submit performs the same validation and then submits the job.
++"""
++
+ import argparse
+-import importlib.util
++import hashlib
+ import json
+ import re
+ import shutil
+ import subprocess
++import sys
+ import tempfile
+ from pathlib import Path
+ 
++
+ ROOT = Path(__file__).resolve().parents[2]
++
++EXPECTED_BRANCH = (
++    "chipseq-incremental-generalization"
++)
++
+ FILES = [
+-    "environment.yml", "config/config.yaml", "config/samples.tsv", "config/chipseq_pilot.json",
+-    "config/chipseq_experimental_eligibility.json", "config/chipseq_alignment.json",
+-    "workflow/rules/chipseq_alignment.smk", "workflow/rules/chipseq_eligibility.smk",
+-    "workflow/scripts/validate_chipseq_eligibility.py", "workflow/scripts/fetch_reference_genome.py",
+-    "workflow/scripts/chipseq_alignment_support.py", "workflow/envs/reference.yaml",
+-    "workflow/envs/chipseq_alignment.yaml", "workflow/slurm/chipseq_alignment.sbatch",
+-    "workflow/slurm/submit_chipseq_alignment.py", "docs/chipseq_alignment_pilot.md",
+-    "snapshots/chipseq/control_validation_001/chipseq_conditions.tsv",
+-    "snapshots/chipseq/control_validation_001/control_candidate_summary.json",
+-    "snapshots/chipseq/control_validation_001/request_plan_provenance.json",
++    "environment.yml",
++    "config/config.yaml",
++    "config/chipseq_alignment.json",
++    "workflow/rules/chipseq_alignment.smk",
++    "workflow/scripts/fetch_reference_genome.py",
++    "workflow/scripts/chipseq_alignment_support.py",
++    "workflow/scripts/prepare_chipseq_alignment_inputs.py",
++    "workflow/envs/reference.yaml",
++    "workflow/envs/chipseq_alignment.yaml",
++    "workflow/slurm/chipseq_alignment.sbatch",
++    "workflow/slurm/submit_chipseq_alignment.py",
++    "docs/chipseq_incremental_generalization.md",
+ ]
+ 
+ 
++def sha256(path):
++    digest = hashlib.sha256()
++
++    with Path(path).open("rb") as handle:
++        for chunk in iter(
++            lambda: handle.read(1024 * 1024),
++            b"",
++        ):
++            digest.update(chunk)
++
++    return digest.hexdigest()
++
++
++def relative_path(value):
++    path = Path(value)
++
++    if (
++        path.is_absolute()
++        or not path.parts
++        or ".." in path.parts
++    ):
++        raise ValueError(
++            f"Expected safe project-relative path: {value}"
++        )
++
++    return path
++
++
++def read_job_status(path):
++    values = {}
++
++    with Path(path).open(
++        encoding="utf-8"
++    ) as handle:
++        for line in handle:
++            line = line.rstrip("\n")
++
++            if not line:
++                continue
++
++            fields = line.split("\t")
++
++            if len(fields) != 2:
++                raise ValueError(
++                    f"Malformed job status line: {line!r}"
++                )
++
++            key, value = fields
++
++            if key in values:
++                raise ValueError(
++                    f"Duplicate job status key: {key}"
++                )
++
++            values[key] = value
++
++    required = {
++        "workflow_exit_status",
++        "exit_status",
++    }
++
++    if set(values) != required:
++        raise ValueError(
++            "Unexpected preprocessing job-status keys: "
++            f"{sorted(values)}"
++        )
++
++    try:
++        workflow_exit = int(
++            values["workflow_exit_status"]
++        )
++
++        final_exit = int(
++            values["exit_status"]
++        )
++
++    except ValueError as exc:
++        raise ValueError(
++            "Non-integer preprocessing exit status"
++        ) from exc
++
++    return {
++        "workflow_exit_status": workflow_exit,
++        "exit_status": final_exit,
++    }
++
++
++def resolve_preprocessing_upstream(root):
++    root = Path(root).resolve()
++
++    config_path = (
++        root
++        / "config"
++        / "chipseq_alignment.json"
++    )
++
++    config = json.loads(
++        config_path.read_text(
++            encoding="utf-8"
++        )
++    )
++
++    if config.get("schema_version") != 1:
++        raise ValueError(
++            "Unsupported alignment configuration schema"
++        )
++
++    pointer_rel = relative_path(
++        config[
++            "preprocessing_latest_submission"
++        ]
++    )
++
++    pointer = root / pointer_rel
++
++    if not pointer.is_file():
++        raise ValueError(
++            "No submitted dynamic ChIP preprocessing is "
++            f"available: {pointer}"
++        )
++
++    raw_submission = pointer.read_text(
++        encoding="utf-8"
++    ).strip()
++
++    if not raw_submission:
++        raise ValueError(
++            "Dynamic preprocessing latest-submission "
++            "pointer is empty"
++        )
++
++    submission = Path(
++        raw_submission
++    )
++
++    if not submission.is_absolute():
++        submission = root / submission
++
++    submission = submission.resolve()
++
++    allowed_parent = (
++        root
++        / "results"
++        / "chipseq"
++        / "preprocessing"
++        / "slurm"
++    ).resolve()
++
++    if submission.parent != allowed_parent:
++        raise ValueError(
++            "Preprocessing submission is outside the "
++            "expected project SLURM directory"
++        )
++
++    if not re.fullmatch(
++        r"submission_[A-Za-z0-9_-]+",
++        submission.name,
++    ):
++        raise ValueError(
++            f"Unexpected preprocessing submission name: "
++            f"{submission.name}"
++        )
++
++    job_id_file = (
++        submission
++        / "job_id.txt"
++    )
++
++    if not job_id_file.is_file():
++        raise ValueError(
++            "Latest preprocessing submission has no "
++            "job_id.txt and is therefore not a completed "
++            "submitted workflow"
++        )
++
++    job_id = job_id_file.read_text(
++        encoding="utf-8"
++    ).strip()
++
++    if not re.fullmatch(
++        r"[0-9]+",
++        job_id,
++    ):
++        raise ValueError(
++            f"Invalid preprocessing job id: {job_id!r}"
++        )
++
++    job_dir = (
++        submission
++        / f"job_{job_id}"
++    )
++
++    status_file = (
++        job_dir
++        / "job_status.tsv"
++    )
++
++    if not status_file.is_file():
++        raise ValueError(
++            "Preprocessing job status is missing: "
++            f"{status_file}"
++        )
++
++    status = read_job_status(
++        status_file
++    )
++
++    if (
++        status["workflow_exit_status"] != 0
++        or status["exit_status"] != 0
++    ):
++        raise ValueError(
++            "Latest preprocessing submission did not "
++            f"complete successfully: {status}"
++        )
++
++    project = (
++        submission
++        / "project"
++    ).resolve()
++
++    if not project.is_dir():
++        raise ValueError(
++            "Preprocessing project directory is missing: "
++            f"{project}"
++        )
++
++    output_manifest = (
++        job_dir
++        / "output.sha256"
++    )
++
++    if not output_manifest.is_file():
++        raise ValueError(
++            "Successful preprocessing job is missing "
++            f"output.sha256: {output_manifest}"
++        )
++
++    verification = subprocess.run(
++        [
++            "sha256sum",
++            "--check",
++            str(output_manifest),
++        ],
++        cwd=project,
++        text=True,
++        stdout=subprocess.PIPE,
++        stderr=subprocess.STDOUT,
++    )
++
++    if verification.returncode != 0:
++        raise ValueError(
++            "Preprocessing output SHA-256 validation "
++            "failed:\n"
++            + verification.stdout
++        )
++
++    artifacts = {}
++
++    for key in (
++        "processing_runs",
++        "qc_by_fastq",
++        "qc_by_job",
++    ):
++        relative = relative_path(
++            config[key]
++        )
++
++        absolute = (
++            project
++            / relative
++        )
++
++        if not absolute.is_file():
++            raise ValueError(
++                f"Required preprocessing artifact is "
++                f"missing: {absolute}"
++            )
++
++        artifacts[key] = {
++            "relative": str(relative),
++            "absolute": str(
++                absolute.resolve()
++            ),
++            "sha256": sha256(
++                absolute
++            ),
++        }
++
++    return {
++        "schema_version": 1,
++        "preprocessing_submission": str(
++            submission
++        ),
++        "preprocessing_project": str(
++            project
++        ),
++        "preprocessing_job_id": job_id,
++        "preprocessing_job_directory": str(
++            job_dir
++        ),
++        "job_status": status,
++        "job_status_sha256": sha256(
++            status_file
++        ),
++        "output_manifest": str(
++            output_manifest
++        ),
++        "output_manifest_sha256": sha256(
++            output_manifest
++        ),
++        "output_manifest_verified": True,
++        "artifacts": artifacts,
++    }
++
++
++def create_alignment_plan(
++    root,
++    upstream,
++    output,
++):
++    root = Path(root).resolve()
++    output = Path(output)
++
++    config = json.loads(
++        (
++            root
++            / "config"
++            / "chipseq_alignment.json"
++        ).read_text(
++            encoding="utf-8"
++        )
++    )
++
++    artifacts = upstream[
++        "artifacts"
++    ]
++
++    command = [
++        sys.executable,
++        str(
++            root
++            / "workflow"
++            / "scripts"
++            / "prepare_chipseq_alignment_inputs.py"
++        ),
++        "--project-root",
++        upstream[
++            "preprocessing_project"
++        ],
++        "--processing-runs",
++        artifacts[
++            "processing_runs"
++        ]["absolute"],
++        "--qc-by-fastq",
++        artifacts[
++            "qc_by_fastq"
++        ]["absolute"],
++        "--qc-by-job",
++        artifacts[
++            "qc_by_job"
++        ]["absolute"],
++        "--output",
++        str(output),
++    ]
++
++    subprocess.run(
++        command,
++        cwd=root,
++        check=True,
++    )
++
++    plan = json.loads(
++        output.read_text(
++            encoding="utf-8"
++        )
++    )
++
++    if plan.get("schema_version") != 1:
++        raise ValueError(
++            "Unexpected generated alignment-plan schema"
++        )
++
++    if plan.get("run_count", 0) < 1:
++        raise ValueError(
++            "Generated alignment plan is empty"
++        )
++
++    if (
++        plan.get("library_layout")
++        != "SINGLE"
++    ):
++        raise ValueError(
++            "Operational alignment currently supports "
++            "SINGLE only"
++        )
++
++    if (
++        plan.get("instrument_platform")
++        != "ILLUMINA"
++    ):
++        raise ValueError(
++            "Operational alignment currently supports "
++            "ILLUMINA only"
++        )
++
++    expected_project = str(
++        Path(
++            upstream[
++                "preprocessing_project"
++            ]
++        ).resolve()
++    )
++
++    if (
++        str(
++            Path(
++                plan["source_root"]
++            ).resolve()
++        )
++        != expected_project
++    ):
++        raise ValueError(
++            "Alignment plan source_root does not match "
++            "validated preprocessing project"
++        )
++
++    if config[
++        "scope"
++    ] != "dynamic_single_end_alignment_and_qc":
++        raise ValueError(
++            "Unexpected operational alignment scope"
++        )
++
++    return plan
++
++
+ def main():
+-    parser = argparse.ArgumentParser(description=__doc__)
+-    mode = parser.add_mutually_exclusive_group(required=True)
+-    mode.add_argument("--check", action="store_true")
+-    mode.add_argument("--submit", action="store_true")
++    parser = argparse.ArgumentParser(
++        description=__doc__
++    )
++
++    mode = parser.add_mutually_exclusive_group(
++        required=True
++    )
++
++    mode.add_argument(
++        "--check",
++        action="store_true",
++    )
++
++    mode.add_argument(
++        "--submit",
++        action="store_true",
++    )
++
+     args = parser.parse_args()
+-    branch = subprocess.check_output(["git", "branch", "--show-current"], cwd=ROOT, text=True).strip()
+-    if branch != "chipseq-metadata-audit":
+-        raise ValueError(f"Unexpected branch: {branch}")
++
++    branch = subprocess.check_output(
++        [
++            "git",
++            "branch",
++            "--show-current",
++        ],
++        cwd=ROOT,
++        text=True,
++    ).strip()
++
++    if branch != EXPECTED_BRANCH:
++        raise ValueError(
++            f"Unexpected branch: {branch}"
++        )
++
+     for name in FILES:
+-        if not (ROOT / name).is_file():
+-            raise ValueError(f"Missing source: {name}")
+-    spec = importlib.util.spec_from_file_location("chip_support", ROOT / "workflow/scripts/chipseq_alignment_support.py")
+-    support = importlib.util.module_from_spec(spec)
+-    spec.loader.exec_module(support)
+-    plan = support.prepare(ROOT)
+-    subprocess.run(["bash", "-n", str(ROOT / "workflow/slurm/chipseq_alignment.sbatch")], check=True)
+-    parent = ROOT / "results/chipseq/alignment/slurm"
+-    parent.mkdir(parents=True, exist_ok=True)
+-    submission = Path(tempfile.mkdtemp(prefix="submission_", dir=parent))
+-    project = submission / "project"
++        if not (
++            ROOT
++            / name
++        ).is_file():
++            raise ValueError(
++                f"Missing source: {name}"
++            )
++
++    subprocess.run(
++        [
++            "bash",
++            "-n",
++            str(
++                ROOT
++                / "workflow"
++                / "slurm"
++                / "chipseq_alignment.sbatch"
++            ),
++        ],
++        check=True,
++    )
++
++    upstream = (
++        resolve_preprocessing_upstream(
++            ROOT
++        )
++    )
++
++    parent = (
++        ROOT
++        / "results"
++        / "chipseq"
++        / "alignment"
++        / "slurm"
++    )
++
++    parent.mkdir(
++        parents=True,
++        exist_ok=True,
++    )
++
++    submission = Path(
++        tempfile.mkdtemp(
++            prefix="submission_",
++            dir=parent,
++        )
++    )
++
++    project = (
++        submission
++        / "project"
++    )
++
+     for name in FILES:
+-        target = project / name
+-        target.parent.mkdir(parents=True, exist_ok=True)
+-        shutil.copyfile(ROOT / name, target)
+-    support.dump(project / "config/chipseq_alignment_inputs.json", plan)
+-    for command, name in ((["git", "rev-parse", "HEAD"], "base_commit.txt"),
+-                          (["git", "status", "--short"], "git_status.txt"),
+-                          (["git", "diff", "--binary", "--", *FILES], "source_changes.patch")):
+-        (submission / name).write_bytes(subprocess.check_output(command, cwd=ROOT))
+-    hashes = []
+-    for path in sorted(project.rglob("*")):
++        target = (
++            project
++            / name
++        )
++
++        target.parent.mkdir(
++            parents=True,
++            exist_ok=True,
++        )
++
++        shutil.copy2(
++            ROOT / name,
++            target,
++        )
++
++    plan_path = (
++        project
++        / "config"
++        / "chipseq_alignment_inputs.json"
++    )
++
++    plan = create_alignment_plan(
++        ROOT,
++        upstream,
++        plan_path,
++    )
++
++    (
++        submission
++        / "upstream_preprocessing.json"
++    ).write_text(
++        json.dumps(
++            {
++                **upstream,
++                "alignment_run_count": (
++                    plan["run_count"]
++                ),
++                "alignment_role_counts": (
++                    plan["role_counts"]
++                ),
++                "alignment_plan_sha256": (
++                    sha256(plan_path)
++                ),
++            },
++            indent=2,
++            sort_keys=True,
++        )
++        + "\n",
++        encoding="utf-8",
++    )
++
++    (
++        submission
++        / "base_commit.txt"
++    ).write_bytes(
++        subprocess.check_output(
++            [
++                "git",
++                "rev-parse",
++                "HEAD",
++            ],
++            cwd=ROOT,
++        )
++    )
++
++    (
++        submission
++        / "git_status.txt"
++    ).write_bytes(
++        subprocess.check_output(
++            [
++                "git",
++                "status",
++                "--short",
++            ],
++            cwd=ROOT,
++        )
++    )
++
++    (
++        submission
++        / "source_changes.patch"
++    ).write_bytes(
++        subprocess.check_output(
++            [
++                "git",
++                "diff",
++                "--binary",
++                "--",
++                *FILES,
++            ],
++            cwd=ROOT,
++        )
++    )
++
++    source_hashes = []
++
++    for path in sorted(
++        project.rglob("*")
++    ):
+         if path.is_file():
+-            hashes.append(f"{support.sha(path)}  {path.relative_to(project).as_posix()}\n")
+-    (submission / "source.sha256").write_text("".join(hashes))
+-    subprocess.run(["python3", "workflow/scripts/validate_chipseq_eligibility.py",
+-                    "--decisions", "config/chipseq_experimental_eligibility.json",
+-                    "--samples", "config/samples.tsv",
+-                    "--conditions", "snapshots/chipseq/control_validation_001/chipseq_conditions.tsv",
+-                    "--pilot", "config/chipseq_pilot.json",
+-                    "--report", str(submission / "eligibility_preflight.json")], cwd=project, check=True)
+-    print("[OK] Source snapshot, eligibility, upstream reports and FASTQ availability checked.", flush=True)
+-    print("The complete FASTQ hashes will be verified on the compute node before alignment.", flush=True)
+-    print(f"LOGS: {submission}", flush=True)
++            source_hashes.append(
++                f"{sha256(path)}  "
++                f"{path.relative_to(project).as_posix()}\n"
++            )
++
++    (
++        submission
++        / "source.sha256"
++    ).write_text(
++        "".join(
++            source_hashes
++        ),
++        encoding="utf-8",
++    )
++
++    source_validation = subprocess.run(
++        [
++            "sha256sum",
++            "--check",
++            str(
++                submission
++                / "source.sha256"
++            ),
++        ],
++        cwd=project,
++        text=True,
++        stdout=subprocess.PIPE,
++        stderr=subprocess.STDOUT,
++    )
++
++    (
++        submission
++        / "source_validation.log"
++    ).write_text(
++        source_validation.stdout,
++        encoding="utf-8",
++    )
++
++    if source_validation.returncode != 0:
++        raise ValueError(
++            "Alignment source snapshot SHA validation "
++            "failed"
++        )
++
++    subprocess.run(
++        [
++            sys.executable,
++            "-m",
++            "py_compile",
++            "workflow/scripts/"
++            "chipseq_alignment_support.py",
++            "workflow/scripts/"
++            "prepare_chipseq_alignment_inputs.py",
++            "workflow/slurm/"
++            "submit_chipseq_alignment.py",
++        ],
++        cwd=project,
++        check=True,
++    )
++
++    print(
++        "[OK] Dynamic ChIP alignment source snapshot "
++        "and preprocessing upstream validated.",
++        flush=True,
++    )
++
++    print(
++        "ALIGNMENT RUNS: "
++        f"{plan['run_count']} "
++        f"(IP={plan['role_counts']['ip']}, "
++        f"Input={plan['role_counts']['input']})",
++        flush=True,
++    )
++
++    print(
++        f"UPSTREAM PREPROCESSING: "
++        f"{upstream['preprocessing_submission']}",
++        flush=True,
++    )
++
++    print(
++        f"CHECK DIRECTORY: {submission}",
++        flush=True,
++    )
++
+     if args.check:
+-        print("[OK] Check only. No job submitted; VERA execution validation remains pending.")
++        print(
++            "[OK] Check only. No job submitted.",
++            flush=True,
++        )
+         return
+-    result = subprocess.check_output(["sbatch", "--parsable", f"--chdir={project}",
+-        f"--output={submission}/slurm_%j.out", str(project / "workflow/slurm/chipseq_alignment.sbatch")], text=True).strip()
+-    job = result.split(";")[0]
+-    if not re.fullmatch(r"[0-9]+", job):
+-        raise ValueError(f"Unexpected sbatch response: {result}")
+-    (submission / "job_id.txt").write_text(job + "\n")
+-    (parent / "latest_submission.txt").write_text(str(submission) + "\n")
+-    print(f"JOB SUBMITTED: {job}", flush=True)
+-    subprocess.run(["squeue", "-j", job, "-o", "%.18i %.26j %.12T %.10M %R"], check=False)
++
++    result = subprocess.check_output(
++        [
++            "sbatch",
++            "--parsable",
++            f"--chdir={project}",
++            f"--output={submission}/slurm_%j.out",
++            str(
++                project
++                / "workflow"
++                / "slurm"
++                / "chipseq_alignment.sbatch"
++            ),
++        ],
++        text=True,
++    ).strip()
++
++    job = result.split(
++        ";"
++    )[0]
++
++    if not re.fullmatch(
++        r"[0-9]+",
++        job,
++    ):
++        raise ValueError(
++            f"Unexpected sbatch response: {result}"
++        )
++
++    (
++        submission
++        / "job_id.txt"
++    ).write_text(
++        job + "\n",
++        encoding="utf-8",
++    )
++
++    (
++        parent
++        / "latest_submission.txt"
++    ).write_text(
++        str(submission) + "\n",
++        encoding="utf-8",
++    )
++
++    print(
++        f"JOB SUBMITTED: {job}",
++        flush=True,
++    )
++
++    print(
++        f"LOGS: {submission}",
++        flush=True,
++    )
++
++    subprocess.run(
++        [
++            "squeue",
++            "-j",
++            job,
++            "-o",
++            "%.18i %.26j %.12T %.10M %R",
++        ],
++        check=False,
++    )
+ 
+ 
+ if __name__ == "__main__":

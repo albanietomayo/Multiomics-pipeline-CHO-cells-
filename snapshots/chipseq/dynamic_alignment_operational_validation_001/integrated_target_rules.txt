@@ -1,0 +1,6 @@
+chipseq_alignment_all
+chipseq_alignment_summary
+chipseq_bowtie2_index
+chipseq_fasta_index
+chipseq_mapping_reference
+chipseq_nuclear_reference

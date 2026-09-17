@@ -1,0 +1,7 @@
+ M config/chipseq_alignment.json
+ M docs/chipseq_incremental_generalization.md
+ M workflow/scripts/chipseq_alignment_support.py
+ M workflow/slurm/chipseq_alignment.sbatch
+ M workflow/slurm/submit_chipseq_alignment.py
+?? snapshots/chipseq/dynamic_alignment_operational_validation_001/
+?? workflow/tests/test_chipseq_alignment_operational.py
