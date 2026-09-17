@@ -1,0 +1,4 @@
+host_python=Python 3.10.14
+filter_python=Python 3.14.7
+snakemake_python=Python 3.14.7
+snakemake=9.25.2

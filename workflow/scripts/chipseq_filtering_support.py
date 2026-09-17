@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify upstream BAMs, audit duplicate marking and filter the SINGLE pilot."""
+"""Verify upstream BAMs, audit duplicate marking and filter SINGLE ChIP-seq runs."""
 import argparse
 import csv
 import hashlib
@@ -131,7 +131,7 @@ def item_for(run):
         raise ValueError("Filtering configuration differs from the submission plan")
     matches = [r for r in plan["runs"] if r["run_accession"] == run]
     if len(matches) != 1:
-        raise ValueError("Unknown or duplicate pilot run")
+        raise ValueError("Unknown or duplicate filtering run")
     return plan, matches[0]
 
 
@@ -185,7 +185,7 @@ def picard_metrics(path, run):
                 rows.append(entry)
             parsed = list(csv.DictReader([line] + rows, delimiter="\t"))
             if len(parsed) != 1 or parsed[0]["LIBRARY"] != run:
-                raise ValueError("Expected Picard metrics for exactly one pilot library")
+                raise ValueError("Expected Picard metrics for exactly one SINGLE library")
             row = parsed[0]
             if int(row["READ_PAIRS_EXAMINED"]) != 0 or int(row["READ_PAIR_DUPLICATES"]) != 0:
                 raise ValueError("Unexpected paired-end Picard metrics")
@@ -242,7 +242,7 @@ def filter_bam(run, bam, metrics, output, report, flow):
     if counts["retained_reads"] + sum(counts["removed_" + name] for name in REASONS) != counts["input_records"]:
         raise ValueError("Filtering accounting does not balance")
     if not counts["retained_reads"]:
-        raise ValueError("No reads survive filtering; review the pilot before downstream analysis")
+        raise ValueError("No reads survive filtering; review the run before downstream analysis")
     pysam.quickcheck(str(partial))
     partial.replace(output)
     data = dict(run_accession=run, role=item["role"], min_mapq=cfg["min_mapq"], exclude_flags=cfg["exclude_flags"],

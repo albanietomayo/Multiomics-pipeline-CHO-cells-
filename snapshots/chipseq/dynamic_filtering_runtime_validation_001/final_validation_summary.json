@@ -1,0 +1,41 @@
+{
+  "duplicate_run_fails_closed": true,
+  "dynamic_filtering_runtime_tests_passed": 4,
+  "exclude_flags": 3844,
+  "exclude_mapq_255": true,
+  "filtered_bam_files_created": 0,
+  "filtering_operational_layer_modified": false,
+  "filtering_scientific_config_modified": false,
+  "instrument_platform": "ILLUMINA",
+  "library_layout": "SINGLE",
+  "markduplicates_version_policy_preserved": true,
+  "min_mapq": 30,
+  "mitochondrial_accession": "NC_007936.1",
+  "optical_duplicate_detection": false,
+  "paired_layout_fails_closed": true,
+  "phase5b_validation_passed": true,
+  "pilot_eligibility_present_in_runtime": false,
+  "planned_jobs_total": 112,
+  "planned_rule_jobs": {
+    "chipseq_filter_bam": 22,
+    "chipseq_filter_stage": 22,
+    "chipseq_filtered_index": 22,
+    "chipseq_filtered_qc": 22,
+    "chipseq_filtering_all": 1,
+    "chipseq_filtering_summary": 1,
+    "chipseq_mark_duplicates": 22
+  },
+  "processing_runs": 22,
+  "real_22_run_alignment_available": false,
+  "real_duplicate_marking_executed": false,
+  "real_filtering_executed": false,
+  "role_counts": {
+    "input": 4,
+    "ip": 18
+  },
+  "schema_version": 1,
+  "scientific_filtering_regression_tests_passed": 9,
+  "scope": "chipseq_dynamic_filtering_runtime_validation",
+  "validated_base_commit": "f11d9782c26e990236a0e627866099d571fe3f86",
+  "validated_scientific_filtering_method_preserved": true
+}

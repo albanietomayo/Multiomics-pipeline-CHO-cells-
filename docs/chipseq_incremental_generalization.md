@@ -288,3 +288,44 @@ Operational validation of Phase 4C uses an isolated synthetic successful
 preprocessing submission. The production 22-run preprocessing workflow
 has not yet been executed, so the real project is expected to fail
 closed until a successful dynamic preprocessing submission exists.
+
+## Dynamic duplicate marking and filtering runtime
+
+Phase 5B generalizes the duplicate-marking and BAM-filtering runtime
+from the original two-run pilot to an arbitrary non-empty validated
+SINGLE-end ChIP-seq cohort.
+
+The runtime consumes `config/chipseq_filtering_inputs.json` and no
+longer imports the pilot experimental-eligibility rule or requires
+exactly two accessions.
+
+The filtering input plan is fail-closed. At workflow parsing time it
+requires:
+
+- schema version 1;
+- SINGLE-end layout;
+- ILLUMINA platform;
+- unique ENA run accessions;
+- roles restricted to `ip` and `input`;
+- at least one IP and one Input;
+- canonical upstream BAM paths of the form
+  `outputs/<run>/raw.sorted.bam`;
+- valid SHA-256 digests and positive BAM byte sizes;
+- internally consistent input, mapped and nuclear MAPQ counts.
+
+The validated scientific filtering method is unchanged. Picard
+MarkDuplicates marks duplicates without removing them at the duplicate
+marking stage. The subsequent filtering step retains nuclear primary
+records with MAPQ >= 30 and excludes MAPQ 255, unmapped, non-primary,
+QC-failed, mitochondrial and duplicate-marked records according to the
+previously validated policy.
+
+The current generalized cohort contains 22 unique runs: 18 IP and
+4 shared Input libraries. This phase validates runtime expansion only;
+the real 22-run alignment outputs do not yet exist and no real
+duplicate marking or filtering is executed here.
+
+The existing filtering submitter, filtering SLURM wrapper and the
+pilot-specific upstream `prepare()` interface remain intentionally
+unchanged during Phase 5B. Their replacement by the verified dynamic
+alignment-submission contract is reserved for Phase 5C.

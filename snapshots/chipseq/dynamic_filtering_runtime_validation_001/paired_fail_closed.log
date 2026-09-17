@@ -1,0 +1,3 @@
+ValueError in file "/tmp/tmp.AtMcRWSsqM/project/workflow/rules/chipseq_filtering.smk", line 32:
+Dynamic ChIP-seq filtering currently supports SINGLE only
+  File "/tmp/tmp.AtMcRWSsqM/project/workflow/rules/chipseq_filtering.smk", line 32, in <module>

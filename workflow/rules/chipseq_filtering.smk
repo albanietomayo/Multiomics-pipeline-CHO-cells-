@@ -1,22 +1,222 @@
 import json
 import re
+from pathlib import PurePosixPath
 
-with open("config/chipseq_filtering.json") as handle:
+with open(
+    "config/chipseq_filtering.json"
+) as handle:
     CF = json.load(handle)
-with open("config/chipseq_filtering_inputs.json") as handle:
+
+with open(
+    "config/chipseq_filtering_inputs.json"
+) as handle:
     FILTER_INPUTS = json.load(handle)
-RUNS = [item["run_accession"] for item in FILTER_INPUTS["runs"]]
-if len(RUNS) != 2 or len(set(RUNS)) != 2 or any(not re.fullmatch(r"[DES]RR[0-9]+", run) for run in RUNS):
-    raise ValueError("Expected two distinct pilot runs")
+
+
+def _safe_relative(value):
+    path = PurePosixPath(value)
+
+    return (
+        bool(path.parts)
+        and not path.is_absolute()
+        and ".." not in path.parts
+    )
+
+
+if FILTER_INPUTS.get("schema_version") != 1:
+    raise ValueError(
+        "Unsupported filtering input-plan schema"
+    )
+
+if FILTER_INPUTS.get("library_layout") != "SINGLE":
+    raise ValueError(
+        "Dynamic ChIP-seq filtering currently supports "
+        "SINGLE only"
+    )
+
+if FILTER_INPUTS.get("instrument_platform") != "ILLUMINA":
+    raise ValueError(
+        "Dynamic ChIP-seq filtering currently supports "
+        "ILLUMINA only"
+    )
+
+SOURCE_ROOT = FILTER_INPUTS.get(
+    "source_root"
+)
+
+if (
+    not isinstance(SOURCE_ROOT, str)
+    or not SOURCE_ROOT.strip()
+):
+    raise ValueError(
+        "Filtering input plan has no source_root"
+    )
+
+RUN_ROWS = FILTER_INPUTS.get(
+    "runs"
+)
+
+if (
+    not isinstance(RUN_ROWS, list)
+    or not RUN_ROWS
+):
+    raise ValueError(
+        "Filtering input plan contains no runs"
+    )
+
+RUNS = []
+ROLE_COUNTS = {
+    "ip": 0,
+    "input": 0,
+}
+
+for item in RUN_ROWS:
+
+    if not isinstance(item, dict):
+        raise ValueError(
+            "Filtering run entry must be an object"
+        )
+
+    run = item.get(
+        "run_accession"
+    )
+
+    if (
+        not isinstance(run, str)
+        or not re.fullmatch(
+            r"[DES]RR[0-9]+",
+            run,
+        )
+    ):
+        raise ValueError(
+            f"Invalid filtering run accession: {run!r}"
+        )
+
+    if run in RUNS:
+        raise ValueError(
+            f"Duplicate filtering run: {run}"
+        )
+
+    role = item.get(
+        "role"
+    )
+
+    if role not in ROLE_COUNTS:
+        raise ValueError(
+            f"Invalid filtering role for {run}: {role!r}"
+        )
+
+    relative = item.get(
+        "source_relative"
+    )
+
+    expected_relative = (
+        f"outputs/{run}/raw.sorted.bam"
+    )
+
+    if (
+        relative != expected_relative
+        or not _safe_relative(relative)
+    ):
+        raise ValueError(
+            f"Unexpected upstream BAM path for {run}: "
+            f"{relative!r}"
+        )
+
+    digest = item.get(
+        "sha256"
+    )
+
+    if (
+        not isinstance(digest, str)
+        or not re.fullmatch(
+            r"[0-9a-f]{64}",
+            digest,
+        )
+    ):
+        raise ValueError(
+            f"Invalid upstream BAM SHA-256 for {run}"
+        )
+
+    try:
+        bam_bytes = int(
+            item["bytes"]
+        )
+
+        input_reads = int(
+            item["input_reads"]
+        )
+
+        mapped_reads = int(
+            item["mapped_reads"]
+        )
+
+        nuclear_mapq = int(
+            item[
+                "nuclear_mapq_ge_threshold"
+            ]
+        )
+
+    except (
+        KeyError,
+        TypeError,
+        ValueError,
+    ) as exc:
+
+        raise ValueError(
+            f"Invalid filtering counts for {run}"
+        ) from exc
+
+    if bam_bytes <= 0:
+        raise ValueError(
+            f"Empty upstream BAM for {run}"
+        )
+
+    if input_reads <= 0:
+        raise ValueError(
+            f"Non-positive upstream read count for {run}"
+        )
+
+    if not (
+        0
+        <= mapped_reads
+        <= input_reads
+    ):
+        raise ValueError(
+            f"Invalid mapped-read count for {run}"
+        )
+
+    if not (
+        0
+        <= nuclear_mapq
+        <= mapped_reads
+    ):
+        raise ValueError(
+            f"Invalid nuclear MAPQ count for {run}"
+        )
+
+    RUNS.append(
+        run
+    )
+
+    ROLE_COUNTS[
+        role
+    ] += 1
+
+if ROLE_COUNTS["ip"] < 1:
+    raise ValueError(
+        "Filtering cohort contains no IP runs"
+    )
+
+if ROLE_COUNTS["input"] < 1:
+    raise ValueError(
+        "Filtering cohort contains no Input runs"
+    )
+
+
 OUT = "results/chipseq/filtering"
 CODE = "workflow/scripts/chipseq_filtering_support.py"
 PLAN = "config/chipseq_filtering_inputs.json"
-CHIP_ELIGIBILITY_SAMPLES = "config/samples.tsv"
-CHIP_ELIGIBILITY_CONDITIONS = "snapshots/chipseq/control_validation_001/chipseq_conditions.tsv"
-CHIP_ELIGIBILITY_PILOT = "config/chipseq_pilot.json"
-CHIP_ELIGIBILITY_REPORT = OUT + "/pilot_eligibility.json"
-
-include: "chipseq_eligibility.smk"
 
 rule chipseq_filtering_all:
     input:
@@ -36,7 +236,7 @@ rule chipseq_filter_stage:
         upstream=lambda w: FILTER_INPUTS["source_root"] + "/" + next(
             r["source_relative"] for r in FILTER_INPUTS["runs"] if r["run_accession"] == w.run),
         plan=PLAN, configuration="config/chipseq_filtering.json", code=CODE,
-        reference="inputs/reference/genome_plus_mt.fa.fai", eligible=CHIP_ELIGIBILITY_REPORT
+        reference="inputs/reference/genome_plus_mt.fa.fai"
     output:
         bam=temp("inputs/{run}/raw.sorted.bam"),
         verified=OUT + "/{run}/input_validation.json"
