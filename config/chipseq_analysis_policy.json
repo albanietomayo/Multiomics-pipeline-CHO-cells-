@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "scope": "incremental_chipseq_analysis_planning",
+  "auto_pairing_rule": "unique_exact_condition_input",
+  "require_same_study": true,
+  "require_resolved_condition": true,
+  "require_retained_eligibility": true,
+  "reject_documented_input_issues": true,
+  "allow_multiple_control_candidates": false,
+  "allow_missing_control": false,
+  "supported_library_layouts": [
+    "SINGLE"
+  ],
+  "condition_match_fields": [
+    "study_accession",
+    "condition_rule",
+    "label_context",
+    "time_value",
+    "time_unit"
+  ],
+  "status_definitions": {
+    "ready": "One unique compatible Input is deterministically resolved and both runs pass current eligibility rules.",
+    "review_required": "The available evidence is ambiguous, inconsistent, documented as problematic, or not yet supported automatically.",
+    "blocked_no_control": "No compatible Input control is available under the current deterministic pairing rules.",
+    "excluded": "The IP run is explicitly excluded by the experimental eligibility review."
+  }
+}

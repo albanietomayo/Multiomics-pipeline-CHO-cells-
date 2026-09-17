@@ -1,0 +1,43 @@
+{
+  "ambiguous_pairings_preserved": 6,
+  "interpretation": {
+    "blocked_no_control": "no compatible Input under current rule",
+    "ready": "unique exact-condition eligible Input",
+    "review_required": "ambiguous pairing retained for review"
+  },
+  "pilot_recovered_by_general_rule": {
+    "analysis_status": "ready",
+    "control_run_accession": "SRR20770287",
+    "declared_target": "H3K4me3",
+    "ip_run_accession": "SRR20770297",
+    "pairing_rule": "unique_exact_condition_input",
+    "time_unit": "days",
+    "time_value": "3"
+  },
+  "ready_by_control": {
+    "ERR868150": 6,
+    "ERR868177": 6,
+    "SRR20770287": 3,
+    "SRR20770295": 3
+  },
+  "ready_by_study": {
+    "PRJEB9291": 12,
+    "PRJNA865478": 6
+  },
+  "ready_by_target": {
+    "H3K27ac": 4,
+    "H3K27me3": 2,
+    "H3K36me3": 2,
+    "H3K4me1": 2,
+    "H3K4me3": 4,
+    "H3K9me3": 4
+  },
+  "schema_version": 1,
+  "status_counts": {
+    "blocked_no_control": 90,
+    "ready": 18,
+    "review_required": 6
+  },
+  "total_ip_analyses": 114,
+  "validation_scope": "incremental_chipseq_analysis_planning"
+}

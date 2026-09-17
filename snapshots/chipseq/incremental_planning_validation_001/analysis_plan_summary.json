@@ -1,0 +1,27 @@
+{
+  "analysis_plan_sha256": "70aa3261a06cd8794ea39c1437d05ad657e7c15d7efc607453d60565d2306b79",
+  "input_sha256": {
+    "annotations": "aba14651dcf09a0504da32b0310ae7f25774ae64051eece807443ae3d270d79f",
+    "candidates": "fd95901aaff8dca7bcdb2a6a48de2dbbec2616ecea1d134ea88d329a0826276f",
+    "conditions": "12a6cb7c77a9ec9e1d6f560d24e6fa1e7ac5b1ecfa5192d668134cca6a7a447c",
+    "eligibility": "1fe8d2defde8063857382a42353e619f8b849dd04804a2a0752970faf115d5ca",
+    "policy": "e197c12c872e3059377749b3881a105eb20c9630fc178370664ead0fd8e177df",
+    "runs": "c13f1ffc79fc9e0ee3c97a293296c0a9a9ec2b25e67e836e6043986479f30911"
+  },
+  "ip_analyses": 114,
+  "ready_by_target": {
+    "H3K27ac": 4,
+    "H3K27me3": 2,
+    "H3K36me3": 2,
+    "H3K4me1": 2,
+    "H3K4me3": 4,
+    "H3K9me3": 4
+  },
+  "schema_version": 1,
+  "scope": "incremental_chipseq_analysis_planning",
+  "status_counts": {
+    "blocked_no_control": 90,
+    "ready": 18,
+    "review_required": 6
+  }
+}
