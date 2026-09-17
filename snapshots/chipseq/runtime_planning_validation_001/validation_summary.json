@@ -1,0 +1,35 @@
+{
+  "build_validation_manifest_modified": false,
+  "common_smk_modified": false,
+  "fastq_manifest_files": 22,
+  "fastq_manifest_runs": 22,
+  "fastq_role_counts": {
+    "SINGLE": 22
+  },
+  "input_sha256": {
+    "processing_runs": "2e9ca290ad6482d190f11b8bca75b8f68058af230941824183b34ff91670ad7f",
+    "processing_summary": "b1bfdb5bcc1a623431c8a5dfcbe4736355c5971256320133add7c88a4615d576",
+    "validation_fastq_manifest": "f723e53b1d9091cfafdadceea0d06a68eb3e5ededb7ddd7a4ce188f172949153"
+  },
+  "processing_role_counts": {
+    "input": 4,
+    "ip": 18
+  },
+  "processing_to_fastq_run_set_identity": true,
+  "ready_analysis_count": 18,
+  "schema_version": 1,
+  "scope": "chipseq_runtime_planning_integration",
+  "shared_input_reuse": {
+    "ERR868150": 6,
+    "ERR868177": 6,
+    "SRR20770287": 3,
+    "SRR20770295": 3
+  },
+  "snakemake_parse": true,
+  "total_fastq_bytes": 39120498415,
+  "total_fastq_gib": 36.434,
+  "unique_input_runs": 4,
+  "unique_ip_runs": 18,
+  "unique_processing_runs": 22,
+  "validation_scope": "Current validated ChIP-seq analysis plan, real project software runtime, FASTQ-manifest compatibility and Snakemake parsing; no full live ENA refresh was executed."
+}

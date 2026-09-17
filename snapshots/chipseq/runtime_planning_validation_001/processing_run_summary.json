@@ -1,0 +1,25 @@
+{
+  "input_sha256": {
+    "analysis_plan": "70aa3261a06cd8794ea39c1437d05ad657e7c15d7efc607453d60565d2306b79",
+    "samples": "8611f84086b97074cc2271a331adc42442bb5ebf908ee5a736db49f4f94bd570"
+  },
+  "layout_counts": {
+    "SINGLE": 22
+  },
+  "ready_analysis_count": 18,
+  "role_counts": {
+    "input": 4,
+    "ip": 18
+  },
+  "schema_version": 1,
+  "scope": "chipseq_ready_processing_run_set",
+  "shared_input_reuse": {
+    "ERR868150": 6,
+    "ERR868177": 6,
+    "SRR20770287": 3,
+    "SRR20770295": 3
+  },
+  "total_fastq_bytes": 39120498415,
+  "total_fastq_files": 22,
+  "unique_processing_runs": 22
+}

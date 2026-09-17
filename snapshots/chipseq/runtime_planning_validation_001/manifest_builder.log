@@ -1,0 +1,12 @@
+
+--- VALIDATION FASTQ MANIFEST ---
+Corridas: 22
+Archivos FASTQ: 22
+Volumen: 36.434 GiB
+
+Roles FASTQ:
+fastq_role
+SINGLE    22
+Name: count, dtype: int64
+
+Manifest escrito en: /tmp/tmp.FrfTRrhsQm/validation_fastq_manifest.tsv

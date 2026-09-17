@@ -115,3 +115,33 @@ permission to select arbitrarily among multiple compatible controls.
 Conversely, a new IP deposited for an already reviewed condition can reuse
 an existing unique compatible Input when the control-candidate rules resolve
 that association deterministically.
+
+## Runtime planning integration
+
+The metadata workflow now connects the previously validated incremental
+eligibility and analysis-planning layers to the active ENA-derived ChIP-seq
+metadata products.
+
+The runtime chain is:
+
+1. active ChIP-seq run inventory;
+2. label-derived target and role annotation;
+3. reconstructed experimental conditions and control candidates;
+4. incremental protocol eligibility;
+5. deterministic analysis planning;
+6. deduplicated processing-run selection.
+
+Only analyses with `analysis_status = ready` contribute runs to the
+processing cohort.
+
+IP runs and shared Input controls are deduplicated before FASTQ acquisition.
+A shared Input therefore appears once in the processing-run table even when
+it supports several ready analyses.
+
+The current validated catalogue produces 18 ready IP/Input analyses and
+22 unique processing runs: 18 IP libraries and four shared Input controls.
+
+This phase does not yet redirect the preprocessing entry point to the
+runtime processing-run table. The validated common FASTQ/QC/preprocessing
+engine remains unchanged until the runtime planning layer is independently
+validated.

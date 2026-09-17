@@ -1,0 +1,9 @@
+[OK] ChIP-seq processing run set built
+ready_analyses=18
+unique_processing_runs=22
+input: 4
+ip: 18
+shared_input ERR868150: 6 analyses
+shared_input ERR868177: 6 analyses
+shared_input SRR20770287: 3 analyses
+shared_input SRR20770295: 3 analyses

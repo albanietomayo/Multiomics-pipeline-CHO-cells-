@@ -1,0 +1,9 @@
+chipseq_analysis_plan
+chipseq_annotate_labels
+chipseq_control_candidates
+chipseq_experimental_eligibility
+chipseq_incremental_eligibility
+chipseq_metadata_all
+chipseq_metadata_plan
+chipseq_processing_runs
+chipseq_xml_inventory
