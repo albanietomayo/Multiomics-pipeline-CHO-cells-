@@ -1,0 +1,32 @@
+{
+  "extra_qc_rows_fail_closed": true,
+  "instrument_platform": "ILLUMINA",
+  "legacy_alignment_runtime_modified": false,
+  "library_layout": "SINGLE",
+  "missing_qc_rows_fail_closed": true,
+  "paired_layout_fail_closed": true,
+  "path_escape_fail_closed": true,
+  "planner_run_set_matches_processing_cohort": true,
+  "post_fastp_read_count_crosscheck": true,
+  "processed_fastq_byte_size_recorded": true,
+  "processed_fastq_path_validation": true,
+  "processed_fastq_sha256_recorded": true,
+  "processing_cohort_source": "snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv",
+  "processing_runs": 22,
+  "real_22_run_alignment_executed": false,
+  "real_22_run_preprocessing_outputs_available": false,
+  "role_counts": {
+    "input": 4,
+    "ip": 18
+  },
+  "schema_version": 1,
+  "scope": "chipseq_dynamic_alignment_input_planning_validation",
+  "slurm_submission": false,
+  "synthetic_processed_fastq_fixture": true,
+  "unsupported_platform_fail_closed": true,
+  "validated_base_commit": "3bde6d61ca9586d14f879b7d9e3b258afba40d5c",
+  "validated_pilot_subset": [
+    "SRR20770287",
+    "SRR20770297"
+  ]
+}
