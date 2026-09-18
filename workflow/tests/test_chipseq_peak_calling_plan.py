@@ -5,6 +5,7 @@ import importlib.util
 import json
 import tempfile
 import unittest
+from collections import Counter
 from pathlib import Path
 
 
@@ -19,6 +20,11 @@ SCRIPT = (
 POLICY = (
     ROOT /
     "config/chipseq_peak_calling_policy.json"
+)
+
+REAL_ANALYSIS_PLAN = (
+    ROOT / "snapshots/chipseq/incremental_planning_validation_001/"
+    "chipseq_analysis_plan.tsv"
 )
 
 
@@ -81,6 +87,42 @@ def row(
 
 
 class PeakCallingPlanTests(unittest.TestCase):
+
+    def test_validated_real_cohort_is_inherited_exactly(self):
+        result = peak_plan.build_plan(REAL_ANALYSIS_PLAN, POLICY)
+
+        with REAL_ANALYSIS_PLAN.open(newline="", encoding="utf-8") as handle:
+            upstream = [
+                item for item in csv.DictReader(handle, delimiter="\t")
+                if item["analysis_status"] == "ready"
+            ]
+
+        self.assertEqual(len(result), 18)
+        self.assertEqual(Counter(x["study_accession"] for x in result), {
+            "PRJEB9291": 12, "PRJNA865478": 6,
+        })
+        self.assertEqual(Counter(x["peak_mode"] for x in result), {
+            "narrow": 8, "broad": 10,
+        })
+        self.assertEqual(Counter(x["fragment_size_policy"] for x in result), {
+            "fixed": 6, "phantompeakqualtools": 12,
+        })
+        self.assertEqual(
+            len({x[key] for x in result for key in (
+                "ip_run_accession", "control_run_accession",
+            )}),
+            22,
+        )
+
+        inherited = {
+            x["analysis_id"]: (x["ip_run_accession"], x["control_run_accession"])
+            for x in result
+        }
+        expected = {
+            x["analysis_id"]: (x["ip_run_accession"], x["control_run_accession"])
+            for x in upstream
+        }
+        self.assertEqual(inherited, expected)
 
     def build(
         self,
@@ -329,6 +371,36 @@ class PeakCallingPlanTests(unittest.TestCase):
             "Duplicate ready analysis_id",
         ):
             self.build(rows)
+
+    def test_duplicate_ready_ip_fails_closed(self):
+        first = row("A", "PRJEB9291", "H3K4me3")
+        second = row("B", "PRJEB9291", "H3K27ac")
+        second["ip_run_accession"] = first["ip_run_accession"]
+        with self.assertRaisesRegex(ValueError, "Duplicate ready IP analysis"):
+            self.build([first, second])
+
+    def test_unsafe_identifier_fails_closed(self):
+        bad = row("../escape", "PRJEB9291", "H3K4me3")
+        with self.assertRaisesRegex(ValueError, "Unsafe analysis_id"):
+            self.build([bad])
+
+    def test_non_boolean_policy_value_fails_closed(self):
+        policy = json.loads(POLICY.read_text())
+        policy["technical_defaults"]["spmr"] = 1
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "policy.json"
+            path.write_text(json.dumps(policy))
+            with self.assertRaisesRegex(ValueError, "must be a boolean"):
+                self.build([row("A", "PRJEB9291", "H3K4me3")], path)
+
+    def test_unsupported_genome_size_policy_fails_closed(self):
+        policy = json.loads(POLICY.read_text())
+        policy["technical_defaults"]["effective_genome_size_policy"] = "magic"
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "policy.json"
+            path.write_text(json.dumps(policy))
+            with self.assertRaisesRegex(ValueError, "genome-size policy"):
+                self.build([row("A", "PRJEB9291", "H3K4me3")], path)
 
     def test_invalid_fixed_extsize_fails_closed(self):
         policy = json.loads(

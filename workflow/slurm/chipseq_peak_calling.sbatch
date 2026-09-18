@@ -91,14 +91,6 @@ CHIP_ARGS=(
     --rerun-incomplete
 )
 
-CHIP_STAGE=eligibility
-
-snakemake \
-    chipseq_experimental_eligibility \
-    "${CHIP_ARGS[@]}" \
-    -p \
-    > "$CHIP_SAVE/eligibility.log" 2>&1
-
 CHIP_STAGE=dry_run
 
 snakemake \
@@ -133,11 +125,19 @@ done
 
 CHIP_STAGE=output_copy
 
-python workflow/scripts/chipseq_peak_calling_support.py \
+python workflow/scripts/chipseq_peak_calling_dynamic.py \
     publish \
-    --save "$CHIP_SAVE" \
+    --source results/chipseq/peak_calling \
+    --destination "$CHIP_SAVE" \
     > "$CHIP_SAVE/output_copy_validation.log" 2>&1
+
+CHIP_STAGE=output_validation
+
+(
+    cd "$CHIP_SAVE"
+    sha256sum --check output.sha256
+) > "$CHIP_SAVE/output_manifest_validation.log" 2>&1
 
 CHIP_STAGE=completed
 
-echo "[OK] MACS3 peak calling, FRiP and signal QC completed; outputs copied and verified."
+echo "[OK] Dynamic 18-analysis MACS3 peak calling, FRiP and descriptive QC completed; outputs copied and verified."

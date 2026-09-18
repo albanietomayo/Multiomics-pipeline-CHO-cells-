@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "scope": "dynamic_chipseq_peak_calling_runtime_preflight",
+  "analysis_plan": "snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv",
+  "peak_policy": "config/chipseq_peak_calling_policy.json",
+  "peak_plan": "config/chipseq_peak_calling_plan.tsv",
+  "peak_plan_summary": "config/chipseq_peak_calling_plan_summary.json",
+  "filtering_latest_submission": "results/chipseq/filtering/slurm/latest_submission.txt",
+  "runtime_manifest": "config/chipseq_peak_calling_runtime.json",
+  "expected_analysis_count": 18,
+  "expected_run_count": 22
+}

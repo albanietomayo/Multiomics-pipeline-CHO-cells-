@@ -13,6 +13,7 @@ import argparse
 import csv
 import hashlib
 import json
+import re
 from collections import Counter
 from pathlib import Path
 
@@ -83,6 +84,37 @@ def require_nonempty(row, field, label):
     return value
 
 
+SAFE_COMPONENT = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
+SUPPORTED_GENOME_SIZE_POLICY = (
+    "derive_nuclear_reference_span_from_fai_"
+    "excluding_mitochondrial_contig"
+)
+
+
+def require_safe_identifier(value, label, pattern=SAFE_COMPONENT):
+    if (
+        not isinstance(value, str)
+        or not pattern.fullmatch(value)
+        or value in {".", ".."}
+    ):
+        raise ValueError(f"Unsafe {label} for path use: {value!r}")
+    return value
+
+
+def require_boolean(mapping, field, label):
+    value = mapping.get(field)
+    if type(value) is not bool:
+        raise ValueError(f"{label}.{field} must be a boolean")
+    return value
+
+
+def require_policy_text(mapping, field, label):
+    value = mapping.get(field)
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"Missing {label}.{field}")
+    return value
+
+
 def validate_policy(policy):
     if policy.get("schema_version") != 1:
         raise ValueError("Unsupported ChIP peak-calling policy schema")
@@ -133,6 +165,14 @@ def validate_policy(policy):
             "scale_to must be small or large"
         )
 
+    for boolean_field in (
+        "spmr",
+        "store_bdg",
+        "call_summits",
+        "cutoff_analysis",
+    ):
+        require_boolean(defaults, boolean_field, "technical_defaults")
+
     if defaults.get("spmr") is not True:
         raise ValueError(
             "Current harmonized policy requires SPMR"
@@ -143,6 +183,17 @@ def validate_policy(policy):
             "Current harmonized policy requires bedGraph outputs"
         )
 
+    if defaults.get("mitochondrial_accession") != "NC_007936.1":
+        raise ValueError("Unsupported mitochondrial accession")
+
+    if (
+        defaults.get("effective_genome_size_policy")
+        != SUPPORTED_GENOME_SIZE_POLICY
+    ):
+        raise ValueError("Unsupported effective genome-size policy")
+
+    require_policy_text(defaults, "parameter_basis", "technical_defaults")
+
     studies = policy.get("studies")
 
     if not isinstance(studies, dict) or not studies:
@@ -151,6 +202,10 @@ def validate_policy(policy):
         )
 
     for study, study_policy in studies.items():
+        require_safe_identifier(study, "study identifier")
+        require_policy_text(study_policy, "evidence_type", study)
+        require_policy_text(study_policy, "source_doi", study)
+        require_policy_text(study_policy, "source_url", study)
         targets = study_policy.get("targets")
         fragment = study_policy.get("fragment_size_policy")
 
@@ -164,19 +219,24 @@ def validate_policy(policy):
                 f"Missing fragment_size_policy for {study}"
             )
 
+        require_policy_text(fragment, "basis", f"{study}.fragment_size_policy")
+
         mode = fragment.get("mode")
 
         if mode == "fixed":
-            if int(fragment.get("extsize", 0)) <= 0:
+            if type(fragment.get("extsize")) is not int or fragment["extsize"] <= 0:
                 raise ValueError(
                     f"Fixed fragment policy needs positive extsize: "
                     f"{study}"
                 )
 
         elif mode == "phantompeakqualtools":
-            if fragment.get(
-                "requires_external_estimation"
-            ) is not True:
+            require_boolean(
+                fragment,
+                "requires_external_estimation",
+                f"{study}.fragment_size_policy",
+            )
+            if fragment["requires_external_estimation"] is not True:
                 raise ValueError(
                     "PhantomPeakQualTools policy must require "
                     f"external estimation: {study}"
@@ -189,6 +249,9 @@ def validate_policy(policy):
             )
 
         for target, target_policy in targets.items():
+            require_safe_identifier(target, f"target identifier for {study}")
+            if not isinstance(target_policy, dict):
+                raise ValueError(f"Invalid target policy for {study}/{target}")
             peak_mode = target_policy.get("peak_mode")
 
             if peak_mode not in {"narrow", "broad"}:
@@ -228,6 +291,7 @@ def build_plan(analysis_plan_path, policy_path):
     )
 
     seen_analysis_ids = set()
+    seen_ip_runs = set()
     peak_plan = []
 
     for row in rows:
@@ -239,6 +303,7 @@ def build_plan(analysis_plan_path, policy_path):
             "analysis_id",
             "ready analysis",
         )
+        require_safe_identifier(analysis_id, "analysis_id")
 
         if analysis_id in seen_analysis_ids:
             raise ValueError(
@@ -252,24 +317,32 @@ def build_plan(analysis_plan_path, policy_path):
             "study_accession",
             analysis_id,
         )
+        require_safe_identifier(study, "study_accession")
 
         ip_run = require_nonempty(
             row,
             "ip_run_accession",
             analysis_id,
         )
+        require_safe_identifier(ip_run, "IP run accession")
+
+        if ip_run in seen_ip_runs:
+            raise ValueError(f"Duplicate ready IP analysis: {ip_run}")
+        seen_ip_runs.add(ip_run)
 
         control_run = require_nonempty(
             row,
             "control_run_accession",
             analysis_id,
         )
+        require_safe_identifier(control_run, "Input run accession")
 
         target = require_nonempty(
             row,
             "declared_target",
             analysis_id,
         )
+        require_safe_identifier(target, "declared target")
 
         layout = require_nonempty(
             row,
@@ -376,6 +449,7 @@ def build_plan(analysis_plan_path, policy_path):
                 "evidence_type"
             ],
             "source_doi": study_policy["source_doi"],
+            "source_url": study_policy["source_url"],
             "evidence_note": target_policy.get(
                 "evidence_note",
                 "",
@@ -413,6 +487,7 @@ FIELDS = [
     "evidence_type",
     "source_doi",
     "evidence_note",
+    "source_url",
 ]
 
 
