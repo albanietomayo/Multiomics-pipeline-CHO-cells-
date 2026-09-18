@@ -30,6 +30,7 @@ FILES = [
     "workflow/tests/test_chipseq_peak_calling_dynamic.py",
     "workflow/tests/test_chipseq_peak_calling_dynamic_runtime.py",
     "workflow/tests/test_chipseq_peak_calling_plan.py",
+    "workflow/tests/test_chipseq_phase6c_operational.py",
 ]
 
 
@@ -57,7 +58,8 @@ def local_validation():
     subprocess.run(
         ["python3", "-m", "unittest", "workflow.tests.test_chipseq_peak_calling_plan",
          "workflow.tests.test_chipseq_peak_calling_dynamic",
-         "workflow.tests.test_chipseq_peak_calling_dynamic_runtime"],
+         "workflow.tests.test_chipseq_peak_calling_dynamic_runtime",
+         "workflow.tests.test_chipseq_phase6c_operational"],
         cwd=ROOT,
         check=True,
     )

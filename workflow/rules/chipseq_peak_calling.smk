@@ -76,7 +76,15 @@ rule chipseq_phantompeakqualtools:
     shell:
         r"""
         mkdir -p $(dirname {output.table:q})
-        run_spp.R -c={input.bam:q} -p={threads} -savp={output.plot:q} -out={output.table:q} > {log:q} 2>&1
+        CHIP_PPQT_TABLE_TMP={output.table:q}.tmp.$$
+        CHIP_PPQT_PLOT_TMP={output.plot:q}.tmp.$$
+        trap 'rm -f "$CHIP_PPQT_TABLE_TMP" "$CHIP_PPQT_PLOT_TMP"' EXIT
+        run_spp.R -c={input.bam:q} -p={threads} -savp="$CHIP_PPQT_PLOT_TMP" -out="$CHIP_PPQT_TABLE_TMP" > {log:q} 2>&1
+        test -s "$CHIP_PPQT_TABLE_TMP"
+        test -s "$CHIP_PPQT_PLOT_TMP"
+        mv -f "$CHIP_PPQT_TABLE_TMP" {output.table:q}
+        mv -f "$CHIP_PPQT_PLOT_TMP" {output.plot:q}
+        trap - EXIT
         """
 
 

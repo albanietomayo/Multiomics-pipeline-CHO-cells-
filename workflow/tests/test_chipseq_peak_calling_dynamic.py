@@ -389,6 +389,13 @@ class DynamicPeakCallingTests(unittest.TestCase):
         ))
         return plan_path, summary, policy, analysis, job
 
+    def refresh_output_manifest(self, job):
+        outputs = job / "outputs"
+        files = sorted(path for path in outputs.rglob("*") if path.is_file())
+        (job / "output.sha256").write_text("".join(
+            f"{D.sha256(path)}  {path.relative_to(job).as_posix()}\n" for path in files
+        ))
+
     def test_runtime_manifest_supports_shared_inputs_and_hash_provenance(self):
         args = self.runtime_fixture()
         runtime = D.build_runtime_manifest(*args)
@@ -415,6 +422,51 @@ class DynamicPeakCallingTests(unittest.TestCase):
         args = list(self.runtime_fixture())
         (args[4] / "outputs/SRR1/filtered.bam").write_bytes(b"tampered")
         with self.assertRaisesRegex(ValueError, "SHA-256 mismatch"):
+            D.build_runtime_manifest(*args)
+
+    def test_runtime_incomplete_job_and_missing_manifest_fail(self):
+        args = list(self.runtime_fixture())
+        (args[4] / "job_status.tsv").write_text(
+            "stage\tfiltering\nexit_status\t1\n"
+        )
+        with self.assertRaisesRegex(ValueError, "not successfully completed"):
+            D.build_runtime_manifest(*args)
+
+        args = list(self.runtime_fixture())
+        (args[4] / "output.sha256").unlink()
+        with self.assertRaisesRegex(ValueError, "no output checksum manifest"):
+            D.build_runtime_manifest(*args)
+
+    def test_runtime_missing_bam_and_csi_fail(self):
+        for relative, message in (
+            ("outputs/SRR1/filtered.bam", "Missing filtered bam"),
+            ("outputs/SRR1/filtered.bam.csi", "Missing filtered csi"),
+        ):
+            args = list(self.runtime_fixture())
+            (args[4] / relative).unlink()
+            with self.subTest(relative=relative), self.assertRaisesRegex(
+                ValueError, message
+            ):
+                D.build_runtime_manifest(*args)
+
+    def test_runtime_wrong_roles_fail_after_verified_manifest(self):
+        args = list(self.runtime_fixture())
+        qc_path = args[4] / "outputs/SRR1/filtering_qc.json"
+        qc = json.loads(qc_path.read_text())
+        qc["role"] = "input"
+        qc_path.write_text(json.dumps(qc))
+        self.refresh_output_manifest(args[4])
+        with self.assertRaisesRegex(ValueError, "non-IP filtering role"):
+            D.build_runtime_manifest(*args)
+
+    def test_runtime_reference_identity_mismatch_fails(self):
+        args = list(self.runtime_fixture())
+        provenance_path = args[4] / "outputs/input_provenance.json"
+        provenance = json.loads(provenance_path.read_text())
+        provenance["reference_provenance"]["mapping_sha256"] = "9" * 64
+        provenance_path.write_text(json.dumps(provenance))
+        self.refresh_output_manifest(args[4])
+        with self.assertRaisesRegex(ValueError, "provenance identities disagree"):
             D.build_runtime_manifest(*args)
 
     def test_per_analysis_qc_and_provenance_records(self):

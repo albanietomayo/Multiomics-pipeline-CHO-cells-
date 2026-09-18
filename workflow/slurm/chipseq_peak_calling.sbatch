@@ -60,6 +60,7 @@ module purge
 module load Miniforge3/24.1.2-0
 
 export CONDA_PKGS_DIRS="$TMPDIR/chipseq-peak-calling-conda-pkgs"
+export CONDA_CHANNEL_PRIORITY=strict
 export XDG_CACHE_HOME="$TMPDIR/chipseq-peak-calling-cache"
 export PYTHONDONTWRITEBYTECODE=1
 
