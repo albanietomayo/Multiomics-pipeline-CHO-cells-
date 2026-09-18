@@ -1,0 +1,39 @@
+benchmark:
+  version: "0.1.0"
+  name: "CHO genomic integration gold benchmark"
+
+target_reference:
+  assembly_name: "CriGri-PICRH-1.0"
+  refseq_accession: "GCF_003668045.3"
+  genbank_accession: "GCA_003668045.2"
+  fasta: "resources/reference/CriGri-PICRH-1.0/genome.fa"
+
+coordinates:
+  curated_tsv: "1-based-closed"
+  bed: "0-based-half-open"
+  preserve_source_coordinates: true
+
+benchmark_roles:
+  - positive
+  - negative
+  - support_only
+
+evidence_classes:
+  - targeted_validated
+  - screen_validated
+  - observed_stable
+  - observed_unstable
+  - predicted_candidate
+  - orthogonal_support
+
+mapping_status:
+  - native_target_reference
+  - mapped_unique
+  - mapped_ambiguous
+  - unresolved
+
+gold_benchmark:
+  include_roles:
+    - positive
+    - negative
+  exclude_prediction_only: true

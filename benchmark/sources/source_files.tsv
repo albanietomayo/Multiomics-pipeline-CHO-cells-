@@ -1,0 +1,2 @@
+study_id	source_kind	filename	url	local_path	sha256	retrieved_utc
+DHIMAN2020	supplementary_data	mmc2.xlsx	https://ars.els-cdn.com/content/image/1-s2.0-S200103702030475X-mmc2.xlsx	benchmark/raw/dhiman2020/mmc2.xlsx	3fd95dcb53ba6ecc001ed258226a59d5f68f840d299eac802730446ed06745ae	2026-09-18T16:20:58.833978+00:00

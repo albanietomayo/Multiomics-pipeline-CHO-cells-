@@ -1,0 +1,274 @@
+Workbook: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_benchmark/benchmark/raw/dhiman2020/mmc2.xlsx
+Number of sheets: 14
+Sheet names:
+  - List of tables
+  - Suppl Table 1
+  - Suppl Table 2
+  - Suppl Table 3.1
+  - Suppl Table 3.2
+  - Suppl Table 4
+  - Suppl Table 5
+  - Suppl Table 6
+  - Suppl Table 7
+  - Suppl Table 8
+  - Suppl Table 9
+  - Suppl Table 10
+  - Suppl Table 11
+  - Suppl Table 12
+
+==============================================================================
+SHEET: List of tables
+DIMENSION: A1:B14
+==============================================================================
+PREVIEW row 1: B1=Description
+PREVIEW row 2: A2=Suppl. Table 1 | B2=Genomic rearrangements at transgene integration sites or induced by transgene integration in the host genome.
+PREVIEW row 3: A3=Suppl Table 2 | B3=Alignment coverage of WGS samples for all the cell lines computed with Qualimap after deduplication
+PREVIEW row 4: A4=Suppl. Table 3.1 | B4=Differentially expressed genes overlapping structural variations exclusively in stable or unstable cell line with low, medium or high copy number separately
+PREVIEW row 5: A5=Suppl. Table 3.2 | B5=Genes with co-existing genomic rearrangements around them (within 2kb) in stable or unstable cell lines
+PREVIEW row 6: A6=Suppl. Table 4 | B6=Genomic, transcriptomic and epigenetic profiles around known transgene integration sites
+
+KEYWORD MATCHES:
+  row 2: A2=Suppl. Table 1 | B2=Genomic rearrangements at transgene integration sites or induced by transgene integration in the host genome.
+  row 4: A4=Suppl. Table 3.1 | B4=Differentially expressed genes overlapping structural variations exclusively in stable or unstable cell line with low, medium or high copy number separately
+  row 5: A5=Suppl. Table 3.2 | B5=Genes with co-existing genomic rearrangements around them (within 2kb) in stable or unstable cell lines
+  row 6: A6=Suppl. Table 4 | B6=Genomic, transcriptomic and epigenetic profiles around known transgene integration sites
+
+==============================================================================
+SHEET: Suppl Table 1
+DIMENSION: A1:N58
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 1: Genomic rearrangements at transgene integration sites or induced by transgene integration in the host genome.
+PREVIEW row 2: A2=The integration sites and structural variations around them were reported by Cergentis in reference to the CHO-K1 GS genome assembly. The corresponding sites were identified in the Chinese hamster genome for further analysis
+PREVIEW row 3: A3=TLA sequencing data was also mapped to the Chinese hamster reference genome to confirm rearrangements in the host genome
+PREVIEW row 5: A5=Cell line | B5=Vector | C5=Description | D5=Integration sites (P1 and P10) | E5=Integration sites (CriGri-PICR) | G5=Sequence/structural variation (Host) | I5=Sequence/structural variation (TG-TG fusions) | K5=Number of each type of TG-TG fusion | M5=Gene | N5=Gene description
+PREVIEW row 6: D6=CHO-K1 GS | E6=P1 | F6=P10 | G6=P1 | H6=P10 | I6=P1 | J6=P10 | K6=P1 | L6=P10
+PREVIEW row 7: A7=G9 | B7=VectorA | C7=Low copy, Stable | D7=scaffold_5:62874551-62874575 | E7=NW_020822533.1:6601451-6601475 | F7=NW_020822533.1:6601451-6601475 | G7=_ | H7=_ | I7=3 TG-TG fusions | J7=2 TG-TG fusions | K7=H→H=1; T→T=1; T→H=2 homologous | L7=H→H=1; T→T=1 | M7=Just at the boundary of an exon of Fam219b | N7=FAM219B (Family With Sequence Similarity 219 Member B)
+
+KEYWORD MATCHES:
+  row 1: A1=Suppl. Table 1: Genomic rearrangements at transgene integration sites or induced by transgene integration in the host genome.
+  row 2: A2=The integration sites and structural variations around them were reported by Cergentis in reference to the CHO-K1 GS genome assembly. The corresponding sites were identified in the Chinese hamster genome for further analysis
+  row 3: A3=TLA sequencing data was also mapped to the Chinese hamster reference genome to confirm rearrangements in the host genome
+  row 5: A5=Cell line | B5=Vector | C5=Description | D5=Integration sites (P1 and P10) | E5=Integration sites (CriGri-PICR) | G5=Sequence/structural variation (Host) | I5=Sequence/structural variation (TG-TG fusions) | K5=Number of each type of TG-TG fusion | M5=Gene | N5=Gene description
+  row 7: A7=G9 | B7=VectorA | C7=Low copy, Stable | D7=scaffold_5:62874551-62874575 | E7=NW_020822533.1:6601451-6601475 | F7=NW_020822533.1:6601451-6601475 | G7=_ | H7=_ | I7=3 TG-TG fusions | J7=2 TG-TG fusions | K7=H→H=1; T→T=1; T→H=2 homologous | L7=H→H=1; T→T=1 | M7=Just at the boundary of an exon of Fam219b | N7=FAM219B (Family With Sequence Similarity 219 Member B)
+  row 8: A8=5G10 | B8=VectorA | C8=Low copy, Unstable | D8=Scaffold_10:55468507-55579781; scaffold_13:38766574-38945398; scaffold_31:15914547-17304455  (Only P10) | E8=NW_020822425.1:6655503-6681964; NW_020822407.1:9302191-9324853 | F8=NW_020822425.1:6655503-6681964; NW_020822407.1:9302191-9324853; NW_020822603.1:1899019-1995809 | G8=Inversion; Deletion | H8=Inversion; Deletion; Partial integration | I8=_ | J8=1 (For primer pair 2 data on scaffold with partial integration) | K8=_ | L8=H→H=1 | M8=2nd integration site creates a deletion in host genome encoding Gabra4 gene | N8=Gene Ontology (GO) annotations related to this gene include drug binding and extracellular ligand-gated ion channel activity.
+  row 9: A9=1E3 | B9=VectorA | C9=Medium copy, Stable | D9=Scaffold_8:50662778 | E9=NW_020822529.1:13736142 | F9=NW_020822529.1:13736142 | G9=_ | H9=_ | I9=3 TG-TG fusions | J9=1 TG-TG fusion | K9=H→T=1; T→T=1; T→H=1 | L9=T→H=1 | M9=Intron of Robo1 gene | N9=Plays a role in the regulation of cell migration via its interaction with MYO9B; inhibits MYO9B-mediated stimulation of RHOA GTPase activity, and thereby leads to increased levels of active, GTP-bound RHOA (PubMed:26529257)
+  row 10: A10=1C11 | B10=VectorE | C10=Medium copy, Unstable | D10=Scaffold_26:20947145 | E10=NW_020822464.1:4510798 | F10=NW_020822464.1:4510798 | G10=_ | H10=_ | I10=15 TG-TG fusions, 1SNV | J10=15 TG-TG fusions, 1SNV | K10=H→H=3; H→T=4; T→T=5; T→H=4 | L10=H→H=3; H→T=4; T→T=5; T→H=4 | M10=Intergenic region downstream of a ncRNA, overlapping enhancer marks | N10=_
+  row 11: A11=6A6 | B11=VectorA | C11=High copy, Stable | D11=Scaffold_6:30840871; scaffold_29:7225292 | E11=NW_020822506.1:18313071 | F11=NW_020822506.1:18313071; NW_020822426.1:2132680 | G11=_ | H11=_ | I11=17 TG-TG fusions | J11=13 TG-TG fusions | K11=H→H=3; T→T=3; T→H=11 | L11=T→T=3; T→H=10 | M11=Intron of Nidogen-1; intron of ncRNA | N11=This gene encodes a member of the nidogen family of basement membrane glycoproteins. The protein interacts with several other components of basement membranes, and may play a role in cell interactions with the extracellular matrix.
+  row 12: A12=6H1 | B12=VectorA | C12=High copy, Unstable | D12=Scaffold_6:30840871; scaffold_29:7225292 | E12=NW_020822506.1:18313071 | F12=NW_020822506.1:18313071; NW_020822426.1:2132680 | G12=_ | H12=_ | I12=17 TG-TG fusions | J12=17 TG-TG fusions | K12=H→H=3; T→T=3; T→H=11 | L12=T→T=3; T→H=10 | M12=“ | N12=“
+  row 13: A13=1F1 | B13=VectorA | C13=Low copy, Stable | D13=scaffold_72:777609-777725 | E13=NW_020822658.1:8447336-8447452 | F13=N.A. | G13=_ | H13=N.A. | I13=2 TG-TG fusions | J13=N.A. | K13=T→T=1; T→H=1 | L13=N.A. | M13=Intergenic. Repressed heterochromatin region | N13=_
+  row 14: A14=C5 | B14=vectorA | C14=Low copy, Stable | D14=scaffold_0:171873330-171873339 | E14=NW_020822439.1:28675479-28675488 | F14=N.A. | G14=Small deletion | H14=N.A. | I14=2 TG-TG fusions | J14=N.A. | K14=T→H=2 | L14=N.A. | M14=Intergenic. Quiescent region | N14=_
+  row 15: A15=F6 | B15=vectorA | C15=Low copy, Stable | D15=scaffold_0:171873330-171873339 | E15=NW_020822439.1:28675479-28675488 | F15=N.A. | G15=Small deletion | H15=N.A. | I15=2 TG-TG fusions | J15=N.A. | K15=T→H=2 | L15=N.A. | M15=Intergenic. Quiescent region | N15=_
+  row 16: A16=4B8 | B16=vectorA | C16=Low copy, Stable | D16=scaffold_22:35419264-35419286 | E16=NW_020822530.1:888970-888992 | F16=N.A. | G16=Small deletion | H16=N.A. | I16=1 TG-TG fusion | J16=N.A. | K16=T→T=1 | L16=N.A. | M16=Intron of Spidr gene | N16=SPIDR (Scaffold Protein Involved In DNA Repair). Plays a role in DNA double-strand break (DBS) repair via homologous recombination (HR). Serves as a scaffolding protein that helps to promote the recruitment of DNA-processing enzymes like the helicase BLM and recombinase RAD51 to site of DNA damage, and hence contributes to maintain genomic integrity.
+  row 17: A17=E1 | B17=vectorA | C17=Low copy, Stable | D17=scaffold_11:52996406-53048911 | E17=NW_020822688.1:8025060-8077508 | F17=N.A. | G17=Duplication of region between integration sites | H17=N.A. | I17=8TG-TG fusions, 1SNV | J17=N.A. | K17=H→T=2; T→T=1; T→H=5 | L17=N.A. | M17=Region of observed duplication in the host genome encodes a part of Apool gene and whole of Satl1 gene | N17=Apool: Plays a crucial role in crista junction formation and mitochondrial function. SATL1 (Spermidine/Spermine N1-Acetyl Transferase Like 1) is a Protein Coding gene. Gene Ontology (GO) annotations related to this gene include N-acetyltransferase activity.
+  row 18: A18=2H7.13 | B18=VectorB | C18=Unknown copy, Unstable | D18=Scaffold_162:89417 | E18=NW_020822638.1:1900568 | F18=N.A. | G18=_ | H18=N.A. | I18=7 TG-TG fusions | J18=N.A. | K18=H→H=1; H→T=3; T→T=2; T→H=1 | L18=N.A. | M18=Intergenic region | N18=_
+  row 19: A19=C2714B | B19=VectorB | C19=Unknown copy, Stable | D19=Scaffold_162:89417 | E19=NW_020822638.1:1900568 | F19=N.A. | G19=_ | H19=N.A. | I19=7 TG-TG fusions | J19=N.A. | K19=H→H=1; H→T=3; T→T=2; T→H=1 | L19=N.A. | M19=Intergenic region | N19=_
+
+==============================================================================
+SHEET: Suppl Table 2
+DIMENSION: A1:C11
+==============================================================================
+PREVIEW row 1: A1=Suppl Table 2: Alignment coverage of WGS samples for all the cell lines computed with Qualimap after deduplication
+PREVIEW row 3: B3=Alignment coverage
+PREVIEW row 4: A4=Host | B4=40.59X
+PREVIEW row 5: A5=Process evolved | B5=50.356X
+PREVIEW row 6: A6=Low copy, stable | B6=42.7048X
+PREVIEW row 7: A7=Low copy, unstable | B7=39.6037X
+
+KEYWORD MATCHES:
+  row 6: A6=Low copy, stable | B6=42.7048X
+  row 7: A7=Low copy, unstable | B7=39.6037X
+  row 8: A8=Medium copy, stable | B8=41.9915X
+  row 9: A9=Medium copy, unstable | B9=49.6856X
+  row 10: A10=High copy, stable | B10=42.5946X
+  row 11: A11=High copy, unstable | B11=41.9112X
+
+==============================================================================
+SHEET: Suppl Table 3.1
+DIMENSION: A1:AU50
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 3.1:  Differentially expressed genes overlapping structural variations exclusively in stable or unstable cell line with low, medium or high copy number separately
+PREVIEW row 3: A3=Low Copy Stable | I3=Low Copy Unstable | Q3=Medium Copy Stable | Y3=Medium Copy Unstable | AG3=High Copy Stable | AO3=High Copy Unstable
+PREVIEW row 4: B4=baseMean | C4=log2FoldChange | D4=lfcSE | E4=stat | F4=pvalue | G4=padj | J4=baseMean | K4=log2FoldChange | L4=lfcSE | M4=stat | N4=pvalue | O4=padj | R4=baseMean | S4=log2FoldChange | T4=lfcSE | U4=stat | V4=pvalue | W4=padj | Z4=baseMean | AA4=log2FoldChange
+PREVIEW row 5: A5=Znf532 | B5=1172.5494995392301 | C5=0.58545562391489303 | D5=0.14431065834043799 | E5=4.0569118778029898 | F5=4.9725832910270298E-5 | G5=2.0159345589814501E-3 | I5=Slc25a40 | J5=2303.2896333497001 | K5=-0.65083971838549204 | L5=0.116389449519524 | M5=-5.5919133656209299 | N5=2.2458087776196601E-8 | O5=2.7842846206843102E-6 | Q5=LOC113832625 | R5=21.758426706440201 | S5=-1.7219846813599999 | T5=0.52537597210890297 | U5=-3.2776235929629798 | V5=1.0468489009095E-3
+PREVIEW row 6: A6=Zbtb10 | B6=1133.2932922581001 | C6=-0.58508822513016501 | D6=6.8117768193453998E-2 | E6=-8.5893628145378802 | F6=8.7452954704605802E-18 | G6=7.8304403943007302E-15 | I6=Dpyd | J6=679.63858469667196 | K6=0.79455975825605996 | L6=0.19077934147228001 | M6=4.1648102573596004 | N6=3.1161160933417697E-5 | O6=1.3500656740964899E-3 | Q6=Nup210l | R6=40.797318186666097 | S6=-1.0160215941578501 | T6=0.31241246338596901 | U6=-3.25218009277246 | V6=1.14523433377501E-3
+PREVIEW row 7: A7=Scn3a | B7=248.350634683095 | C7=1.5015845678440201 | D7=0.21773900137917701 | E7=6.8962590915401103 | F7=5.3389784097643003E-12 | G7=1.5365770541102001E-9 | I7=Bcar3 | J7=2069.19984805782 | K7=-0.79080540392577903 | L7=5.7030574711327699E-2 | M7=-13.866341132429501 | N7=1.01314577560245E-43 | O7=4.0822176163461596E-40 | Q7=Lrriq3 | R7=2565.9761542097299 | S7=-0.62702138380505601 | T7=5.6656544631478303E-2 | U7=-11.0670600878241 | V7=1.81249493808085E-28
+
+KEYWORD MATCHES:
+  row 1: A1=Suppl. Table 3.1:  Differentially expressed genes overlapping structural variations exclusively in stable or unstable cell line with low, medium or high copy number separately
+  row 3: A3=Low Copy Stable | I3=Low Copy Unstable | Q3=Medium Copy Stable | Y3=Medium Copy Unstable | AG3=High Copy Stable | AO3=High Copy Unstable
+
+==============================================================================
+SHEET: Suppl Table 3.2
+DIMENSION: A1:F89
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 3.2: Genes with co-existing genomic rearrangements around them (within 2kb) in stable or unstable cell lines
+PREVIEW row 4: B4=GeneID | C4=Symbol | D4=Aliases | E4=description | F4=other_designations
+PREVIEW row 5: A5=Stable (G9, 1E3, 6A6) | B5=100689464 | C5=Slc1a3 | D5=I79_010950, Glast | E5=solute carrier family 1 member 3 | F5=excitatory amino acid transporter 1|glutamate and aspartate transporter|solute carrier family 1 (glial high affinity glutamate transporter), member 3
+PREVIEW row 6: B6=100751536 | C6=L3mbtl2 | D6=I79_018573 | E6=L3MBTL histone methyl-lysine binding protein 2 | F6=lethal(3)malignant brain tumor-like protein 2|L3MBTL2, polycomb repressive complex 1 subunit|Lethal(3)malignant brain tumor-like 2 protein|l(3)mbt-like 2
+PREVIEW row 7: B7=100753655 | C7=Parp2 | D7=I79_017320 | E7=poly(ADP-ribose) polymerase 2 | F7=poly [ADP-ribose] polymerase 2|poly (ADP-ribose) polymerase family, member 2
+PREVIEW row 8: B8=100756495 | C8=Cyth3 | E8=cytohesin 3 | F8=cytohesin-3|Cytohesin-3
+
+KEYWORD MATCHES:
+  row 1: A1=Suppl. Table 3.2: Genes with co-existing genomic rearrangements around them (within 2kb) in stable or unstable cell lines
+  row 5: A5=Stable (G9, 1E3, 6A6) | B5=100689464 | C5=Slc1a3 | D5=I79_010950, Glast | E5=solute carrier family 1 member 3 | F5=excitatory amino acid transporter 1|glutamate and aspartate transporter|solute carrier family 1 (glial high affinity glutamate transporter), member 3
+  row 22: A22=Unstable (5G10, 1C11, 6H1) | B22=100751883 | C22=LOC100751883 | E22=mortality factor 4-like protein 1 pseudogene
+
+==============================================================================
+SHEET: Suppl Table 4
+DIMENSION: A1:G40
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 4: Genomic, transcriptomic and epigenetic profiles around known transgene integration sites
+PREVIEW row 3: A3=Cell.line | B3=Copy.number | C3=Stability | D3=Variant.Profile | E3=Expression.Peak.Distance | F3=State | G3=Gene
+PREVIEW row 4: A4=G9 | B4=Low | C4=Stable | D4=0 | E4=0 | F4=2 | G4=1st exon of Fam219b
+PREVIEW row 5: A5=5G10 | B5=Low | C5=Unstable | D5=2 | E5=698 | F5=0 | G5=no
+PREVIEW row 6: A6=5G10 | B6=Low | C6=Unstable | D6=2.33 | E6=516 | F6=1 | G6=Non-exp Gabra4
+PREVIEW row 7: A7=5G10 | B7=Low | C7=Unstable | D7=-1 | E7=676 | F7=-2 | G7=no
+
+KEYWORD MATCHES:
+  row 1: A1=Suppl. Table 4: Genomic, transcriptomic and epigenetic profiles around known transgene integration sites
+  row 4: A4=G9 | B4=Low | C4=Stable | D4=0 | E4=0 | F4=2 | G4=1st exon of Fam219b
+  row 5: A5=5G10 | B5=Low | C5=Unstable | D5=2 | E5=698 | F5=0 | G5=no
+  row 6: A6=5G10 | B6=Low | C6=Unstable | D6=2.33 | E6=516 | F6=1 | G6=Non-exp Gabra4
+  row 7: A7=5G10 | B7=Low | C7=Unstable | D7=-1 | E7=676 | F7=-2 | G7=no
+  row 8: A8=‘1E3 | B8=Medium | C8=Stable | D8=5 | E8=7 | F8=1 | G8=Intron of Robo1
+  row 9: A9=1C11 | B9=Medium | C9=Unstable | D9=-0.67 | E9=15 | F9=1 | G9=no
+  row 10: A10=6A6 | B10=High | C10=Stable | D10=0 | E10=0.57599999999999996 | F10=3 | G10=Intron of nidogen-1
+  row 11: A11=6A6 | B11=High | C11=Stable | D11=0 | E11=720 | F11=-1 | G11=intron of non expressed ncRNA
+  row 12: A12=6H1 | B12=High | C12=Unstable | D12=0 | E12=0.57599999999999996 | F12=3 | G12=Intron of nidogen-1
+  row 13: A13=6H1 | B13=High | C13=Unstable | D13=0 | E13=720 | F13=-1 | G13=intron of non expressed ncRNA
+  row 14: A14=1F1 | B14=Low | C14=Stable | D14=0 | E14=322 | F14=-2 | G14=no
+  row 15: A15=C5 | B15=Low | C15=Stable | D15=-1 | E15=153 | F15=0 | G15=no
+  row 16: A16=F6 | B16=Low | C16=Stable | D16=-1 | E16=153 | F16=0 | G16=no
+  row 17: A17=4B8 | B17=Low | C17=Stable | D17=-0.3 | E17=6.17 | F17=1 | G17=intron of spidr
+  row 18: A18=E1 | B18=Low | C18=Stable | D18=2 | E18=0 | F18=3 | G18=Apool, Satl1
+  row 19: A19=2H7.13 | B19=Unknown | C19=Unstable | D19=1.33 | E19=145 | F19=-2 | G19=no
+  row 20: A20=C2714B | B20=Unknown | C20=Stable | D20=1.33 | E20=145 | F20=-2 | G20=no
+  row 21: A21=sLP1.1a | B21=Low | C21=Stable | D21=0 | E21=220 | F21=0 | G21=no
+  row 22: A22=sLP1.2a | B22=Low | C22=Stable | D22=0.67 | E22=724 | F22=1 | G22=no
+  row 23: A23=sLP20b (Rosa.B12) | B23=Low | C23=Stable | D23=-0.67 | E23=1.8 | F23=2 | G23=intron of ncRNA
+  row 24: A24=mLP3 | B24=Low | C24=Stable | D24=0 | E24=282 | F24=1 | G24=no
+  row 25: A25=mLP4 (A5) | B25=Low | C25=Stable | D25=0 | E25=105 | F25=1 | G25=Intron of Bmp5
+  row 26: A26=mLP5 (A8) | B26=Low | C26=Stable | D26=0 | E26=0.67500000000000004 | F26=1 | G26=Intron of Ssnbp2
+  row 27: A27=mLP6 (B5) | B27=Low | C27=Stable | D27=-1.3 | E27=1080 | F27=0 | G27=Intron of Grid2
+  row 28: A28=mLP7 (C2) | B28=Low | C28=Stable | D28=-0.33 | E28=53 | F28=1 | G28=Intron of Cobll1
+  row 29: A29=mLP8 (C5) | B29=Low | C29=Stable | D29=-0.33 | E29=0 | F29=3 | G29=Exon opf Clcc1
+  row 30: A30=mLP9 (C10) | B30=Low | C30=Stable | D30=4.33 | E30=0.38500000000000001 | F30=3 | G30=Intron of Fam 114a1
+  row 31: A31=mLP10 (D9) | B31=Low | C31=Stable | D31=0 | E31=1.28 | F31=1 | G31=Intron of Lrba
+  row 32: A32=mLP11 (E8) | B32=Low | C32=Stable | D32=0.67 | E32=1030 | F32=0 | G32=no
+  row 33: A33=mLP12 (G8) | B33=Low | C33=Stable | D33=0 | E33=0.874 | F33=3 | G33=Intron of Dcn
+  row 34: A34=mLP13 (G11) | B34=Low | C34=Stable | D34=0 | E34=4.05 | F34=1 | G34=Intron of Cep128
+  row 35: A35=mLP14 (PL1.2) | B35=Low | C35=Stable | D35=-1 | E35=1.52 | F35=3 | G35=Intron of Aacs
+  row 36: A36=mLP15 (PL1.3) | B36=Low | C36=Stable | D36=-1 | E36=0.38700000000000001 | F36=1 | G36=Intron of Aldh5a1
+  row 37: A37=mLP16 (PL1.10) | B37=Low | C37=Stable | D37=-0.67 | E37=6.7000000000000004E-2 | F37=3 | G37=Intron of Smad6
+  row 38: A38=mLP17 (PL1.11) | B38=Low | C38=Stable | D38=-1.3 | E38=627 | F38=0 | G38=no
+  row 39: A39=mLP18 (PL1.17) | B39=Low | C39=Stable | D39=1.3 | E39=1210 | F39=0 | G39=no
+  row 40: A40=mLP19 (PL1.20) | B40=Low | C40=Stable | D40=1 | E40=13.2 | F40=-1 | G40=Intron of Lman1l
+
+==============================================================================
+SHEET: Suppl Table 5
+DIMENSION: A1:H44
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 5: Gene sets enriched in expressing cell lines for differentially expressed genes in host vs expressing cell line comparison
+PREVIEW row 3: A3=NAME | B3=SIZE | C3=ES | D3=NES | E3=NOM p-val | F3=FDR q-val | G3=FWER p-val | H3=RANK AT MAX
+PREVIEW row 4: A4=REACTOME_AMINO_ACID_SYNTHESIS_AND_INTERCONVERSION_TRANSAMINATION | B4=15 | C4=0.85003899999999999 | D4=2.2567286000000002 | E4=0 | F4=0 | G4=0 | H4=631
+PREVIEW row 5: A5=REACTOME_AMINO_ACID_AND_OLIGOPEPTIDE_SLC_TRANSPORTERS | B5=27 | C5=0.69077885000000006 | D5=2.1124187000000001 | E5=0 | F5=2.4258436000000002E-3 | G5=6.0000000000000001E-3 | H5=1829
+PREVIEW row 6: A6=REACTOME_TRANSPORT_OF_INORGANIC_CATIONS_ANIONS_AND_AMINO_ACIDS_OLIGOPEPTIDES | B6=50 | C6=0.57852060000000005 | D6=2.0266771000000001 | E6=1.8148820000000001E-3 | F6=9.2670219999999998E-3 | G6=3.5000000000000003E-2 | H6=2133
+PREVIEW row 7: A7=KEGG_AMINOACYL_TRNA_BIOSYNTHESIS | B7=41 | C7=0.58678883000000004 | D7=2.0006086999999999 | E7=0 | F7=1.1525137E-2 | G7=5.5E-2 | H7=1968
+
+==============================================================================
+SHEET: Suppl Table 6
+DIMENSION: A1:H212
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 6: Gene sets enriched in host cell lines for differentially expressed genes in host vs expressing cell line comparison
+PREVIEW row 3: A3=NAME | B3=SIZE | C3=ES | D3=NES | E3=NOM p-val | F3=FDR q-val | G3=FWER p-val | H3=RANK AT MAX
+PREVIEW row 4: A4=KEGG_RIBOSOME | B4=78 | C4=-0.74024146999999996 | D4=-3.0215673000000001 | E4=0 | F4=0 | G4=0 | H4=3311
+PREVIEW row 5: A5=REACTOME_PEPTIDE_CHAIN_ELONGATION | B5=76 | C5=-0.74197524999999998 | D5=-2.9613158999999998 | E5=0 | F5=0 | G5=0 | H5=3311
+PREVIEW row 6: A6=REACTOME_3_UTR_MEDIATED_TRANSLATIONAL_REGULATION | B6=95 | C6=-0.69891239999999999 | D6=-2.9204140000000001 | E6=0 | F6=0 | G6=0 | H6=3209
+PREVIEW row 7: A7=REACTOME_MITOTIC_M_M_G1_PHASES | B7=151 | C7=-0.64016914000000003 | D7=-2.8571992000000002 | E7=0 | F7=0 | G7=0 | H7=2930
+
+KEYWORD MATCHES:
+  row 75: A75=REACTOME_DEPOSITION_OF_NEW_CENPA_CONTAINING_NUCLEOSOMES_AT_THE_CENTROMERE | B75=18 | C75=-0.70353810000000006 | D75=-2.0466186999999998 | E75=0 | F75=8.0211219999999997E-4 | G75=4.5999999999999999E-2 | H75=4190
+  row 76: A76=REACTOME_CHROMOSOME_MAINTENANCE | B76=68 | C76=-0.51842469999999996 | D76=-2.0332612999999999 | E76=0 | F76=9.9493460000000004E-4 | G76=5.8000000000000003E-2 | H76=3556
+
+==============================================================================
+SHEET: Suppl Table 7
+DIMENSION: A1:F60
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 7: Differentially expressed genes within unfavorable cell lines in reference to favorable cell lines
+PREVIEW row 3: B3=baseMean | C3=log2FoldChange | D3=lfcSE | E3=pvalue | F3=padj
+PREVIEW row 4: A4=Slc26a2 | B4=216.45217745828899 | C4=7.7570326952945399 | D4=0.91798045738753797 | E4=9.0586844692354293E-18 | F4=7.29858207686299E-14
+PREVIEW row 5: A5=Slco4a1 | B5=4.4269118684592401 | C5=6.6749921262460399 | D5=2.7699236223276702 | E5=1.8976041888117601E-5 | F5=5.1827108302564002E-3
+PREVIEW row 6: A6=LOC103162784 | B6=49.352587005055497 | C6=5.99696684864485 | D6=2.1743071815900801 | E6=3.4202450922111901E-5 | F6=7.2518196599856699E-3
+PREVIEW row 7: A7=Calcrl | B7=28.543973365338399 | C7=5.5205834691641202 | D7=0.88645013392673 | E7=2.3126893148004601E-11 | F7=6.2111126031157802E-8
+
+==============================================================================
+SHEET: Suppl Table 8
+DIMENSION: A1:H27
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 8: Gene sets enriched in favorable cell lines for differentially expressed genes in favorable vs unfavorable cell line comparison
+PREVIEW row 3: A3=NAME | B3=SIZE | C3=ES | D3=NES | E3=NOM p-val | F3=FDR q-val | G3=FWER p-val | H3=RANK AT MAX
+PREVIEW row 4: A4=REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE | B4=96 | C4=-0.48182738000000003 | D4=-2.1899052000000001 | E4=0 | F4=5.0373199999999996E-3 | G4=8.0000000000000002E-3 | H4=3796
+PREVIEW row 5: A5=KEGG_RIBOSOME | B5=78 | C5=-0.49221029999999999 | D5=-2.1351352000000001 | E5=0 | F5=6.6419356000000001E-3 | G5=2.1000000000000001E-2 | H5=3796
+PREVIEW row 6: A6=REACTOME_PEPTIDE_CHAIN_ELONGATION | B6=76 | C6=-0.48945627000000003 | D6=-2.1244130000000001 | E6=0 | F6=4.8745230000000004E-3 | G6=2.3E-2 | H6=3796
+PREVIEW row 7: A7=REACTOME_UNFOLDED_PROTEIN_RESPONSE | B7=68 | C7=-0.50046283000000003 | D7=-2.119707 | E7=0 | F7=3.8119569999999999E-3 | G7=2.4E-2 | H7=1798
+
+==============================================================================
+SHEET: Suppl Table 9
+DIMENSION: A1:G162
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 9: Gene sets enriched in unfavorable cell lines for differentially expressed genes in favorable vs unfavorable cell line comparison
+PREVIEW row 3: A3=NAME | B3=SIZE | C3=ES | D3=NES | E3=NOM p-val | F3=FDR q-val | G3=FWER p-val
+PREVIEW row 4: A4=PID_INTEGRIN_A9B1_PATHWAY | B4=19 | C4=0.71143573999999998 | D4=2.0731945000000001 | E4=0 | F4=3.4039523000000002E-2 | G4=2.8000000000000001E-2
+PREVIEW row 5: A5=REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION | B5=41 | C5=0.55171853000000004 | D5=1.9358833 | E5=0 | F5=0.12834683 | G5=0.192
+PREVIEW row 6: A6=PID_INTEGRIN_A4B1_PATHWAY | B6=25 | C6=0.61243594000000001 | D6=1.9322273999999999 | E6=0 | F6=9.0069584999999994E-2 | G6=0.20100000000000001
+PREVIEW row 7: A7=PID_INTEGRIN1_PATHWAY | B7=43 | C7=0.54018169999999999 | D7=1.9218484 | E7=0 | F7=7.7282719999999999E-2 | G7=0.224
+
+==============================================================================
+SHEET: Suppl Table 10
+DIMENSION: A1:AX550
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 10:  Gene set enrichment analysis reports for individual comaprisons with false discovery rate (FDR q-val ) < 25%
+PREVIEW row 2: A2=The enrichment of gene sets for significantly differentially expressed genes while comparing favorable vs unfavorable cell lines in terms of stability or copy number.
+PREVIEW row 3: A3=Cell lines with stable transgene expression and lower copy number are favorable.
+PREVIEW row 5: A5=(a) Stable vs unstable comparison for low, medium and high copy number cell lines | M5=(b) Lower vs higher copy number comparisons
+PREVIEW row 6: A6=Low | E6=Medium | I6=High
+PREVIEW row 7: A7=Stable | C7=Unstable | E7=Stable | G7=Unstable | I7=Stable | K7=Unstable | M7=Low | O7=Medium | Q7=Low | S7=High | U7=Medium | W7=High
+
+KEYWORD MATCHES:
+  row 3: A3=Cell lines with stable transgene expression and lower copy number are favorable.
+  row 5: A5=(a) Stable vs unstable comparison for low, medium and high copy number cell lines | M5=(b) Lower vs higher copy number comparisons
+  row 7: A7=Stable | C7=Unstable | E7=Stable | G7=Unstable | I7=Stable | K7=Unstable | M7=Low | O7=Medium | Q7=Low | S7=High | U7=Medium | W7=High
+  row 23: A23=REACTOME_METABOLISM_OF_PROTEINS | B23=0.15480853999999999 | E23=REACTOME_NONSENSE_MEDIATED_DECAY_ENHANCED_BY_THE_EXON_JUNCTION_COMPLEX | F23=0.24311793000000001 | G23=REACTOME_P53_DEPENDENT_G1_DNA_DAMAGE_RESPONSE | H23=2.8655759999999999E-3 | I23=NABA_SECRETED_FACTORS | J23=3.778422E-3 | K23=REACTOME_RESOLUTION_OF_AP_SITES_VIA_THE_MULTIPLE_NUCLEOTIDE_PATCH_REPLACEMENT_PATHWAY | L23=1.973958E-2 | M23=KEGG_AMINOACYL_TRNA_BIOSYNTHESIS | N23=8.6455379999999995E-3 | O23=REACTOME_COLLAGEN_FORMATION | P23=0.17603287000000001 | Q23=REACTOME_METABOLISM_OF_NON_CODING_RNA | R23=7.376779E-2 | W23=KEGG_RIBOSOME | X23=0.104832076
+  row 123: G123=PID_IL8_CXCR2_PATHWAY | H123=0.15825265999999999 | I123=REACTOME_INTEGRATION_OF_ENERGY_METABOLISM | J123=6.0376525E-2 | M123=SIG_CHEMOTAXIS | N123=0.16703518000000001
+  row 153: G153=KEGG_DORSO_VENTRAL_AXIS_FORMATION | H153=0.17332985000000001 | I153=PID_TXA2PATHWAY | J153=8.5170949999999995E-2 | M153=REACTOME_INTEGRATION_OF_ENERGY_METABOLISM | N153=0.21406417999999999
+  row 167: G167=REACTOME_PLC_BETA_MEDIATED_EVENTS | H167=0.18713309 | I167=KEGG_LYSOSOME | J167=9.3485849999999995E-2 | M167=REACTOME_CHROMOSOME_MAINTENANCE | N167=0.23847932999999999
+
+==============================================================================
+SHEET: Suppl Table 11
+DIMENSION: A1:X7172
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 11: Favorable landing pads
+PREVIEW row 2: A2=The table reports distances from closest high expression peak, high variability peak and different chromatin states from the center of regions predicted as favorable landing pads.
+PREVIEW row 3: A3=The genic context (intronic/ intergenic), chromosome, length and score of the corresponding region are also reported.
+PREVIEW row 4: A4="Scaled values" column for each parameter represents values scaled by maximum value such that all values range from 0 to 1 (pq=p/pmax)
+PREVIEW row 5: Q5=Scaled values
+PREVIEW row 6: A6=Chromosome | B6=Start | C6=Stop | D6=High expression peak | E6=High variability peak | F6=Quiescent | G6=Repressed | H6=Enhancer | I6=Promoter | J6=Active Transcription | K6=Intronic/Intergenic | L6=Chromosome assignment | M6=Size | N6=score | O6=rank | P6=Browser coordinates | Q6=High expression peak | R6=High variability peak | S6=Quiescent | T6=Repressed
+
+KEYWORD MATCHES:
+  row 3: A3=The genic context (intronic/ intergenic), chromosome, length and score of the corresponding region are also reported.
+  row 6: A6=Chromosome | B6=Start | C6=Stop | D6=High expression peak | E6=High variability peak | F6=Quiescent | G6=Repressed | H6=Enhancer | I6=Promoter | J6=Active Transcription | K6=Intronic/Intergenic | L6=Chromosome assignment | M6=Size | N6=score | O6=rank | P6=Browser coordinates | Q6=High expression peak | R6=High variability peak | S6=Quiescent | T6=Repressed | U6=Enhancer | V6=Promoter | W6=Active Transcription | X6=Size
+
+==============================================================================
+SHEET: Suppl Table 12
+DIMENSION: A1:X16054
+==============================================================================
+PREVIEW row 1: A1=Suppl. Table 12: Unfavorable landing pads
+PREVIEW row 2: A2=The table reports distances from closest high expression peak, high variability peak and different chromatin states from the center of regions predicted as unfavorable landing pads.
+PREVIEW row 3: A3=The genic context (intronic/ intergenic), chromosome, length and score of the corresponding region are also reported.
+PREVIEW row 4: A4=Scaled values' column for each parameter represents values scaled by maximum value such that all values range from 0 to 1 (pq=p/pmax)
+PREVIEW row 5: Q5=Scaled values
+PREVIEW row 6: A6=Chromosome | B6=Start | C6=Stop | D6=High expression peak | E6=High variability peak | F6=Quiescent | G6=Repressed | H6=Enhancer | I6=Promoter | J6=Active Transcription | K6=Intronic/Intergenic | L6=Chromosome assignment | M6=Size | N6=score | O6=rank | P6=Browser coordinates | Q6=High expression peak | R6=High variability peak | S6=Quiescent | T6=Repressed
+
+KEYWORD MATCHES:
+  row 3: A3=The genic context (intronic/ intergenic), chromosome, length and score of the corresponding region are also reported.
+  row 6: A6=Chromosome | B6=Start | C6=Stop | D6=High expression peak | E6=High variability peak | F6=Quiescent | G6=Repressed | H6=Enhancer | I6=Promoter | J6=Active Transcription | K6=Intronic/Intergenic | L6=Chromosome assignment | M6=Size | N6=score | O6=rank | P6=Browser coordinates | Q6=High expression peak | R6=High variability peak | S6=Quiescent | T6=Repressed | U6=Enhancer | V6=Promoter | W6=Active Transcription | X6=Size

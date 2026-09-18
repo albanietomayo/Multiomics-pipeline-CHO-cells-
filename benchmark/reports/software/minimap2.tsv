@@ -1,0 +1,7 @@
+field	value
+software	minimap2
+version	2.31-r1302
+distribution	official_precompiled_x64_linux
+url	https://github.com/lh3/minimap2/releases/download/v2.31/minimap2-2.31_x64-linux.tar.bz2
+archive_sha256	300bc287f05eb890c6211fa7db043ce98320a401621fadd1cfdbeabd1a6e4ab5
+binary_sha256	cb7e8f228d516fe4632a2250d09d1635ddd7aa95588c9fd5442d1dbe6e9a20a3

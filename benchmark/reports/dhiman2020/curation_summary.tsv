@@ -1,0 +1,12 @@
+metric	value
+study	DHIMAN2020
+experimental_observations	17
+positive_observations	10
+negative_observations	7
+unique_harmonized_loci	13
+mapped_unique_loci	13
+positive_loci	6
+negative_loci	4
+context_conflict_loci	3
+gold_binary_loci	10
+target_assembly	GCF_003668045.3

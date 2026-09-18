@@ -1,0 +1,8 @@
+study_id=DHIMAN2020
+doi=10.1016/j.csbj.2020.11.008
+pmid=33304461
+pmcid=PMC7710658
+supplementary_file=mmc2.xlsx
+supplementary_sha256=3fd95dcb53ba6ecc001ed258226a59d5f68f840d299eac802730446ed06745ae
+code_repository=https://github.com/hd4git/StabilityAnalysis
+code_commit=41943e290f1a2aa5e78b4999b4160c9328c1c06c
