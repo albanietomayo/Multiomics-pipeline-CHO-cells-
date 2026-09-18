@@ -1,0 +1,9 @@
+field	value
+study_id	GAIDUKOV2018
+primary_coordinate_source	Gaidukov_2018_Table_1
+source_assembly_name	CriGri_1.0
+source_refseq_accession	GCF_000223135.1
+source_genbank_accession	GCA_000223135.1
+source_fasta_sha256	1cde020eb633c668de0ffe63cd01ffd4936ec00f7f8dc3729ec961befa78abdc
+coordinate_interpretation	published_scaffold_point_positions_treated_as_1_based
+target_assembly	GCF_003668045.3

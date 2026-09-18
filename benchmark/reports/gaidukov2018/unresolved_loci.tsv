@@ -1,0 +1,5 @@
+source_locus_id	lp_clone	source_seqname	source_position	benchmark_role	mapping_status	strict_failure_reasons	canonical_inclusion
+GAIDUKOV2018_L004	mLP3	NW_003613746.1	1864526	positive	unresolved	qcov<0.95	FALSE
+GAIDUKOV2018_L006	mLP5	NW_003614999.1	237547	positive	unresolved	qcov<0.95 | qcov<0.95;identity<0.99;site_not_covered	FALSE
+GAIDUKOV2018_L012	mLP11	NW_003613853.1	898266	positive	unresolved	identity<0.99	FALSE
+GAIDUKOV2018_L020	mLP19	NW_003616625.1	49532	positive	unresolved	identity<0.99	FALSE

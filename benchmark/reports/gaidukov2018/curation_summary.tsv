@@ -1,0 +1,17 @@
+metric	value
+study	GAIDUKOV2018
+published_physical_loci	21
+experimental_observations_added	21
+mapped_unique_observations	17
+unresolved_observations	4
+targeted_CRISPR_regions_total	7
+targeted_CRISPR_regions_mapped	6
+new_canonical_loci_added	17
+exact_existing_loci_merged	0
+total_benchmark_observations	38
+total_harmonized_loci	30
+total_positive_loci	23
+total_negative_loci	4
+total_support_only_loci	3
+total_gold_binary_loci	27
+target_assembly	GCF_003668045.3
