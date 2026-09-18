@@ -1,0 +1,4 @@
+benchmark_class	run_accession	status	completed_stages	resource_accounting
+P10	ERR868176	pending_not_run	0/5	not_available_until_real_execution
+P50	ERR868152	pending_not_run	0/5	not_available_until_real_execution
+P90	SRR20770294	pending_not_run	0/5	not_available_until_real_execution
