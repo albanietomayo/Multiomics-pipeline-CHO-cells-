@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "scope": "dynamic_chipseq_peak_calling_policy",
+  "technical_defaults": {
+    "supported_library_layouts": [
+      "SINGLE"
+    ],
+    "format": "BAM",
+    "qvalue": 0.01,
+    "keep_dup": "all",
+    "scale_to": "small",
+    "spmr": true,
+    "store_bdg": true,
+    "call_summits": false,
+    "cutoff_analysis": false,
+    "broad_cutoff": 0.1,
+    "mitochondrial_accession": "NC_007936.1",
+    "effective_genome_size_policy": "derive_nuclear_reference_span_from_fai_excluding_mitochondrial_contig",
+    "parameter_basis": "TFM_harmonized_MACS3_policy"
+  },
+  "studies": {
+    "PRJNA865478": {
+      "evidence_type": "publication_methods",
+      "source_doi": "10.3389/fbioe.2022.1010719",
+      "source_url": "https://www.frontiersin.org/journals/bioengineering-and-biotechnology/articles/10.3389/fbioe.2022.1010719/full",
+      "fragment_size_policy": {
+        "mode": "fixed",
+        "extsize": 147,
+        "basis": "source_study_MACS2_nomodel_extsize_147"
+      },
+      "targets": {
+        "H3K4me3": {
+          "peak_mode": "narrow"
+        },
+        "H3K27ac": {
+          "peak_mode": "narrow"
+        },
+        "H3K9me3": {
+          "peak_mode": "broad"
+        }
+      }
+    },
+    "PRJEB9291": {
+      "evidence_type": "publication_methods",
+      "source_doi": "10.1002/bit.25990",
+      "source_url": "https://onlinelibrary.wiley.com/doi/10.1002/bit.25990",
+      "fragment_size_policy": {
+        "mode": "phantompeakqualtools",
+        "basis": "source_study_fragment_size_modeled_with_PhantomPeakQualTools",
+        "requires_external_estimation": true
+      },
+      "targets": {
+        "H3K4me3": {
+          "peak_mode": "narrow"
+        },
+        "H3K27ac": {
+          "peak_mode": "narrow"
+        },
+        "H3K4me1": {
+          "peak_mode": "broad"
+        },
+        "H3K27me3": {
+          "peak_mode": "broad"
+        },
+        "H3K36me3": {
+          "peak_mode": "broad"
+        },
+        "H3K9me3": {
+          "peak_mode": "broad",
+          "evidence_note": "Interpreted from the paper's apparent H3K4me9 typographical error because the experimental mark set contains H3K9me3, not H3K4me9."
+        }
+      }
+    }
+  }
+}
