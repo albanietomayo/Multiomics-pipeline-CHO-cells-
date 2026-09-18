@@ -5,8 +5,18 @@ import bisect
 from collections import defaultdict
 from pathlib import Path
 
-import numpy as np
-import pysam
+from tn5_transform import insertion_position
+
+
+def usable_read(read, min_mapq):
+    return not (
+        read.is_unmapped
+        or read.is_secondary
+        or read.is_supplementary
+        or read.is_duplicate
+        or read.is_qcfail
+        or read.mapping_quality < min_mapq
+    )
 
 
 def load_tss_bed(path, reference_lengths, window):
@@ -82,6 +92,8 @@ def load_tss_bed(path, reference_lengths, window):
 
 
 def main():
+    import numpy as np
+    import pysam
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--bam", required=True)
@@ -146,14 +158,7 @@ def main():
         for read in bam.fetch(until_eof=True):
             reads_seen += 1
 
-            if (
-                read.is_unmapped
-                or read.is_secondary
-                or read.is_supplementary
-                or read.is_duplicate
-                or read.is_qcfail
-                or read.mapping_quality < args.min_mapq
-            ):
+            if not usable_read(read, args.min_mapq):
                 continue
 
             chrom = bam.get_reference_name(read.reference_id)
@@ -161,12 +166,15 @@ def main():
             if chrom not in tss_positions:
                 continue
 
-            if read.is_reverse:
-                if read.reference_end is None:
-                    continue
-                insertion = read.reference_end + args.reverse_shift
-            else:
-                insertion = read.reference_start + args.forward_shift
+            if read.reference_end is None:
+                continue
+            insertion = insertion_position(
+                read.reference_start,
+                read.reference_end,
+                read.is_reverse,
+                args.forward_shift,
+                args.reverse_shift,
+            )
 
             if insertion < 0 or insertion >= reference_lengths[chrom]:
                 continue

@@ -13,6 +13,9 @@ rule fastq_manifest:
     output:
         manifest=config["fastq"]["manifest"]
 
+    conda:
+        "../envs/fastq_io.yaml"
+
     shell:
         """
         python {input.script} \

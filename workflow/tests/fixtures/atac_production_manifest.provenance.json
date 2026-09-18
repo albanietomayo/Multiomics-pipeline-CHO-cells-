@@ -1,0 +1,5 @@
+{
+  "fixture": true,
+  "eligible_runs": ["SRR12774931", "SRR12774932"],
+  "source": "workflow/tests/fixtures/atac_fastq_manifest.tsv"
+}

@@ -1,0 +1,7 @@
+name: fastq-io
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pandas=3.0.5
+  - requests=2.32.5

@@ -1,0 +1,5 @@
+fastq:
+  manifest: workflow/tests/fixtures/atac_fastq_manifest.tsv
+atacseq:
+  production_manifest: workflow/tests/fixtures/atac_production_manifest.tsv
+  production_manifest_provenance: workflow/tests/fixtures/atac_production_manifest.provenance.json
