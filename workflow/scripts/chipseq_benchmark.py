@@ -60,24 +60,34 @@ REFERENCE_IDENTITY = {
     "configured_annotation_release": "104",
     "mitochondrial_accession": "NC_007936.1",
 }
-REFERENCE_FILES = [
-    "genome.fa",
-    "annotation.gff3",
-    "annotation.gtf",
-    "sequence_report.jsonl",
-    "reference_metadata.tsv",
-    "SHA256SUMS.txt",
-    "chipseq/mitochondrial.fa",
-    "chipseq/genome_plus_mt.fa",
-    "chipseq/genome_plus_mt.fa.fai",
-    "chipseq/reference_provenance.json",
-    "chipseq/bowtie2_index/genome_plus_mt.1.bt2l",
-    "chipseq/bowtie2_index/genome_plus_mt.2.bt2l",
-    "chipseq/bowtie2_index/genome_plus_mt.3.bt2l",
-    "chipseq/bowtie2_index/genome_plus_mt.4.bt2l",
-    "chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l",
-    "chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l",
+EXPECTED_NUCLEAR_SPAN_BP = 2_366_634_374
+EXPECTED_MITOCHONDRIAL_LENGTH_BP = 16_284
+REFERENCE_SOURCE_SHA256 = {
+    "genome_plus_mt.fa.gz": "f5e1effa4d063b9005eeaa0f245e7a09e84d970d6efaeb80f442cfbbf6216923",
+    "genome_plus_mt.fa.fai": "2dfb28d82459be6cbddb6e4be79e2c328c436654cc37f2e703c7abb9c50a0d57",
+    "reference_provenance.json": "3646c60b547d946814704af383464807dda890cfd371ff78f24edf8307fd582f",
+}
+REFERENCE_CONTENT_SHA256 = {
+    "nuclear": "5c81f08eafe8f5051704f692cc21a970f58b24b2bc1bedef82cb17ec7a2b4478",
+    "mitochondrial": "b7ccf6b1c6981c2b4a0c9e57245bd6712a861e685571db56d274c04fc30ed37c",
+    "mapping": "dfd445e136c4bc9c11f9616d251b86732d1aab0cbdbf9d1ababb8093f7430e94",
+}
+INDEX_COMPONENTS = [
+    f"bowtie2_index/genome_plus_mt.{suffix}.bt2l"
+    for suffix in ("1", "2", "3", "4", "rev.1", "rev.2")
 ]
+REFERENCE_FILES = [*REFERENCE_SOURCE_SHA256, *INDEX_COMPONENTS]
+REFERENCE_INVENTORY = "reference_inventory.json"
+REFERENCE_BUILD = {
+    "builder": "bowtie2-build",
+    "version": "2.5.5",
+    "mode": "large-index",
+    "input": "TMPDIR decompression of genome_plus_mt.fa.gz",
+    "command": (
+        "bowtie2-build --large-index --threads 8 "
+        "${TMPDIR}/genome_plus_mt.fa ${TMPDIR}/bowtie2_index/genome_plus_mt"
+    ),
+}
 
 
 def sha256(path: Path) -> str:
@@ -300,20 +310,6 @@ def storage_preflight(
     }
 
 
-
-
-def _metadata_values(path: Path) -> dict[str, str]:
-    rows = read_tsv(path)
-    if set(rows[0]) != {"field", "value"}:
-        raise ValueError(f"Unexpected reference metadata columns: {path}")
-    values: dict[str, str] = {}
-    for row in rows:
-        if not row["field"] or row["field"] in values:
-            raise ValueError(f"Missing or duplicate reference metadata field: {path}")
-        values[row["field"]] = row["value"]
-    return values
-
-
 def _fai_summary(path: Path, mitochondrial_accession: str) -> dict[str, int]:
     sequence_count = 0
     nuclear_span = 0
@@ -342,98 +338,111 @@ def _fai_summary(path: Path, mitochondrial_accession: str) -> dict[str, int]:
     }
 
 
-def reference_inventory(root: Path) -> dict[str, object]:
-    """Validate and fingerprint one explicit immutable shared reference root."""
-    if not root.is_absolute():
-        raise ValueError("Shared reference root must be an explicit absolute path")
-    root = root.resolve()
-    if not root.is_dir():
-        raise ValueError(f"Shared reference root is not a directory: {root}")
+def _reference_document(root: Path) -> dict[str, object]:
     paths = {relative: root / relative for relative in REFERENCE_FILES}
     for relative, path in paths.items():
         if not path.is_file() or path.stat().st_size <= 0:
             raise ValueError(f"Missing or empty shared reference resource: {relative}")
 
-    metadata = _metadata_values(paths["reference_metadata.tsv"])
-    for field in (
-        "assembly_name", "refseq_accession", "genbank_accession", "species",
-        "taxid", "configured_annotation_release",
-    ):
-        if metadata.get(field) != REFERENCE_IDENTITY[field]:
-            raise ValueError(
-                f"Shared reference metadata mismatch for {field}: {metadata.get(field)!r}"
-            )
+    observed_hashes = {relative: sha256(path) for relative, path in paths.items()}
+    for relative, expected in REFERENCE_SOURCE_SHA256.items():
+        if observed_hashes[relative] != expected:
+            raise ValueError(f"Validated shared reference source hash mismatch: {relative}")
 
-    checksum_entries = []
-    for line in paths["SHA256SUMS.txt"].read_text(encoding="utf-8").splitlines():
-        fields = line.split(maxsplit=1)
-        if len(fields) != 2 or not re.fullmatch(r"[0-9a-f]{64}", fields[0]):
-            raise ValueError("Malformed shared reference SHA256SUMS entry")
-        checksum_entries.append((fields[0], fields[1].lstrip("*")))
-    for relative in (
-        "genome.fa", "annotation.gff3", "annotation.gtf",
-        "sequence_report.jsonl", "reference_metadata.tsv",
-    ):
-        matches = [
-            digest for digest, name in checksum_entries
-            if name == relative or name.endswith("/" + relative)
-        ]
-        if len(matches) != 1 or sha256(paths[relative]) != matches[0]:
-            raise ValueError(f"Shared reference SHA256SUMS mismatch for {relative}")
-
-    provenance = json.loads(
-        paths["chipseq/reference_provenance.json"].read_text(encoding="utf-8")
-    )
-    for field in ("nuclear_accession", "mitochondrial_accession"):
-        expected_key = "refseq_accession" if field == "nuclear_accession" else field
-        if provenance.get(field) != REFERENCE_IDENTITY[expected_key]:
-            raise ValueError(f"Shared ChIP reference provenance mismatch for {field}")
-
-    records = []
-    observed_hashes: dict[str, str] = {}
-    for relative in REFERENCE_FILES:
-        path = paths[relative]
-        digest = sha256(path)
-        observed_hashes[relative] = digest
-        records.append({
-            "relative_path": relative,
-            "execution_path": str(path),
-            "bytes": path.stat().st_size,
-            "sha256": digest,
-        })
-    hash_expectations = {
-        "nuclear_sha256": observed_hashes["genome.fa"],
-        "mitochondrial_sha256": observed_hashes["chipseq/mitochondrial.fa"],
-        "mapping_sha256": observed_hashes["chipseq/genome_plus_mt.fa"],
+    provenance = json.loads(paths["reference_provenance.json"].read_text(encoding="utf-8"))
+    provenance_identity = {
+        "nuclear_accession": REFERENCE_IDENTITY["refseq_accession"],
+        "mitochondrial_accession": REFERENCE_IDENTITY["mitochondrial_accession"],
+        "configured_annotation_release": int(
+            REFERENCE_IDENTITY["configured_annotation_release"]
+        ),
+        "annotation_release_independently_verified": False,
     }
-    for field, expected in hash_expectations.items():
+    for field, expected in provenance_identity.items():
+        if provenance.get(field) != expected:
+            raise ValueError(f"Shared ChIP reference provenance mismatch for {field}")
+    provenance_hashes = {
+        "nuclear_sha256": REFERENCE_CONTENT_SHA256["nuclear"],
+        "mitochondrial_sha256": REFERENCE_CONTENT_SHA256["mitochondrial"],
+        "mapping_sha256": REFERENCE_CONTENT_SHA256["mapping"],
+    }
+    for field, expected in provenance_hashes.items():
         if provenance.get(field) != expected:
             raise ValueError(f"Shared ChIP reference provenance hash mismatch for {field}")
 
     fai = _fai_summary(
-        paths["chipseq/genome_plus_mt.fa.fai"],
+        paths["genome_plus_mt.fa.fai"],
         REFERENCE_IDENTITY["mitochondrial_accession"],
     )
+    if fai["nuclear_span_bp"] != EXPECTED_NUCLEAR_SPAN_BP:
+        raise ValueError("Shared ChIP reference nuclear span disagrees with the verified FAI")
+    if fai["mitochondrial_length_bp"] != EXPECTED_MITOCHONDRIAL_LENGTH_BP:
+        raise ValueError("Shared ChIP reference mitochondrial length disagrees with the verified FAI")
     if provenance.get("mitochondrial_length") != fai["mitochondrial_length_bp"]:
-        raise ValueError("Shared ChIP reference mitochondrial length disagrees with FAI")
+        raise ValueError("Shared ChIP reference provenance mitochondrial length disagrees with FAI")
+
     return {
-        "schema_version": 1,
-        "root": str(root),
+        "schema_version": 2,
         "identity": dict(REFERENCE_IDENTITY),
         "fai": fai,
-        "files": records,
-        "required_index_components": [
-            item for item in REFERENCE_FILES if item.endswith(".bt2l")
+        "source_content_sha256": dict(REFERENCE_CONTENT_SHA256),
+        "files": [
+            {
+                "relative_path": relative,
+                "bytes": paths[relative].stat().st_size,
+                "sha256": observed_hashes[relative],
+            }
+            for relative in REFERENCE_FILES
         ],
-        "regeneration": {
-            "nuclear_and_annotation": "workflow/scripts/fetch_reference_genome.py",
-            "combined_reference": "workflow/scripts/chipseq_alignment_support.py reference",
-            "index_command": (
-                "bowtie2-build --large-index --threads 8 genome_plus_mt.fa "
-                "bowtie2_index/genome_plus_mt"
-            ),
-        },
+        "required_index_components": list(INDEX_COMPONENTS),
+        "build": dict(REFERENCE_BUILD),
     }
+
+
+def write_reference_inventory(root: Path, output: Path | None = None) -> Path:
+    """Create the immutable inventory after one successful one-time index build."""
+    if not root.is_absolute():
+        raise ValueError("Shared reference root must be an explicit absolute path")
+    root = root.resolve()
+    if not root.is_dir():
+        raise ValueError(f"Shared reference root is not a directory: {root}")
+    destination = output or root / REFERENCE_INVENTORY
+    if destination.exists() or destination.with_name(destination.name + ".part").exists():
+        raise ValueError(f"Reference inventory output collision: {destination}")
+    atomic_text(
+        destination,
+        json.dumps(_reference_document(root), indent=2, sort_keys=True) + "\n",
+    )
+    return destination
+
+
+def reference_inventory(root: Path) -> dict[str, object]:
+    """Validate one explicit, prebuilt and inventory-pinned shared reference."""
+    if not root.is_absolute():
+        raise ValueError("Shared reference root must be an explicit absolute path")
+    root = root.resolve()
+    if not root.is_dir():
+        raise ValueError(f"Shared reference root is not a directory: {root}")
+    inventory_path = root / REFERENCE_INVENTORY
+    if not inventory_path.is_file() or inventory_path.stat().st_size <= 0:
+        raise ValueError(f"Missing or empty shared reference resource: {REFERENCE_INVENTORY}")
+    expected = json.loads(inventory_path.read_text(encoding="utf-8"))
+    observed = _reference_document(root)
+    if expected != observed:
+        raise ValueError("Shared reference differs from its immutable reference inventory")
+    result = dict(observed)
+    result["root"] = str(root)
+    result["inventory_file"] = {
+        "relative_path": REFERENCE_INVENTORY,
+        "execution_path": str(inventory_path),
+        "bytes": inventory_path.stat().st_size,
+        "sha256": sha256(inventory_path),
+    }
+    result["files"] = [
+        {**item, "execution_path": str(root / item["relative_path"])}
+        for item in observed["files"]
+    ]
+    return result
 
 
 def validate_reference_inventory(root: Path, expected_path: Path) -> dict[str, object]:
@@ -656,6 +665,9 @@ def main() -> None:
     reference.add_argument("--shared-reference-root", type=Path, required=True)
     reference.add_argument("--expected", type=Path)
     reference.add_argument("--output", type=Path)
+    create_reference = sub.add_parser("create-reference-inventory")
+    create_reference.add_argument("--shared-reference-root", type=Path, required=True)
+    create_reference.add_argument("--output", type=Path)
     record = sub.add_parser("record-stage")
     record.add_argument("--stage", required=True)
     record.add_argument("--marker", type=Path, required=True)
@@ -694,6 +706,9 @@ def main() -> None:
             atomic_text(args.output, content)
         else:
             print(content, end="")
+    elif args.action == "create-reference-inventory":
+        output = write_reference_inventory(args.shared_reference_root, args.output)
+        print(f"REFERENCE_INVENTORY={output}")
     elif args.action == "record-stage":
         write_artifact_record(args.stage, args.marker, args.transient, args.persistent)
     elif args.action == "persist-files":

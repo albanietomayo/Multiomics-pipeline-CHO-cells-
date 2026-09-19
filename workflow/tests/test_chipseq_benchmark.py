@@ -2,6 +2,7 @@
 """Regression tests for the non-executing ChIP-seq benchmark control layer."""
 
 import csv
+import gzip
 import importlib.util
 import json
 import shutil
@@ -33,6 +34,7 @@ class ChipseqBenchmarkTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.temp = Path(self.temporary.name)
+        self.reference_fixture_count = 0
 
     def tearDown(self):
         self.temporary.cleanup()
@@ -46,61 +48,56 @@ class ChipseqBenchmarkTests(unittest.TestCase):
         return root
 
     def fixture_reference(self):
-        root = (self.temp / "shared_reference").resolve()
-        chipseq = root / "chipseq"
-        index = chipseq / "bowtie2_index"
+        self.reference_fixture_count += 1
+        root = (self.temp / f"shared_reference_{self.reference_fixture_count}").resolve()
+        index = root / "bowtie2_index"
         index.mkdir(parents=True)
-        files = {
-            "genome.fa": ">chr1\nACGT\n",
-            "annotation.gff3": "##gff-version 3\n",
-            "annotation.gtf": "# annotation\n",
-            "sequence_report.jsonl": "{}\n",
-            "chipseq/mitochondrial.fa": ">NC_007936.1\nACGT\n",
-            "chipseq/genome_plus_mt.fa": ">chr1\nACGT\n>NC_007936.1\nACGT\n",
-            "chipseq/genome_plus_mt.fa.fai": (
-                "chr1\t4\t6\t4\t5\nNC_007936.1\t4\t24\t4\t5\n"
-            ),
-        }
-        for suffix in ("1", "2", "3", "4", "rev.1", "rev.2"):
-            files[f"chipseq/bowtie2_index/genome_plus_mt.{suffix}.bt2l"] = (
-                f"index-{suffix}\n"
-            )
-        for relative, content in files.items():
-            path = root / relative
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(content, encoding="utf-8")
-        metadata = ["field\tvalue"]
-        for field in (
-            "species", "taxid", "assembly_name", "refseq_accession",
-            "genbank_accession", "configured_annotation_release",
-        ):
-            metadata.append(f"{field}\t{SUPPORT.REFERENCE_IDENTITY[field]}")
-        (root / "reference_metadata.tsv").write_text(
-            "\n".join(metadata) + "\n", encoding="utf-8"
-        )
-        provenance = {
-            "nuclear_accession": SUPPORT.REFERENCE_IDENTITY["refseq_accession"],
-            "mitochondrial_accession": SUPPORT.REFERENCE_IDENTITY["mitochondrial_accession"],
-            "nuclear_sha256": SUPPORT.sha256(root / "genome.fa"),
-            "mitochondrial_sha256": SUPPORT.sha256(chipseq / "mitochondrial.fa"),
-            "mapping_sha256": SUPPORT.sha256(chipseq / "genome_plus_mt.fa"),
-            "mitochondrial_length": 4,
-        }
-        (chipseq / "reference_provenance.json").write_text(
-            json.dumps(provenance) + "\n", encoding="utf-8"
-        )
-        checksummed = (
-            "genome.fa", "annotation.gff3", "annotation.gtf",
-            "sequence_report.jsonl", "reference_metadata.tsv",
-        )
-        (root / "SHA256SUMS.txt").write_text(
-            "".join(
-                f"{SUPPORT.sha256(root / relative)}  "
-                f"resources/reference/CriGri-PICRH-1.0/{relative}\n"
-                for relative in checksummed
-            ),
+        combined = b">chr1\nACGT\n>NC_007936.1\nACGT\n"
+        with (root / "genome_plus_mt.fa.gz").open("wb") as compressed:
+            with gzip.GzipFile(
+                filename="", mode="wb", fileobj=compressed, mtime=0
+            ) as handle:
+                handle.write(combined)
+        (root / "genome_plus_mt.fa.fai").write_text(
+            "chr1\t4\t6\t4\t5\nNC_007936.1\t4\t24\t4\t5\n",
             encoding="utf-8",
         )
+        synthetic_content_hashes = {
+            "nuclear": "1" * 64,
+            "mitochondrial": "2" * 64,
+            "mapping": "3" * 64,
+        }
+        provenance = {
+            "annotation_release_independently_verified": False,
+            "configured_annotation_release": 104,
+            "nuclear_accession": SUPPORT.REFERENCE_IDENTITY["refseq_accession"],
+            "mitochondrial_accession": SUPPORT.REFERENCE_IDENTITY["mitochondrial_accession"],
+            "nuclear_sha256": synthetic_content_hashes["nuclear"],
+            "mitochondrial_sha256": synthetic_content_hashes["mitochondrial"],
+            "mapping_sha256": synthetic_content_hashes["mapping"],
+            "mitochondrial_length": 4,
+        }
+        (root / "reference_provenance.json").write_text(
+            json.dumps(provenance) + "\n", encoding="utf-8"
+        )
+        for suffix in ("1", "2", "3", "4", "rev.1", "rev.2"):
+            (index / f"genome_plus_mt.{suffix}.bt2l").write_text(
+                f"index-{suffix}\n", encoding="utf-8"
+            )
+        source_hashes = {
+            relative: SUPPORT.sha256(root / relative)
+            for relative in SUPPORT.REFERENCE_SOURCE_SHA256
+        }
+        patches = [
+            mock.patch.dict(SUPPORT.REFERENCE_SOURCE_SHA256, source_hashes, clear=True),
+            mock.patch.dict(SUPPORT.REFERENCE_CONTENT_SHA256, synthetic_content_hashes, clear=True),
+            mock.patch.object(SUPPORT, "EXPECTED_NUCLEAR_SPAN_BP", 4),
+            mock.patch.object(SUPPORT, "EXPECTED_MITOCHONDRIAL_LENGTH_BP", 4),
+        ]
+        for patcher in patches:
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        SUPPORT.write_reference_inventory(root)
         return root
 
     def test_exact_manifest_membership_count_and_uniqueness(self):
@@ -279,9 +276,32 @@ class ChipseqBenchmarkTests(unittest.TestCase):
             set(SUPPORT.REFERENCE_FILES),
         )
 
+    def test_annotations_and_uncompressed_fasta_are_not_operational_inputs(self):
+        root = self.fixture_reference()
+        inventory = SUPPORT.reference_inventory(root)
+        paths = {item["relative_path"] for item in inventory["files"]}
+        self.assertNotIn("annotation.gff3", paths)
+        self.assertNotIn("annotation.gtf", paths)
+        self.assertNotIn("genome_plus_mt.fa", paths)
+        self.assertIn("genome_plus_mt.fa.gz", paths)
+
+    def test_shared_reference_source_hash_and_inventory_fail_closed(self):
+        root = self.fixture_reference()
+        (root / "genome_plus_mt.fa.gz").write_bytes(b"changed")
+        with self.assertRaisesRegex(ValueError, "source hash mismatch"):
+            SUPPORT.reference_inventory(root)
+
+        root = self.fixture_reference()
+        inventory_path = root / SUPPORT.REFERENCE_INVENTORY
+        inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
+        inventory["build"]["version"] = "different"
+        inventory_path.write_text(json.dumps(inventory) + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "immutable reference inventory"):
+            SUPPORT.reference_inventory(root)
+
     def test_shared_reference_validation_fails_closed(self):
         root = self.fixture_reference()
-        (root / "chipseq/bowtie2_index/genome_plus_mt.4.bt2l").unlink()
+        (root / "bowtie2_index/genome_plus_mt.4.bt2l").unlink()
         with self.assertRaisesRegex(ValueError, "Missing or empty"):
             SUPPORT.reference_inventory(root)
         with self.assertRaisesRegex(ValueError, "explicit absolute"):
@@ -294,8 +314,8 @@ class ChipseqBenchmarkTests(unittest.TestCase):
             json.dumps({"shared_reference": SUPPORT.reference_inventory(root)}),
             encoding="utf-8",
         )
-        (root / "chipseq/bowtie2_index/genome_plus_mt.1.bt2l").write_text("changed\n", encoding="utf-8")
-        with self.assertRaisesRegex(ValueError, "immutable submission inventory"):
+        (root / "bowtie2_index/genome_plus_mt.1.bt2l").write_text("changed\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "immutable (reference|submission) inventory"):
             SUPPORT.validate_reference_inventory(root, expected)
 
     def test_stage_sizes_and_hashes_recorded_before_transient_disappears(self):
@@ -351,7 +371,8 @@ class ChipseqBenchmarkTests(unittest.TestCase):
         script = SBATCH_PATH.read_text(encoding="utf-8")
         self.assertIn("--shared-reference-root", script)
         self.assertNotIn("bowtie2-build", script)
-        self.assertNotIn('cp "$CHIP_FASTA', script)
+        self.assertNotIn('CHIP_FASTA=', script)
+        self.assertIn("genome_plus_mt.fa.fai.part", script)
         self.assertNotIn("persist_work", script)
 
     def test_completion_marker_follows_successful_persistence(self):

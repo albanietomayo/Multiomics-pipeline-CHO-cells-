@@ -143,9 +143,13 @@ CHIP_STAGE="shared_reference_validation"
 python "$CHIP_SUPPORT" check-reference --shared-reference-root "$CHIP_SHARED_REFERENCE_ROOT" \
     --expected "$CHIP_SUBMISSION_ROOT/submission_plan.json" \
     --output "$CHIP_SAVE/reference_provenance.json"
-CHIP_RDIR="$CHIP_SHARED_REFERENCE_ROOT/chipseq"
-CHIP_FASTA="$CHIP_RDIR/genome_plus_mt.fa"
-CHIP_INDEX="$CHIP_RDIR/bowtie2_index/genome_plus_mt"
+CHIP_INDEX="$CHIP_SHARED_REFERENCE_ROOT/bowtie2_index/genome_plus_mt"
+mkdir -p inputs/reference
+cp -- "$CHIP_SHARED_REFERENCE_ROOT/genome_plus_mt.fa.fai" \
+    inputs/reference/genome_plus_mt.fa.fai.part
+cmp -- "$CHIP_SHARED_REFERENCE_ROOT/genome_plus_mt.fa.fai" \
+    inputs/reference/genome_plus_mt.fa.fai.part
+mv inputs/reference/genome_plus_mt.fa.fai.part inputs/reference/genome_plus_mt.fa.fai
 
 if [[ ! -e "$CHIP_SAVE/benchmark_metrics.tsv" ]]; then
     printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \

@@ -28,9 +28,12 @@ and the validated ChIP duplicate-marking/nuclear-filtering policy.
 
 | Artifact | Created by | Node TMPDIR copy | Persistent successful-run copy | Duplicate persistent copies | Retention reason | Regenerability |
 |---|---|---:|---:|---:|---|---|
-| nuclear FASTA, GFF3, GTF, sequence report, metadata | reference provisioning outside benchmark | none | shared root only | zero per run | immutable reference and annotation identity | regenerable from fixed NCBI assembly/provenance |
-| combined nuclear/mitochondrial FASTA + FAI | shared reference provisioning | none | shared root only | zero per run | exact mapping reference and verified nuclear span | regenerable from the verified nuclear FASTA and versioned mitochondrial accession |
-| six Bowtie2 large-index components | shared reference provisioning | none | shared root only | zero per run | alignment prerequisite | regenerable from the hashed combined FASTA and recorded command |
+| compressed combined nuclear/mitochondrial FASTA | historical reference run | none | existing external object; linked, not copied | zero per run | hashed archival source and index regeneration | public source is regenerable; exact compressed and content hashes are pinned |
+| combined-reference FAI | historical reference run | one 24,707-byte TMPDIR copy for filtering | existing external object; linked, not copied | zero per run | exact contig dictionary and verified nuclear span | regenerable from the pinned compressed FASTA |
+| reference provenance + immutable inventory | historical run / one-time provisioning | none | one small canonical copy plus existing provenance link | zero per run | assembly, source, build and component identity | regenerable from validated evidence, except that hashes are retained as the identity contract |
+| six Bowtie2 2.5.5 large-index components | one-time provisioning | none during benchmark | shared root only | zero per run | alignment prerequisite | regenerable once from the pinned compressed FASTA; never rebuilt per run |
+| nuclear FASTA, mitochondrial FASTA, sequence report, metadata and source-hash manifest | historical reference acquisition | none | existing evidence only | zero | provenance only; not consumed by benchmark stages | regenerable from fixed accessions and hashes |
+| GFF3 and GTF | historical reference acquisition | none | not required by this benchmark contract | zero | no acquisition, QC, alignment, duplicate, filtering or metric consumer | regenerable from fixed assembly/annotation provenance |
 | downloaded raw FASTQ | acquisition | one | none | zero | stage input; expected bytes and MD5 remain in manifest | public ENA URL/accession makes it regenerable |
 | processed FASTQ | fastp | one | none | zero | alignment input | regenerable from raw FASTQ, exact fastp parameters and environment |
 | alignment-stage FASTQ | old harness alignment wrapper | none in lean harness | none | zero | eliminated implementation-only copy | not applicable |
@@ -71,22 +74,80 @@ code.
 
 ## Shared reference prerequisite
 
-No canonical complete ChIP reference/index was found in the inspected project
-area, so the submitter requires `--shared-reference-root`; there is no default.
-Before either check or submit it requires nonempty nuclear FASTA, GFF3, GTF,
-sequence report, reference metadata and SHA manifest; combined FASTA,
-mitochondrial FASTA, FAI and ChIP provenance; and all six
-`genome_plus_mt.*.bt2l` components. It validates CriGri-PICRH-1.0 /
-GCF_003668045.3 / GCA_003668045.2, annotation release 104, NC_007936.1,
-the FAI-derived nuclear span, file sizes and SHA-256 values. The immutable
-inventory includes exact execution paths and regeneration commands. The worker
-recomputes it against the submission plan before processing.
+The benchmark has no default reference path. Its minimal canonical root contains
+only `genome_plus_mt.fa.gz`, `genome_plus_mt.fa.fai`,
+`reference_provenance.json`, `reference_inventory.json`, and the six
+`bowtie2_index/genome_plus_mt.*.bt2l` files. The three historical source files
+may be symlinks to the validated external objects; every check follows them and
+verifies exact bytes and SHA-256 values. The uncompressed combined FASTA is not
+persistent. GFF3, GTF, standalone nuclear/mitochondrial FASTAs, sequence report,
+metadata and the old hash list are not operational inputs.
+
+Before check or submission, and again in the worker before biological
+processing, validation requires the exact CriGri-PICRH-1.0 /
+GCF_003668045.3 / GCA_003668045.2 identity, configured annotation release 104,
+NC_007936.1, a FAI-derived nuclear span of 2,366,634,374 bp, mitochondrial
+length 16,284 bp, the three validated historical source hashes, all six index
+components, Bowtie2 2.5.5 large-index build metadata, and an exact match to the
+immutable inventory. The submission plan then pins the inventory itself and all
+execution paths, sizes and hashes for the worker recheck. Annotation release 104
+is retained as configured provenance and is not misrepresented as independently
+verified.
 
 The safe submitter defaults to check-only behavior and cannot invoke `sbatch`
 without `--submit`. Submission also requires the expected branch, a clean
 worktree, exact regenerated manifest, adequate output/scratch minimums and no
 pre-existing class/accession output. A validated completed job is never silently
 overwritten.
+
+### Existing validated evidence
+
+The reusable source directory is
+`/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq/results/chipseq/alignment/slurm/submission__niyvyr2/job_10297460/outputs/reference`.
+Direct inspection gave:
+
+| File | Bytes | SHA-256 | Contract role |
+|---|---:|---|---|
+| `genome_plus_mt.fa.gz` | 882,813,762 | `f5e1effa4d063b9005eeaa0f245e7a09e84d970d6efaeb80f442cfbbf6216923` | linked archival source |
+| `genome_plus_mt.fa.fai` | 24,707 | `2dfb28d82459be6cbddb6e4be79e2c328c436654cc37f2e703c7abb9c50a0d57` | linked runtime dictionary |
+| `reference_provenance.json` | 710 | `3646c60b547d946814704af383464807dda890cfd371ff78f24edf8307fd582f` | linked runtime provenance |
+| `mitochondrial.fa` | 16,580 | `b7ccf6b1c6981c2b4a0c9e57245bd6712a861e685571db56d274c04fc30ed37c` | provenance only |
+| `sequence_report.jsonl` | 195,537 | `e96372c787e1422cabd813efd8a2c2a7981b5f0136605b7531813a9beb318332` | provenance only |
+| `reference_metadata.tsv` | 494 | `eb752199fe08accc16b561199a2092c1b4dae4778ee24183167649edf0456e07` | provenance only |
+| `original_nuclear_resources.sha256` | 601 | `669b4844f084ad51c5863931bae7fbe4585f3fee2dfbfaa300c583aec5d2464f` | provenance only |
+
+The relevant project trees contain no surviving Bowtie2 component and no
+standalone nuclear FASTA. The latter remains represented inside the validated
+compressed combined source; its original hash, plus the GFF3/GTF and sequence
+report hashes, remains in `original_nuclear_resources.sha256`.
+
+### One-time provisioning plan (do not execute on a login node)
+
+This is a compute workload: the historical build used about 6.7 GB maximum RSS
+and roughly 15 minutes just for the forward/reverse index build. Provision it as
+one explicitly authorized SLURM job, not as a benchmark stage and not once per
+benchmark run. The job should:
+
+1. Refuse an existing canonical target and create a staging directory on the
+   same shared filesystem.
+2. Symlink the exact existing `genome_plus_mt.fa.gz`, FAI and provenance files
+   from the historical output listed above.
+3. Verify their recorded hashes, decompress the FASTA only to node-local
+   `$TMPDIR`, and verify the decompressed SHA-256
+   (`dfd445e136c4bc9c11f9616d251b86732d1aab0cbdbf9d1ababb8093f7430e94`).
+4. Run Bowtie2 2.5.5 exactly once with `--large-index --threads 8`, writing all
+   build output under `$TMPDIR`.
+5. Copy each completed component to a `.part` name in the shared staging tree,
+   verify size/hash, then rename it. Generate `reference_inventory.json` with
+   `chipseq_benchmark.py create-reference-inventory`.
+6. Run `check-reference` against the staging tree, remove write permissions from
+   the payload/inventory, atomically rename the complete staging directory to
+   the previously absent canonical root, and run `check-reference` once more.
+7. Remove only node-local temporary files through the scheduler's TMPDIR cleanup.
+
+The whole-directory final rename prevents benchmark jobs from observing a
+partial index. No permanent uncompressed FASTA and no annotation copy are
+created.
 
 ## Restart and storage consequences
 
@@ -100,13 +161,27 @@ operator to choose a new isolated attempt instead of overwriting evidence.
 For P10, the two committed historical pilot observations give final-filtered
 BAM/source-FASTQ byte ratios of 0.8814 and 0.8449. Treating their midpoint only
 as an empirical engineering estimate (not a biological scaling law) gives a
-1.026 GiB filtered BAM for the 1,273,744,805-byte P10 input. Adding measured
-small QC/source evidence and modest metadata/index overhead gives a 1.04 GiB
-central persistent estimate. Applying the larger observed ratio plus a
-conservative evidence allowance gives 1.15 GiB. Against 9.847 GiB free, the
-corresponding margins are approximately 8.807 GiB and 8.697 GiB. Scratch
-expansion remains unknown until a real P10 run and is not represented by these
-persistent estimates.
+1.026 GiB filtered BAM for the 1,273,744,805-byte P10 input. The conservative
+successful-run persistence allowance remains 1.15 GiB (1,234,803,098 bytes when
+rounded upward).
+
+On 2026-09-19, the final Ceph snapshot reported 23,005,142,471 bytes used of a
+32,212,254,720-byte home quota: 9,207,112,249 bytes (8.574791 GiB) free.
+The historical reference
+output already counted in usage is 883,052,391 bytes; the three objects reused
+by the operational contract account for 882,839,179 of those bytes. No index
+component survives in either relevant ChIP alignment-results tree.
+
+The historical Bowtie2 log records exact sizes of 796,690,238 bytes for each of
+`.1.bt2l` and `.rev.1.bt2l`, and 1,182,112,388 bytes for each of `.2.bt2l` and
+`.rev.2.bt2l`: 3,957,605,252 bytes (3.685807 GiB) known new data. It does not
+record `.3.bt2l` or `.4.bt2l` sizes, and the new inventory size depends on the
+new component hashes. Therefore the exact new-reference total and exact final
+quota margins remain unknown until the one-time build. Based only on the known
+four files, free space after provisioning is strictly less than 5,249,506,997
+bytes (4.888984 GiB), and after the conservative P10 allowance strictly less
+than 4,014,703,899 bytes (3.738984 GiB). These are upper bounds on remaining
+space, not forecasts. Scratch expansion remains unknown until a real P10 run.
 
 ## Intentionally separate
 
