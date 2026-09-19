@@ -15,6 +15,7 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[2]
 SUPPORT_PATH = ROOT / "workflow/scripts/chipseq_benchmark.py"
 SUBMIT_PATH = ROOT / "workflow/slurm/submit_chipseq_benchmark.py"
+SBATCH_PATH = ROOT / "workflow/slurm/chipseq_benchmark_p10_p50_p90.sbatch"
 
 
 def load(name, path):
@@ -42,6 +43,64 @@ class ChipseqBenchmarkTests(unittest.TestCase):
         (root / "benchmarks").mkdir()
         shutil.copy2(ROOT / "config/samples.tsv", root / "config/samples.tsv")
         shutil.copy2(SUPPORT.SELECTION, root / "benchmarks/selection.tsv")
+        return root
+
+    def fixture_reference(self):
+        root = (self.temp / "shared_reference").resolve()
+        chipseq = root / "chipseq"
+        index = chipseq / "bowtie2_index"
+        index.mkdir(parents=True)
+        files = {
+            "genome.fa": ">chr1\nACGT\n",
+            "annotation.gff3": "##gff-version 3\n",
+            "annotation.gtf": "# annotation\n",
+            "sequence_report.jsonl": "{}\n",
+            "chipseq/mitochondrial.fa": ">NC_007936.1\nACGT\n",
+            "chipseq/genome_plus_mt.fa": ">chr1\nACGT\n>NC_007936.1\nACGT\n",
+            "chipseq/genome_plus_mt.fa.fai": (
+                "chr1\t4\t6\t4\t5\nNC_007936.1\t4\t24\t4\t5\n"
+            ),
+        }
+        for suffix in ("1", "2", "3", "4", "rev.1", "rev.2"):
+            files[f"chipseq/bowtie2_index/genome_plus_mt.{suffix}.bt2l"] = (
+                f"index-{suffix}\n"
+            )
+        for relative, content in files.items():
+            path = root / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content, encoding="utf-8")
+        metadata = ["field\tvalue"]
+        for field in (
+            "species", "taxid", "assembly_name", "refseq_accession",
+            "genbank_accession", "configured_annotation_release",
+        ):
+            metadata.append(f"{field}\t{SUPPORT.REFERENCE_IDENTITY[field]}")
+        (root / "reference_metadata.tsv").write_text(
+            "\n".join(metadata) + "\n", encoding="utf-8"
+        )
+        provenance = {
+            "nuclear_accession": SUPPORT.REFERENCE_IDENTITY["refseq_accession"],
+            "mitochondrial_accession": SUPPORT.REFERENCE_IDENTITY["mitochondrial_accession"],
+            "nuclear_sha256": SUPPORT.sha256(root / "genome.fa"),
+            "mitochondrial_sha256": SUPPORT.sha256(chipseq / "mitochondrial.fa"),
+            "mapping_sha256": SUPPORT.sha256(chipseq / "genome_plus_mt.fa"),
+            "mitochondrial_length": 4,
+        }
+        (chipseq / "reference_provenance.json").write_text(
+            json.dumps(provenance) + "\n", encoding="utf-8"
+        )
+        checksummed = (
+            "genome.fa", "annotation.gff3", "annotation.gtf",
+            "sequence_report.jsonl", "reference_metadata.tsv",
+        )
+        (root / "SHA256SUMS.txt").write_text(
+            "".join(
+                f"{SUPPORT.sha256(root / relative)}  "
+                f"resources/reference/CriGri-PICRH-1.0/{relative}\n"
+                for relative in checksummed
+            ),
+            encoding="utf-8",
+        )
         return root
 
     def test_exact_manifest_membership_count_and_uniqueness(self):
@@ -140,7 +199,7 @@ class ChipseqBenchmarkTests(unittest.TestCase):
 
     def test_check_mode_has_no_submission_side_effect(self):
         plan = {"mode": "check"}
-        argv = [str(SUBMIT_PATH), "--benchmark-class", "P10"]
+        argv = [str(SUBMIT_PATH), "--benchmark-class", "P10", "--shared-reference-root", "/fixture"]
         with mock.patch.object(sys, "argv", argv), \
                 mock.patch.object(SUBMIT, "local_validation", return_value=plan), \
                 mock.patch.object(SUBMIT, "prepare_submission") as prepare, \
@@ -151,7 +210,10 @@ class ChipseqBenchmarkTests(unittest.TestCase):
         check_output.assert_not_called()
 
     def test_submit_requires_clean_source_and_forbids_dirty_override(self):
-        argv = [str(SUBMIT_PATH), "--benchmark-class", "P10", "--submit", "--development-dirty-check"]
+        argv = [
+            str(SUBMIT_PATH), "--benchmark-class", "P10", "--shared-reference-root",
+            "/fixture", "--submit", "--development-dirty-check",
+        ]
         with mock.patch.object(sys, "argv", argv), self.assertRaisesRegex(ValueError, "forbidden"):
             SUBMIT.main()
 
@@ -204,6 +266,123 @@ class ChipseqBenchmarkTests(unittest.TestCase):
         output.write_text("changed\n", encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "changed"):
             SUPPORT.verify_completion("synthetic", marker)
+
+
+    def test_shared_reference_inventory_is_complete_and_fai_derived(self):
+        root = self.fixture_reference()
+        inventory = SUPPORT.reference_inventory(root)
+        self.assertEqual(inventory["identity"]["refseq_accession"], "GCF_003668045.3")
+        self.assertEqual(inventory["fai"]["nuclear_span_bp"], 4)
+        self.assertEqual(len(inventory["required_index_components"]), 6)
+        self.assertEqual(
+            {item["relative_path"] for item in inventory["files"]},
+            set(SUPPORT.REFERENCE_FILES),
+        )
+
+    def test_shared_reference_validation_fails_closed(self):
+        root = self.fixture_reference()
+        (root / "chipseq/bowtie2_index/genome_plus_mt.4.bt2l").unlink()
+        with self.assertRaisesRegex(ValueError, "Missing or empty"):
+            SUPPORT.reference_inventory(root)
+        with self.assertRaisesRegex(ValueError, "explicit absolute"):
+            SUPPORT.reference_inventory(Path("relative/reference"))
+
+    def test_shared_reference_change_after_submission_fails_closed(self):
+        root = self.fixture_reference()
+        expected = self.temp / "submission_plan.json"
+        expected.write_text(
+            json.dumps({"shared_reference": SUPPORT.reference_inventory(root)}),
+            encoding="utf-8",
+        )
+        (root / "chipseq/bowtie2_index/genome_plus_mt.1.bt2l").write_text("changed\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "immutable submission inventory"):
+            SUPPORT.validate_reference_inventory(root, expected)
+
+    def test_stage_sizes_and_hashes_recorded_before_transient_disappears(self):
+        transient = self.temp / "raw.bam"
+        marker = self.temp / "stage.json"
+        transient.write_bytes(b"bam-bytes")
+        SUPPORT.write_artifact_record("alignment", marker, [transient], [])
+        transient.unlink()
+        record = json.loads(marker.read_text(encoding="utf-8"))
+        self.assertEqual(record["artifacts"][0]["bytes"], 9)
+        self.assertEqual(record["artifacts"][0]["retention"], "transient")
+        self.assertTrue(record["artifacts"][0]["regenerable"])
+
+    def test_persistence_copy_is_verified_and_collision_protected(self):
+        source = self.temp / "filtered.bam"
+        source.write_bytes(b"filtered")
+        destination = self.temp / "persistent"
+        outputs = SUPPORT.persist_files(destination, [f"filtered/filtered.bam={source}"])
+        self.assertEqual(outputs[0].read_bytes(), b"filtered")
+        with self.assertRaisesRegex(ValueError, "collision"):
+            SUPPORT.persist_files(destination, [f"filtered/filtered.bam={source}"])
+
+    def test_transient_raw_fastq_policy(self):
+        script = SBATCH_PATH.read_text(encoding="utf-8")
+        self.assertNotIn("data/raw/$CHIP_FILENAME=", script)
+        self.assertIn("run_stage acquisition_validation", script)
+
+    def test_transient_processed_fastq_and_no_alignment_copy_policy(self):
+        script = SBATCH_PATH.read_text(encoding="utf-8")
+        self.assertNotIn("preprocessing/$CHIP_RUN.fastq.gz=", script)
+        self.assertNotIn("cp @PROCESSED@", script)
+        self.assertIn("-U @PROCESSED@", script)
+
+    def test_transient_raw_and_duplicate_marked_bam_policy(self):
+        script = SBATCH_PATH.read_text(encoding="utf-8")
+        persistence = script.split('CHIP_STAGE="successful_persistence"', 1)[1]
+        self.assertNotIn("raw.sorted.bam=", persistence)
+        self.assertNotIn("dupmarked.sorted.bam=", persistence)
+        self.assertIn("dupmarked.sorted.bam", script)
+
+    def test_retained_filtered_bam_qc_metrics_and_provenance_policy(self):
+        script = SBATCH_PATH.read_text(encoding="utf-8")
+        for required in (
+            "filtered/filtered.bam=", "filtered/filtered.bam.csi=",
+            "qc/fastp/", "qc/fastqc/", "picard_metrics.txt",
+            "benchmark_metrics.tsv", "reference_provenance.json",
+            "persistent_footprint.tsv", "pipeline_commit.txt",
+            "environment_explicit.txt",
+        ):
+            self.assertIn(required, script)
+
+    def test_no_persistent_per_run_reference_or_index_duplication(self):
+        script = SBATCH_PATH.read_text(encoding="utf-8")
+        self.assertIn("--shared-reference-root", script)
+        self.assertNotIn("bowtie2-build", script)
+        self.assertNotIn('cp "$CHIP_FASTA', script)
+        self.assertNotIn("persist_work", script)
+
+    def test_completion_marker_follows_successful_persistence(self):
+        script = SBATCH_PATH.read_text(encoding="utf-8")
+        self.assertLess(script.index('"$CHIP_SUPPORT" persist-files'), script.index(
+            '"$CHIP_SUPPORT" complete-stage --stage benchmark'
+        ))
+        self.assertEqual(script.count("complete-stage --stage benchmark"), 1)
+        self.assertLess(
+            script.index('> "$CHIP_SAVE/persistent_footprint.tsv"'),
+            script.index('mv "$CHIP_COMPLETION_PENDING" "$CHIP_SAVE/benchmark.complete.json"'),
+        )
+        self.assertLess(
+            script.index('stage\\tcompleted'),
+            script.index('CHIP_PERSISTENT_BASE_BYTES='),
+        )
+        self.assertLess(
+            script.index('mv "$CHIP_COMPLETION_PENDING" "$CHIP_SAVE/benchmark.complete.json"'),
+            script.rindex("trap - EXIT"),
+        )
+        self.assertEqual(script.count("trap - EXIT"), 2)
+        self.assertIn('--marker "$CHIP_COMPLETION_PENDING"', script)
+
+    def test_worker_records_required_benchmark_resource_metrics(self):
+        script = SBATCH_PATH.read_text(encoding="utf-8")
+        for field in (
+            "elapsed_seconds", "max_rss_kbytes", "user_cpu_seconds",
+            "system_cpu_seconds", "baseline_scratch_bytes", "peak_scratch_bytes",
+            "incremental_peak_scratch_bytes", "input_bytes", "output_bytes",
+        ):
+            self.assertIn(field, script)
 
 
 if __name__ == "__main__":

@@ -15,6 +15,7 @@ set -euo pipefail
 : "${SLURM_JOB_ID:?SLURM_JOB_ID is required}"
 : "${CHIP_BENCHMARK_CLASS:?Select exactly one of P10, P50, P90}"
 : "${CHIP_BENCHMARK_ACCESSION:?Explicit benchmark accession is required}"
+: "${CHIP_SHARED_REFERENCE_ROOT:?Explicit absolute shared reference root is required}"
 
 CHIP_SOURCE="$PWD"
 CHIP_SUBMISSION_ROOT="$(dirname "$CHIP_SOURCE")"
@@ -26,6 +27,11 @@ CHIP_STAGE="initialization"
 CHIP_MONITOR_PID=""
 
 mkdir -p "$CHIP_SAVE" "$CHIP_WORK"
+if [[ -f "$CHIP_SAVE/benchmark.complete.json" ]]; then
+    python "$CHIP_SUPPORT" verify-stage --stage benchmark --marker "$CHIP_SAVE/benchmark.complete.json"
+    echo "ERROR: validated completed benchmark already exists: $CHIP_SAVE" >&2
+    exit 2
+fi
 
 stop_monitor() {
     if [[ -n "$CHIP_MONITOR_PID" ]]; then
@@ -35,17 +41,12 @@ stop_monitor() {
     fi
 }
 
-persist_work() {
-    mkdir -p "$CHIP_SAVE/work"
-    rsync -a "$CHIP_WORK/" "$CHIP_SAVE/work/"
-}
 
 finish() {
     local status=$?
     trap - EXIT
     set +e
     stop_monitor
-    persist_work
     printf 'stage\t%s\nexit_status\t%s\n' "$CHIP_STAGE" "$status" > "$CHIP_SAVE/job_status.tsv"
     exit "$status"
 }
@@ -76,9 +77,6 @@ CHIP_POST_DIR="results/qc/post/$CHIP_RUN"
 CHIP_ALIGN_DIR="results/chipseq/alignment/$CHIP_RUN"
 CHIP_FILTER_DIR="results/chipseq/filtering/$CHIP_RUN"
 
-if [[ -d "$CHIP_SAVE/work" ]]; then
-    rsync -a "$CHIP_SAVE/work/" "$CHIP_WORK/"
-fi
 
 rsync -a --exclude='.git/' --exclude='data/' --exclude='results/' --exclude='resources/' \
     "$CHIP_SOURCE/" "$CHIP_WORK/"
@@ -99,7 +97,6 @@ export PYTHONDONTWRITEBYTECODE=1
 mkdir -p "$CONDA_PKGS_DIRS" "$XDG_CACHE_HOME"
 
 CHIP_MAIN_ENV="$TMPDIR/chipseq-benchmark-main-env"
-CHIP_REF_ENV="$TMPDIR/chipseq-benchmark-reference-env"
 CHIP_PREP_ENV="$TMPDIR/chipseq-benchmark-preprocessing-env"
 CHIP_QC_ENV="$TMPDIR/chipseq-benchmark-qc-env"
 CHIP_ALIGN_ENV="$TMPDIR/chipseq-benchmark-alignment-env"
@@ -109,7 +106,6 @@ CHIP_FILTER_ENV="$TMPDIR/chipseq-benchmark-filtering-env"
 CHIP_STAGE="environment_setup"
 CHIP_SETUP_START="$(date +%s)"
 conda env create --prefix "$CHIP_MAIN_ENV" --file environment.yml > "$CHIP_SAVE/main_environment.log" 2>&1
-conda env create --prefix "$CHIP_REF_ENV" --file workflow/envs/reference.yaml > "$CHIP_SAVE/reference_environment.log" 2>&1
 conda env create --prefix "$CHIP_PREP_ENV" --file workflow/envs/preprocessing.yaml > "$CHIP_SAVE/preprocessing_environment.log" 2>&1
 conda env create --prefix "$CHIP_QC_ENV" --file workflow/envs/qc.yaml > "$CHIP_SAVE/qc_environment.log" 2>&1
 conda env create --prefix "$CHIP_ALIGN_ENV" --file workflow/envs/chipseq_alignment.yaml > "$CHIP_SAVE/alignment_environment.log" 2>&1
@@ -126,6 +122,12 @@ mkdir -p "$CHIP_SAVE/software_versions"
 "$CHIP_ALIGN_ENV/bin/samtools" --version > "$CHIP_SAVE/software_versions/samtools.txt" 2>&1
 "$CHIP_DUP_ENV/bin/picard" MarkDuplicates --version > "$CHIP_SAVE/software_versions/picard.txt" 2>&1
 conda --version > "$CHIP_SAVE/software_versions/conda.txt" 2>&1
+conda list --explicit --prefix "$CHIP_MAIN_ENV" > "$CHIP_SAVE/software_versions/main_environment_explicit.txt"
+conda list --explicit --prefix "$CHIP_PREP_ENV" > "$CHIP_SAVE/software_versions/preprocessing_environment_explicit.txt"
+conda list --explicit --prefix "$CHIP_QC_ENV" > "$CHIP_SAVE/software_versions/qc_environment_explicit.txt"
+conda list --explicit --prefix "$CHIP_ALIGN_ENV" > "$CHIP_SAVE/software_versions/alignment_environment_explicit.txt"
+conda list --explicit --prefix "$CHIP_DUP_ENV" > "$CHIP_SAVE/software_versions/duplicates_environment_explicit.txt"
+conda list --explicit --prefix "$CHIP_FILTER_ENV" > "$CHIP_SAVE/software_versions/filtering_environment_explicit.txt"
 "$CHIP_MAIN_ENV/bin/python" -c \
     'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8"))["source_git_commit"])' \
     "$CHIP_SUBMISSION_ROOT/submission_plan.json" > "$CHIP_SAVE/pipeline_commit.txt"
@@ -137,29 +139,13 @@ printf '%s\n' \
     'slurm_request=eight_cpus_32G_8h_provisional_bootstrap_not_a_result' \
     > "$CHIP_SAVE/benchmark_contract.txt"
 
-CHIP_STAGE="reference_setup"
-CHIP_REFERENCE_START="$(date +%s)"
-PATH="$CHIP_REF_ENV/bin:$PATH" /usr/bin/time -v -o "$CHIP_SAVE/reference_fetch_resources.txt" \
-    "$CHIP_REF_ENV/bin/python" workflow/scripts/fetch_reference_genome.py \
-    > "$CHIP_SAVE/reference_fetch.log" 2>&1
-PATH="$CHIP_ALIGN_ENV/bin:$PATH" /usr/bin/time -v -o "$CHIP_SAVE/mapping_reference_resources.txt" \
-    "$CHIP_ALIGN_ENV/bin/python" workflow/scripts/chipseq_alignment_support.py reference \
-    > "$CHIP_SAVE/mapping_reference.log" 2>&1
-
-CHIP_RDIR="resources/reference/CriGri-PICRH-1.0/chipseq"
+CHIP_STAGE="shared_reference_validation"
+python "$CHIP_SUPPORT" check-reference --shared-reference-root "$CHIP_SHARED_REFERENCE_ROOT" \
+    --expected "$CHIP_SUBMISSION_ROOT/submission_plan.json" \
+    --output "$CHIP_SAVE/reference_provenance.json"
+CHIP_RDIR="$CHIP_SHARED_REFERENCE_ROOT/chipseq"
 CHIP_FASTA="$CHIP_RDIR/genome_plus_mt.fa"
 CHIP_INDEX="$CHIP_RDIR/bowtie2_index/genome_plus_mt"
-mkdir -p "$(dirname "$CHIP_INDEX")" inputs/reference
-PATH="$CHIP_ALIGN_ENV/bin:$PATH" /usr/bin/time -v -o "$CHIP_SAVE/bowtie2_index_resources.txt" \
-    "$CHIP_ALIGN_ENV/bin/bowtie2-build" --large-index --threads 8 "$CHIP_FASTA" "$CHIP_INDEX" \
-    > "$CHIP_SAVE/bowtie2_index.log" 2>&1
-"$CHIP_ALIGN_ENV/bin/samtools" faidx "$CHIP_FASTA"
-cp "$CHIP_FASTA.fai" inputs/reference/genome_plus_mt.fa.fai
-CHIP_REFERENCE_END="$(date +%s)"
-printf 'setup_elapsed_seconds=%s\nreference_and_index_bytes=%s\n' \
-    "$((CHIP_REFERENCE_END - CHIP_REFERENCE_START))" \
-    "$(du -sb "$CHIP_RDIR" | awk '{print $1}')" \
-    > "$CHIP_SAVE/reference_setup_summary.txt"
 
 if [[ ! -e "$CHIP_SAVE/benchmark_metrics.tsv" ]]; then
     printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
@@ -178,15 +164,10 @@ run_stage() {
     shift
     local outputs=("${@:1:$output_count}")
     shift "$output_count"
-    local marker=".benchmark/stages/$stage.complete.json"
     local stage_dir="$CHIP_SAVE/stages/$stage"
-    mkdir -p "$stage_dir" "$(dirname "$marker")"
+    local marker="$stage_dir/artifacts.json"
+    mkdir -p "$stage_dir"
 
-    if [[ -f "$marker" ]]; then
-        "$CHIP_MAIN_ENV/bin/python" "$CHIP_SUPPORT" verify-stage --stage "$stage" --marker "$marker"
-        printf 'stage\t%s\nstatus\tcomplete_reused_after_validation\n' "$stage" > "$stage_dir/resume_status.tsv"
-        return
-    fi
 
     CHIP_STAGE="$stage"
     local baseline start_epoch end_epoch start_utc end_utc status peak incremental output_bytes
@@ -230,12 +211,13 @@ run_stage() {
         "$stage" "$([[ "$status" == 0 ]] && echo complete || echo failed)" "$status" "$start_utc" "$end_utc" \
         > "$stage_dir/stage_status.tsv"
     if (( status != 0 )); then
-        persist_work
         return "$status"
     fi
-    "$CHIP_MAIN_ENV/bin/python" "$CHIP_SUPPORT" complete-stage --stage "$stage" --marker "$marker" "${outputs[@]}"
-    find . -type f -printf '%p\t%s\n' | sort > "$stage_dir/output_inventory.tsv"
-    persist_work
+    local record_args=()
+    for output in "${outputs[@]}"; do
+        record_args+=(--transient "$output")
+    done
+    "$CHIP_MAIN_ENV/bin/python" "$CHIP_SUPPORT" record-stage --stage "$stage" --marker "$marker" "${record_args[@]}"
 }
 
 mkdir -p data/raw results/preprocessing "$CHIP_POST_DIR" "$CHIP_ALIGN_DIR" "$CHIP_FILTER_DIR" inputs
@@ -262,8 +244,7 @@ sed -e "s|@RUN@|$CHIP_RUN|g" -e "s|@PROCESSED@|$CHIP_PROCESSED|g" \
     -e "s|@ALIGN_ENV@|$CHIP_ALIGN_ENV|g" > "$CHIP_ALIGN_SCRIPT" <<'ALIGN_SCRIPT'
 #!/usr/bin/env bash
 set -euo pipefail
-cp @PROCESSED@ inputs/@RUN@.fastq.gz
-@ALIGN_ENV@/bin/bowtie2 --local --very-sensitive-local --seed 0 -p 6 -x @INDEX@ -U inputs/@RUN@.fastq.gz \
+@ALIGN_ENV@/bin/bowtie2 --local --very-sensitive-local --seed 0 -p 6 -x @INDEX@ -U @PROCESSED@ \
     --rg-id @RUN@ --rg SM:@RUN@ --rg LB:@RUN@ --rg PL:ILLUMINA 2> @OUT@/bowtie2.log | \
     @ALIGN_ENV@/bin/samtools sort -@ 1 -m 768M -T @OUT@/sort_tmp -o @OUT@/raw.sorted.bam - \
     2> @OUT@/sort.log
@@ -317,8 +298,57 @@ run_stage filtering "$(stat -c %s "$CHIP_ALIGN_DIR/raw.sorted.bam")" 5 \
     "work/chipseq_filtering/$CHIP_RUN/dupmarked.sorted.bam" \
     "$CHIP_FILTER_SCRIPT"
 
+CHIP_STAGE="successful_persistence"
+"$CHIP_MAIN_ENV/bin/python" "$CHIP_SUPPORT" persist-files \
+    --destination "$CHIP_SAVE/artifacts" \
+    "filtered/filtered.bam=$CHIP_FILTER_DIR/filtered.bam" \
+    "filtered/filtered.bam.csi=$CHIP_FILTER_DIR/filtered.bam.csi" \
+    "qc/fastp/$CHIP_RUN.fastp.json=$CHIP_FASTP_JSON" \
+    "qc/fastp/$CHIP_RUN.fastp.html=$CHIP_FASTP_HTML" \
+    "qc/fastqc/${CHIP_RUN}_fastqc.html=$CHIP_POST_DIR/${CHIP_RUN}_fastqc.html" \
+    "qc/fastqc/${CHIP_RUN}_fastqc.zip=$CHIP_POST_DIR/${CHIP_RUN}_fastqc.zip" \
+    "qc/alignment/alignment_qc.json=$CHIP_ALIGN_DIR/alignment_qc.json" \
+    "qc/alignment/flagstat.txt=$CHIP_ALIGN_DIR/flagstat.txt" \
+    "qc/alignment/idxstats.tsv=$CHIP_ALIGN_DIR/idxstats.tsv" \
+    "qc/alignment/samtools_stats.txt=$CHIP_ALIGN_DIR/samtools_stats.txt" \
+    "qc/alignment/bowtie2.log=$CHIP_ALIGN_DIR/bowtie2.log" \
+    "qc/filtering/input_validation.json=$CHIP_FILTER_DIR/input_validation.json" \
+    "qc/filtering/picard_metrics.txt=$CHIP_FILTER_DIR/picard_metrics.txt" \
+    "qc/filtering/picard.log=$CHIP_FILTER_DIR/picard.log" \
+    "qc/filtering/filtering_qc.json=$CHIP_FILTER_DIR/filtering_qc.json" \
+    "qc/filtering/filtering_flow.tsv=$CHIP_FILTER_DIR/filtering_flow.tsv" \
+    "qc/filtering/filtered_validation.json=$CHIP_FILTER_DIR/filtered_validation.json" \
+    "provenance/chipseq_alignment_inputs.json=config/chipseq_alignment_inputs.json" \
+    "provenance/chipseq_filtering_inputs.json=config/chipseq_filtering_inputs.json" \
+    > "$CHIP_SAVE/persistence.log"
+
+
+mapfile -t CHIP_COMPLETION_OUTPUTS < <(
+    find "$CHIP_SAVE/artifacts" -type f -print | sort
+    find "$CHIP_SAVE/stages" -name artifacts.json -type f -print | sort
+    printf '%s\n' \
+        "$CHIP_SAVE/benchmark_metrics.tsv" \
+        "$CHIP_SAVE/reference_provenance.json"
+)
+CHIP_COMPLETION_PENDING="$CHIP_SAVE/benchmark.complete.pending.json"
+"$CHIP_MAIN_ENV/bin/python" "$CHIP_SUPPORT" complete-stage --stage benchmark \
+    --marker "$CHIP_COMPLETION_PENDING" "${CHIP_COMPLETION_OUTPUTS[@]}"
+
 CHIP_STAGE="completed"
-persist_work
 printf 'benchmark_class\t%s\nrun_accession\t%s\nstage\tcompleted\nexit_status\t0\n' \
     "$CHIP_BENCHMARK_CLASS" "$CHIP_RUN" > "$CHIP_SAVE/job_status.tsv"
+CHIP_PERSISTENT_BASE_BYTES="$(find "$CHIP_SUBMISSION_ROOT" -type f \
+    ! -path "$CHIP_SAVE/persistent_footprint.tsv" -printf '%s\n' | \
+    awk '{total += $1} END {print total+0}')"
+CHIP_PERSISTENT_BYTES="$CHIP_PERSISTENT_BASE_BYTES"
+while true; do
+    CHIP_FOOTPRINT_TEXT="$(printf 'scope\tlogical_bytes\nsubmission_directory_final\t%s' \
+        "$CHIP_PERSISTENT_BYTES")"
+    CHIP_MEASURED_BYTES="$((CHIP_PERSISTENT_BASE_BYTES + ${#CHIP_FOOTPRINT_TEXT} + 1))"
+    [[ "$CHIP_MEASURED_BYTES" == "$CHIP_PERSISTENT_BYTES" ]] && break
+    CHIP_PERSISTENT_BYTES="$CHIP_MEASURED_BYTES"
+done
+printf '%s\n' "$CHIP_FOOTPRINT_TEXT" > "$CHIP_SAVE/persistent_footprint.tsv"
+mv "$CHIP_COMPLETION_PENDING" "$CHIP_SAVE/benchmark.complete.json"
+trap - EXIT
 echo "[OK] ChIP-seq benchmark completed: $CHIP_BENCHMARK_CLASS $CHIP_RUN"

@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+from typing import Iterable
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -49,6 +50,33 @@ SACCT_FIELDS = [
     "MaxRSS",
     "AveRSS",
     "ExitCode",
+]
+REFERENCE_IDENTITY = {
+    "assembly_name": "CriGri-PICRH-1.0",
+    "refseq_accession": "GCF_003668045.3",
+    "genbank_accession": "GCA_003668045.2",
+    "species": "Cricetulus griseus",
+    "taxid": "10029",
+    "configured_annotation_release": "104",
+    "mitochondrial_accession": "NC_007936.1",
+}
+REFERENCE_FILES = [
+    "genome.fa",
+    "annotation.gff3",
+    "annotation.gtf",
+    "sequence_report.jsonl",
+    "reference_metadata.tsv",
+    "SHA256SUMS.txt",
+    "chipseq/mitochondrial.fa",
+    "chipseq/genome_plus_mt.fa",
+    "chipseq/genome_plus_mt.fa.fai",
+    "chipseq/reference_provenance.json",
+    "chipseq/bowtie2_index/genome_plus_mt.1.bt2l",
+    "chipseq/bowtie2_index/genome_plus_mt.2.bt2l",
+    "chipseq/bowtie2_index/genome_plus_mt.3.bt2l",
+    "chipseq/bowtie2_index/genome_plus_mt.4.bt2l",
+    "chipseq/bowtie2_index/genome_plus_mt.rev.1.bt2l",
+    "chipseq/bowtie2_index/genome_plus_mt.rev.2.bt2l",
 ]
 
 
@@ -272,6 +300,223 @@ def storage_preflight(
     }
 
 
+
+
+def _metadata_values(path: Path) -> dict[str, str]:
+    rows = read_tsv(path)
+    if set(rows[0]) != {"field", "value"}:
+        raise ValueError(f"Unexpected reference metadata columns: {path}")
+    values: dict[str, str] = {}
+    for row in rows:
+        if not row["field"] or row["field"] in values:
+            raise ValueError(f"Missing or duplicate reference metadata field: {path}")
+        values[row["field"]] = row["value"]
+    return values
+
+
+def _fai_summary(path: Path, mitochondrial_accession: str) -> dict[str, int]:
+    sequence_count = 0
+    nuclear_span = 0
+    mitochondrial_length = None
+    seen: set[str] = set()
+    with path.open(encoding="utf-8") as handle:
+        for line in handle:
+            fields = line.rstrip("\n").split("\t")
+            if len(fields) != 5 or not fields[1].isdigit() or int(fields[1]) <= 0:
+                raise ValueError(f"Malformed FAI row: {path}")
+            name, length = fields[0], int(fields[1])
+            if not name or name in seen:
+                raise ValueError(f"Missing or duplicate FAI sequence: {path}")
+            seen.add(name)
+            sequence_count += 1
+            if name == mitochondrial_accession:
+                mitochondrial_length = length
+            else:
+                nuclear_span += length
+    if sequence_count < 2 or mitochondrial_length is None or nuclear_span <= 0:
+        raise ValueError("Combined-reference FAI lacks nuclear or mitochondrial span")
+    return {
+        "sequence_count": sequence_count,
+        "nuclear_span_bp": nuclear_span,
+        "mitochondrial_length_bp": mitochondrial_length,
+    }
+
+
+def reference_inventory(root: Path) -> dict[str, object]:
+    """Validate and fingerprint one explicit immutable shared reference root."""
+    if not root.is_absolute():
+        raise ValueError("Shared reference root must be an explicit absolute path")
+    root = root.resolve()
+    if not root.is_dir():
+        raise ValueError(f"Shared reference root is not a directory: {root}")
+    paths = {relative: root / relative for relative in REFERENCE_FILES}
+    for relative, path in paths.items():
+        if not path.is_file() or path.stat().st_size <= 0:
+            raise ValueError(f"Missing or empty shared reference resource: {relative}")
+
+    metadata = _metadata_values(paths["reference_metadata.tsv"])
+    for field in (
+        "assembly_name", "refseq_accession", "genbank_accession", "species",
+        "taxid", "configured_annotation_release",
+    ):
+        if metadata.get(field) != REFERENCE_IDENTITY[field]:
+            raise ValueError(
+                f"Shared reference metadata mismatch for {field}: {metadata.get(field)!r}"
+            )
+
+    checksum_entries = []
+    for line in paths["SHA256SUMS.txt"].read_text(encoding="utf-8").splitlines():
+        fields = line.split(maxsplit=1)
+        if len(fields) != 2 or not re.fullmatch(r"[0-9a-f]{64}", fields[0]):
+            raise ValueError("Malformed shared reference SHA256SUMS entry")
+        checksum_entries.append((fields[0], fields[1].lstrip("*")))
+    for relative in (
+        "genome.fa", "annotation.gff3", "annotation.gtf",
+        "sequence_report.jsonl", "reference_metadata.tsv",
+    ):
+        matches = [
+            digest for digest, name in checksum_entries
+            if name == relative or name.endswith("/" + relative)
+        ]
+        if len(matches) != 1 or sha256(paths[relative]) != matches[0]:
+            raise ValueError(f"Shared reference SHA256SUMS mismatch for {relative}")
+
+    provenance = json.loads(
+        paths["chipseq/reference_provenance.json"].read_text(encoding="utf-8")
+    )
+    for field in ("nuclear_accession", "mitochondrial_accession"):
+        expected_key = "refseq_accession" if field == "nuclear_accession" else field
+        if provenance.get(field) != REFERENCE_IDENTITY[expected_key]:
+            raise ValueError(f"Shared ChIP reference provenance mismatch for {field}")
+
+    records = []
+    observed_hashes: dict[str, str] = {}
+    for relative in REFERENCE_FILES:
+        path = paths[relative]
+        digest = sha256(path)
+        observed_hashes[relative] = digest
+        records.append({
+            "relative_path": relative,
+            "execution_path": str(path),
+            "bytes": path.stat().st_size,
+            "sha256": digest,
+        })
+    hash_expectations = {
+        "nuclear_sha256": observed_hashes["genome.fa"],
+        "mitochondrial_sha256": observed_hashes["chipseq/mitochondrial.fa"],
+        "mapping_sha256": observed_hashes["chipseq/genome_plus_mt.fa"],
+    }
+    for field, expected in hash_expectations.items():
+        if provenance.get(field) != expected:
+            raise ValueError(f"Shared ChIP reference provenance hash mismatch for {field}")
+
+    fai = _fai_summary(
+        paths["chipseq/genome_plus_mt.fa.fai"],
+        REFERENCE_IDENTITY["mitochondrial_accession"],
+    )
+    if provenance.get("mitochondrial_length") != fai["mitochondrial_length_bp"]:
+        raise ValueError("Shared ChIP reference mitochondrial length disagrees with FAI")
+    return {
+        "schema_version": 1,
+        "root": str(root),
+        "identity": dict(REFERENCE_IDENTITY),
+        "fai": fai,
+        "files": records,
+        "required_index_components": [
+            item for item in REFERENCE_FILES if item.endswith(".bt2l")
+        ],
+        "regeneration": {
+            "nuclear_and_annotation": "workflow/scripts/fetch_reference_genome.py",
+            "combined_reference": "workflow/scripts/chipseq_alignment_support.py reference",
+            "index_command": (
+                "bowtie2-build --large-index --threads 8 genome_plus_mt.fa "
+                "bowtie2_index/genome_plus_mt"
+            ),
+        },
+    }
+
+
+def validate_reference_inventory(root: Path, expected_path: Path) -> dict[str, object]:
+    expected = json.loads(expected_path.read_text(encoding="utf-8"))
+    if isinstance(expected, dict) and "shared_reference" in expected:
+        expected = expected["shared_reference"]
+    observed = reference_inventory(root)
+    if observed != expected:
+        raise ValueError("Shared reference differs from the immutable submission inventory")
+    return observed
+
+
+def artifact_record(
+    stage: str,
+    transient: Iterable[Path],
+    persistent: Iterable[Path],
+) -> dict[str, object]:
+    records = []
+    for retention, outputs in (("transient", transient), ("persistent", persistent)):
+        for output in outputs:
+            if not output.is_file() or output.stat().st_size <= 0:
+                raise ValueError(f"Missing or empty stage output: {output}")
+            records.append({
+                "path": str(output),
+                "bytes": output.stat().st_size,
+                "sha256": sha256(output),
+                "retention": retention,
+                "regenerable": retention == "transient",
+            })
+    if not records:
+        raise ValueError("At least one stage output is required")
+    return {"schema_version": 2, "stage": stage, "status": "complete", "artifacts": records}
+
+
+def write_artifact_record(
+    stage: str,
+    marker: Path,
+    transient: Iterable[Path],
+    persistent: Iterable[Path],
+) -> None:
+    atomic_text(
+        marker,
+        json.dumps(
+            artifact_record(stage, transient, persistent),
+            indent=2,
+            sort_keys=True,
+        ) + "\n",
+    )
+
+
+def persist_files(destination: Path, mappings: list[str]) -> list[Path]:
+    """Copy an allowlisted set once, verify it, and refuse destination collisions."""
+    if not mappings:
+        raise ValueError("At least one persistence mapping is required")
+    destination.mkdir(parents=True, exist_ok=True)
+    persisted = []
+    seen: set[Path] = set()
+    for mapping in mappings:
+        if "=" not in mapping:
+            raise ValueError(f"Malformed persistence mapping: {mapping!r}")
+        relative_text, source_text = mapping.split("=", 1)
+        relative = Path(relative_text)
+        if relative.is_absolute() or not relative.parts or ".." in relative.parts:
+            raise ValueError(f"Unsafe persistent relative path: {relative_text!r}")
+        source = Path(source_text)
+        target = destination / relative
+        temporary = target.with_name(target.name + ".part")
+        if target in seen or target.exists() or temporary.exists():
+            raise ValueError(f"Persistent output collision: {target}")
+        seen.add(target)
+        if not source.is_file() or source.stat().st_size <= 0:
+            raise ValueError(f"Missing or empty persistence source: {source}")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, temporary)
+        if (
+            temporary.stat().st_size != source.stat().st_size
+            or sha256(temporary) != sha256(source)
+        ):
+            raise ValueError(f"Persistent copy validation failed: {source}")
+        temporary.replace(target)
+        persisted.append(target)
+    return persisted
+
 def parse_sacct(input_path: Path, output_path: Path) -> None:
     lines = [line for line in input_path.read_text(encoding="utf-8").splitlines() if line.strip()]
     if not lines:
@@ -407,6 +652,18 @@ def main() -> None:
     filtering.add_argument("--qc", type=Path, required=True)
     filtering.add_argument("--config", type=Path, default=Path("config/chipseq_filtering.json"))
     filtering.add_argument("--output", type=Path, required=True)
+    reference = sub.add_parser("check-reference")
+    reference.add_argument("--shared-reference-root", type=Path, required=True)
+    reference.add_argument("--expected", type=Path)
+    reference.add_argument("--output", type=Path)
+    record = sub.add_parser("record-stage")
+    record.add_argument("--stage", required=True)
+    record.add_argument("--marker", type=Path, required=True)
+    record.add_argument("--transient", action="append", type=Path, default=[])
+    record.add_argument("--persistent", action="append", type=Path, default=[])
+    persist = sub.add_parser("persist-files")
+    persist.add_argument("--destination", type=Path, required=True)
+    persist.add_argument("mappings", nargs="+")
     args = parser.parse_args()
 
     if args.action == "generate-manifest":
@@ -427,6 +684,21 @@ def main() -> None:
         make_alignment_plan(args.run, args.processed_fastq, args.fastp_json, args.output)
     elif args.action == "make-filtering-plan":
         make_filtering_plan(args.run, args.bam, args.qc, args.config, args.output)
+    elif args.action == "check-reference":
+        inventory = (
+            validate_reference_inventory(args.shared_reference_root, args.expected)
+            if args.expected else reference_inventory(args.shared_reference_root)
+        )
+        content = json.dumps(inventory, indent=2, sort_keys=True) + "\n"
+        if args.output:
+            atomic_text(args.output, content)
+        else:
+            print(content, end="")
+    elif args.action == "record-stage":
+        write_artifact_record(args.stage, args.marker, args.transient, args.persistent)
+    elif args.action == "persist-files":
+        for path in persist_files(args.destination, args.mappings):
+            print(path)
 
 
 if __name__ == "__main__":

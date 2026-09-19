@@ -80,6 +80,10 @@ def local_validation(args: argparse.Namespace) -> dict[str, object]:
     row = SUPPORT.manifest_item(rows, args.benchmark_class)
     if args.run_accession is not None and args.run_accession != row["run_accession"]:
         raise ValueError("Explicit run accession does not match the selected percentile")
+    reference = SUPPORT.reference_inventory(args.shared_reference_root)
+    if any(character in reference["root"] for character in (",", "\n")):
+        raise ValueError("Shared reference root cannot contain commas or newlines")
+
     storage = SUPPORT.storage_preflight(row, args.output_root, args.scratch_root)
     return {
         "mode": "submit" if args.submit else "check",
@@ -92,6 +96,7 @@ def local_validation(args: argparse.Namespace) -> dict[str, object]:
         "benchmark": row,
         "storage": storage,
         "source_files": source_inventory(),
+        "shared_reference": reference,
         "slurm_requests": {
             "status": "provisional_bootstrap_inherited_from_validated_chipseq_workers",
             "cpus": 8,
@@ -136,6 +141,12 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("--scratch-root", type=Path, default=Path(os.environ.get("TMPDIR", "/tmp")))
     result.add_argument("--submit", action="store_true", help="Explicitly create and submit; default is check only")
     result.add_argument(
+        "--shared-reference-root",
+        type=Path,
+        required=True,
+        help="Absolute root of the prebuilt verified CriGri-PICRH-1.0 ChIP reference/index",
+    )
+    result.add_argument(
         "--development-dirty-check",
         action="store_true",
         help="Allow dirty source only in non-submitting check mode",
@@ -160,7 +171,8 @@ def main() -> None:
         "--parsable",
         "--export=ALL,"
         f"CHIP_BENCHMARK_CLASS={row['benchmark_class']},"
-        f"CHIP_BENCHMARK_ACCESSION={row['run_accession']}",
+        f"CHIP_BENCHMARK_ACCESSION={row['run_accession']},"
+        f"CHIP_SHARED_REFERENCE_ROOT={plan['shared_reference']['root']}",
         "workflow/slurm/chipseq_benchmark_p10_p50_p90.sbatch",
     ]
     job_id = subprocess.check_output(command, cwd=project, text=True).strip()
