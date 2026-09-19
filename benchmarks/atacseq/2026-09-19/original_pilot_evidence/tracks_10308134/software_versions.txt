@@ -1,0 +1,7 @@
+=== bedGraphToBigWig ===
+bedGraphToBigWig v 2.10 - Convert a bedGraph file to bigWig format (bbi version: 4).
+usage:
+   bedGraphToBigWig in.bedGraph chrom.sizes out.bw
+
+=== pyBigWig ===
+0.3.26

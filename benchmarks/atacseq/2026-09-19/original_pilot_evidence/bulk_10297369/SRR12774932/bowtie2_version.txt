@@ -1,0 +1,7 @@
+/local/tmp.10297369/atac-rule-envs/1031688ab38d124037369c7f8c9f9e77_/bin/bowtie2-align-s version 2.5.5
+64-bit
+Built on runnervm7g52i
+Mon Sep 14 02:26:12 UTC 2026
+Compiler: gcc version 14.4.0 (conda-forge gcc 14.4.0-4) 
+Options: -O3 -funroll-loops -g3 -fvisibility-inlines-hidden -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -fno-merge-constants -isystem /local/tmp.10297369/atac-rule-envs/1031688ab38d124037369c7f8c9f9e77_/include -fdebug-prefix-map=/opt/conda/conda-bld/bowtie2_1789352508860/work=/usr/local/src/conda/bowtie2-2.5.5 -fdebug-prefix-map=/local/tmp.10297369/atac-rule-envs/1031688ab38d124037369c7f8c9f9e77_=/usr/local/src/conda-prefix -O3
+Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}

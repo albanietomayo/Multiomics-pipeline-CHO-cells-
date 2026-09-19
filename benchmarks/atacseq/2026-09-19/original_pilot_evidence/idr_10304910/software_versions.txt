@@ -1,0 +1,9 @@
+=== MACS3 ===
+macs3 3.0.4
+
+=== BEDTOOLS ===
+bedtools v2.31.1
+
+=== IDR ===
+IDR 2.0.4.2
+/local/tmp.10304910/atac_idr_10304910/idr-env/bin/idr --version

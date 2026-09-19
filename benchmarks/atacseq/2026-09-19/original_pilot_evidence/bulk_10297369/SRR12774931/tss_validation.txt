@@ -1,0 +1,1 @@
+TSS files are nonempty and contain no missing/nonfinite numeric values; no biological threshold applied.

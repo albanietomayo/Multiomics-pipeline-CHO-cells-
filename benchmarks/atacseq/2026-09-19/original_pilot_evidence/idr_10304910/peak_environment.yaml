@@ -1,0 +1,7 @@
+name: atac-pooled-peak
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - macs3=3.0.4
+  - bedtools=2.31.1

@@ -1,0 +1,3 @@
+run_accession	input_intervals	kept_intervals	clipped_intervals	dropped_intervals	clipped_bp	bigwig_bytes	chromosomes_with_signal	chromosomes_in_header
+SRR12774931	13608762	13608700	107	62	3317	71316193	563	563
+SRR12774932	11384174	11384100	117	74	3648	59418535	565	565

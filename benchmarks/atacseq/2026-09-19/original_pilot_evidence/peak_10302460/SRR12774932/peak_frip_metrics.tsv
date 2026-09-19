@@ -1,0 +1,13 @@
+metric	value
+run_accession	SRR12774932
+usable_reads	5858817
+reads_in_peaks	1798356
+frip	0.30694866
+peak_count	215037
+nuclear_reference_span_bp	2366634374
+tn5_forward_shift_bp	4
+tn5_reverse_shift_bp	-5
+macs3_smooth_window_bp	150
+macs3_shift_bp	-75
+macs3_extsize_bp	150
+macs3_pvalue_threshold	0.01

@@ -1,0 +1,5 @@
+SRR12774932_peaks.narrowPeak: OK
+SRR12774932_summits.bed: OK
+SRR12774932_peaks.xls: OK
+SRR12774932.tn5.tagAlign.gz: OK
+peak_frip_metrics.tsv: OK

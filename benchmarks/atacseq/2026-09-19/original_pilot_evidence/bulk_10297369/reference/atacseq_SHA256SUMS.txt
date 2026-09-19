@@ -1,0 +1,3 @@
+5c81f08eafe8f5051704f692cc21a970f58b24b2bc1bedef82cb17ec7a2b4478  resources/reference/CriGri-PICRH-1.0/genome.fa
+f795693164463c4eddd2d21a138652e7f0b01be999dc3f7e98ad33ae44e09e48  resources/reference/CriGri-PICRH-1.0/atacseq/NC_007936.1.fa
+499cd99d9553c72390f83c1dfaf7ab68f02de7b03aec474335af85fc14b70390  resources/reference/CriGri-PICRH-1.0/atacseq/genome_plus_mt.fa

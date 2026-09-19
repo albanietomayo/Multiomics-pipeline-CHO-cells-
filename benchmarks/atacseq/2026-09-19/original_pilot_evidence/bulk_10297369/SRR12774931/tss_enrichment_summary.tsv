@@ -1,0 +1,13 @@
+metric	value
+total_tss	42215
+usable_tss	42148
+tss_skipped_boundary	67
+tss_skipped_missing_reference	0
+reads_seen	7068304
+reads_used	7044436
+insertion_events_in_tss_windows	2279148
+window_bp	2000
+bin_size_bp	10
+background_bp_per_side	100
+background_mean	2325.000000
+tss_enrichment_score	9.693333

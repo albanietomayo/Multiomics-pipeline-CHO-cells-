@@ -1,0 +1,7 @@
+metric	value
+input_intervals	11384174
+kept_intervals	11384100
+clipped_intervals	117
+dropped_intervals	74
+unknown_chromosome_intervals	0
+clipped_bp_total	3648

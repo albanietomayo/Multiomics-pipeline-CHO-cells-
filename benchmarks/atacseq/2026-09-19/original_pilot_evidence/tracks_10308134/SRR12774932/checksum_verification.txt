@@ -1,0 +1,4 @@
+SRR12774932.ATAC_Tn5_SPMR_150bp.bw: OK
+chrom.sizes: OK
+boundary_clipping_metrics.tsv: OK
+track_metrics.tsv: OK

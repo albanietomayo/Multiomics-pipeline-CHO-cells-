@@ -1,0 +1,16 @@
+metric	value
+run_accession	SRR12774931
+source_signal	MACS3_treat_pileup
+normalization	SPMR
+tn5_forward_shift_bp	4
+tn5_reverse_shift_bp	-5
+macs3_shift_bp	-75
+macs3_extsize_bp	150
+input_bedgraph_intervals	13608762
+kept_bedgraph_intervals	13608700
+boundary_clipped_intervals	107
+boundary_dropped_intervals	62
+boundary_clipped_bp	3317
+bigwig_bytes	71316193
+chromosomes_with_signal	563
+chromosomes_in_header	563
