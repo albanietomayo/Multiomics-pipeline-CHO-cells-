@@ -1,0 +1,8 @@
+job_id	job_name	state	exit_code	elapsed_seconds	elapsed	alloc_cpus	req_mem	max_rss	node	role	biological_status
+10280253	atac_pe_validation	COMPLETED	0:0	27044	07:30:44	64	98304M	4868.80M	vera-r02-09	Technical paired-end filtering validation	SRR29929613 multiome/single-cell; excluded from bulk CHO atlas
+10297369	atac_bulk_CHO_TSS	COMPLETED	0:0	2384	00:39:44	64	98304M	5504.59M	vera-r02-13	Bulk CHO alignment/filtering/TSS pilot	SRR12774931 and SRR12774932; superseded by production
+10300242	atac_verify_existing	COMPLETED	0:0	53	00:00:53	2	23700M	1052.38M	vera-r03-06	Verification of existing ATAC outputs	Technical validation
+10302460	atac_peak_pilot	COMPLETED	0:0	199	00:03:19	4	47400M	379.26M	vera-r05-04	MACS3 peak calling and FRiP pilot	SRR12774931 and SRR12774932; superseded by production
+10304910	atac_idr_pilot	COMPLETED	0:0	167	00:02:47	4	47400M	496.88M	vera-r06-02	Reproducibility and IDR pilot	SRR12774931 and SRR12774932; superseded by production
+10308134	atac_tracks_v2	COMPLETED	0:0	94	00:01:34	2	23700M	27.59M	vera-r05-04	BigWig track validation pilot	SRR12774931 and SRR12774932; superseded by production
+10318071	atac_prod_validate	COMPLETED	0:0	1950	00:32:30	16	189600M	7701.42M	vera-r06-02	Canonical end-to-end ATAC production validation	Canonical TFM production result
