@@ -1,0 +1,13 @@
+field	value
+date	2026-09-19
+omics	ATAC-seq
+cleanup_batch	Tanda_3
+authorization	EXPLICIT_USER_AUTHORIZATION
+technical_directories_removed	4
+git_worktrees_removed	2
+predelete_disk_bytes	92537856
+removal_status	PASS
+worktree_prune_completed	YES
+remote_historical_branches_preserved	YES
+protected_non_atac_worktrees_preserved	YES
+canonical_production_preserved	YES

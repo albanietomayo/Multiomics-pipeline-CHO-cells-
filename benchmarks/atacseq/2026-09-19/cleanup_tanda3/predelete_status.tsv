@@ -1,0 +1,16 @@
+field	value
+date	2026-09-19
+omics	ATAC-seq
+cleanup_batch	Tanda_3
+user_authorization	YES
+main_commit	f6343b99d011d17a0e19f3a16539a1ce5b9df6c0
+github_sync	YES
+active_atac_jobs	0
+technical_directories_to_remove	4
+worktrees_to_remove	2
+predelete_disk_bytes	92537856
+integrated_substantive_changes	NO
+paired_diff_sha256	31ec63bc50c52c492c4cc17b34de4e282c43acf09b388bfdd47473f62b894018
+paired_diff_preserved_in_git	YES
+historical_remote_branches_preserved	YES
+canonical_production_sha256	PASS

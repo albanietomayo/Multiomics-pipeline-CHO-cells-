@@ -1,0 +1,7 @@
+path	type	classification	preservation_status	reason
+/cephyr/users/mayoa/Vera/atacseq_paired_validation_results/SRR29929613/job_10280253	technical_directory	CLEANUP_CANDIDATE_AFTER_CLOSURE	PRESERVED_IN_TANDA3_CAPSULE	PE validation used excluded multiome/single-cell SRR29929613; compact technical evidence and exact experimental patch preserved.
+/cephyr/users/mayoa/Vera/atac_filter_integration_validation	technical_directory	CLEANUP_CANDIDATE_AFTER_CLOSURE	PRESERVED_IN_TANDA3_CAPSULE	Historical filter/manifest integration validation superseded by final production workflow.
+/cephyr/users/mayoa/Vera/atac_integration_pre_20260917T123008Z	technical_directory	CLEANUP_CANDIDATE_AFTER_CLOSURE	PRESERVED_IN_TANDA3_CAPSULE	Pre-integration snapshot preserved in full in Tanda 3 capsule.
+/cephyr/users/mayoa/Vera/atacseq_existing_verification_results	technical_directory	CLEANUP_CANDIDATE_AFTER_CLOSURE	PRESERVED_IN_TANDA3_CAPSULE	Historical existing-output verification preserved in full in Tanda 3 capsule.
+/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_atacseq_integrated	git_worktree	CLEANUP_CANDIDATE_AFTER_CLOSURE	BRANCH_REMOTE_AND_STATE_DOCUMENTED	Remote branch preserved; remaining local differences verified as CRLF/LF only.
+/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_atacseq_paired	git_worktree	CLEANUP_CANDIDATE_AFTER_CLOSURE	BRANCH_REMOTE_AND_EXACT_DIFF_PRESERVED	Remote branch preserved; exact uncommitted PE diff and submitted launcher preserved.
