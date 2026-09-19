@@ -1,0 +1,305 @@
+diff --git a/workflow/rules/atacseq.smk b/workflow/rules/atacseq.smk
+index 5523413..0352574 100644
+--- a/workflow/rules/atacseq.smk
++++ b/workflow/rules/atacseq.smk
+@@ -205,14 +205,18 @@ def get_atacseq_bowtie2_read_args(wildcards):
+ # Bowtie2 alignment
+ # ------------------------------------------------------------
+ 
++def _hpc_atac_output(path):
++    return temp(path) if config.get("hpc_validation_cleanup", False) else path
++
++
+ rule atacseq_align_run:
+     input:
+         index_dir=config["atacseq"]["bowtie2_index_dir"],
+         reads=get_atacseq_alignment_reads
+ 
+     output:
+-        bam=config["atacseq"]["align_dir"] + "/{run_accession}/raw.sorted.bam",
+-        bai=config["atacseq"]["align_dir"] + "/{run_accession}/raw.sorted.bam.bai",
++        bam=_hpc_atac_output(config["atacseq"]["align_dir"] + "/{run_accession}/raw.sorted.bam"),
++        bai=_hpc_atac_output(config["atacseq"]["align_dir"] + "/{run_accession}/raw.sorted.bam.bai"),
+         log=config["atacseq"]["align_dir"] + "/{run_accession}/bowtie2.log"
+ 
+     params:
+@@ -253,8 +257,8 @@ rule atacseq_mark_duplicates:
+         bam=config["atacseq"]["align_dir"] + "/{run_accession}/raw.sorted.bam"
+ 
+     output:
+-        bam=config["atacseq"]["align_dir"] + "/{run_accession}/dupmarked.sorted.bam",
+-        bai=config["atacseq"]["align_dir"] + "/{run_accession}/dupmarked.sorted.bai",
++        bam=_hpc_atac_output(config["atacseq"]["align_dir"] + "/{run_accession}/dupmarked.sorted.bam"),
++        bai=_hpc_atac_output(config["atacseq"]["align_dir"] + "/{run_accession}/dupmarked.sorted.bai"),
+         metrics=config["atacseq"]["qc_dir"] + "/{run_accession}/duplication_metrics.txt"
+ 
+     resources:
+@@ -268,10 +272,19 @@ rule atacseq_mark_duplicates:
+         mkdir -p $(dirname {output.bam:q})
+         mkdir -p $(dirname {output.metrics:q})
+ 
++        picard_tmp=$(mktemp -d {resources.tmpdir:q}/picard_markduplicates.XXXXXX)
++        trap 'rm -rf -- "$picard_tmp"' EXIT
++
++        printf 'PICARD_TMP_DIR=%s\n' "$picard_tmp"
++        df -h "$picard_tmp"
++        df -i "$picard_tmp"
++
++        JAVA_TOOL_OPTIONS="${{JAVA_TOOL_OPTIONS:-}} -Djava.io.tmpdir=$picard_tmp" \
+         picard -Xmx3g MarkDuplicates \
+           I={input.bam:q} \
+           O={output.bam:q} \
+           M={output.metrics:q} \
++          TMP_DIR="$picard_tmp" \
+           REMOVE_DUPLICATES=false \
+           CREATE_INDEX=true
+ 
+diff --git a/workflow/rules/common.smk b/workflow/rules/common.smk
+index 90bb247..16d38e0 100644
+--- a/workflow/rules/common.smk
++++ b/workflow/rules/common.smk
+@@ -58,6 +58,10 @@ def get_validation_fastq_outputs(wildcards):
+         )
+     ]
+ 
++def _hpc_fastq_output(path):
++    return temp(path) if config.get("hpc_validation_cleanup", False) else path
++
++
+ rule download_validation_fastq:
+     input:
+         manifest=lambda wildcards: (
+@@ -68,7 +72,7 @@ rule download_validation_fastq:
+         script="workflow/scripts/download_fastq.py"
+ 
+     output:
+-        fastq=(
++        fastq=_hpc_fastq_output(
+             f"{config['fastq']['validation_output_dir']}/"
+             "{run_accession}/{filename}"
+         )
+@@ -368,7 +372,7 @@ rule fastp_single:
+         fastq=get_fastp_single_input
+ 
+     output:
+-        fastq=(
++        fastq=_hpc_fastq_output(
+             f"{config['preprocessing']['fastp_dir']}/"
+             "{run_accession}/{fastq_role}/{basename}.fastq.gz"
+         ),
+@@ -432,11 +436,11 @@ rule fastp_paired:
+         )
+ 
+     output:
+-       r1=(
++       r1=_hpc_fastq_output(
+            f"{config['preprocessing']['fastp_dir']}/"
+            "{run_accession}/PAIRED/{run_accession}_R1.fastq.gz"
+        ),
+-       r2=(
++       r2=_hpc_fastq_output(
+            f"{config['preprocessing']['fastp_dir']}/"
+            "{run_accession}/PAIRED/{run_accession}_R2.fastq.gz"
+        ),
+diff --git a/workflow/slurm/atacseq_paired_validation.sbatch b/workflow/slurm/atacseq_paired_validation.sbatch
+index 19bc193..53cb5e3 100755
+--- a/workflow/slurm/atacseq_paired_validation.sbatch
++++ b/workflow/slurm/atacseq_paired_validation.sbatch
+@@ -3,7 +3,7 @@
+ #SBATCH --partition=vera
+ #SBATCH --nodes=1
+ #SBATCH --ntasks=1
+-#SBATCH --cpus-per-task=8
++#SBATCH --cpus-per-task=64
+ #SBATCH --mem=96G
+ #SBATCH --time=24:00:00
+ #SBATCH --job-name=atac_pe_validation
+@@ -15,7 +15,7 @@ RUN_ACCESSION="SRR29929613"
+ PROJECT_HOME="/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_atacseq_paired"
+ SAVE_ROOT="/cephyr/users/mayoa/Vera/atacseq_paired_validation_results"
+ JOB_TAG="${SLURM_JOB_ID:?SLURM_JOB_ID is required}"
+-THREADS="${SLURM_CPUS_PER_TASK:-8}"
++THREADS=16  # CPU reserved for disk quota; execution concurrency is limited.
+ MEM_MB=90000
+ 
+ WORK="${TMPDIR:?TMPDIR is required}/TFM_multiomics_pipeline_atacseq_${RUN_ACCESSION}"
+@@ -33,6 +33,98 @@ fi
+ 
+ mkdir -p "$WORK" "$SAVE"
+ 
++QUOTA_ROOT="/cephyr/users/mayoa"
++QUOTA_BYTES=$((30 * 1024 * 1024 * 1024))
++RESERVE_BYTES=$((3 * 1024 * 1024 * 1024))
++
++check_home_capacity() {
++    local required="$1" stats used entries
++    stats=$(cat "$QUOTA_ROOT") || return 1
++    used=$(awk '$1 == "rbytes:" {print $2}' <<< "$stats")
++    entries=$(awk '$1 == "rentries:" {print $2}' <<< "$stats")
++    [[ "$used" =~ ^[0-9]+$ && "$entries" =~ ^[0-9]+$ ]] || {
++        echo "ERROR: cannot read Ceph HOME accounting" >&2
++        return 1
++    }
++    printf 'home_bytes=%s required_bytes=%s home_entries=%s\n' \
++        "$used" "$required" "$entries"
++    (( used + required + RESERVE_BYTES <= QUOTA_BYTES && entries + 1000 < 60000 ))
++}
++
++sample_storage() {
++    local used apparent filesystem_available
++    used=$(du -s -B1 "$TMPDIR" 2>/dev/null |
++        awk 'NR==1 {print $1}' || true)
++    apparent=$(du -s -B1 --apparent-size "$TMPDIR" 2>/dev/null |
++        awk 'NR==1 {print $1}' || true)
++    filesystem_available=$(df -B1 --output=avail "$TMPDIR" |
++        awk 'NR==2 {print $1}' || true)
++    printf '%s\t%s\t%s\t%s\n' "$(date --iso-8601=seconds)" \
++        "${used:-NA}" "${apparent:-NA}" "${filesystem_available:-NA}"
++}
++
++MONITOR_PID=""
++finish() {
++    local result=$? archive_result=0 item
++    trap - EXIT
++    set +e
++    if [[ -n "$MONITOR_PID" ]]; then
++        kill "$MONITOR_PID" 2>/dev/null
++        wait "$MONITOR_PID" 2>/dev/null
++    fi
++    sample_storage >> "$SAVE/scratch_usage.tsv"
++    local diagnostics=()
++    for item in \
++        .snakemake/log results/metadata \
++        results/preprocessing/fastp/reports \
++        "results/atacseq/qc/$RUN_ACCESSION" \
++        "results/atacseq/bowtie2/$RUN_ACCESSION/bowtie2.log"
++    do
++        [[ ! -e "$WORK/$item" ]] || diagnostics+=("$item")
++    done
++    if (( ${#diagnostics[@]} )); then
++        tar -C "$WORK" -czf "$SAVE/diagnostics.tar.gz" -- "${diagnostics[@]}"
++        archive_result=$?
++    fi
++    if (( result == 0 && archive_result != 0 )); then
++        result=$archive_result
++    fi
++    printf 'exit_status\t%s\nfinished_at\t%s\n' \
++        "$result" "$(date --iso-8601=seconds)" > "$SAVE/job_status.tsv"
++    if (( result == 0 )); then
++        printf 'Validated BAM and verified persistent copy\n' > "$SAVE/complete.ok"
++    else
++        printf 'Job failed; inspect job_status.tsv and persistent logs\n' >&2
++    fi
++    exit "$result"
++}
++trap finish EXIT
++trap 'exit 143' TERM
++trap 'exit 130' INT
++
++printf 'timestamp\ttmpdir_allocated_bytes\ttmpdir_apparent_bytes\tfilesystem_available_bytes\n' \
++    > "$SAVE/scratch_usage.tsv"
++check_home_capacity "$((20 * 1024 * 1024 * 1024))" \
++    > "$SAVE/home_capacity_at_start.txt" || {
++        echo "ERROR: insufficient HOME margin for this validation" >&2
++        exit 5
++    }
++
++scontrol show job "$JOB_TAG" > "$SAVE/slurm_job_at_start.txt"
++df -h "$TMPDIR" > "$SAVE/tmpdir_filesystem_at_start.txt"
++
++(
++    while :; do
++        sample_storage
++        sleep 60
++    done
++) >> "$SAVE/scratch_usage.tsv" &
++MONITOR_PID=$!
++
++git -C "$PROJECT_HOME" diff --binary HEAD > "$SAVE/pipeline_changes.patch"
++cp "$PROJECT_HOME/workflow/slurm/atacseq_paired_validation.sbatch" \
++    "$SAVE/submitted_script.sbatch"
++
+ git -C "$PROJECT_HOME" rev-parse HEAD > "$SAVE/pipeline_commit.txt"
+ git -C "$PROJECT_HOME" status --short > "$SAVE/git_status_at_start.txt"
+ cp "$PROJECT_HOME/config/validation_runs.tsv" "$SAVE/validation_runs_for_job.tsv"
+@@ -73,7 +165,7 @@ set +e
+         --cores "$THREADS" \
+         --resources "mem_mb=$MEM_MB" \
+         --rerun-incomplete \
+-        --notemp \
++        --config hpc_validation_cleanup=True \
+         --latency-wait 60 \
+         -p \
+         > "$SAVE/snakemake_execution.log" 2>&1
+@@ -90,18 +182,18 @@ if (( WORKFLOW_STATUS != 0 )); then
+     exit "$WORKFLOW_STATUS"
+ fi
+ 
+-SAMTOOLS=$(
+-    find "$CONDA_ENVS" \
+-        -path '*/bin/samtools' \
+-        -print \
+-        -quit
++BOWTIE2=$(
++    find "$CONDA_ENVS" -path '*/bin/bowtie2' -print -quit
+ )
++SAMTOOLS="$(dirname "$BOWTIE2")/samtools"
+ 
+ if [[ -z "$SAMTOOLS" || ! -x "$SAMTOOLS" ]]; then
+     printf 'ERROR: samtools executable not found\n' >&2
+     exit 3
+ fi
+ 
++"$SAMTOOLS" --version > "$SAVE/samtools_version.txt"
++"$BOWTIE2" --version > "$SAVE/bowtie2_version.txt"
+ "$SAMTOOLS" quickcheck -v "$FILTERED_BAM"
+ "$SAMTOOLS" flagstat "$FILTERED_BAM" > "$SAVE/filtered.flagstat.txt"
+ "$SAMTOOLS" idxstats "$FILTERED_BAM" > "$SAVE/filtered.idxstats.tsv"
+@@ -135,7 +227,7 @@ printf 'records_per_qname\tqname_groups\n' > "$PAIR_DISTRIBUTION"
+ | "$SAMTOOLS" view - \
+ | cut -f1 \
+ | uniq -c \
+-| awk '{groups[$1]++} END {for (number in groups) print number, groups[number]}' \
++| awk 'BEGIN {OFS="\t"} {groups[$1]++} END {for (number in groups) print number, groups[number]}' \
+ | sort -n \
+ >> "$PAIR_DISTRIBUTION"
+ 
+@@ -174,10 +266,25 @@ if (( TOTAL == 0 ||
+     exit 4
+ fi
+ 
++BAM_BYTES=$(stat -c %s "$FILTERED_BAM")
++BAI_BYTES=$(stat -c %s "${FILTERED_BAM}.bai")
++check_home_capacity "$((BAM_BYTES + BAI_BYTES + 256 * 1024 * 1024))" \
++    > "$SAVE/home_capacity_before_copy.txt" || {
++        echo "ERROR: validated BAM exceeds safe persistent HOME capacity" >&2
++        exit 5
++    }
++
+ mkdir -p "$SAVE/artifacts"
+ 
++while IFS= read -r -d '' item; do
++    rsync -aR "$item" "$SAVE/artifacts/"
++done < <(
++    find resources/reference/CriGri-PICRH-1.0 -type f \
++        \( -name '*metadata*.tsv' -o -name SHA256SUMS.txt \
++           -o -name sequence_report.jsonl \) -print0
++)
++
+ for item in \
+-    "resources/reference/CriGri-PICRH-1.0" \
+     "results/metadata" \
+     "results/preprocessing/fastp/reports/${RUN_ACCESSION}" \
+     "results/atacseq/bowtie2/${RUN_ACCESSION}/bowtie2.log" \
+@@ -198,6 +305,11 @@ sha256sum \
+     "${TARGET}.bai" \
+     > "$SAVE/filtered_sha256.txt"
+ 
++(
++    cd "$SAVE/artifacts"
++    sha256sum --check "$SAVE/filtered_sha256.txt"
++) > "$SAVE/persistent_checksum_verification.txt"
++
+ du -sh "$WORK" > "$SAVE/final_work_directory_size.txt"
+ df -h "$TMPDIR" > "$SAVE/tmpdir_filesystem.txt"
+ 

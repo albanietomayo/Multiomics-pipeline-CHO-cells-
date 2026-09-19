@@ -1,0 +1,404 @@
+
+SNAKEMAKE
+=========
+  Date: 2026-09-17 14:45:52
+  Workflow ID: 37c97214-dad8-4793-9651-045db5c2be3f
+  Platform: Linux-5.14.0-687.39.1.el9_8.x86_64-x86_64-with-glibc2.34
+  Host: vera-r01-17
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /local/tmp.10308335/atac_filter_validation_10308335/main-env/bin/snakemake --snakefile Snakefile --cores 1 --dry-run --printshellcmds --forcerun atacseq_filter_bam results/atacseq/filtered_bam/SRR12774931/filtered.bam
+  Snakefile: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/Snakefile
+  Base directory: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git
+  Run directory: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git
+  Working directory: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git
+  Config file(s): ['config/config.yaml']
+  Config MD5: 9472961971ba223269a3e25925681a55
+
+Building DAG of jobs...
+Job stats:
+job                            count
+---------------------------  -------
+metadata                           1
+reference_genome                   1
+atacseq_reference                  1
+fastq_manifest                     1
+metadata_reports                   1
+atacseq_bowtie2_index              1
+validation_fastq_manifest          1
+atacseq_align_run                  1
+build_rnaseq_count_matrix          1
+combine_featurecounts_qc           1
+combine_rseqc_strandedness         1
+combine_star_metrics               1
+multiqc_post                       1
+multiqc_raw                        1
+summarize_preprocessing_qc         1
+validation_download_report         1
+atacseq_mark_duplicates            1
+classify_rseqc_strandedness        1
+all                                1
+atacseq_filter_bam                 1
+total                             20
+
+
+[Thu Sep 17 14:45:52 2026]
+rule metadata:
+    input: config/classification_rules.tsv, config/curated_studies.tsv, workflow/scripts/selection_policy.py, config/selection_decisions.tsv, workflow/scripts/fetch_ena_metadata.py
+    output: results/metadata/ena_metadata_raw.tsv, results/metadata/ena_metadata_fastq.tsv, results/metadata/ena_metadata_omics.tsv, results/metadata/ena_metadata_explicit_evidence.tsv, results/metadata/ena_metadata_after_cell_line.tsv, results/metadata/ena_metadata_after_cell_type.tsv, results/metadata/ena_metadata_after_external_rules.tsv, results/metadata/ena_metadata_after_curation.tsv, config/samples.tsv, results/metadata/selection_audit/summary.json, results/metadata/selection_audit/excluded.tsv, results/metadata/selection_audit/review_required.tsv
+    jobid: 1
+    reason: Missing output files: results/metadata/ena_metadata_after_cell_type.tsv, results/metadata/ena_metadata_after_cell_line.tsv, results/metadata/ena_metadata_explicit_evidence.tsv, results/metadata/ena_metadata_raw.tsv, results/metadata/ena_metadata_fastq.tsv, results/metadata/ena_metadata_after_external_rules.tsv, results/metadata/ena_metadata_omics.tsv, results/metadata/ena_metadata_after_curation.tsv; Updated input files: config/selection_decisions.tsv, workflow/scripts/selection_policy.py, workflow/scripts/fetch_ena_metadata.py
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/fetch_ena_metadata.py
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule reference_genome:
+    input: workflow/scripts/fetch_reference_genome.py
+    output: resources/reference/CriGri-PICRH-1.0/genome.fa, resources/reference/CriGri-PICRH-1.0/annotation.gff3, resources/reference/CriGri-PICRH-1.0/annotation.gtf, resources/reference/CriGri-PICRH-1.0/sequence_report.jsonl, resources/reference/CriGri-PICRH-1.0/reference_metadata.tsv, resources/reference/CriGri-PICRH-1.0/SHA256SUMS.txt
+    jobid: 9
+    reason: Missing output files: resources/reference/CriGri-PICRH-1.0/annotation.gff3, resources/reference/CriGri-PICRH-1.0/sequence_report.jsonl, resources/reference/CriGri-PICRH-1.0/annotation.gtf, resources/reference/CriGri-PICRH-1.0/SHA256SUMS.txt, resources/reference/CriGri-PICRH-1.0/reference_metadata.tsv, resources/reference/CriGri-PICRH-1.0/genome.fa
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/fetch_reference_genome.py
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule atacseq_reference:
+    input: workflow/scripts/build_atac_reference.py, resources/reference/CriGri-PICRH-1.0/genome.fa
+    output: resources/reference/CriGri-PICRH-1.0/atacseq/NC_007936.1.fa, resources/reference/CriGri-PICRH-1.0/atacseq/genome_plus_mt.fa, resources/reference/CriGri-PICRH-1.0/atacseq/reference_metadata.tsv, resources/reference/CriGri-PICRH-1.0/atacseq/SHA256SUMS.txt
+    jobid: 19
+    reason: Missing output files: resources/reference/CriGri-PICRH-1.0/atacseq/genome_plus_mt.fa; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/genome.fa
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/build_atac_reference.py           --nuclear-fasta resources/reference/CriGri-PICRH-1.0/genome.fa           --mitochondrial-accession NC_007936.1           --mitochondrial-fasta resources/reference/CriGri-PICRH-1.0/atacseq/NC_007936.1.fa           --mapping-fasta resources/reference/CriGri-PICRH-1.0/atacseq/genome_plus_mt.fa           --metadata resources/reference/CriGri-PICRH-1.0/atacseq/reference_metadata.tsv           --sha256 resources/reference/CriGri-PICRH-1.0/atacseq/SHA256SUMS.txt
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule metadata_reports:
+    input: results/metadata/ena_metadata_raw.tsv, results/metadata/ena_metadata_fastq.tsv, results/metadata/ena_metadata_omics.tsv, results/metadata/ena_metadata_explicit_evidence.tsv, results/metadata/ena_metadata_after_cell_line.tsv, results/metadata/ena_metadata_after_cell_type.tsv, results/metadata/ena_metadata_after_external_rules.tsv, results/metadata/ena_metadata_after_curation.tsv, workflow/scripts/generate_metadata_report.py
+    output: results/metadata/reports/filtering_summary.tsv, results/metadata/reports/omics_summary.tsv, results/metadata/reports/explicit_evidence_summary.tsv, results/metadata/reports/explicit_negative_by_study.tsv, results/metadata/reports/cell_line_values_summary.tsv, results/metadata/reports/cell_line_classification_summary.tsv, results/metadata/reports/cell_type_values_summary.tsv, results/metadata/reports/cell_type_layer_summary.tsv, results/metadata/reports/cell_type_classification_summary.tsv, results/metadata/reports/external_rules_classification_summary.tsv, results/metadata/reports/external_rules_comparison.tsv, results/metadata/reports/unresolved_after_external_by_study.tsv, results/metadata/reports/unresolved_after_external_patterns.tsv, results/metadata/reports/curation_comparison.tsv, results/metadata/reports/unresolved_after_curation.tsv
+    jobid: 2
+    reason: Missing output files: results/metadata/reports/unresolved_after_curation.tsv, results/metadata/reports/curation_comparison.tsv; Input files updated by another job: results/metadata/ena_metadata_after_cell_type.tsv, results/metadata/ena_metadata_after_cell_line.tsv, results/metadata/ena_metadata_after_curation.tsv, results/metadata/ena_metadata_explicit_evidence.tsv, results/metadata/ena_metadata_raw.tsv, results/metadata/ena_metadata_fastq.tsv, results/metadata/ena_metadata_omics.tsv, results/metadata/ena_metadata_after_external_rules.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/generate_metadata_report.py
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule fastq_manifest:
+    input: config/samples.tsv, workflow/scripts/build_fastq_manifest.py
+    output: results/metadata/fastq_manifest.tsv
+    jobid: 3
+    reason: Input files updated by another job: config/samples.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/build_fastq_manifest.py             --samples config/samples.tsv             --output results/metadata/fastq_manifest.tsv
+        
+
+[Thu Sep 17 14:45:52 2026]
+checkpoint validation_fastq_manifest:
+    input: results/metadata/fastq_manifest.tsv, config/validation_runs.tsv, workflow/scripts/build_validation_manifest.py, config/selection_audit_input_20260914.tsv, config/samples.tsv, config/classification_rules.tsv, config/curated_studies.tsv, config/selection_decisions.tsv, workflow/scripts/selection_policy.py, workflow/scripts/selection_gate.py
+    output: results/metadata/validation_fastq_manifest.tsv, results/metadata/validation_fastq_manifest.tsv.selection.tsv
+    jobid: 4
+    reason: Missing output files: results/metadata/validation_fastq_manifest.tsv; Input files updated by another job: config/samples.tsv, results/metadata/fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/build_validation_manifest.py             --manifest results/metadata/fastq_manifest.tsv             --validation-runs config/validation_runs.tsv             --output results/metadata/validation_fastq_manifest.tsv
+        
+DAG of jobs will be updated after completion.
+
+[Thu Sep 17 14:45:52 2026]
+rule atacseq_bowtie2_index:
+    input: resources/reference/CriGri-PICRH-1.0/atacseq/genome_plus_mt.fa
+    output: resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index
+    jobid: 18
+    reason: Missing output files: resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index; Input files updated by another job: resources/reference/CriGri-PICRH-1.0/atacseq/genome_plus_mt.fa
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        mkdir -p resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index
+        bowtie2-build --threads 1 resources/reference/CriGri-PICRH-1.0/atacseq/genome_plus_mt.fa resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index/genome_plus_mt
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule summarize_preprocessing_qc:
+    input: <TBD>, <TBD>, <TBD>, workflow/scripts/summarize_preprocessing_qc.py
+    output: results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv
+    log: results/preprocessing/fastp/reports/summarize_preprocessing_qc.log
+    jobid: 8
+    reason: Missing output files: results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/summarize_preprocessing_qc.py > results/preprocessing/fastp/reports/summarize_preprocessing_qc.log 2>&1
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule combine_rseqc_strandedness:
+    input: <TBD>, workflow/scripts/combine_star_metrics.py
+    output: results/rnaseq/qc/strandedness_by_unit.tsv
+    jobid: 12
+    reason: Missing output files: results/rnaseq/qc/strandedness_by_unit.tsv; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/combine_star_metrics.py             results/rnaseq/qc/strandedness_by_unit.tsv             results/metadata/validation_fastq_manifest.tsv
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule multiqc_raw:
+    input: <TBD>
+    output: results/qc/raw/multiqc/multiqc_report.html, results/qc/raw/multiqc/multiqc_report_data
+    jobid: 6
+    reason: Missing output files: results/qc/raw/multiqc/multiqc_report.html; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        mkdir -p results/qc/raw/multiqc
+
+        multiqc             results/qc/raw/fastqc             --outdir results/qc/raw/multiqc             --filename multiqc_report.html             --force
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule build_rnaseq_count_matrix:
+    input: <TBD>, workflow/scripts/build_rnaseq_count_matrix.py, config/selection_audit_input_20260914.tsv, config/samples.tsv, config/classification_rules.tsv, config/curated_studies.tsv, config/selection_decisions.tsv, workflow/scripts/selection_policy.py, workflow/scripts/selection_gate.py
+    output: results/rnaseq/gene_counts_matrix.tsv, results/rnaseq/gene_counts_matrix.tsv.selection.tsv
+    jobid: 10
+    reason: Missing output files: results/rnaseq/gene_counts_matrix.tsv; Input files updated by another job: config/samples.tsv, results/metadata/validation_fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/build_rnaseq_count_matrix.py             results/rnaseq/gene_counts_matrix.tsv             results/metadata/validation_fastq_manifest.tsv
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule combine_featurecounts_qc:
+    input: <TBD>, workflow/scripts/combine_star_metrics.py
+    output: results/rnaseq/qc/featurecounts_qc_by_unit.tsv
+    jobid: 14
+    reason: Missing output files: results/rnaseq/qc/featurecounts_qc_by_unit.tsv; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/combine_star_metrics.py             results/rnaseq/qc/featurecounts_qc_by_unit.tsv             results/metadata/validation_fastq_manifest.tsv
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule atacseq_align_run:
+    input: resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index, <TBD>
+    output: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam, results/atacseq/bowtie2/SRR12774931/raw.sorted.bam.bai, results/atacseq/bowtie2/SRR12774931/bowtie2.log
+    jobid: 17
+    reason: Missing output files: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv, resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index
+    wildcards: run_accession=SRR12774931
+    resources: tmpdir=/local/tmp.10308335, mem_mb=8000, mem=8 GB, mem_mib=7630
+Shell command: 
+        mkdir -p $(dirname results/atacseq/bowtie2/SRR12774931/raw.sorted.bam)
+
+        bowtie2           --local           --very-sensitive           --threads 1           --rg-id SRR12774931           --rg SM:SRR12774931           -x resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index/genome_plus_mt           <TBD>           2> results/atacseq/bowtie2/SRR12774931/bowtie2.log         | samtools sort -o results/atacseq/bowtie2/SRR12774931/raw.sorted.bam -
+
+        samtools index results/atacseq/bowtie2/SRR12774931/raw.sorted.bam results/atacseq/bowtie2/SRR12774931/raw.sorted.bam.bai
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule multiqc_post:
+    input: <TBD>
+    output: results/qc/post/multiqc/multiqc_report.html, results/qc/post/multiqc/multiqc_report_data
+    log: results/qc/post/multiqc/multiqc.log
+    jobid: 7
+    reason: Missing output files: results/qc/post/multiqc/multiqc_report.html; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        mkdir -p $(dirname results/qc/post/multiqc/multiqc_report.html)
+
+        multiqc             results/metadata/validation_fastq_manifest.tsv             --outdir $(dirname results/qc/post/multiqc/multiqc_report.html)             --filename multiqc_report.html             --force             > results/qc/post/multiqc/multiqc.log 2>&1
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule validation_download_report:
+    input: <TBD>, <TBD>, workflow/scripts/download_validation_subset.py
+    output: results/metadata/reports/validation_download_summary.tsv
+    jobid: 5
+    reason: Missing output files: results/metadata/reports/validation_download_summary.tsv; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/download_validation_subset.py             --manifest results/metadata/validation_fastq_manifest.tsv             --output-dir data/raw/fastq             --report results/metadata/reports/validation_download_summary.tsv
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule combine_star_metrics:
+    input: <TBD>, workflow/scripts/combine_star_metrics.py
+    output: results/rnaseq/qc/alignment_qc_by_unit.tsv
+    jobid: 11
+    reason: Missing output files: results/rnaseq/qc/alignment_qc_by_unit.tsv; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/combine_star_metrics.py             results/rnaseq/qc/alignment_qc_by_unit.tsv             results/metadata/validation_fastq_manifest.tsv
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule atacseq_mark_duplicates:
+    input: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam
+    output: results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai, results/atacseq/qc/SRR12774931/duplication_metrics.txt
+    jobid: 16
+    reason: Missing output files: results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam; Input files updated by another job: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam
+    wildcards: run_accession=SRR12774931
+    resources: tmpdir=/local/tmp.10308335, mem_mb=4000, mem=4 GB, mem_mib=3815
+Shell command: 
+        mkdir -p $(dirname results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam)
+        mkdir -p $(dirname results/atacseq/qc/SRR12774931/duplication_metrics.txt)
+
+        picard_tmp=$(mktemp -d /local/tmp.10308335/picard_markduplicates.XXXXXX)
+        trap 'rm -rf -- "$picard_tmp"' EXIT
+        printf 'PICARD_TMP_DIR=%s
+' "$picard_tmp"
+        JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-} -Djava.io.tmpdir=$picard_tmp"         picard -Xmx3g MarkDuplicates           I=results/atacseq/bowtie2/SRR12774931/raw.sorted.bam           O=results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam           M=results/atacseq/qc/SRR12774931/duplication_metrics.txt           TMP_DIR="$picard_tmp"           REMOVE_DUPLICATES=false           CREATE_INDEX=true
+
+        test -s results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule classify_rseqc_strandedness:
+    input: results/rnaseq/qc/strandedness_by_unit.tsv, workflow/scripts/classify_rseqc_strandedness.py
+    output: results/rnaseq/qc/strandedness_classification.tsv
+    jobid: 13
+    reason: Missing output files: results/rnaseq/qc/strandedness_classification.tsv; Input files updated by another job: results/rnaseq/qc/strandedness_by_unit.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: 
+        python workflow/scripts/classify_rseqc_strandedness.py             results/rnaseq/qc/strandedness_by_unit.tsv             0.8             0.1             results/rnaseq/qc/strandedness_classification.tsv
+        
+
+[Thu Sep 17 14:45:52 2026]
+rule all:
+    input: config/samples.tsv, results/metadata/ena_metadata_after_curation.tsv, results/metadata/reports/curation_comparison.tsv, results/metadata/reports/unresolved_after_curation.tsv, results/metadata/fastq_manifest.tsv, results/metadata/validation_fastq_manifest.tsv, <TBD>, results/metadata/reports/validation_download_summary.tsv, <TBD>, results/qc/raw/multiqc/multiqc_report.html, <TBD>, <TBD>, results/qc/post/multiqc/multiqc_report.html, results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv, resources/reference/CriGri-PICRH-1.0/genome.fa, resources/reference/CriGri-PICRH-1.0/annotation.gff3, resources/reference/CriGri-PICRH-1.0/annotation.gtf, resources/reference/CriGri-PICRH-1.0/sequence_report.jsonl, resources/reference/CriGri-PICRH-1.0/reference_metadata.tsv, resources/reference/CriGri-PICRH-1.0/SHA256SUMS.txt, results/rnaseq/gene_counts_matrix.tsv, results/rnaseq/qc/alignment_qc_by_unit.tsv, <TBD>, results/rnaseq/qc/strandedness_by_unit.tsv, results/rnaseq/qc/strandedness_classification.tsv, results/rnaseq/qc/featurecounts_qc_by_unit.tsv
+    jobid: 0
+    reason: Input files updated by another job: config/samples.tsv, results/rnaseq/qc/strandedness_by_unit.tsv, results/metadata/validation_fastq_manifest.tsv, results/rnaseq/qc/alignment_qc_by_unit.tsv, resources/reference/CriGri-PICRH-1.0/sequence_report.jsonl, resources/reference/CriGri-PICRH-1.0/annotation.gtf, results/qc/post/multiqc/multiqc_report.html, results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv, results/metadata/ena_metadata_after_curation.tsv, results/metadata/reports/validation_download_summary.tsv, results/qc/raw/multiqc/multiqc_report.html, results/rnaseq/qc/strandedness_classification.tsv, resources/reference/CriGri-PICRH-1.0/annotation.gff3, results/rnaseq/gene_counts_matrix.tsv, results/rnaseq/qc/featurecounts_qc_by_unit.tsv, results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv, results/metadata/reports/unresolved_after_curation.tsv, resources/reference/CriGri-PICRH-1.0/SHA256SUMS.txt, results/metadata/reports/curation_comparison.tsv, resources/reference/CriGri-PICRH-1.0/reference_metadata.tsv, resources/reference/CriGri-PICRH-1.0/genome.fa, results/metadata/fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10308335
+Shell command: None
+
+[Thu Sep 17 14:45:52 2026]
+rule atacseq_filter_bam:
+    input: <TBD>, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai
+    output: results/atacseq/filtered_bam/SRR12774931/filtered.bam, results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai
+    jobid: 15
+    reason: Input files updated by another job: results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam, results/metadata/validation_fastq_manifest.tsv
+    wildcards: run_accession=SRR12774931
+    resources: tmpdir=/local/tmp.10308335, mem_mb=8000, mem=8 GB, mem_mib=7630
+Shell command: 
+        set -euo pipefail
+
+        mkdir -p $(dirname results/atacseq/filtered_bam/SRR12774931/filtered.bam)
+
+        NUCLEAR_REFS=$(
+            samtools idxstats results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam \
+            | awk -v mt="NC_007936.1" \
+                '$1 != mt && $1 != "*" {print $1}'
+        )
+
+        if [[ "<TBD>" == "SINGLE" ]]; then
+
+            samtools view \
+              -b \
+              -q 30 \
+              -F 3844 \
+              -o results/atacseq/filtered_bam/SRR12774931/filtered.bam \
+              results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam \
+              $NUCLEAR_REFS
+
+        elif [[ "<TBD>" == "PAIRED" ]]; then
+
+            TMP_ROOT="${TMPDIR:-/tmp}"
+
+            TMP_DIR=$(
+                mktemp -d \
+                  "$TMP_ROOT/atacseq_filter_SRR12774931.XXXXXX"
+            )
+
+            trap 'rm -rf "$TMP_DIR"' EXIT
+
+            samtools view \
+              -u \
+              -q 30 \
+              -f 3 \
+              -F 3852 \
+              results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam \
+              $NUCLEAR_REFS \
+            | samtools sort \
+                -n \
+                -@ 1 \
+                -m 750M \
+                -T "$TMP_DIR/queryname" \
+                -o "$TMP_DIR/candidates.name.bam" \
+                -
+
+            samtools view "$TMP_DIR/candidates.name.bam" \
+            | cut -f1 \
+            | uniq -c \
+            | awk '$1 == 2 {print $2}' \
+            > "$TMP_DIR/complete_pair_names.txt"
+
+            test -s "$TMP_DIR/complete_pair_names.txt"
+
+            samtools view \
+              -u \
+              -N "$TMP_DIR/complete_pair_names.txt" \
+              "$TMP_DIR/candidates.name.bam" \
+            | samtools sort \
+                -@ 1 \
+                -m 750M \
+                -T "$TMP_DIR/coordinate" \
+                -o results/atacseq/filtered_bam/SRR12774931/filtered.bam \
+                -
+
+            RECORD_COUNT=$(samtools view -c results/atacseq/filtered_bam/SRR12774931/filtered.bam)
+
+            if (( RECORD_COUNT == 0 || RECORD_COUNT % 2 != 0 )); then
+                printf \
+                  'Invalid paired ATAC-seq BAM record count: %s\n' \
+                  "$RECORD_COUNT" >&2
+                exit 1
+            fi
+
+        else
+
+            printf \
+              'Unsupported ATAC-seq structure: %s\n' \
+              "<TBD>" >&2
+            exit 1
+
+        fi
+
+        samtools quickcheck -v results/atacseq/filtered_bam/SRR12774931/filtered.bam
+        samtools index results/atacseq/filtered_bam/SRR12774931/filtered.bam results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai
+        
+Job stats:
+job                            count
+---------------------------  -------
+metadata                           1
+reference_genome                   1
+atacseq_reference                  1
+fastq_manifest                     1
+metadata_reports                   1
+atacseq_bowtie2_index              1
+validation_fastq_manifest          1
+atacseq_align_run                  1
+build_rnaseq_count_matrix          1
+combine_featurecounts_qc           1
+combine_rseqc_strandedness         1
+combine_star_metrics               1
+multiqc_post                       1
+multiqc_raw                        1
+summarize_preprocessing_qc         1
+validation_download_report         1
+atacseq_mark_duplicates            1
+classify_rseqc_strandedness        1
+all                                1
+atacseq_filter_bam                 1
+total                             20
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        all, atacseq_align_run, atacseq_bowtie2_index, atacseq_filter_bam, atacseq_mark_duplicates, atacseq_reference, build_rnaseq_count_matrix, classify_rseqc_strandedness, combine_featurecounts_qc, combine_rseqc_strandedness, combine_star_metrics, fastq_manifest, metadata_reports, multiqc_post, multiqc_raw, summarize_preprocessing_qc, validation_download_report, validation_fastq_manifest
+    output files have to be generated:
+        atacseq_align_run, atacseq_bowtie2_index, atacseq_mark_duplicates, atacseq_reference, build_rnaseq_count_matrix, classify_rseqc_strandedness, combine_featurecounts_qc, combine_rseqc_strandedness, combine_star_metrics, metadata, metadata_reports, multiqc_post, multiqc_raw, reference_genome, summarize_preprocessing_qc, validation_download_report, validation_fastq_manifest
+    updated input files:
+        metadata
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
+The run involves checkpoint jobs, which will result in alteration of the DAG of jobs (e.g. adding more jobs) after their completion.

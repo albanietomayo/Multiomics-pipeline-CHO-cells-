@@ -1,0 +1,50 @@
+{
+  "run_accession": "SRR12774932",
+  "layout": "SINGLE",
+  "technical_checks": "passed",
+  "biological_acceptance": "not_assessed",
+  "total_records": 5858817,
+  "min_mapq": 30,
+  "mitochondrial_records": 0,
+  "tss_metrics": {
+    "total_tss": 42215.0,
+    "usable_tss": 42148.0,
+    "tss_skipped_boundary": 67.0,
+    "tss_skipped_missing_reference": 0.0,
+    "reads_seen": 5858817.0,
+    "reads_used": 5837106.0,
+    "insertion_events_in_tss_windows": 1774406.0,
+    "window_bp": 2000.0,
+    "bin_size_bp": 10.0,
+    "background_bp_per_side": 100.0,
+    "background_mean": 1848.45,
+    "tss_enrichment_score": 9.405718
+  },
+  "inputs": {
+    "bam": {
+      "path": "/cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/filtered_bam/SRR12774932/filtered.bam",
+      "sha256": "dfeb1826288eb3a1c4670a21668e43613dbf866eafcf259dfed17d80c2299b87"
+    },
+    "bai": {
+      "path": "/cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/filtered_bam/SRR12774932/filtered.bam.bai",
+      "sha256": "e631042d31c2dc107587a7aeb12b27644664f1bb08d8ad3d8468c704108333e0"
+    },
+    "profile": {
+      "path": "/cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/qc/SRR12774932/tss_profile.tsv",
+      "sha256": "471f9c86eff70cd5fb48f1cf635923b6466e84b4d8290098bca6a2401226677b"
+    },
+    "summary": {
+      "path": "/cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/qc/SRR12774932/tss_enrichment_summary.tsv",
+      "sha256": "c3cc8f3000a41f82453fb8f8892353287cef7a0a6a42820bb7ea292b1b818d48"
+    }
+  },
+  "selection_inputs": {
+    "config/selection_audit_input_20260914.tsv": "8611f84086b97074cc2271a331adc42442bb5ebf908ee5a736db49f4f94bd570",
+    "config/samples.tsv": "8611f84086b97074cc2271a331adc42442bb5ebf908ee5a736db49f4f94bd570",
+    "config/classification_rules.tsv": "19a43f81f888ab36bed31753d577d47a4a9c2e62472e3f4e6f396e47540bd10a",
+    "config/curated_studies.tsv": "2fec61c8c5f211e2e4d966f561f4e252663e3402aae6ba054f036bcf06f1871d",
+    "config/selection_decisions.tsv": "de91245f4c22152fc1a54066d30dd282f82070676fb8cac5d82230f396c799f6",
+    "workflow/scripts/selection_policy.py": "9501c90538da3110101611f8f5ba204b41db55401e31930ac45a2aeaf3be7cbf",
+    "workflow/scripts/selection_gate.py": "066fc79bfda7877f2640b8ba23fd47412f61ca5a793979b72c8a48c1c82a8fbf"
+  }
+}

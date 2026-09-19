@@ -1,0 +1,29 @@
+
+--- FASTQ MANIFEST ---
+Corridas: 1983
+Archivos FASTQ: 3122
+
+Library layout original:
+library_layout
+PAIRED    1094
+SINGLE     889
+Name: count, dtype: int64
+
+Processing layout:
+processing_layout
+PAIRED    1119
+SINGLE     864
+Name: count, dtype: int64
+
+Estructura FASTQ:
+fastq_structure
+PAIRED                  1099
+SINGLE                   765
+UNPAIRED_FROM_PAIRED      97
+PAIRED_PLUS_UNPAIRED      20
+PACBIO_SUBREADS            2
+Name: count, dtype: int64
+
+Corridas no resueltas: 0
+
+Manifest escrito en: results/metadata/fastq_manifest.tsv

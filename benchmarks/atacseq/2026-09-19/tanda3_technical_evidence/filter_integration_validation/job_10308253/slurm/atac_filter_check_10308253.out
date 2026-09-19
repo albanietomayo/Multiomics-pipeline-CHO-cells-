@@ -1,0 +1,26 @@
+This job can be monitored from: https://job.c3se.chalmers.se/vera/10308253
+============================================================
+REPOSITORY STATE
+============================================================
+ M config/config.yaml
+ M workflow/rules/atacseq.smk
+?? atac_filter_check_10308253.err
+?? atac_filter_check_10308253.out
+
+============================================================
+CREATE SNAKEMAKE ENVIRONMENT IN SCRATCH
+============================================================
+Snakemake: 9.25.2
+
+============================================================
+PARSE / RULE CHECK
+============================================================
+291:rule atacseq_filter_bam:
+Unified filter rule: present
+Old SINGLE-only rule: absent
+
+============================================================
+DRY-RUN FILTERED BAM
+============================================================
+
+===== SRR12774931 : FILTER =====

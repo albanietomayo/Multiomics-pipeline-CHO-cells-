@@ -1,0 +1,66 @@
+
+SNAKEMAKE
+=========
+  Date: 2026-09-17 15:24:50
+  Workflow ID: e438bafa-c572-45f1-a080-9f5b7149f22f
+  Platform: Linux-5.14.0-687.33.1.el9_8.0.1.x86_64-x86_64-with-glibc2.34
+  Host: vera-r05-04
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /local/tmp.10309406/atac_manifest_v2_10309406/main-env/bin/snakemake --snakefile Snakefile --cores 1 --dry-run --printshellcmds --use-conda --conda-prefix /local/tmp.10309406/atac_manifest_v2_10309406/rule-envs results/metadata/validation_fastq_manifest.tsv
+  Snakefile: /local/tmp.10309406/atac_manifest_v2_10309406/repo/Snakefile
+  Base directory: /local/tmp.10309406/atac_manifest_v2_10309406/repo
+  Run directory: /local/tmp.10309406/atac_manifest_v2_10309406/repo
+  Working directory: /local/tmp.10309406/atac_manifest_v2_10309406/repo
+  Config file(s): ['config/config.yaml']
+  Config MD5: 9472961971ba223269a3e25925681a55
+
+Building DAG of jobs...
+Job stats:
+job                          count
+-------------------------  -------
+fastq_manifest                   1
+validation_fastq_manifest        1
+total                            2
+
+
+[Thu Sep 17 15:24:50 2026]
+rule fastq_manifest:
+    input: config/samples.tsv, workflow/scripts/build_fastq_manifest.py
+    output: results/metadata/fastq_manifest.tsv
+    jobid: 1
+    reason: Missing output files: results/metadata/fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10309406
+Shell command: 
+        python workflow/scripts/build_fastq_manifest.py             --samples config/samples.tsv             --output results/metadata/fastq_manifest.tsv
+        
+
+[Thu Sep 17 15:24:50 2026]
+checkpoint validation_fastq_manifest:
+    input: results/metadata/fastq_manifest.tsv, config/validation_runs.tsv, workflow/scripts/build_validation_manifest.py, config/selection_audit_input_20260914.tsv, config/samples.tsv, config/classification_rules.tsv, config/curated_studies.tsv, config/selection_decisions.tsv, workflow/scripts/selection_policy.py, workflow/scripts/selection_gate.py
+    output: results/metadata/validation_fastq_manifest.tsv, results/metadata/validation_fastq_manifest.tsv.selection.tsv
+    jobid: 0
+    reason: Missing output files: results/metadata/validation_fastq_manifest.tsv; Input files updated by another job: results/metadata/fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10309406
+Shell command: 
+        python workflow/scripts/build_validation_manifest.py             --manifest results/metadata/fastq_manifest.tsv             --validation-runs config/validation_runs.tsv             --output results/metadata/validation_fastq_manifest.tsv
+        
+DAG of jobs will be updated after completion.
+Job stats:
+job                          count
+-------------------------  -------
+fastq_manifest                   1
+validation_fastq_manifest        1
+total                            2
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        validation_fastq_manifest
+    output files have to be generated:
+        fastq_manifest, validation_fastq_manifest
+1 jobs have missing provenance/metadata so that it in part cannot be used to trigger re-runs.
+Rules with missing metadata: metadata
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
+The run involves checkpoint jobs, which will result in alteration of the DAG of jobs (e.g. adding more jobs) after their completion.

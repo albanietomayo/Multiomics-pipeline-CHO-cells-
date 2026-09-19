@@ -1,0 +1,7 @@
+/local/tmp.10280253/snakemake-conda/3d9aeffb49f5f620697610b22c3dde2f_/bin/bowtie2-align-s version 2.5.5
+64-bit
+Built on runnervmn36qa
+Tue Feb 17 04:32:11 UTC 2026
+Compiler: gcc version 14.3.0 (conda-forge gcc 14.3.0-17) 
+Options: -O3 -funroll-loops -g3 -fvisibility-inlines-hidden -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /local/tmp.10280253/snakemake-conda/3d9aeffb49f5f620697610b22c3dde2f_/include -fdebug-prefix-map=/opt/conda/conda-bld/bowtie2_1771302537514/work=/usr/local/src/conda/bowtie2-2.5.5 -fdebug-prefix-map=/local/tmp.10280253/snakemake-conda/3d9aeffb49f5f620697610b22c3dde2f_=/usr/local/src/conda-prefix -O3
+Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}

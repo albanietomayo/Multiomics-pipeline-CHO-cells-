@@ -1,0 +1,78 @@
+Assuming unrestricted shared filesystem usage.
+Falling back to greedy scheduler because no ILP solver is found (you have to install pulp and either coincbc or glpk).
+
+SNAKEMAKE
+=========
+  Date: 2026-09-17 15:07:26
+  Workflow ID: a6e08643-d265-4b5d-b795-73c74b62de00
+  Platform: Linux-5.14.0-687.33.1.el9_8.0.1.x86_64-x86_64-with-glibc2.34
+  Host: vera-r05-04
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /local/tmp.10308663/atac_manifest_validation_10308663/main-env/bin/snakemake --snakefile Snakefile --cores 1 results/metadata/validation_fastq_manifest.tsv
+  Snakefile: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/Snakefile
+  Base directory: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git
+  Run directory: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git
+  Working directory: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git
+  Config file(s): ['config/config.yaml']
+  Config MD5: 9472961971ba223269a3e25925681a55
+
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                          count
+-------------------------  -------
+metadata                         1
+fastq_manifest                   1
+validation_fastq_manifest        1
+total                            3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Sep 17 15:07:26 2026]
+localrule metadata:
+    input: config/classification_rules.tsv, config/curated_studies.tsv, workflow/scripts/selection_policy.py, config/selection_decisions.tsv, workflow/scripts/fetch_ena_metadata.py
+    output: results/metadata/ena_metadata_raw.tsv, results/metadata/ena_metadata_fastq.tsv, results/metadata/ena_metadata_omics.tsv, results/metadata/ena_metadata_explicit_evidence.tsv, results/metadata/ena_metadata_after_cell_line.tsv, results/metadata/ena_metadata_after_cell_type.tsv, results/metadata/ena_metadata_after_external_rules.tsv, results/metadata/ena_metadata_after_curation.tsv, config/samples.tsv, results/metadata/selection_audit/summary.json, results/metadata/selection_audit/excluded.tsv, results/metadata/selection_audit/review_required.tsv
+    jobid: 2
+    reason: Updated input files: workflow/scripts/selection_policy.py, config/selection_decisions.tsv, workflow/scripts/fetch_ena_metadata.py
+    resources: tmpdir=/local/tmp.10308663
+Traceback (most recent call last):
+  File "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/workflow/scripts/fetch_ena_metadata.py", line 15, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+RuleException:
+CalledProcessError in file "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/workflow/rules/metadata.smk", line 34:
+Command 'set -euo pipefail;  
+        python workflow/scripts/fetch_ena_metadata.py' returned non-zero exit status 1.
+[Thu Sep 17 15:07:26 2026]
+Error in rule metadata:
+    message: None
+    jobid: 2
+    input: config/classification_rules.tsv, config/curated_studies.tsv, workflow/scripts/selection_policy.py, config/selection_decisions.tsv, workflow/scripts/fetch_ena_metadata.py
+    output: results/metadata/ena_metadata_raw.tsv, results/metadata/ena_metadata_fastq.tsv, results/metadata/ena_metadata_omics.tsv, results/metadata/ena_metadata_explicit_evidence.tsv, results/metadata/ena_metadata_after_cell_line.tsv, results/metadata/ena_metadata_after_cell_type.tsv, results/metadata/ena_metadata_after_external_rules.tsv, results/metadata/ena_metadata_after_curation.tsv, config/samples.tsv, results/metadata/selection_audit/summary.json, results/metadata/selection_audit/excluded.tsv, results/metadata/selection_audit/review_required.tsv
+    shell:
+        
+        python workflow/scripts/fetch_ena_metadata.py
+        
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Thu Sep 17 15:07:26 2026]
+Error in rule metadata:
+    message: None
+    jobid: 2
+    input: config/classification_rules.tsv, config/curated_studies.tsv, workflow/scripts/selection_policy.py, config/selection_decisions.tsv, workflow/scripts/fetch_ena_metadata.py
+    output: results/metadata/ena_metadata_raw.tsv, results/metadata/ena_metadata_fastq.tsv, results/metadata/ena_metadata_omics.tsv, results/metadata/ena_metadata_explicit_evidence.tsv, results/metadata/ena_metadata_after_cell_line.tsv, results/metadata/ena_metadata_after_cell_type.tsv, results/metadata/ena_metadata_after_external_rules.tsv, results/metadata/ena_metadata_after_curation.tsv, config/samples.tsv, results/metadata/selection_audit/summary.json, results/metadata/selection_audit/excluded.tsv, results/metadata/selection_audit/review_required.tsv
+    shell:
+        
+        python workflow/scripts/fetch_ena_metadata.py
+        
+        (command exited with non-zero exit code)
+Complete log(s): /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/.snakemake/log/2026-09-17T150726.559435.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

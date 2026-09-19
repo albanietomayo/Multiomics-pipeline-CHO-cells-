@@ -1,0 +1,2 @@
+1fb82f021737acb1af941769bf6fdb9f9d603892fa1c257ab199efcd286c9b5e  results/atacseq/filtered_bam/SRR29929613/filtered.bam
+7e553eb96b54d35024d54f0e129b7e01376db249d4f5c2b4be9e529f9f795492  results/atacseq/filtered_bam/SRR29929613/filtered.bam.bai

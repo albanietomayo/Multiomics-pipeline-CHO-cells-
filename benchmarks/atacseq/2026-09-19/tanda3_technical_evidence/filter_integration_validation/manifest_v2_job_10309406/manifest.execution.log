@@ -1,0 +1,76 @@
+Assuming unrestricted shared filesystem usage.
+Falling back to greedy scheduler because no ILP solver is found (you have to install pulp and either coincbc or glpk).
+
+SNAKEMAKE
+=========
+  Date: 2026-09-17 15:24:51
+  Workflow ID: 9faf3c7e-3265-4bd0-bf54-63354f060d02
+  Platform: Linux-5.14.0-687.33.1.el9_8.0.1.x86_64-x86_64-with-glibc2.34
+  Host: vera-r05-04
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /local/tmp.10309406/atac_manifest_v2_10309406/main-env/bin/snakemake --snakefile Snakefile --cores 1 --use-conda --conda-prefix /local/tmp.10309406/atac_manifest_v2_10309406/rule-envs results/metadata/validation_fastq_manifest.tsv
+  Snakefile: /local/tmp.10309406/atac_manifest_v2_10309406/repo/Snakefile
+  Base directory: /local/tmp.10309406/atac_manifest_v2_10309406/repo
+  Run directory: /local/tmp.10309406/atac_manifest_v2_10309406/repo
+  Working directory: /local/tmp.10309406/atac_manifest_v2_10309406/repo
+  Config file(s): ['config/config.yaml']
+  Config MD5: 9472961971ba223269a3e25925681a55
+
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                          count
+-------------------------  -------
+fastq_manifest                   1
+validation_fastq_manifest        1
+total                            2
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Sep 17 15:24:51 2026]
+localrule fastq_manifest:
+    input: config/samples.tsv, workflow/scripts/build_fastq_manifest.py
+    output: results/metadata/fastq_manifest.tsv
+    jobid: 1
+    reason: Missing output files: results/metadata/fastq_manifest.tsv
+    resources: tmpdir=/local/tmp.10309406
+Traceback (most recent call last):
+  File "/local/tmp.10309406/atac_manifest_v2_10309406/repo/workflow/scripts/build_fastq_manifest.py", line 17, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+RuleException:
+CalledProcessError in file "/local/tmp.10309406/atac_manifest_v2_10309406/repo/workflow/rules/common.smk", line 17:
+Command 'set -euo pipefail;  
+        python workflow/scripts/build_fastq_manifest.py             --samples config/samples.tsv             --output results/metadata/fastq_manifest.tsv' returned non-zero exit status 1.
+[Thu Sep 17 15:24:53 2026]
+Error in rule fastq_manifest:
+    message: None
+    jobid: 1
+    input: config/samples.tsv, workflow/scripts/build_fastq_manifest.py
+    output: results/metadata/fastq_manifest.tsv
+    shell:
+        
+        python workflow/scripts/build_fastq_manifest.py             --samples config/samples.tsv             --output results/metadata/fastq_manifest.tsv
+        
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Thu Sep 17 15:24:53 2026]
+Error in rule fastq_manifest:
+    message: None
+    jobid: 1
+    input: config/samples.tsv, workflow/scripts/build_fastq_manifest.py
+    output: results/metadata/fastq_manifest.tsv
+    shell:
+        
+        python workflow/scripts/build_fastq_manifest.py             --samples config/samples.tsv             --output results/metadata/fastq_manifest.tsv
+        
+        (command exited with non-zero exit code)
+Complete log(s): /local/tmp.10309406/atac_manifest_v2_10309406/repo/.snakemake/log/2026-09-17T152451.299989.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

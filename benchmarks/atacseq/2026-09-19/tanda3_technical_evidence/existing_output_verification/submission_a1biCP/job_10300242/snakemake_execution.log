@@ -1,0 +1,85 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Config file config/atacseq_bulk.yaml is extended by additional config specified via the command line.
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-09-16 19:49:58
+  Workflow ID: 657a3e89-df6d-4d1e-af9c-238a1381eb2b
+  Platform: Linux-5.14.0-687.39.1.el9_8.x86_64-x86_64-with-glibc2.34
+  Host: vera-r03-06
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /local/tmp.10300242/atac-verify-main/bin/snakemake --snakefile Snakefile.atac atacseq_existing_all --use-conda --conda-prefix /local/tmp.10300242/atac-verify-envs --cores 2 --default-resources tmpdir=/local/tmp.10300242 --config atacseq_existing_job=/cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369 -p
+  Snakefile: /local/tmp.10300242/atac_verify_10300242/Snakefile.atac
+  Base directory: /local/tmp.10300242/atac_verify_10300242
+  Run directory: /local/tmp.10300242/atac_verify_10300242
+  Working directory: /local/tmp.10300242/atac_verify_10300242
+  Config file(s): ['config/config.yaml', 'config/atacseq_bulk.yaml']
+  Config MD5: d1130499ac155f2334c0140705c678ed
+
+Building DAG of jobs...
+Your conda installation is not configured to use strict channel priorities. This is however important for having robust and correct environments (for details, see https://conda-forge.org/docs/user/tipsandtricks.html). Please consider to configure strict priorities by executing 'conda config --set channel_priority strict'.
+Creating conda environment workflow/envs/atacseq_qc.yaml...
+Downloading and installing remote packages.
+Cleaning up conda package tarballs.
+Environment for /local/tmp.10300242/atac_verify_10300242/workflow/rules/../envs/atacseq_qc.yaml created (location: ../atac-verify-envs/ba2420013494fe38629bfa2378a59a6c_)
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job                          count
+-------------------------  -------
+atacseq_validate_existing        2
+atacseq_existing_all             1
+total                            3
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Wed Sep 16 19:50:06 2026]
+localrule atacseq_validate_existing:
+    input: /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774931/artifacts/results/atacseq/filtered_bam/SRR12774931/filtered.bam, /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774931/artifacts/results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai, /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774931/artifacts/results/atacseq/qc/SRR12774931/tss_profile.tsv, /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774931/artifacts/results/atacseq/qc/SRR12774931/tss_enrichment_summary.tsv, workflow/scripts/validate_atac_outputs.py, config/atacseq_validation_runs.tsv, config/selection_audit_input_20260914.tsv, config/samples.tsv, config/classification_rules.tsv, config/curated_studies.tsv, config/selection_decisions.tsv, workflow/scripts/selection_policy.py, workflow/scripts/selection_gate.py
+    output: results/atacseq/qc/verification_existing/SRR12774931.json
+    jobid: 1
+    reason: Missing output files: results/atacseq/qc/verification_existing/SRR12774931.json
+    wildcards: run_accession=SRR12774931
+    resources: tmpdir=/local/tmp.10300242, disk_mb=1000, disk=1 GB, disk_mib=954, mem_mb=2000, mem=2 GB, mem_mib=1908
+Shell command: 
+        python workflow/scripts/validate_atac_outputs.py --run SRR12774931 --layout SINGLE           --bam /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774931/artifacts/results/atacseq/filtered_bam/SRR12774931/filtered.bam --bai /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774931/artifacts/results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai --profile /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774931/artifacts/results/atacseq/qc/SRR12774931/tss_profile.tsv --summary /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774931/artifacts/results/atacseq/qc/SRR12774931/tss_enrichment_summary.tsv           --min-mapq 30 --mitochondrial NC_007936.1           --window 2000 --bin-size 10 --background 100           --tmpdir /local/tmp.10300242 --output results/atacseq/qc/verification_existing/SRR12774931.json
+        
+Activating conda environment: ../atac-verify-envs/ba2420013494fe38629bfa2378a59a6c_
+
+[Wed Sep 16 19:50:06 2026]
+localrule atacseq_validate_existing:
+    input: /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/filtered_bam/SRR12774932/filtered.bam, /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/filtered_bam/SRR12774932/filtered.bam.bai, /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/qc/SRR12774932/tss_profile.tsv, /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/qc/SRR12774932/tss_enrichment_summary.tsv, workflow/scripts/validate_atac_outputs.py, config/atacseq_validation_runs.tsv, config/selection_audit_input_20260914.tsv, config/samples.tsv, config/classification_rules.tsv, config/curated_studies.tsv, config/selection_decisions.tsv, workflow/scripts/selection_policy.py, workflow/scripts/selection_gate.py
+    output: results/atacseq/qc/verification_existing/SRR12774932.json
+    jobid: 2
+    reason: Missing output files: results/atacseq/qc/verification_existing/SRR12774932.json
+    wildcards: run_accession=SRR12774932
+    resources: tmpdir=/local/tmp.10300242, disk_mb=1000, disk=1 GB, disk_mib=954, mem_mb=2000, mem=2 GB, mem_mib=1908
+Shell command: 
+        python workflow/scripts/validate_atac_outputs.py --run SRR12774932 --layout SINGLE           --bam /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/filtered_bam/SRR12774932/filtered.bam --bai /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/filtered_bam/SRR12774932/filtered.bam.bai --profile /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/qc/SRR12774932/tss_profile.tsv --summary /cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369/runs/SRR12774932/artifacts/results/atacseq/qc/SRR12774932/tss_enrichment_summary.tsv           --min-mapq 30 --mitochondrial NC_007936.1           --window 2000 --bin-size 10 --background 100           --tmpdir /local/tmp.10300242 --output results/atacseq/qc/verification_existing/SRR12774932.json
+        
+Activating conda environment: ../atac-verify-envs/ba2420013494fe38629bfa2378a59a6c_
+[Wed Sep 16 19:50:14 2026]
+Finished jobid: 2 (Rule: atacseq_validate_existing)
+1 of 3 steps (33%) done
+[Wed Sep 16 19:50:16 2026]
+Finished jobid: 1 (Rule: atacseq_validate_existing)
+2 of 3 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep 16 19:50:16 2026]
+localrule atacseq_existing_all:
+    input: results/atacseq/qc/verification_existing/SRR12774931.json, results/atacseq/qc/verification_existing/SRR12774932.json
+    jobid: 0
+    reason: Input files updated by another job: results/atacseq/qc/verification_existing/SRR12774931.json, results/atacseq/qc/verification_existing/SRR12774932.json
+    resources: tmpdir=/local/tmp.10300242, disk_mb=1000, disk=1 GB, disk_mib=954, mem_mb=1000, mem=1 GB, mem_mib=954
+Shell command: None
+[Wed Sep 16 19:50:16 2026]
+Finished jobid: 0 (Rule: atacseq_existing_all)
+3 of 3 steps (100%) done
+Complete log(s): /local/tmp.10300242/atac_verify_10300242/.snakemake/log/2026-09-16T194957.865967.snakemake.log

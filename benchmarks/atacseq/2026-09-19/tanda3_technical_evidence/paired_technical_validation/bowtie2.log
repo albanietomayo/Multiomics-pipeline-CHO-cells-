@@ -1,0 +1,361 @@
+[WARNING] Failed to launch x86-64-v3 version, staying with default
+[WARNING] Failed to launch x86-64-v3 version, staying with default
+Warning: skipping mate #2 of read 'SRR29929613.3640955 A00382:683:HL2FGDRX3:2:2106:4354:1204:GGGGGGCGGTGTAATGATATAGGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.3640955 A00382:683:HL2FGDRX3:2:2106:4354:1204:GGGGGGCGGTGTAATGATATAGGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.4832757 A00382:683:HL2FGDRX3:2:2107:2808:22294:CAGACGCGACGCCAACTTACCCCA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.4832757 A00382:683:HL2FGDRX3:2:2107:2808:22294:CAGACGCGACGCCAACTTACCCCA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.6790579 A00382:683:HL2FGDRX3:2:2110:16514:6480:CAGACGCGTAGCAAGCTGCGCGTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.6790579 A00382:683:HL2FGDRX3:2:2110:16514:6480:CAGACGCGTAGCAAGCTGCGCGTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.8392499 A00382:683:HL2FGDRX3:2:2112:18069:9048:GAGACGCGCGTTGCACTGTGGGTA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.8392499 A00382:683:HL2FGDRX3:2:2112:18069:9048:GAGACGCGCGTTGCACTGTGGGTA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.12437609 A00382:683:HL2FGDRX3:2:2117:18385:12226:GGGGGGGGGACCTGCCTCGCAATC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.12437609 A00382:683:HL2FGDRX3:2:2117:18385:12226:GGGGGGGGGACCTGCCTCGCAATC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.15607787 A00382:683:HL2FGDRX3:2:2121:30798:10144:CAGACGCGTACTGAGGAAATGCAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.15607787 A00382:683:HL2FGDRX3:2:2121:30798:10144:CAGACGCGTACTGAGGAAATGCAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.20165557 A00382:683:HL2FGDRX3:2:2126:26973:32111:CAGACGCGCAACGGTACAAGCTCA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.20165557 A00382:683:HL2FGDRX3:2:2126:26973:32111:CAGACGCGCAACGGTACAAGCTCA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.20549623 A00382:683:HL2FGDRX3:2:2127:2889:13041:CAGACGCGGAAGCTATGGCGATAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.20549623 A00382:683:HL2FGDRX3:2:2127:2889:13041:CAGACGCGGAAGCTATGGCGATAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.25921803 A00382:683:HL2FGDRX3:2:2133:31819:31485:GGGACGCGGTAGCTGGACTCGCTA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.25921803 A00382:683:HL2FGDRX3:2:2133:31819:31485:GGGACGCGGTAGCTGGACTCGCTA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.30299317 A00382:683:HL2FGDRX3:2:2139:19009:5979:CAGACGCGCTACTAACTAAGCCAG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.30299317 A00382:683:HL2FGDRX3:2:2139:19009:5979:CAGACGCGCTACTAACTAAGCCAG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.31902859 A00382:683:HL2FGDRX3:2:2141:31430:3881:CAGACGCGCTAGACCCTTGCGTGT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.31902859 A00382:683:HL2FGDRX3:2:2141:31430:3881:CAGACGCGCTAGACCCTTGCGTGT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.33057077 A00382:683:HL2FGDRX3:2:2142:13503:18208:CAGACGCGCAACATAACCTGATTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.33057077 A00382:683:HL2FGDRX3:2:2142:13503:18208:CAGACGCGCAACATAACCTGATTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.33057879 A00382:683:HL2FGDRX3:2:2142:17427:18239:CAGACGCGTATTGGCTGCTCCAAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.33057879 A00382:683:HL2FGDRX3:2:2142:17427:18239:CAGACGCGTATTGGCTGCTCCAAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.33071875 A00382:683:HL2FGDRX3:2:2142:17861:18834:CAGACGCGTATTGGCTGCTCCAAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.33071875 A00382:683:HL2FGDRX3:2:2142:17861:18834:CAGACGCGTATTGGCTGCTCCAAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.33083160 A00382:683:HL2FGDRX3:2:2142:14036:19319:CAGACGCGCAACATAACCTGATTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.33083160 A00382:683:HL2FGDRX3:2:2142:14036:19319:CAGACGCGCAACATAACCTGATTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.34326871 A00382:683:HL2FGDRX3:2:2144:9769:1376:CAGACGCGGTAGGTGCTCGCAATC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.34326871 A00382:683:HL2FGDRX3:2:2144:9769:1376:CAGACGCGGTAGGTGCTCGCAATC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.34508468 A00382:683:HL2FGDRX3:2:2144:26060:9267:CAGACGCGAATTGCGACTAAGGTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.34508468 A00382:683:HL2FGDRX3:2:2144:26060:9267:CAGACGCGAATTGCGACTAAGGTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.45998071 A00382:683:HL2FGDRX3:2:2158:19849:4116:GGGCCGCGTAAGGCTGAACAACAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.45998071 A00382:683:HL2FGDRX3:2:2158:19849:4116:GGGCCGCGTAAGGCTGAACAACAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.47994049 A00382:683:HL2FGDRX3:2:2160:27805:18677:GGGGGGCGCAGTGTGACTTAACGA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.47994049 A00382:683:HL2FGDRX3:2:2160:27805:18677:GGGGGGCGCAGTGTGACTTAACGA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.48900731 A00382:683:HL2FGDRX3:2:2161:15637:22435:CAGACGCGCTTGAATCTTAATGTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.48900731 A00382:683:HL2FGDRX3:2:2161:15637:22435:CAGACGCGCTTGAATCTTAATGTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.49869428 A00382:683:HL2FGDRX3:2:2162:16468:28447:CAGACGCGTCAAGGACTCCCTCAC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.49869428 A00382:683:HL2FGDRX3:2:2162:16468:28447:CAGACGCGTCAAGGACTCCCTCAC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.51403251 A00382:683:HL2FGDRX3:2:2164:30617:23171:GGGCCGCGTTAATGGACCTGATAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.51403251 A00382:683:HL2FGDRX3:2:2164:30617:23171:GGGCCGCGTTAATGGACCTGATAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.55524901 A00382:683:HL2FGDRX3:2:2169:18204:23469:GGGGGGCGGTGTAATGATATAGGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.55524901 A00382:683:HL2FGDRX3:2:2169:18204:23469:GGGGGGCGGTGTAATGATATAGGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.58946322 A00382:683:HL2FGDRX3:2:2173:28022:29543:CAGACGCGTGCTATACTGTTACAC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.58946322 A00382:683:HL2FGDRX3:2:2173:28022:29543:CAGACGCGTGCTATACTGTTACAC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.67135496 A00382:683:HL2FGDRX3:2:2206:3206:9643:GGGCCGCGTTTCAAGCTAAAGGTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.67135496 A00382:683:HL2FGDRX3:2:2206:3206:9643:GGGCCGCGTTTCAAGCTAAAGGTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.67924293 A00382:683:HL2FGDRX3:2:2207:29758:9126:CAGACGCGGTTGAAGTGATGATGG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.67924293 A00382:683:HL2FGDRX3:2:2207:29758:9126:CAGACGCGGTTGAAGTGATGATGG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.68981346 A00382:683:HL2FGDRX3:2:2208:11035:20697:CAGACGCGACACCGTTGATGCACC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.68981346 A00382:683:HL2FGDRX3:2:2208:11035:20697:CAGACGCGACACCGTTGATGCACC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.71064098 A00382:683:HL2FGDRX3:2:2211:15239:4836:CAGACGCGTTCACTGACCTACCGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.71064098 A00382:683:HL2FGDRX3:2:2211:15239:4836:CAGACGCGTTCACTGACCTACCGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.71077384 A00382:683:HL2FGDRX3:2:2211:15772:5447:CAGACGCGTTCACTGACCTACCGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.71077384 A00382:683:HL2FGDRX3:2:2211:15772:5447:CAGACGCGTTCACTGACCTACCGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.72260279 A00382:683:HL2FGDRX3:2:2212:31141:21386:CAGACGCGTCCCACCCTCAGTATT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.72260279 A00382:683:HL2FGDRX3:2:2212:31141:21386:CAGACGCGTCCCACCCTCAGTATT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.76066301 A00382:683:HL2FGDRX3:2:2217:3052:6621:CAGACGCGAATTAGGCTAGGTATA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.76066301 A00382:683:HL2FGDRX3:2:2217:3052:6621:CAGACGCGAATTAGGCTAGGTATA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.82727539 A00382:683:HL2FGDRX3:2:2225:28194:4539:CAGACGCGCCGTTGCACCGTTCCG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.82727539 A00382:683:HL2FGDRX3:2:2225:28194:4539:CAGACGCGCCGTTGCACCGTTCCG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.83000231 A00382:683:HL2FGDRX3:2:2225:22354:16219:CAGACGCGCGTGATGACTAACCTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.83000231 A00382:683:HL2FGDRX3:2:2225:22354:16219:CAGACGCGCGTGATGACTAACCTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.83293227 A00382:683:HL2FGDRX3:2:2225:26485:28698:CAGACGCGTATAACCCTGTACGTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.83293227 A00382:683:HL2FGDRX3:2:2225:26485:28698:CAGACGCGTATAACCCTGTACGTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.83809651 A00382:683:HL2FGDRX3:2:2226:21350:14857:CAGACGCGGTTATTGTGAGCGATA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.83809651 A00382:683:HL2FGDRX3:2:2226:21350:14857:CAGACGCGGTTATTGTGAGCGATA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.85779902 A00382:683:HL2FGDRX3:2:2228:19533:26647:CAGACGCGTTATAGCCTCTAACTA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.85779902 A00382:683:HL2FGDRX3:2:2228:19533:26647:CAGACGCGTTATAGCCTCTAACTA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.86900204 A00382:683:HL2FGDRX3:2:2230:5367:2331:CAGACGCGTGACAACGACAGGTAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.86900204 A00382:683:HL2FGDRX3:2:2230:5367:2331:CAGACGCGTGACAACGACAGGTAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.86987670 A00382:683:HL2FGDRX3:2:2230:3161:6089:CAGACGCGGGGCAATCTATTAGCC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.86987670 A00382:683:HL2FGDRX3:2:2230:3161:6089:CAGACGCGGGGCAATCTATTAGCC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.87528916 A00382:683:HL2FGDRX3:2:2230:28519:28902:CAGACGCGCATAGGTGAATTAGAC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.87528916 A00382:683:HL2FGDRX3:2:2230:28519:28902:CAGACGCGCATAGGTGAATTAGAC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.88718519 A00382:683:HL2FGDRX3:2:2232:3830:7467:CAGACGCGCTTGAAGGAACCAAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.88718519 A00382:683:HL2FGDRX3:2:2232:3830:7467:CAGACGCGCTTGAAGGAACCAAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.89492849 A00382:683:HL2FGDRX3:2:2233:10565:4413:CAGACGCGAAGCCTAACGTAATGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.89492849 A00382:683:HL2FGDRX3:2:2233:10565:4413:CAGACGCGAAGCCTAACGTAATGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.93388380 A00382:683:HL2FGDRX3:2:2237:14262:25723:CAGACGCGACTAAGGTGACCTGCA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.93388380 A00382:683:HL2FGDRX3:2:2237:14262:25723:CAGACGCGACTAAGGTGACCTGCA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.96982151 A00382:683:HL2FGDRX3:2:2241:14814:34037:CAGACGCGGCGTTTGTGGCTAAAG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.96982151 A00382:683:HL2FGDRX3:2:2241:14814:34037:CAGACGCGGCGTTTGTGGCTAAAG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.96984022 A00382:683:HL2FGDRX3:2:2241:14678:34115:CAGACGCGGCGTTTGTGGCTAAAG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.96984022 A00382:683:HL2FGDRX3:2:2241:14678:34115:CAGACGCGGCGTTTGTGGCTAAAG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.99816579 A00382:683:HL2FGDRX3:2:2245:5972:10394:CAGACGCGAATTGTGGAGGGTTAC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.99816579 A00382:683:HL2FGDRX3:2:2245:5972:10394:CAGACGCGAATTGTGGAGGGTTAC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.100741520 A00382:683:HL2FGDRX3:2:2246:9498:13714:CAGACGCGTGGCGTAACACCTTAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.100741520 A00382:683:HL2FGDRX3:2:2246:9498:13714:CAGACGCGTGGCGTAACACCTTAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.102554546 A00382:683:HL2FGDRX3:2:2248:30535:18991:CAGACGCGCAGCGCTTGGCGAAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.102554546 A00382:683:HL2FGDRX3:2:2248:30535:18991:CAGACGCGCAGCGCTTGGCGAAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.102556083 A00382:683:HL2FGDRX3:2:2248:30445:19053:CAGACGCGCAGCGCTTGGCGAAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.102556083 A00382:683:HL2FGDRX3:2:2248:30445:19053:CAGACGCGCAGCGCTTGGCGAAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.105349034 A00382:683:HL2FGDRX3:2:2251:12608:30373:CAGACGCGCAGTTATCTACTCCTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.105349034 A00382:683:HL2FGDRX3:2:2251:12608:30373:CAGACGCGCAGTTATCTACTCCTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.110484019 A00382:683:HL2FGDRX3:2:2257:24587:33896:CAGACGCGACAGCACGAGGTCCAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.110484019 A00382:683:HL2FGDRX3:2:2257:24587:33896:CAGACGCGACAGCACGAGGTCCAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.116845026 A00382:683:HL2FGDRX3:2:2265:3278:17660:CAGACGCGAATGAGCTGCGGATAG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.116845026 A00382:683:HL2FGDRX3:2:2265:3278:17660:CAGACGCGAATGAGCTGCGGATAG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.119948665 A00382:683:HL2FGDRX3:2:2269:19171:6605:CAGACGCGCATAGTGGACGTAATG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.119948665 A00382:683:HL2FGDRX3:2:2269:19171:6605:CAGACGCGCATAGTGGACGTAATG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.127386968 A00382:683:HL2FGDRX3:2:2278:16721:3928:CAGACGCGTAGCAAGCTGCGCGTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.127386968 A00382:683:HL2FGDRX3:2:2278:16721:3928:CAGACGCGTAGCAAGCTGCGCGTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.127409031 A00382:683:HL2FGDRX3:2:2278:17011:4930:CAGACGCGTAGCAAGCTGCGCGTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.127409031 A00382:683:HL2FGDRX3:2:2278:17011:4930:CAGACGCGTAGCAAGCTGCGCGTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.134668002 A00382:683:HL2FGDRX3:2:2109:5014:23985:CAGACGCGTTACCTCCTCTTGAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.134668002 A00382:683:HL2FGDRX3:2:2109:5014:23985:CAGACGCGTTACCTCCTCTTGAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.135016540 A00382:683:HL2FGDRX3:2:2110:4155:3897:CAGACGCGTCACCTGGATTGTTTG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.135016540 A00382:683:HL2FGDRX3:2:2110:4155:3897:CAGACGCGTCACCTGGATTGTTTG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.142715566 A00382:683:HL2FGDRX3:2:2119:14064:25066:CAGACGCGCTATCGGCTACTTAGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.142715566 A00382:683:HL2FGDRX3:2:2119:14064:25066:CAGACGCGCTATCGGCTACTTAGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.142738161 A00382:683:HL2FGDRX3:2:2119:12852:26099:CAGACGCGCTATCGGCTACTTAGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.142738161 A00382:683:HL2FGDRX3:2:2119:12852:26099:CAGACGCGCTATCGGCTACTTAGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.143497079 A00382:683:HL2FGDRX3:2:2120:18222:23469:GGGGGGGGACCAAATGAACCTTTG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.143497079 A00382:683:HL2FGDRX3:2:2120:18222:23469:GGGGGGGGACCAAATGAACCTTTG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.143896724 A00382:683:HL2FGDRX3:2:2121:1334:5087:CAGACGCGAATTGTGGATTATCAC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.143896724 A00382:683:HL2FGDRX3:2:2121:1334:5087:CAGACGCGAATTGTGGATTATCAC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.150434289 A00382:683:HL2FGDRX3:2:2129:5276:3458:CAGACGCGATAAAGGACTTATCGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.150434289 A00382:683:HL2FGDRX3:2:2129:5276:3458:CAGACGCGATAAAGGACTTATCGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.153208639 A00382:683:HL2FGDRX3:2:2132:16016:14920:CAGACGCGCATGGCGGAATAACGT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.153208639 A00382:683:HL2FGDRX3:2:2132:16016:14920:CAGACGCGCATGGCGGAATAACGT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.154336881 A00382:683:HL2FGDRX3:2:2133:30165:27618:CAGACGCGCACACCCACGCAATCA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.154336881 A00382:683:HL2FGDRX3:2:2133:30165:27618:CAGACGCGCACACCCACGCAATCA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.154471366 A00382:683:HL2FGDRX3:2:2133:15257:33426:CAGACGCGCCACTTGGACACCTTG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.154471366 A00382:683:HL2FGDRX3:2:2133:15257:33426:CAGACGCGCCACTTGGACACCTTG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.162053019 A00382:683:HL2FGDRX3:2:2142:23637:36761:CAGACGCGGATTGCGGAGCTAAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.162053019 A00382:683:HL2FGDRX3:2:2142:23637:36761:CAGACGCGGATTGCGGAGCTAAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.162057040 A00382:683:HL2FGDRX3:2:2142:23683:36933:CAGACGCGGATTGCGGAGCTAAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.162057040 A00382:683:HL2FGDRX3:2:2142:23683:36933:CAGACGCGGATTGCGGAGCTAAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.162567548 A00382:683:HL2FGDRX3:2:2143:24650:23015:CAGACGCGTCGATTCACTGCACAG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.162567548 A00382:683:HL2FGDRX3:2:2143:24650:23015:CAGACGCGTCGATTCACTGCACAG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.165909279 A00382:683:HL2FGDRX3:2:2147:18530:22373:CAGACGCGACCAAATGACATGCAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.165909279 A00382:683:HL2FGDRX3:2:2147:18530:22373:CAGACGCGACCAAATGACATGCAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.165977463 A00382:683:HL2FGDRX3:2:2147:1814:25332:CAGACGCGAATTGCGACTAAGGTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.165977463 A00382:683:HL2FGDRX3:2:2147:1814:25332:CAGACGCGAATTGCGACTAAGGTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.166059732 A00382:683:HL2FGDRX3:2:2147:18376:28870:CAGACGCGCCGTTGCACCGTTCCG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.166059732 A00382:683:HL2FGDRX3:2:2147:18376:28870:CAGACGCGCCGTTGCACCGTTCCG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.169418590 A00382:683:HL2FGDRX3:2:2151:3296:30185:CAGACGCGACTAGCGGAACTGAGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.169418590 A00382:683:HL2FGDRX3:2:2151:3296:30185:CAGACGCGACTAGCGGAACTGAGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.171335054 A00382:683:HL2FGDRX3:2:2154:32732:4820:CAGACGCGGTCGATTCTCCATAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.171335054 A00382:683:HL2FGDRX3:2:2154:32732:4820:CAGACGCGGTCGATTCTCCATAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.171560001 A00382:683:HL2FGDRX3:2:2154:21495:14512:CAGACGCGACCAAATGACATGCAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.171560001 A00382:683:HL2FGDRX3:2:2154:21495:14512:CAGACGCGACCAAATGACATGCAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.174872059 A00382:683:HL2FGDRX3:2:2158:18313:13730:GGGCCGCGTAGCGGATGAGGAACT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.174872059 A00382:683:HL2FGDRX3:2:2158:18313:13730:GGGCCGCGTAGCGGATGAGGAACT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.176115891 A00382:683:HL2FGDRX3:2:2159:14253:31219:CAGACGCGCTTCCCGCTTAGCTAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.176115891 A00382:683:HL2FGDRX3:2:2159:14253:31219:CAGACGCGCTTCCCGCTTAGCTAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.176711889 A00382:683:HL2FGDRX3:2:2160:25048:20917:CAGACGCGTGCTATACTGTTACAC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.176711889 A00382:683:HL2FGDRX3:2:2160:25048:20917:CAGACGCGTGCTATACTGTTACAC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.183891182 A00382:683:HL2FGDRX3:2:2169:26151:8453:GGGGGGGGCCTTTCTGAGTCAAGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.183891182 A00382:683:HL2FGDRX3:2:2169:26151:8453:GGGGGGGGCCTTTCTGAGTCAAGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.184940930 A00382:683:HL2FGDRX3:2:2170:26982:18004:CAGACGCGTCAGCACCTTAGCTCG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.184940930 A00382:683:HL2FGDRX3:2:2170:26982:18004:CAGACGCGTCAGCACCTTAGCTCG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.187796303 A00382:683:HL2FGDRX3:2:2173:31801:34929:GGGCCGCGACGGAACCTACAACAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.187796303 A00382:683:HL2FGDRX3:2:2173:31801:34929:GGGCCGCGACGGAACCTACAACAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.191281892 A00382:683:HL2FGDRX3:2:2178:14479:8312:CAGACGCGCGCGAGTGAGAACGAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.191281892 A00382:683:HL2FGDRX3:2:2178:14479:8312:CAGACGCGCGCGAGTGAGAACGAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.193871487 A00382:683:HL2FGDRX3:2:2203:19488:18145:CAGACGCGTGCTGTGCTAATCCTG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.193871487 A00382:683:HL2FGDRX3:2:2203:19488:18145:CAGACGCGTGCTGTGCTAATCCTG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.200464008 A00382:683:HL2FGDRX3:2:2211:29460:29089:CAGACGCGTCATGGAGATGAATGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.200464008 A00382:683:HL2FGDRX3:2:2211:29460:29089:CAGACGCGTCATGGAGATGAATGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.206729669 A00382:683:HL2FGDRX3:2:2219:27877:10347:CAGACGCGACGGAACCTCCGCAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.206729669 A00382:683:HL2FGDRX3:2:2219:27877:10347:CAGACGCGACGGAACCTCCGCAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.207116741 A00382:683:HL2FGDRX3:2:2219:5095:26882:CAGACGCGTGCTGTGCTAATCCTG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.207116741 A00382:683:HL2FGDRX3:2:2219:5095:26882:CAGACGCGTGCTGTGCTAATCCTG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.208777627 A00382:683:HL2FGDRX3:2:2221:19804:25645:CAGACGCGCATTTAGCTAGTTGGG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.208777627 A00382:683:HL2FGDRX3:2:2221:19804:25645:CAGACGCGCATTTAGCTAGTTGGG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.211400053 A00382:683:HL2FGDRX3:2:2224:26639:29027:CAGACGCGTATTGCTGACTTCGAC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.211400053 A00382:683:HL2FGDRX3:2:2224:26639:29027:CAGACGCGTATTGCTGACTTCGAC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.213051777 A00382:683:HL2FGDRX3:2:2226:1976:26991:CAGACGCGCTAGACCCTTGCGTGT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.213051777 A00382:683:HL2FGDRX3:2:2226:1976:26991:CAGACGCGCTAGACCCTTGCGTGT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.215447775 A00382:683:HL2FGDRX3:2:2229:21296:20306:CAGACGCGCCTTTCTGAGTCAAGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.215447775 A00382:683:HL2FGDRX3:2:2229:21296:20306:CAGACGCGCCTTTCTGAGTCAAGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.218855820 A00382:683:HL2FGDRX3:2:2233:11433:19883:CAGACGCGAATCCGGGAAGCTATA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.218855820 A00382:683:HL2FGDRX3:2:2233:11433:19883:CAGACGCGAATCCGGGAAGCTATA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.222837874 A00382:683:HL2FGDRX3:2:2238:28537:7921:CAGACGCGAGAGGCGGACGTAATG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.222837874 A00382:683:HL2FGDRX3:2:2238:28537:7921:CAGACGCGAGAGGCGGACGTAATG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.223036139 A00382:683:HL2FGDRX3:2:2238:18032:16313:CAGACGCGTGGGCGTGACAAGAAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.223036139 A00382:683:HL2FGDRX3:2:2238:18032:16313:CAGACGCGTGGGCGTGACAAGAAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.224380520 A00382:683:HL2FGDRX3:2:2240:4318:1078:CAGACGCGCAGTTATCTACTCCTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.224380520 A00382:683:HL2FGDRX3:2:2240:4318:1078:CAGACGCGCAGTTATCTACTCCTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.225076017 A00382:683:HL2FGDRX3:2:2240:32181:30295:CAGACGCGTGCAAGGTGAGCGCGA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.225076017 A00382:683:HL2FGDRX3:2:2240:32181:30295:CAGACGCGTGCAAGGTGAGCGCGA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.225084153 A00382:683:HL2FGDRX3:2:2240:31024:30639:CAGACGCGTGCAAGGTGAGCGCGA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.225084153 A00382:683:HL2FGDRX3:2:2240:31024:30639:CAGACGCGTGCAAGGTGAGCGCGA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.237754498 A00382:683:HL2FGDRX3:2:2255:21007:27352:CAGACGCGGTGCAAGCTGCGCGTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.237754498 A00382:683:HL2FGDRX3:2:2255:21007:27352:CAGACGCGGTGCAAGCTGCGCGTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.238231641 A00382:683:HL2FGDRX3:2:2256:22652:11663:CAGACGCGCATAGGTGAATTAGAC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.238231641 A00382:683:HL2FGDRX3:2:2256:22652:11663:CAGACGCGCATAGGTGAATTAGAC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.238541792 A00382:683:HL2FGDRX3:2:2256:7943:24956:CAGACGCGGAAATACCTTGCATGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.238541792 A00382:683:HL2FGDRX3:2:2256:7943:24956:CAGACGCGGAAATACCTTGCATGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.239336956 A00382:683:HL2FGDRX3:2:2257:2682:22889:CAGACGCGGTGCAAGCTGCGCGTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.239336956 A00382:683:HL2FGDRX3:2:2257:2682:22889:CAGACGCGGTGCAAGCTGCGCGTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.240652002 A00382:683:HL2FGDRX3:2:2259:30110:6887:CAGACGCGGGTAACTACCCTGTGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.240652002 A00382:683:HL2FGDRX3:2:2259:30110:6887:CAGACGCGGGTAACTACCCTGTGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.241403790 A00382:683:HL2FGDRX3:2:2260:24532:2550:CAGACGCGGGTAACTACCCTGTGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.241403790 A00382:683:HL2FGDRX3:2:2260:24532:2550:CAGACGCGGGTAACTACCCTGTGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.242444750 A00382:683:HL2FGDRX3:2:2261:19524:10723:CAGACGCGCTGGATCCTCGCTCAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.242444750 A00382:683:HL2FGDRX3:2:2261:19524:10723:CAGACGCGCTGGATCCTCGCTCAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.247126463 A00382:683:HL2FGDRX3:2:2266:3260:30123:CAGACGCGCTTGTAACTAGGCTTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.247126463 A00382:683:HL2FGDRX3:2:2266:3260:30123:CAGACGCGCTTGTAACTAGGCTTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.247485120 A00382:683:HL2FGDRX3:2:2267:27055:9424:GCGACGCGTTATAGCCTCGCCAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.247485120 A00382:683:HL2FGDRX3:2:2267:27055:9424:GCGACGCGTTATAGCCTCGCCAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.249030636 A00382:683:HL2FGDRX3:2:2269:31602:3364:CAGACGCGGTCGATTCTCCATAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.249030636 A00382:683:HL2FGDRX3:2:2269:31602:3364:CAGACGCGGTCGATTCTCCATAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.252774591 A00382:683:HL2FGDRX3:2:2273:6723:19899:CAGACGCGAGAGGCGGACGTAATG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.252774591 A00382:683:HL2FGDRX3:2:2273:6723:19899:CAGACGCGAGAGGCGGACGTAATG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.253215226 A00382:683:HL2FGDRX3:2:2274:30020:2785:CAGACGCGTTCACTGACGGTCAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.253215226 A00382:683:HL2FGDRX3:2:2274:30020:2785:CAGACGCGTTCACTGACGGTCAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.254247789 A00382:683:HL2FGDRX3:2:2275:7057:11146:CAGACGCGTTTAGCTGAGGCCCTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.254247789 A00382:683:HL2FGDRX3:2:2275:7057:11146:CAGACGCGTTTAGCTGAGGCCCTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.260665709 A00382:683:HL2FGDRX3:2:2121:25699:6668:CAGACGCGCAGCGCTTGGCGAAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.260665709 A00382:683:HL2FGDRX3:2:2121:25699:6668:CAGACGCGCAGCGCTTGGCGAAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.264129290 A00382:683:HL2FGDRX3:2:2139:27859:21277:CAGACGCGTCAACAAACGCTTGGG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.264129290 A00382:683:HL2FGDRX3:2:2139:27859:21277:CAGACGCGTCAACAAACGCTTGGG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.280272883 A00382:683:HL2FGDRX3:2:2243:18774:29465:CAGACGCGTCGTCCTTGCAATGTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.280272883 A00382:683:HL2FGDRX3:2:2243:18774:29465:CAGACGCGTCGTCCTTGCAATGTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.283357884 A00382:683:HL2FGDRX3:2:2258:19063:30185:CAGACGCGTCAGTTTGAGCTTTGT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.283357884 A00382:683:HL2FGDRX3:2:2258:19063:30185:CAGACGCGTCAGTTTGAGCTTTGT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.290944848 A00382:683:HL2FGDRX3:2:2105:23665:24659:GGGGGGGGTGTAACCTGTTCCTCG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.290944848 A00382:683:HL2FGDRX3:2:2105:23665:24659:GGGGGGGGTGTAACCTGTTCCTCG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.291206495 A00382:683:HL2FGDRX3:2:2106:1226:1172:GGGGGGGGGTAATCGACGTAATGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.291206495 A00382:683:HL2FGDRX3:2:2106:1226:1172:GGGGGGGGGTAATCGACGTAATGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.292801007 A00382:683:HL2FGDRX3:2:2108:6460:4633:GGGGGGGGTAACTTCGATCCCTTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.292801007 A00382:683:HL2FGDRX3:2:2108:6460:4633:GGGGGGGGTAACTTCGATCCCTTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.294011244 A00382:683:HL2FGDRX3:2:2109:23999:24956:GGGCCGCGAAGATAGACGTAGCTA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.294011244 A00382:683:HL2FGDRX3:2:2109:23999:24956:GGGCCGCGAAGATAGACGTAGCTA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.299425498 A00382:683:HL2FGDRX3:2:2116:17616:17033:GGGGGGGGGTATGCGACCATAATG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.299425498 A00382:683:HL2FGDRX3:2:2116:17616:17033:GGGGGGGGGTATGCGACCATAATG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.302133992 A00382:683:HL2FGDRX3:2:2119:5430:28808:CAGACGCGGGCGAGAGAATATGGT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.302133992 A00382:683:HL2FGDRX3:2:2119:5430:28808:CAGACGCGGGCGAGAGAATATGGT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.308826137 A00382:683:HL2FGDRX3:2:2127:14281:33364:CAGACGCGCCGGTTTGACAACTAG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.308826137 A00382:683:HL2FGDRX3:2:2127:14281:33364:CAGACGCGCCGGTTTGACAACTAG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.311863933 A00382:683:HL2FGDRX3:2:2131:23692:19914:GCGCCGCGCGCGAGTGAGAACGAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.311863933 A00382:683:HL2FGDRX3:2:2131:23692:19914:GCGCCGCGCGCGAGTGAGAACGAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.311866502 A00382:683:HL2FGDRX3:2:2131:23719:20024:GCGCCGCGCGCGAGTGAGAACGAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.311866502 A00382:683:HL2FGDRX3:2:2131:23719:20024:GCGCCGCGCGCGAGTGAGAACGAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.312946001 A00382:683:HL2FGDRX3:2:2132:22643:30091:CAGACGCGATCAAGACTTGATTTG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.312946001 A00382:683:HL2FGDRX3:2:2132:22643:30091:CAGACGCGATCAAGACTTGATTTG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.317352510 A00382:683:HL2FGDRX3:2:2138:21739:3098:CAGACGCGAACGGACCTCACTATA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.317352510 A00382:683:HL2FGDRX3:2:2138:21739:3098:CAGACGCGAACGGACCTCACTATA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.318341764 A00382:683:HL2FGDRX3:2:2139:4679:9502:CAGACGCGCCACTTGGACACCTTG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.318341764 A00382:683:HL2FGDRX3:2:2139:4679:9502:CAGACGCGCCACTTGGACACCTTG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.318351638 A00382:683:HL2FGDRX3:2:2139:4815:9925:CAGACGCGCCACTTGGACACCTTG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.318351638 A00382:683:HL2FGDRX3:2:2139:4815:9925:CAGACGCGCCACTTGGACACCTTG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.318410192 A00382:683:HL2FGDRX3:2:2139:4056:12399:CAGACGCGCCACTTGGACACCTTG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.318410192 A00382:683:HL2FGDRX3:2:2139:4056:12399:CAGACGCGCCACTTGGACACCTTG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.320213258 A00382:683:HL2FGDRX3:2:2141:26964:17816:CAGACGCGCCTTCAGGAACTTGTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.320213258 A00382:683:HL2FGDRX3:2:2141:26964:17816:CAGACGCGCCTTCAGGAACTTGTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.324062420 A00382:683:HL2FGDRX3:2:2146:22761:2550:CAGACGCGGCTGCAAGATCACACC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.324062420 A00382:683:HL2FGDRX3:2:2146:22761:2550:CAGACGCGGCTGCAAGATCACACC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.324646490 A00382:683:HL2FGDRX3:2:2146:9037:27320:CAGACGCGAAGATAGACGTAGCTA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.324646490 A00382:683:HL2FGDRX3:2:2146:9037:27320:CAGACGCGAAGATAGACGTAGCTA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.327802517 A00382:683:HL2FGDRX3:2:2150:26594:18114:CAGACGCGGCTGCAAGATCACAGA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.327802517 A00382:683:HL2FGDRX3:2:2150:26594:18114:CAGACGCGGCTGCAAGATCACAGA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.328122887 A00382:683:HL2FGDRX3:2:2150:29812:31892:GCGCCGCGGCTGCAAGATCACAGA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.328122887 A00382:683:HL2FGDRX3:2:2150:29812:31892:GCGCCGCGGCTGCAAGATCACAGA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.329810749 A00382:683:HL2FGDRX3:2:2152:11885:32346:CAGACGCGGACCAGGTGGGTAATG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.329810749 A00382:683:HL2FGDRX3:2:2152:11885:32346:CAGACGCGGACCAGGTGGGTAATG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.330270837 A00382:683:HL2FGDRX3:2:2153:3884:16047:CAGACGCGCCAGGTTCTTCGCTCC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.330270837 A00382:683:HL2FGDRX3:2:2153:3884:16047:CAGACGCGCCAGGTTCTTCGCTCC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.331939365 A00382:683:HL2FGDRX3:2:2155:7961:15092:CAGACGCGGGTGAGAACAGATTCG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.331939365 A00382:683:HL2FGDRX3:2:2155:7961:15092:CAGACGCGGGTGAGAACAGATTCG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.332524205 A00382:683:HL2FGDRX3:2:2156:19569:4006:CAGACGCGCATAATCCTTGAGCAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.332524205 A00382:683:HL2FGDRX3:2:2156:19569:4006:CAGACGCGCATAATCCTTGAGCAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.333208442 A00382:683:HL2FGDRX3:2:2156:27932:33426:CAGACGCGCCAAATAACGTTTCCG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.333208442 A00382:683:HL2FGDRX3:2:2156:27932:33426:CAGACGCGCCAAATAACGTTTCCG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.336745455 A00382:683:HL2FGDRX3:2:2161:7319:5024:CAGACGCGACAGCACGAGGACCCT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.336745455 A00382:683:HL2FGDRX3:2:2161:7319:5024:CAGACGCGACAGCACGAGGACCCT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.337633989 A00382:683:HL2FGDRX3:2:2162:10637:7200:CAGACGCGGCTACAAACCCAAACG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.337633989 A00382:683:HL2FGDRX3:2:2162:10637:7200:CAGACGCGGCTACAAACCCAAACG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.341859154 A00382:683:HL2FGDRX3:2:2167:31828:8484:GGGGGGCGACTAAGGTGACCTGCA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.341859154 A00382:683:HL2FGDRX3:2:2167:31828:8484:GGGGGGCGACTAAGGTGACCTGCA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.343231054 A00382:683:HL2FGDRX3:2:2168:13060:32002:CAGACGCGCGGTTAGACGGATAAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.343231054 A00382:683:HL2FGDRX3:2:2168:13060:32002:CAGACGCGCGGTTAGACGGATAAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.345338057 A00382:683:HL2FGDRX3:2:2171:3884:14951:CAGACGCGCGTCCCTCTTCGTAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.345338057 A00382:683:HL2FGDRX3:2:2171:3884:14951:CAGACGCGCGTCCCTCTTCGTAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.349313563 A00382:683:HL2FGDRX3:2:2176:7798:8077:CAGACGCGTGCTGTGCTAATCCTG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.349313563 A00382:683:HL2FGDRX3:2:2176:7798:8077:CAGACGCGTGCTGTGCTAATCCTG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.354904339 A00382:683:HL2FGDRX3:2:2205:25599:14293:GGGCCGCGGGATCCAGATTATTCG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.354904339 A00382:683:HL2FGDRX3:2:2205:25599:14293:GGGCCGCGGGATCCAGATTATTCG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.355961539 A00382:683:HL2FGDRX3:2:2206:26883:25191:GGGCCGCGTCGGTTTACCTCTACG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.355961539 A00382:683:HL2FGDRX3:2:2206:26883:25191:GGGCCGCGTCGGTTTACCTCTACG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.356268305 A00382:683:HL2FGDRX3:2:2207:24460:2769:CAGACGCGTGTTGCGCTTGCTGCA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.356268305 A00382:683:HL2FGDRX3:2:2207:24460:2769:CAGACGCGTGTTGCGCTTGCTGCA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.357038197 A00382:683:HL2FGDRX3:2:2207:5819:37027:CAGACGCGAAGCCTAACCCTCACG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.357038197 A00382:683:HL2FGDRX3:2:2207:5819:37027:CAGACGCGAAGCCTAACCCTCACG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.357969351 A00382:683:HL2FGDRX3:2:2209:4345:5979:GGGGGGGGGGATTAGTGTCACGAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.357969351 A00382:683:HL2FGDRX3:2:2209:4345:5979:GGGGGGGGGGATTAGTGTCACGAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.362259511 A00382:683:HL2FGDRX3:2:2214:21025:11099:CAGACGCGCCTTTCTGAGTCAAGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.362259511 A00382:683:HL2FGDRX3:2:2214:21025:11099:CAGACGCGCCTTTCTGAGTCAAGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.362973347 A00382:683:HL2FGDRX3:2:2215:27796:5478:CAGACGCGTAGCATGGAGCTTAGG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.362973347 A00382:683:HL2FGDRX3:2:2215:27796:5478:CAGACGCGTAGCATGGAGCTTAGG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.364820347 A00382:683:HL2FGDRX3:2:2217:23882:11819:CAGACGCGTGTATTGCTGAATCTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.364820347 A00382:683:HL2FGDRX3:2:2217:23882:11819:CAGACGCGTGTATTGCTGAATCTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.368257315 A00382:683:HL2FGDRX3:2:2221:21576:12712:CAGACGCGTTGAAGCGAAGGATTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.368257315 A00382:683:HL2FGDRX3:2:2221:21576:12712:CAGACGCGTTGAAGCGAAGGATTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.369271910 A00382:683:HL2FGDRX3:2:2222:17092:19351:CAGACGCGGATTGAGTGAAGCCTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.369271910 A00382:683:HL2FGDRX3:2:2222:17092:19351:CAGACGCGGATTGAGTGAAGCCTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.369279471 A00382:683:HL2FGDRX3:2:2222:18557:19664:CAGACGCGGATTGAGTGAAGCCTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.369279471 A00382:683:HL2FGDRX3:2:2222:18557:19664:CAGACGCGGATTGAGTGAAGCCTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.374360790 A00382:683:HL2FGDRX3:2:2228:14027:16517:CAGACGCGCTTCCCGCTGCACACC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.374360790 A00382:683:HL2FGDRX3:2:2228:14027:16517:CAGACGCGCTTCCCGCTGCACACC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.374778230 A00382:683:HL2FGDRX3:2:2228:14389:33959:CAGACGCGCTTCCCGCTGCACACC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.374778230 A00382:683:HL2FGDRX3:2:2228:14389:33959:CAGACGCGCTTCCCGCTGCACACC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.379387513 A00382:683:HL2FGDRX3:2:2234:23728:10019:GAGACGCGCAAACTAACCAGGAAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.379387513 A00382:683:HL2FGDRX3:2:2234:23728:10019:GAGACGCGCAAACTAACCAGGAAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.380118558 A00382:683:HL2FGDRX3:2:2235:18774:4633:CAGACGCGACCCTCCTGAAGTACG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.380118558 A00382:683:HL2FGDRX3:2:2235:18774:4633:CAGACGCGACCCTCCTGAAGTACG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.384203283 A00382:683:HL2FGDRX3:2:2239:13693:30812:CAGACGCGCAGTTATCTACTCCTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.384203283 A00382:683:HL2FGDRX3:2:2239:13693:30812:CAGACGCGCAGTTATCTACTCCTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.387806562 A00382:683:HL2FGDRX3:2:2243:25482:36636:CAGACGCGGACTAGGCTCACCACA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.387806562 A00382:683:HL2FGDRX3:2:2243:25482:36636:CAGACGCGGACTAGGCTCACCACA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.388033528 A00382:683:HL2FGDRX3:2:2244:30219:10081:CAGACGCGAACCAGGCTCTTGAAT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.388033528 A00382:683:HL2FGDRX3:2:2244:30219:10081:CAGACGCGAACCAGGCTCTTGAAT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.392956192 A00382:683:HL2FGDRX3:2:2249:28094:35900:CAGACGCGCATTTGTGATTCCTGG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.392956192 A00382:683:HL2FGDRX3:2:2249:28094:35900:CAGACGCGCATTTGTGATTCCTGG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.393101852 A00382:683:HL2FGDRX3:2:2250:15863:6042:CAGACGCGATGTGCGGAGATTAAC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.393101852 A00382:683:HL2FGDRX3:2:2250:15863:6042:CAGACGCGATGTGCGGAGATTAAC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.393400076 A00382:683:HL2FGDRX3:2:2250:24496:18521:CAGACGCGGTGGCTAGAACAGGAA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.393400076 A00382:683:HL2FGDRX3:2:2250:24496:18521:CAGACGCGGTGGCTAGAACAGGAA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.395336833 A00382:683:HL2FGDRX3:2:2252:8287:28025:CAGACGCGAAGCCTAACCCTCACG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.395336833 A00382:683:HL2FGDRX3:2:2252:8287:28025:CAGACGCGAAGCCTAACCCTCACG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.397583662 A00382:683:HL2FGDRX3:2:2255:30481:14043:CAGACGCGAGCACTAACGTATTTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.397583662 A00382:683:HL2FGDRX3:2:2255:30481:14043:CAGACGCGAGCACTAACGTATTTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.400149398 A00382:683:HL2FGDRX3:2:2258:27010:14105:CAGACGCGATAGATGCTTAACGTT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.400149398 A00382:683:HL2FGDRX3:2:2258:27010:14105:CAGACGCGATAGATGCTTAACGTT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.401574184 A00382:683:HL2FGDRX3:2:2260:28049:1532:CAGACGCGCGCGAAATGTTTGGAC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.401574184 A00382:683:HL2FGDRX3:2:2260:28049:1532:CAGACGCGCGCGAAATGTTTGGAC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.402332340 A00382:683:HL2FGDRX3:2:2260:4083:33301:CAGACGCGCGTAAATACAAACTCG/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.402332340 A00382:683:HL2FGDRX3:2:2260:4083:33301:CAGACGCGCGTAAATACAAACTCG/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.404881378 A00382:683:HL2FGDRX3:2:2263:17020:32283:CAGACGCGGACCAAGCTGCCAGCT/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.404881378 A00382:683:HL2FGDRX3:2:2263:17020:32283:CAGACGCGGACCAAGCTGCCAGCT/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.410037797 A00382:683:HL2FGDRX3:2:2269:17445:33395:CAGACGCGGCGGTAACTGTGCTGC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.410037797 A00382:683:HL2FGDRX3:2:2269:17445:33395:CAGACGCGGCGGTAACTGTGCTGC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.412279166 A00382:683:HL2FGDRX3:2:2272:13413:20494:CAGACGCGTTATAGCCTCTAACTA/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.412279166 A00382:683:HL2FGDRX3:2:2272:13413:20494:CAGACGCGTTATAGCCTCTAACTA/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.412804121 A00382:683:HL2FGDRX3:2:2273:12572:6887:CAGACGCGATCATCATGATCCTTC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.412804121 A00382:683:HL2FGDRX3:2:2273:12572:6887:CAGACGCGATCATCATGATCCTTC/3' because it was < 2 characters long
+Warning: skipping mate #2 of read 'SRR29929613.417079389 A00382:683:HL2FGDRX3:2:2278:1705:9956:CAGACGCGGACCTGCCTCGCAATC/3' because length (1) <= # seed mismatches (0)
+Warning: skipping mate #2 of read 'SRR29929613.417079389 A00382:683:HL2FGDRX3:2:2278:1705:9956:CAGACGCGGACCTGCCTCGCAATC/3' because it was < 2 characters long
+417700822 reads; of these:
+  417700822 (100.00%) were paired; of these:
+    417686781 (100.00%) aligned concordantly 0 times
+    4126 (0.00%) aligned concordantly exactly 1 time
+    9915 (0.00%) aligned concordantly >1 times
+    ----
+    417686781 pairs aligned concordantly 0 times; of these:
+      15910 (0.00%) aligned discordantly 1 time
+    ----
+    417670871 pairs aligned 0 times concordantly or discordantly; of these:
+      835341742 mates make up the pairs; of these:
+        428658540 (51.32%) aligned 0 times
+        278009315 (33.28%) aligned exactly 1 time
+        128673887 (15.40%) aligned >1 times
+48.69% overall alignment rate

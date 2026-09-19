@@ -1,0 +1,3 @@
+ M workflow/rules/atacseq.smk
+ M workflow/rules/common.smk
+ M workflow/slurm/atacseq_paired_validation.sbatch

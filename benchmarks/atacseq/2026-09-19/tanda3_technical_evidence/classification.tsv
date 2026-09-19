@@ -1,0 +1,7 @@
+path	current_classification	proposed_after_capsule_commit	reason
+/cephyr/users/mayoa/Vera/atacseq_paired_validation_results/SRR29929613/job_10280253	DO_NOT_DELETE_YET	CLEANUP_CANDIDATE_AFTER_CLOSURE	PE technical validation used excluded multiome/single-cell data; compact technical evidence preserved here.
+/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_atacseq_integrated	DO_NOT_DELETE_YET	CLEANUP_CANDIDATE_AFTER_CLOSURE	Remote branch is preserved and remaining local changes are CRLF/LF line-ending changes only.
+/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_atacseq_paired	DO_NOT_DELETE_YET	CLEANUP_CANDIDATE_AFTER_CLOSURE	Remote branch is preserved and exact uncommitted experimental diff plus submitted launcher are preserved here.
+/cephyr/users/mayoa/Vera/atac_filter_integration_validation	DO_NOT_DELETE_YET	CLEANUP_CANDIDATE_AFTER_CLOSURE	Small historical integration-validation outputs superseded by final production workflow.
+/cephyr/users/mayoa/Vera/atac_integration_pre_20260917T123008Z	DO_NOT_DELETE_YET	CLEANUP_CANDIDATE_AFTER_CLOSURE	Pre-integration snapshot preserved here in full.
+/cephyr/users/mayoa/Vera/atacseq_existing_verification_results	DO_NOT_DELETE_YET	CLEANUP_CANDIDATE_AFTER_CLOSURE	Existing-output verification job preserved here in full.

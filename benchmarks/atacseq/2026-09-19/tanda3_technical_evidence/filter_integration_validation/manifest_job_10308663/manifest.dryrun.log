@@ -1,0 +1,77 @@
+
+SNAKEMAKE
+=========
+  Date: 2026-09-17 15:07:25
+  Workflow ID: 9c52208d-1b6f-45b1-b383-d58dbee06a6b
+  Platform: Linux-5.14.0-687.33.1.el9_8.0.1.x86_64-x86_64-with-glibc2.34
+  Host: vera-r05-04
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 | packaged by conda-forge | (main, Sep  2 2026, 21:08:32) [GCC 15.3.0]
+  Command: /local/tmp.10308663/atac_manifest_validation_10308663/main-env/bin/snakemake --snakefile Snakefile --cores 1 --dry-run --printshellcmds results/metadata/validation_fastq_manifest.tsv
+  Snakefile: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/Snakefile
+  Base directory: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git
+  Run directory: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git
+  Working directory: /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git
+  Config file(s): ['config/config.yaml']
+  Config MD5: 9472961971ba223269a3e25925681a55
+
+Building DAG of jobs...
+Job stats:
+job                          count
+-------------------------  -------
+metadata                         1
+fastq_manifest                   1
+validation_fastq_manifest        1
+total                            3
+
+
+[Thu Sep 17 15:07:26 2026]
+rule metadata:
+    input: config/classification_rules.tsv, config/curated_studies.tsv, workflow/scripts/selection_policy.py, config/selection_decisions.tsv, workflow/scripts/fetch_ena_metadata.py
+    output: results/metadata/ena_metadata_raw.tsv, results/metadata/ena_metadata_fastq.tsv, results/metadata/ena_metadata_omics.tsv, results/metadata/ena_metadata_explicit_evidence.tsv, results/metadata/ena_metadata_after_cell_line.tsv, results/metadata/ena_metadata_after_cell_type.tsv, results/metadata/ena_metadata_after_external_rules.tsv, results/metadata/ena_metadata_after_curation.tsv, config/samples.tsv, results/metadata/selection_audit/summary.json, results/metadata/selection_audit/excluded.tsv, results/metadata/selection_audit/review_required.tsv
+    jobid: 2
+    reason: Updated input files: workflow/scripts/fetch_ena_metadata.py, workflow/scripts/selection_policy.py, config/selection_decisions.tsv
+    resources: tmpdir=/local/tmp.10308663
+Shell command: 
+        python workflow/scripts/fetch_ena_metadata.py
+        
+
+[Thu Sep 17 15:07:26 2026]
+rule fastq_manifest:
+    input: config/samples.tsv, workflow/scripts/build_fastq_manifest.py
+    output: results/metadata/fastq_manifest.tsv
+    jobid: 1
+    reason: Input files updated by another job: config/samples.tsv
+    resources: tmpdir=/local/tmp.10308663
+Shell command: 
+        python workflow/scripts/build_fastq_manifest.py             --samples config/samples.tsv             --output results/metadata/fastq_manifest.tsv
+        
+
+[Thu Sep 17 15:07:26 2026]
+checkpoint validation_fastq_manifest:
+    input: results/metadata/fastq_manifest.tsv, config/validation_runs.tsv, workflow/scripts/build_validation_manifest.py, config/selection_audit_input_20260914.tsv, config/samples.tsv, config/classification_rules.tsv, config/curated_studies.tsv, config/selection_decisions.tsv, workflow/scripts/selection_policy.py, workflow/scripts/selection_gate.py
+    output: results/metadata/validation_fastq_manifest.tsv, results/metadata/validation_fastq_manifest.tsv.selection.tsv
+    jobid: 0
+    reason: Input files updated by another job: results/metadata/fastq_manifest.tsv, config/samples.tsv
+    resources: tmpdir=/local/tmp.10308663
+Shell command: 
+        python workflow/scripts/build_validation_manifest.py             --manifest results/metadata/fastq_manifest.tsv             --validation-runs config/validation_runs.tsv             --output results/metadata/validation_fastq_manifest.tsv
+        
+DAG of jobs will be updated after completion.
+Job stats:
+job                          count
+-------------------------  -------
+metadata                         1
+fastq_manifest                   1
+validation_fastq_manifest        1
+total                            3
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        fastq_manifest, validation_fastq_manifest
+    updated input files:
+        metadata
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
+The run involves checkpoint jobs, which will result in alteration of the DAG of jobs (e.g. adding more jobs) after their completion.

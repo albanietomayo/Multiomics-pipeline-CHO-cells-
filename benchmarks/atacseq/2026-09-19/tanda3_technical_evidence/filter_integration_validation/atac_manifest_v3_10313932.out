@@ -1,0 +1,33 @@
+This job can be monitored from: https://job.c3se.chalmers.se/vera/10313932
+============================================================
+SOURCE REPOSITORY CHECK
+============================================================
+ M config/config.yaml
+ M workflow/rules/atacseq.smk
+
+============================================================
+CREATE ISOLATED SNAPSHOT
+============================================================
+Versioned samples snapshot:
+-rw-r--r-- 1 mayoa mayoa 1.1M Sep 17 14:30 /local/tmp.10313932/atac_manifest_v3_10313932/repo/config/samples.tsv
+1984 /local/tmp.10313932/atac_manifest_v3_10313932/repo/config/samples.tsv
+
+============================================================
+CREATE MINIMAL PYTHON ENVIRONMENT
+============================================================
+Python: 3.11.16
+pandas: 3.0.5
+
+============================================================
+BUILD FASTQ MANIFEST FROM VERSIONED SAMPLES
+============================================================
+fastq_manifest:
+3123 results/metadata/fastq_manifest.tsv
+
+============================================================
+BUILD VALIDATION MANIFEST
+============================================================
+
+============================================================
+VALIDATE TARGET CHO RUNS
+============================================================

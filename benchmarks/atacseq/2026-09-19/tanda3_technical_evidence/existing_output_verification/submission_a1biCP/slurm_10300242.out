@@ -1,0 +1,4 @@
+This job can be monitored from: https://job.c3se.chalmers.se/vera/10300242
+warning: in the working copy of 'config/rnaseq_hpc_pilot_runs.tsv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'snapshots/2026-09-07/added_target_runs_since_2026-08-30.tsv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'snapshots/2026-09-07/snapshot_comparison_2026-08-30_to_2026-09-07.tsv', CRLF will be replaced by LF the next time Git touches it

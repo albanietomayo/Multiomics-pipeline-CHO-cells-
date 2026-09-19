@@ -1,0 +1,31 @@
+diff --git a/workflow/rules/atacseq.smk b/workflow/rules/atacseq.smk
+index e5f8efe..6980e87 100644
+--- a/workflow/rules/atacseq.smk
++++ b/workflow/rules/atacseq.smk
+@@ -70,6 +70,10 @@ def load_atacseq_validation_manifest():
+         manifest["omics"] == "ATAC-seq"
+     ].copy()
+ 
++    atacseq_manifest = atacseq_manifest[
++        atacseq_manifest["run_accession"].map(lambda acc: selection_decision(acc, omics="ATAC-seq")[0])
++    ].copy()
++
+     if atacseq_manifest.empty:
+         raise ValueError(
+             "No ATAC-seq records found in the validation FASTQ manifest."
+@@ -268,10 +272,15 @@ rule atacseq_mark_duplicates:
+         mkdir -p $(dirname {output.bam:q})
+         mkdir -p $(dirname {output.metrics:q})
+ 
++        picard_tmp=$(mktemp -d {resources.tmpdir:q}/picard_markduplicates.XXXXXX)
++        trap 'rm -rf -- "$picard_tmp"' EXIT
++        printf 'PICARD_TMP_DIR=%s\n' "$picard_tmp"
++        JAVA_TOOL_OPTIONS="${{JAVA_TOOL_OPTIONS:-}} -Djava.io.tmpdir=$picard_tmp" \
+         picard -Xmx3g MarkDuplicates \
+           I={input.bam:q} \
+           O={output.bam:q} \
+           M={output.metrics:q} \
++          TMP_DIR="$picard_tmp" \
+           REMOVE_DUPLICATES=false \
+           CREATE_INDEX=true
+ 

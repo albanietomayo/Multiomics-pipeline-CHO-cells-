@@ -1,0 +1,12 @@
+metric	value
+total_records	396
+proper_pair_records	396
+unmapped_records	0
+mate_unmapped_records	0
+secondary_records	0
+qcfail_records	0
+duplicate_records	0
+supplementary_records	0
+mitochondrial_records	0
+mapq_below_30_records	0
+non_pair_qname_groups	0

@@ -1,0 +1,121 @@
+project:
+  name: "CHO_multiomics_atlas"
+
+target:
+  name: "CHO"
+  organism:
+    scientific_name: "Cricetulus griseus"
+    taxid: 10029
+
+ena:
+  result_type: "read_run"
+
+omics:
+  - "RNA-seq"
+  - "ATAC-seq"
+  - "ChIP-seq"
+
+metadata:
+  raw_output: "results/metadata/ena_metadata_raw.tsv"
+  fastq_output: "results/metadata/ena_metadata_fastq.tsv"
+  omics_output: "results/metadata/ena_metadata_omics.tsv"
+  explicit_evidence_output: "results/metadata/ena_metadata_explicit_evidence.tsv"
+  cell_line_output: "results/metadata/ena_metadata_after_cell_line.tsv"
+  cell_type_output: "results/metadata/ena_metadata_after_cell_type.tsv"
+  external_rules_output: "results/metadata/ena_metadata_after_external_rules.tsv"
+  curated_studies: "config/curated_studies.tsv"
+  curation_output: "results/metadata/ena_metadata_after_curation.tsv"
+  output: "config/samples.tsv"
+
+
+fastq:
+  manifest: "results/metadata/fastq_manifest.tsv"
+  validation_runs: "config/validation_runs.tsv"
+  validation_manifest: "results/metadata/validation_fastq_manifest.tsv"
+  validation_output_dir: "data/raw/fastq"
+  validation_download_report: "results/metadata/reports/validation_download_summary.tsv"
+
+qc:
+  raw_fastqc_dir: "results/qc/raw/fastqc"
+  raw_multiqc_dir: "results/qc/raw/multiqc"
+  post_fastqc_dir: "results/qc/post/fastqc"
+  post_multiqc_dir: "results/qc/post/multiqc"
+
+preprocessing:
+  fastp_dir: "results/preprocessing/fastp"
+  reports_dir: "results/preprocessing/fastp/reports"
+  qc_by_fastq: "results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv"
+  qc_by_job: "results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv"
+
+
+reference:
+  source: "NCBI"
+  species: "Cricetulus griseus"
+  taxid: 10029
+
+  assembly_name: "CriGri-PICRH-1.0"
+  refseq_accession: "GCF_003668045.3"
+  genbank_accession: "GCA_003668045.2"
+  annotation_release: 104
+
+  dir: "resources/reference/CriGri-PICRH-1.0"
+  fasta: "resources/reference/CriGri-PICRH-1.0/genome.fa"
+  gff3: "resources/reference/CriGri-PICRH-1.0/annotation.gff3"
+  gtf: "resources/reference/CriGri-PICRH-1.0/annotation.gtf"
+  sequence_report: "resources/reference/CriGri-PICRH-1.0/sequence_report.jsonl"
+  metadata: "resources/reference/CriGri-PICRH-1.0/reference_metadata.tsv"
+  sha256: "resources/reference/CriGri-PICRH-1.0/SHA256SUMS.txt"
+
+rnaseq:
+  star_index: "resources/reference/CriGri-PICRH-1.0/star_index"
+  star_sjdb_overhang: 100
+  star_align_dir: "results/rnaseq/star"
+  alignment_qc_dir: "results/rnaseq/qc/alignment"
+  alignment_qc_summary: "results/rnaseq/qc/alignment_qc_by_unit.tsv"
+  annotation_bed12: "resources/reference/CriGri-PICRH-1.0/annotation.bed12"
+  strandedness_dir: "results/rnaseq/qc/strandedness"
+  rseqc_sample_size: 200000
+  rseqc_mapq: 30
+  strandedness_summary: "results/rnaseq/qc/strandedness_by_unit.tsv"
+  stranded_threshold: 0.8
+  unstranded_threshold: 0.1
+  strandedness_classification: "results/rnaseq/qc/strandedness_classification.tsv"
+  mate_provenance_dir: "results/rnaseq/qc/mate_provenance"
+  mate_split_dir: "results/rnaseq/preprocessing/mate_split"
+  alignment_units_dir: "results/rnaseq/qc/alignment_units"
+  counts_dir: "results/rnaseq/counts"
+  run_counts_dir: "results/rnaseq/counts_by_run"
+  counts_matrix: "results/rnaseq/gene_counts_matrix.tsv"
+  featurecounts_qc_dir: "results/rnaseq/qc/featurecounts"
+  featurecounts_qc_summary: "results/rnaseq/qc/featurecounts_qc_by_unit.tsv"
+
+atacseq:
+  mitochondrial_accession: "NC_007936.1"
+  reference_dir: "resources/reference/CriGri-PICRH-1.0/atacseq"
+  mitochondrial_fasta: "resources/reference/CriGri-PICRH-1.0/atacseq/NC_007936.1.fa"
+  mapping_fasta: "resources/reference/CriGri-PICRH-1.0/atacseq/genome_plus_mt.fa"
+  reference_metadata: "resources/reference/CriGri-PICRH-1.0/atacseq/reference_metadata.tsv"
+  reference_sha256: "resources/reference/CriGri-PICRH-1.0/atacseq/SHA256SUMS.txt"
+  tss_bed: "resources/reference/CriGri-PICRH-1.0/atacseq/tss.bed"
+  tss_summary: "resources/reference/CriGri-PICRH-1.0/atacseq/tss_summary.tsv"
+  bowtie2_index_dir: "resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index"
+  bowtie2_index: "resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index/genome_plus_mt"
+  align_dir: "results/atacseq/bowtie2"
+  bowtie2_mode: "local"
+  bowtie2_preset: "very-sensitive"
+  paired_max_fragment_length: 2000
+
+  min_mapq: 30
+  single_exclude_flags: 3844
+  tss_window_bp: 2000
+  tss_bin_size_bp: 10
+  tss_background_bp: 100
+  tn5_forward_shift: 4
+  tn5_reverse_shift: -5
+  tss_profile: "results/atacseq/qc/{run_accession}/tss_profile.tsv"
+  tss_enrichment_summary: "results/atacseq/qc/{run_accession}/tss_enrichment_summary.tsv"
+
+  filtered_bam_dir: "results/atacseq/filtered_bam"
+  qc_dir: "results/atacseq/qc"
+  peaks_dir: "results/atacseq/peaks"
+  tracks_dir: "results/atacseq/tracks"

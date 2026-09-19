@@ -1,0 +1,192 @@
+This job can be monitored from: https://job.c3se.chalmers.se/vera/10308335
+============================================================
+REPOSITORY STATE
+============================================================
+ M config/config.yaml
+ M workflow/rules/atacseq.smk
+
+============================================================
+CREATE SNAKEMAKE ENVIRONMENT IN SCRATCH
+============================================================
+Snakemake: 9.25.2
+
+============================================================
+PARSE / RULE CHECK
+============================================================
+291:rule atacseq_filter_bam:
+Unified filter rule: present
+Old SINGLE-only rule: absent
+
+============================================================
+DRY-RUN FILTERED BAM
+============================================================
+
+===== SRR12774931 : FILTER =====
+FILTER DRY-RUN: OK
+  Command: /local/tmp.10308335/atac_filter_validation_10308335/main-env/bin/snakemake --snakefile Snakefile --cores 1 --dry-run --printshellcmds --forcerun atacseq_filter_bam results/atacseq/filtered_bam/SRR12774931/filtered.bam
+    output: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam, results/atacseq/bowtie2/SRR12774931/raw.sorted.bam.bai, results/atacseq/bowtie2/SRR12774931/bowtie2.log
+    reason: Missing output files: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv, resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index
+    wildcards: run_accession=SRR12774931
+        mkdir -p $(dirname results/atacseq/bowtie2/SRR12774931/raw.sorted.bam)
+        bowtie2           --local           --very-sensitive           --threads 1           --rg-id SRR12774931           --rg SM:SRR12774931           -x resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index/genome_plus_mt           <TBD>           2> results/atacseq/bowtie2/SRR12774931/bowtie2.log         | samtools sort -o results/atacseq/bowtie2/SRR12774931/raw.sorted.bam -
+        samtools index results/atacseq/bowtie2/SRR12774931/raw.sorted.bam results/atacseq/bowtie2/SRR12774931/raw.sorted.bam.bai
+    input: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam
+    output: results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai, results/atacseq/qc/SRR12774931/duplication_metrics.txt
+    reason: Missing output files: results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam; Input files updated by another job: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam
+    wildcards: run_accession=SRR12774931
+        mkdir -p $(dirname results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam)
+        mkdir -p $(dirname results/atacseq/qc/SRR12774931/duplication_metrics.txt)
+        JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-} -Djava.io.tmpdir=$picard_tmp"         picard -Xmx3g MarkDuplicates           I=results/atacseq/bowtie2/SRR12774931/raw.sorted.bam           O=results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam           M=results/atacseq/qc/SRR12774931/duplication_metrics.txt           TMP_DIR="$picard_tmp"           REMOVE_DUPLICATES=false           CREATE_INDEX=true
+        test -s results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai
+rule atacseq_filter_bam:
+    input: <TBD>, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai
+    output: results/atacseq/filtered_bam/SRR12774931/filtered.bam, results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai
+    reason: Input files updated by another job: results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam, results/metadata/validation_fastq_manifest.tsv
+    wildcards: run_accession=SRR12774931
+        mkdir -p $(dirname results/atacseq/filtered_bam/SRR12774931/filtered.bam)
+            samtools idxstats results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam \
+              -o results/atacseq/filtered_bam/SRR12774931/filtered.bam \
+              results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam \
+                  "$TMP_ROOT/atacseq_filter_SRR12774931.XXXXXX"
+              results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam \
+                -o results/atacseq/filtered_bam/SRR12774931/filtered.bam \
+            RECORD_COUNT=$(samtools view -c results/atacseq/filtered_bam/SRR12774931/filtered.bam)
+              'Unsupported ATAC-seq structure: %s\n' \
+        samtools quickcheck -v results/atacseq/filtered_bam/SRR12774931/filtered.bam
+        samtools index results/atacseq/filtered_bam/SRR12774931/filtered.bam results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai
+
+===== SRR12774932 : FILTER =====
+FILTER DRY-RUN: OK
+  Command: /local/tmp.10308335/atac_filter_validation_10308335/main-env/bin/snakemake --snakefile Snakefile --cores 1 --dry-run --printshellcmds --forcerun atacseq_filter_bam results/atacseq/filtered_bam/SRR12774932/filtered.bam
+    output: results/atacseq/bowtie2/SRR12774932/raw.sorted.bam, results/atacseq/bowtie2/SRR12774932/raw.sorted.bam.bai, results/atacseq/bowtie2/SRR12774932/bowtie2.log
+    reason: Missing output files: results/atacseq/bowtie2/SRR12774932/raw.sorted.bam; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv, resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index
+    wildcards: run_accession=SRR12774932
+        mkdir -p $(dirname results/atacseq/bowtie2/SRR12774932/raw.sorted.bam)
+        bowtie2           --local           --very-sensitive           --threads 1           --rg-id SRR12774932           --rg SM:SRR12774932           -x resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index/genome_plus_mt           <TBD>           2> results/atacseq/bowtie2/SRR12774932/bowtie2.log         | samtools sort -o results/atacseq/bowtie2/SRR12774932/raw.sorted.bam -
+        samtools index results/atacseq/bowtie2/SRR12774932/raw.sorted.bam results/atacseq/bowtie2/SRR12774932/raw.sorted.bam.bai
+    input: results/atacseq/bowtie2/SRR12774932/raw.sorted.bam
+    output: results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bai, results/atacseq/qc/SRR12774932/duplication_metrics.txt
+    reason: Missing output files: results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bai, results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam; Input files updated by another job: results/atacseq/bowtie2/SRR12774932/raw.sorted.bam
+    wildcards: run_accession=SRR12774932
+        mkdir -p $(dirname results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam)
+        mkdir -p $(dirname results/atacseq/qc/SRR12774932/duplication_metrics.txt)
+        JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-} -Djava.io.tmpdir=$picard_tmp"         picard -Xmx3g MarkDuplicates           I=results/atacseq/bowtie2/SRR12774932/raw.sorted.bam           O=results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam           M=results/atacseq/qc/SRR12774932/duplication_metrics.txt           TMP_DIR="$picard_tmp"           REMOVE_DUPLICATES=false           CREATE_INDEX=true
+        test -s results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bai
+rule atacseq_filter_bam:
+    input: <TBD>, results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bai
+    output: results/atacseq/filtered_bam/SRR12774932/filtered.bam, results/atacseq/filtered_bam/SRR12774932/filtered.bam.bai
+    reason: Input files updated by another job: results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bai, results/metadata/validation_fastq_manifest.tsv, results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam
+    wildcards: run_accession=SRR12774932
+        mkdir -p $(dirname results/atacseq/filtered_bam/SRR12774932/filtered.bam)
+            samtools idxstats results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam \
+              -o results/atacseq/filtered_bam/SRR12774932/filtered.bam \
+              results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam \
+                  "$TMP_ROOT/atacseq_filter_SRR12774932.XXXXXX"
+              results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam \
+                -o results/atacseq/filtered_bam/SRR12774932/filtered.bam \
+            RECORD_COUNT=$(samtools view -c results/atacseq/filtered_bam/SRR12774932/filtered.bam)
+              'Unsupported ATAC-seq structure: %s\n' \
+        samtools quickcheck -v results/atacseq/filtered_bam/SRR12774932/filtered.bam
+        samtools index results/atacseq/filtered_bam/SRR12774932/filtered.bam results/atacseq/filtered_bam/SRR12774932/filtered.bam.bai
+
+============================================================
+DRY-RUN THROUGH TSS
+============================================================
+
+===== SRR12774931 : TSS =====
+TSS DRY-RUN: OK
+  Command: /local/tmp.10308335/atac_filter_validation_10308335/main-env/bin/snakemake --snakefile Snakefile --cores 1 --dry-run --printshellcmds results/atacseq/qc/SRR12774931/tss_enrichment_summary.tsv
+atacseq_filter_bam               1
+atacseq_tss_enrichment           1
+    output: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam, results/atacseq/bowtie2/SRR12774931/raw.sorted.bam.bai, results/atacseq/bowtie2/SRR12774931/bowtie2.log
+    reason: Missing output files: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv, resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index
+    wildcards: run_accession=SRR12774931
+        mkdir -p $(dirname results/atacseq/bowtie2/SRR12774931/raw.sorted.bam)
+        bowtie2           --local           --very-sensitive           --threads 1           --rg-id SRR12774931           --rg SM:SRR12774931           -x resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index/genome_plus_mt           <TBD>           2> results/atacseq/bowtie2/SRR12774931/bowtie2.log         | samtools sort -o results/atacseq/bowtie2/SRR12774931/raw.sorted.bam -
+        samtools index results/atacseq/bowtie2/SRR12774931/raw.sorted.bam results/atacseq/bowtie2/SRR12774931/raw.sorted.bam.bai
+    input: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam
+    output: results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai, results/atacseq/qc/SRR12774931/duplication_metrics.txt
+    reason: Missing output files: results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai; Input files updated by another job: results/atacseq/bowtie2/SRR12774931/raw.sorted.bam
+    wildcards: run_accession=SRR12774931
+        mkdir -p $(dirname results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam)
+        mkdir -p $(dirname results/atacseq/qc/SRR12774931/duplication_metrics.txt)
+        JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-} -Djava.io.tmpdir=$picard_tmp"         picard -Xmx3g MarkDuplicates           I=results/atacseq/bowtie2/SRR12774931/raw.sorted.bam           O=results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam           M=results/atacseq/qc/SRR12774931/duplication_metrics.txt           TMP_DIR="$picard_tmp"           REMOVE_DUPLICATES=false           CREATE_INDEX=true
+        test -s results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai
+rule atacseq_filter_bam:
+    input: <TBD>, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai
+    output: results/atacseq/filtered_bam/SRR12774931/filtered.bam, results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai
+    reason: Missing output files: results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai, results/atacseq/filtered_bam/SRR12774931/filtered.bam; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bai
+    wildcards: run_accession=SRR12774931
+        mkdir -p $(dirname results/atacseq/filtered_bam/SRR12774931/filtered.bam)
+            samtools idxstats results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam \
+              -o results/atacseq/filtered_bam/SRR12774931/filtered.bam \
+              results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam \
+                  "$TMP_ROOT/atacseq_filter_SRR12774931.XXXXXX"
+              results/atacseq/bowtie2/SRR12774931/dupmarked.sorted.bam \
+                -o results/atacseq/filtered_bam/SRR12774931/filtered.bam \
+            RECORD_COUNT=$(samtools view -c results/atacseq/filtered_bam/SRR12774931/filtered.bam)
+        samtools quickcheck -v results/atacseq/filtered_bam/SRR12774931/filtered.bam
+        samtools index results/atacseq/filtered_bam/SRR12774931/filtered.bam results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai
+rule atacseq_tss_enrichment:
+    input: results/atacseq/filtered_bam/SRR12774931/filtered.bam, results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai, resources/reference/CriGri-PICRH-1.0/atacseq/tss.bed, workflow/scripts/calculate_atac_tss_enrichment.py
+    output: results/atacseq/qc/SRR12774931/tss_profile.tsv, results/atacseq/qc/SRR12774931/tss_enrichment_summary.tsv
+    reason: Input files updated by another job: results/atacseq/filtered_bam/SRR12774931/filtered.bam.bai, resources/reference/CriGri-PICRH-1.0/atacseq/tss.bed, results/atacseq/filtered_bam/SRR12774931/filtered.bam
+    wildcards: run_accession=SRR12774931
+        python workflow/scripts/calculate_atac_tss_enrichment.py           --bam results/atacseq/filtered_bam/SRR12774931/filtered.bam           --tss-bed resources/reference/CriGri-PICRH-1.0/atacseq/tss.bed           --profile results/atacseq/qc/SRR12774931/tss_profile.tsv           --summary results/atacseq/qc/SRR12774931/tss_enrichment_summary.tsv           --window 2000           --bin-size 10           --background 100           --forward-shift 4           --reverse-shift -5           --min-mapq 30
+atacseq_filter_bam               1
+atacseq_tss_enrichment           1
+        atacseq_align_run, atacseq_bowtie2_index, atacseq_filter_bam, atacseq_mark_duplicates, atacseq_reference, atacseq_tss_enrichment, atacseq_tss_reference, fastq_manifest, validation_fastq_manifest
+        atacseq_align_run, atacseq_bowtie2_index, atacseq_filter_bam, atacseq_mark_duplicates, atacseq_reference, atacseq_tss_reference, reference_genome, validation_fastq_manifest
+
+===== SRR12774932 : TSS =====
+TSS DRY-RUN: OK
+  Command: /local/tmp.10308335/atac_filter_validation_10308335/main-env/bin/snakemake --snakefile Snakefile --cores 1 --dry-run --printshellcmds results/atacseq/qc/SRR12774932/tss_enrichment_summary.tsv
+atacseq_filter_bam               1
+atacseq_tss_enrichment           1
+    output: results/atacseq/bowtie2/SRR12774932/raw.sorted.bam, results/atacseq/bowtie2/SRR12774932/raw.sorted.bam.bai, results/atacseq/bowtie2/SRR12774932/bowtie2.log
+    reason: Missing output files: results/atacseq/bowtie2/SRR12774932/raw.sorted.bam; Input files updated by another job: results/metadata/validation_fastq_manifest.tsv, resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index
+    wildcards: run_accession=SRR12774932
+        mkdir -p $(dirname results/atacseq/bowtie2/SRR12774932/raw.sorted.bam)
+        bowtie2           --local           --very-sensitive           --threads 1           --rg-id SRR12774932           --rg SM:SRR12774932           -x resources/reference/CriGri-PICRH-1.0/atacseq/bowtie2_index/genome_plus_mt           <TBD>           2> results/atacseq/bowtie2/SRR12774932/bowtie2.log         | samtools sort -o results/atacseq/bowtie2/SRR12774932/raw.sorted.bam -
+        samtools index results/atacseq/bowtie2/SRR12774932/raw.sorted.bam results/atacseq/bowtie2/SRR12774932/raw.sorted.bam.bai
+    input: results/atacseq/bowtie2/SRR12774932/raw.sorted.bam
+    output: results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bai, results/atacseq/qc/SRR12774932/duplication_metrics.txt
+    reason: Missing output files: results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bai; Input files updated by another job: results/atacseq/bowtie2/SRR12774932/raw.sorted.bam
+    wildcards: run_accession=SRR12774932
+        mkdir -p $(dirname results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam)
+        mkdir -p $(dirname results/atacseq/qc/SRR12774932/duplication_metrics.txt)
+        JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-} -Djava.io.tmpdir=$picard_tmp"         picard -Xmx3g MarkDuplicates           I=results/atacseq/bowtie2/SRR12774932/raw.sorted.bam           O=results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam           M=results/atacseq/qc/SRR12774932/duplication_metrics.txt           TMP_DIR="$picard_tmp"           REMOVE_DUPLICATES=false           CREATE_INDEX=true
+        test -s results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bai
+rule atacseq_filter_bam:
+    input: <TBD>, results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam, results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bai
+    output: results/atacseq/filtered_bam/SRR12774932/filtered.bam, results/atacseq/filtered_bam/SRR12774932/filtered.bam.bai
+    reason: Missing output files: results/atacseq/filtered_bam/SRR12774932/filtered.bam, results/atacseq/filtered_bam/SRR12774932/filtered.bam.bai; Input files updated by another job: results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bai, results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam, results/metadata/validation_fastq_manifest.tsv
+    wildcards: run_accession=SRR12774932
+        mkdir -p $(dirname results/atacseq/filtered_bam/SRR12774932/filtered.bam)
+            samtools idxstats results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam \
+              -o results/atacseq/filtered_bam/SRR12774932/filtered.bam \
+              results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam \
+                  "$TMP_ROOT/atacseq_filter_SRR12774932.XXXXXX"
+              results/atacseq/bowtie2/SRR12774932/dupmarked.sorted.bam \
+                -o results/atacseq/filtered_bam/SRR12774932/filtered.bam \
+            RECORD_COUNT=$(samtools view -c results/atacseq/filtered_bam/SRR12774932/filtered.bam)
+        samtools quickcheck -v results/atacseq/filtered_bam/SRR12774932/filtered.bam
+        samtools index results/atacseq/filtered_bam/SRR12774932/filtered.bam results/atacseq/filtered_bam/SRR12774932/filtered.bam.bai
+rule atacseq_tss_enrichment:
+    input: results/atacseq/filtered_bam/SRR12774932/filtered.bam, results/atacseq/filtered_bam/SRR12774932/filtered.bam.bai, resources/reference/CriGri-PICRH-1.0/atacseq/tss.bed, workflow/scripts/calculate_atac_tss_enrichment.py
+    output: results/atacseq/qc/SRR12774932/tss_profile.tsv, results/atacseq/qc/SRR12774932/tss_enrichment_summary.tsv
+    reason: Input files updated by another job: resources/reference/CriGri-PICRH-1.0/atacseq/tss.bed, results/atacseq/filtered_bam/SRR12774932/filtered.bam.bai, results/atacseq/filtered_bam/SRR12774932/filtered.bam
+    wildcards: run_accession=SRR12774932
+        python workflow/scripts/calculate_atac_tss_enrichment.py           --bam results/atacseq/filtered_bam/SRR12774932/filtered.bam           --tss-bed resources/reference/CriGri-PICRH-1.0/atacseq/tss.bed           --profile results/atacseq/qc/SRR12774932/tss_profile.tsv           --summary results/atacseq/qc/SRR12774932/tss_enrichment_summary.tsv           --window 2000           --bin-size 10           --background 100           --forward-shift 4           --reverse-shift -5           --min-mapq 30
+atacseq_filter_bam               1
+atacseq_tss_enrichment           1
+        atacseq_align_run, atacseq_bowtie2_index, atacseq_filter_bam, atacseq_mark_duplicates, atacseq_reference, atacseq_tss_enrichment, atacseq_tss_reference, fastq_manifest, validation_fastq_manifest
+        atacseq_align_run, atacseq_bowtie2_index, atacseq_filter_bam, atacseq_mark_duplicates, atacseq_reference, atacseq_tss_reference, reference_genome, validation_fastq_manifest
+
+============================================================
+FINAL VALIDATION
+============================================================
+Unified ATAC filtering rule parsed successfully and both eligible SINGLE CHO runs resolved through filtered BAM and TSS dry-runs.
+
+RESULTS:
+/cephyr/users/mayoa/Vera/atac_filter_integration_validation/job_10308335

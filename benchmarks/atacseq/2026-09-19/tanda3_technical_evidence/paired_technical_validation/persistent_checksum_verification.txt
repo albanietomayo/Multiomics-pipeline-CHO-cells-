@@ -1,0 +1,2 @@
+results/atacseq/filtered_bam/SRR29929613/filtered.bam: OK
+results/atacseq/filtered_bam/SRR29929613/filtered.bam.bai: OK
