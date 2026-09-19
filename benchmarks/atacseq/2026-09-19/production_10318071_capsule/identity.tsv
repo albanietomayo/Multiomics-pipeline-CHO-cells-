@@ -1,0 +1,10 @@
+field	value
+module	ATAC-seq
+canonical_job_id	10318071
+git_branch	atacseq-downstream-integration
+git_commit	48e5aa5c7086b3fa1cd679fbe571667b75408275
+github_remote_commit	48e5aa5c7086b3fa1cd679fbe571667b75408275
+github_sync	YES
+canonical_artifact_root	/cephyr/users/mayoa/Vera/atac_production_validation/production_48e5aa5c_limited_real_v1/artifacts/job_10318071
+technical_validation	PASS
+scratch_metrics	NA_not_recorded

@@ -1,0 +1,12 @@
+environment_file	package_spec
+workflow/envs/atacseq.yaml	bowtie2=2.5.5
+workflow/envs/atacseq.yaml	samtools=1.24
+workflow/envs/atacseq_picard.yaml	picard=3.5.0
+workflow/envs/atacseq_qc.yaml	pysam=0.24.0
+workflow/envs/atacseq_qc.yaml	numpy=2.5.2
+workflow/envs/atacseq_downstream.yaml	macs3=3.0.4
+workflow/envs/atacseq_downstream.yaml	bedtools=2.31.1
+workflow/envs/atacseq_idr.yaml	idr=2.0.4.2
+workflow/envs/atacseq_tracks.yaml	numpy=2.5.2
+workflow/envs/atacseq_tracks.yaml	ucsc-bedgraphtobigwig=482
+workflow/envs/atacseq_tracks.yaml	pybigwig=0.3.24

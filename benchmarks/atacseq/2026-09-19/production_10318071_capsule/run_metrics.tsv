@@ -1,0 +1,3 @@
+run_accession	input_reads	aligned_reads	alignment_rate_percent	percent_duplication	filtered_alignment_count	tss_enrichment	usable_tss	tn5_shifted_intervals	tn5_dropped_invalid_coordinates	macs3_peak_count	frip	bigwig_clipped_intervals	bigwig_dropped_intervals	bigwig_unknown_intervals	bigwig_header_validation	output_sha256_validation	provenance_exists
+SRR12774931	36262521	35791112	98.70	0.772834	7056340	9.674695	42148	7056340	0	110408	0.28132502118662084	107	62	0	PASS	PASS	YES
+SRR12774932	27125216	26713055	98.48	0.745243	5849003	9.397989	42148	5849003	0	212989	0.30544607345901514	117	74	0	PASS	PASS	YES

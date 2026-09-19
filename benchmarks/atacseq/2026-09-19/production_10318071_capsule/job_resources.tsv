@@ -1,0 +1,2 @@
+job_id	job_name	state	exit_code	elapsed_seconds	elapsed	alloc_cpus	req_mem	max_rss	node	scratch_bytes	scratch_status
+10318071	atac_prod_validate	COMPLETED	0:0	1950	00:32:30	16	189600M	7701.42M	vera-r06-02	NA	NOT_RECORDED
