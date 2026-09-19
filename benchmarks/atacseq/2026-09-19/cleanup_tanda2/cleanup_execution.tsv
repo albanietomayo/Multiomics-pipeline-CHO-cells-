@@ -1,0 +1,15 @@
+field	value
+date	2026-09-19
+omics	ATAC-seq
+cleanup_batch	Tanda_2
+authorization	EXPLICIT_USER_AUTHORIZATION
+directories_removed	4
+files_manifested_before_delete	151
+predelete_disk_bytes	1275842048
+delete_status	PASS
+postdelete_canonical_bam_sha256	PASS
+postdelete_canonical_key_outputs	PASS
+historical_evidence_preserved_in_git	YES
+canonical_job	10318071
+source_postrun_COMPLETE_txt_present	NO
+completion_marker_preserved_in_git	YES

@@ -1,0 +1,5 @@
+path	disk_bytes	file_count	classification
+/cephyr/users/mayoa/Vera/atacseq_bulk_validation_results/launch_20260916T081250Z_2qbkz612/job_10297369	631310336	70	CLEANUP_CANDIDATE_AFTER_CLOSURE
+/cephyr/users/mayoa/Vera/atac_peak_pilot/job_10302460	411081728	29	CLEANUP_CANDIDATE_AFTER_CLOSURE
+/cephyr/users/mayoa/Vera/atac_idr_pilot/job_10304910	102674944	32	CLEANUP_CANDIDATE_AFTER_CLOSURE
+/cephyr/users/mayoa/Vera/atac_tracks_pilot/job_10308134	130775040	20	CLEANUP_CANDIDATE_AFTER_CLOSURE

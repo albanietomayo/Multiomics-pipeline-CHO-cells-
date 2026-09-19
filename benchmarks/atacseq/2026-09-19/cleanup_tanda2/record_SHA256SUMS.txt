@@ -1,0 +1,4 @@
+16d4dc831cd2b3040f4a1b24f923f9e0d5a1a48af8e434fac6e0254a5dc5ac88  /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/atacseq/2026-09-19/cleanup_tanda2/cleanup_manifest.tsv
+2809e2d7a495848727d833d65d9bbf103f3aef36ecfcf83a21cf269bc771d666  /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/atacseq/2026-09-19/cleanup_tanda2/deleted_directories.tsv
+7504bf5b7b9bc62ac8c5fb0cac1ea18387befddb735d39667b44fc3ae87370cc  /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/atacseq/2026-09-19/cleanup_tanda2/predelete_status.tsv
+aeb66111d756659beb235a8a3ae54221cc96dcea725774b0d1e5268ee3de24a7  /cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/atacseq/2026-09-19/cleanup_tanda2/cleanup_execution.tsv
