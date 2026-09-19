@@ -88,8 +88,13 @@ class ChipseqBenchmarkTests(unittest.TestCase):
             relative: SUPPORT.sha256(root / relative)
             for relative in SUPPORT.REFERENCE_SOURCE_SHA256
         }
+        source_sizes = {
+            relative: (root / relative).stat().st_size
+            for relative in SUPPORT.REFERENCE_SOURCE_BYTES
+        }
         patches = [
             mock.patch.dict(SUPPORT.REFERENCE_SOURCE_SHA256, source_hashes, clear=True),
+            mock.patch.dict(SUPPORT.REFERENCE_SOURCE_BYTES, source_sizes, clear=True),
             mock.patch.dict(SUPPORT.REFERENCE_CONTENT_SHA256, synthetic_content_hashes, clear=True),
             mock.patch.object(SUPPORT, "EXPECTED_NUCLEAR_SPAN_BP", 4),
             mock.patch.object(SUPPORT, "EXPECTED_MITOCHONDRIAL_LENGTH_BP", 4),
@@ -288,7 +293,7 @@ class ChipseqBenchmarkTests(unittest.TestCase):
     def test_shared_reference_source_hash_and_inventory_fail_closed(self):
         root = self.fixture_reference()
         (root / "genome_plus_mt.fa.gz").write_bytes(b"changed")
-        with self.assertRaisesRegex(ValueError, "source hash mismatch"):
+        with self.assertRaisesRegex(ValueError, "source (size|hash) mismatch"):
             SUPPORT.reference_inventory(root)
 
         root = self.fixture_reference()

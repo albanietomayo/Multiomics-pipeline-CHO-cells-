@@ -78,10 +78,11 @@ The benchmark has no default reference path. Its minimal canonical root contains
 only `genome_plus_mt.fa.gz`, `genome_plus_mt.fa.fai`,
 `reference_provenance.json`, `reference_inventory.json`, and the six
 `bowtie2_index/genome_plus_mt.*.bt2l` files. The three historical source files
-may be symlinks to the validated external objects; every check follows them and
-verifies exact bytes and SHA-256 values. The uncompressed combined FASTA is not
-persistent. GFF3, GTF, standalone nuclear/mitochondrial FASTAs, sequence report,
-metadata and the old hash list are not operational inputs.
+are hard links to the validated immutable objects; every check verifies exact
+bytes and SHA-256 values. This is zero-duplication reuse and remains valid if
+the historical directory entries are later removed. The uncompressed combined
+FASTA is not persistent. GFF3, GTF, standalone nuclear/mitochondrial FASTAs,
+sequence report, metadata and the old hash list are not operational inputs.
 
 Before check or submission, and again in the worker before biological
 processing, validation requires the exact CriGri-PICRH-1.0 /
@@ -126,12 +127,17 @@ report hashes, remains in `original_nuclear_resources.sha256`.
 This is a compute workload: the historical build used about 6.7 GB maximum RSS
 and roughly 15 minutes just for the forward/reverse index build. Provision it as
 one explicitly authorized SLURM job, not as a benchmark stage and not once per
-benchmark run. The job should:
+benchmark run. The implemented entry points are
+`workflow/slurm/submit_chipseq_reference_provision.py` (check-only unless
+`--submit` is explicit) and
+`workflow/slurm/chipseq_provision_shared_reference.sbatch`. They use
+`/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_benchmark/resources/reference/CriGri-PICRH-1.0/chipseq`.
+The job:
 
-1. Refuse an existing canonical target and create a staging directory on the
-   same shared filesystem.
-2. Symlink the exact existing `genome_plus_mt.fa.gz`, FAI and provenance files
-   from the historical output listed above.
+1. Refuses an existing canonical target and creates a hidden sibling staging
+   directory on the same shared filesystem.
+2. Hard-links the exact existing `genome_plus_mt.fa.gz`, FAI and provenance
+   files after exact size/hash checks.
 3. Verify their recorded hashes, decompress the FASTA only to node-local
    `$TMPDIR`, and verify the decompressed SHA-256
    (`dfd445e136c4bc9c11f9616d251b86732d1aab0cbdbf9d1ababb8093f7430e94`).
@@ -144,6 +150,21 @@ benchmark run. The job should:
    the payload/inventory, atomically rename the complete staging directory to
    the previously absent canonical root, and run `check-reference` once more.
 7. Remove only node-local temporary files through the scheduler's TMPDIR cleanup.
+
+The historical evidence supports a conservative request of 8 CPUs, 16 GiB RAM
+and one hour on account `C3SE2026-1-42`. The job measures all six generated
+components in TMPDIR and requires the exact reference bytes plus the defined
+1.15 GiB P10 reserve to fit the configured 30 GiB quota. Any additional
+operational cushion is explicitly left for human review.
+
+After review and commit, the non-submitting preflight is:
+
+```bash
+python workflow/slurm/submit_chipseq_reference_provision.py
+```
+
+Only an authorized operator should add `--submit`; that is the sole path to
+the single `sbatch` call.
 
 The whole-directory final rename prevents benchmark jobs from observing a
 partial index. No permanent uncompressed FASTA and no annotation copy are

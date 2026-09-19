@@ -67,6 +67,11 @@ REFERENCE_SOURCE_SHA256 = {
     "genome_plus_mt.fa.fai": "2dfb28d82459be6cbddb6e4be79e2c328c436654cc37f2e703c7abb9c50a0d57",
     "reference_provenance.json": "3646c60b547d946814704af383464807dda890cfd371ff78f24edf8307fd582f",
 }
+REFERENCE_SOURCE_BYTES = {
+    "genome_plus_mt.fa.gz": 882_813_762,
+    "genome_plus_mt.fa.fai": 24_707,
+    "reference_provenance.json": 710,
+}
 REFERENCE_CONTENT_SHA256 = {
     "nuclear": "5c81f08eafe8f5051704f692cc21a970f58b24b2bc1bedef82cb17ec7a2b4478",
     "mitochondrial": "b7ccf6b1c6981c2b4a0c9e57245bd6712a861e685571db56d274c04fc30ed37c",
@@ -343,6 +348,10 @@ def _reference_document(root: Path) -> dict[str, object]:
     for relative, path in paths.items():
         if not path.is_file() or path.stat().st_size <= 0:
             raise ValueError(f"Missing or empty shared reference resource: {relative}")
+
+    for relative, expected in REFERENCE_SOURCE_BYTES.items():
+        if paths[relative].stat().st_size != expected:
+            raise ValueError(f"Validated shared reference source size mismatch: {relative}")
 
     observed_hashes = {relative: sha256(path) for relative, path in paths.items()}
     for relative, expected in REFERENCE_SOURCE_SHA256.items():
