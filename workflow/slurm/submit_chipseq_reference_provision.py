@@ -12,11 +12,31 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
+LOG_ROOT = Path("/cephyr/users/mayoa/Vera/chipseq_reference_provision_logs")
+STDOUT_PATH = LOG_ROOT / "job-%j.out"
+STDERR_PATH = LOG_ROOT / "job-%j.err"
 PROVISION_PATH = ROOT / "workflow/scripts/chipseq_reference_provision.py"
 SPEC = importlib.util.spec_from_file_location("chipseq_reference_provision_support", PROVISION_PATH)
 PROVISION = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 SPEC.loader.exec_module(PROVISION)
+
+
+def scheduler_log_report() -> dict[str, object]:
+    resolved_root = LOG_ROOT.resolve()
+    resolved_repository = ROOT.resolve()
+    try:
+        resolved_root.relative_to(resolved_repository)
+    except ValueError:
+        pass
+    else:
+        raise ValueError("Scheduler log root must be outside the Git repository")
+    return {
+        "root": str(resolved_root),
+        "stdout": str(STDOUT_PATH),
+        "stderr": str(STDERR_PATH),
+        "outside_repository": True,
+    }
 
 
 def parser() -> argparse.ArgumentParser:
@@ -40,15 +60,19 @@ def main() -> None:
         raise ValueError("Dirty-source override is forbidden for submission")
     report = PROVISION.preflight(allow_dirty=args.development_dirty_check)
     report["mode"] = "submit" if args.submit else "check"
+    report["scheduler_logs"] = scheduler_log_report()
     print(json.dumps(report, indent=2, sort_keys=True))
     if not args.submit:
         print("CHECK_ONLY_NO_SBATCH=PASS")
         return
 
+    LOG_ROOT.mkdir(parents=True, exist_ok=True)
     head = report["repository"]["head"]
     command = [
         "sbatch",
         "--parsable",
+        f"--output={STDOUT_PATH}",
+        f"--error={STDERR_PATH}",
         f"--export=ALL,CHIP_PROVISION_EXPECTED_COMMIT={head}",
         "workflow/slurm/chipseq_provision_shared_reference.sbatch",
     ]

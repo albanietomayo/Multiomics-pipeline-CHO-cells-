@@ -220,6 +220,93 @@ class ChipseqReferenceProvisionTests(unittest.TestCase):
             SUBMIT.main()
         check_output.assert_not_called()
 
+    def test_check_only_reports_external_scheduler_log_paths(self):
+        report = {
+            "repository": {"head": "a" * 40},
+            "source": {},
+            "destination": {},
+            "quota": {},
+        }
+        log_root = self.temp / "check-only-logs"
+        stdout_path = log_root / "job-%j.out"
+        stderr_path = log_root / "job-%j.err"
+        with mock.patch.object(sys, "argv", [str(SUBMIT_PATH)]), \
+                mock.patch.object(SUBMIT.PROVISION, "preflight", return_value=report), \
+                mock.patch.object(SUBMIT, "LOG_ROOT", log_root), \
+                mock.patch.object(SUBMIT, "STDOUT_PATH", stdout_path), \
+                mock.patch.object(SUBMIT, "STDERR_PATH", stderr_path), \
+                mock.patch.object(SUBMIT.subprocess, "check_output") as check_output, \
+                mock.patch("builtins.print") as output:
+            SUBMIT.main()
+        rendered = json.loads(output.call_args_list[0].args[0])
+        logs = rendered["scheduler_logs"]
+        self.assertEqual(logs["root"], str(log_root))
+        self.assertEqual(logs["stdout"], str(stdout_path))
+        self.assertEqual(logs["stderr"], str(stderr_path))
+        self.assertTrue(logs["outside_repository"])
+        self.assertFalse(log_root.exists())
+        self.assertFalse(stdout_path.exists())
+        self.assertFalse(stderr_path.exists())
+        check_output.assert_not_called()
+
+    def test_real_submit_uses_explicit_external_stdout_and_stderr(self):
+        report = {
+            "repository": {"head": "a" * 40},
+            "source": {},
+            "destination": {},
+            "quota": {},
+        }
+        log_root = self.temp / "external-logs"
+        self.assertFalse(log_root.exists())
+        with mock.patch.object(sys, "argv", [str(SUBMIT_PATH), "--submit"]), \
+                mock.patch.object(SUBMIT.PROVISION, "preflight", return_value=report), \
+                mock.patch.object(SUBMIT, "LOG_ROOT", log_root), \
+                mock.patch.object(SUBMIT, "STDOUT_PATH", log_root / "job-%j.out"), \
+                mock.patch.object(SUBMIT, "STDERR_PATH", log_root / "job-%j.err"), \
+                mock.patch.object(
+                    SUBMIT.subprocess, "check_output", return_value="12345\n"
+                ) as check_output, \
+                mock.patch("builtins.print"):
+            SUBMIT.main()
+        self.assertTrue(log_root.is_dir())
+        command = check_output.call_args.args[0]
+        self.assertIn(f"--output={log_root / 'job-%j.out'}", command)
+        self.assertIn(f"--error={log_root / 'job-%j.err'}", command)
+        self.assertNotIn("slurm-%j.out", " ".join(command))
+        self.assertEqual(check_output.call_count, 1)
+
+    def test_scheduler_log_root_must_be_outside_repository(self):
+        with mock.patch.object(SUBMIT, "LOG_ROOT", ROOT / "scheduler-logs"):
+            with self.assertRaisesRegex(ValueError, "outside the Git repository"):
+                SUBMIT.scheduler_log_report()
+
+    def test_submitter_has_one_explicit_sbatch_call_site(self):
+        source = SUBMIT_PATH.read_text(encoding="utf-8")
+        self.assertEqual(source.count('"sbatch"'), 1)
+        self.assertIn('f"--output={STDOUT_PATH}"', source)
+        self.assertIn('f"--error={STDERR_PATH}"', source)
+
+    def test_clean_worktree_guard_remains_fail_closed(self):
+        values = {
+            ("branch", "--show-current"): PROVISION.EXPECTED_BRANCH,
+            ("rev-parse", "HEAD"): "a" * 40,
+            ("status", "--short"): "?? scheduler-created.out",
+        }
+        with mock.patch.object(
+            PROVISION, "git", side_effect=lambda *args: values[args]
+        ), mock.patch.object(PROVISION.subprocess, "run"):
+            with self.assertRaisesRegex(ValueError, "worktree is dirty"):
+                PROVISION.repository_preflight()
+
+    def test_failed_job_10319325_destination_state_is_safe_to_retry(self):
+        destination = self.temp / "canonical" / "chipseq"
+        report = PROVISION.validate_destination(self.source, destination)
+        self.assertFalse(report["collision"])
+        self.assertFalse(destination.exists())
+        self.assertEqual(
+            list(destination.parent.glob(".chipseq.provisioning.*.staging")), []
+        )
+
     def test_atomic_publication_and_completion_semantics(self):
         script = SBATCH_PATH.read_text(encoding="utf-8")
         validate_stage = 'check-reference --shared-reference-root "$CHIP_STAGE"'
