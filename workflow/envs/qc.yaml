@@ -4,4 +4,5 @@ channels:
 
 dependencies:
   - fastqc=0.12.1
+  - openjdk=17
   - multiqc=1.35

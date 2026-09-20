@@ -116,7 +116,8 @@ mkdir -p "$CHIP_SAVE/software_versions"
 "$CHIP_MAIN_ENV/bin/python" --version > "$CHIP_SAVE/software_versions/python.txt" 2>&1
 "$CHIP_MAIN_ENV/bin/snakemake" --version > "$CHIP_SAVE/software_versions/snakemake.txt"
 "$CHIP_PREP_ENV/bin/fastp" --version > "$CHIP_SAVE/software_versions/fastp.txt" 2>&1
-"$CHIP_QC_ENV/bin/fastqc" --version > "$CHIP_SAVE/software_versions/fastqc.txt" 2>&1
+"$CHIP_QC_ENV/bin/java" -version > "$CHIP_SAVE/software_versions/java.txt" 2>&1
+PATH="$CHIP_QC_ENV/bin:$PATH" "$CHIP_QC_ENV/bin/fastqc" --version > "$CHIP_SAVE/software_versions/fastqc.txt" 2>&1
 "$CHIP_QC_ENV/bin/multiqc" --version > "$CHIP_SAVE/software_versions/multiqc.txt" 2>&1
 "$CHIP_ALIGN_ENV/bin/bowtie2" --version > "$CHIP_SAVE/software_versions/bowtie2.txt" 2>&1
 "$CHIP_ALIGN_ENV/bin/samtools" --version > "$CHIP_SAVE/software_versions/samtools.txt" 2>&1
@@ -236,7 +237,8 @@ run_stage fastp "$(stat -c %s "$CHIP_RAW")" 3 "$CHIP_PROCESSED" "$CHIP_FASTP_JSO
 
 run_stage post_fastqc "$(stat -c %s "$CHIP_PROCESSED")" 2 \
     "$CHIP_POST_DIR/${CHIP_RUN}_fastqc.html" "$CHIP_POST_DIR/${CHIP_RUN}_fastqc.zip" \
-    "$CHIP_QC_ENV/bin/fastqc" --threads 1 --outdir "$CHIP_POST_DIR" "$CHIP_PROCESSED"
+    /usr/bin/env PATH="$CHIP_QC_ENV/bin:$PATH" "$CHIP_QC_ENV/bin/fastqc" \
+    --threads 1 --outdir "$CHIP_POST_DIR" "$CHIP_PROCESSED"
 
 "$CHIP_MAIN_ENV/bin/python" "$CHIP_SUPPORT" make-alignment-plan --run "$CHIP_RUN" \
     --processed-fastq "$CHIP_PROCESSED" --fastp-json "$CHIP_FASTP_JSON" \

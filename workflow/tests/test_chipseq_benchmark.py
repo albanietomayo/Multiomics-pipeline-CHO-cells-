@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SUPPORT_PATH = ROOT / "workflow/scripts/chipseq_benchmark.py"
 SUBMIT_PATH = ROOT / "workflow/slurm/submit_chipseq_benchmark.py"
 SBATCH_PATH = ROOT / "workflow/slurm/chipseq_benchmark_p10_p50_p90.sbatch"
+QC_ENV_PATH = ROOT / "workflow/envs/qc.yaml"
 
 
 def load(name, path):
@@ -371,6 +372,33 @@ class ChipseqBenchmarkTests(unittest.TestCase):
             "environment_explicit.txt",
         ):
             self.assertIn(required, script)
+
+    def test_qc_environment_pins_fastqc_java_runtime(self):
+        environment = QC_ENV_PATH.read_text(encoding="utf-8")
+        self.assertIn("  - fastqc=0.12.1\n", environment)
+        self.assertIn("  - openjdk=17\n", environment)
+        self.assertLess(environment.index("  - conda-forge\n"), environment.index("  - bioconda\n"))
+
+    def test_worker_uses_qc_environment_java_for_fastqc_and_records_provenance(self):
+        script = SBATCH_PATH.read_text(encoding="utf-8")
+        qc_path = 'PATH="$CHIP_QC_ENV/bin:$PATH"'
+        fastqc = '"$CHIP_QC_ENV/bin/fastqc"'
+        self.assertIn(
+            f'{qc_path} {fastqc} --version > "$CHIP_SAVE/software_versions/fastqc.txt" 2>&1',
+            script,
+        )
+        self.assertIn(f'/usr/bin/env {qc_path} {fastqc}', script)
+        self.assertIn(
+            '"$CHIP_QC_ENV/bin/java" -version > "$CHIP_SAVE/software_versions/java.txt" 2>&1',
+            script,
+        )
+        self.assertIn(
+            'conda list --explicit --prefix "$CHIP_QC_ENV" > '
+            '"$CHIP_SAVE/software_versions/qc_environment_explicit.txt"',
+            script,
+        )
+        self.assertNotIn("module load Java", script)
+        self.assertNotIn("/usr/bin/java", script)
 
     def test_no_persistent_per_run_reference_or_index_duplication(self):
         script = SBATCH_PATH.read_text(encoding="utf-8")
