@@ -1,0 +1,2 @@
+canonical_locus_id	locus_name	benchmark_role	best_evidence_tier	n_observations	target_assembly	target_seqname	target_start	target_end	mapping_confidence	supporting_studies	notes
+CHO_BM_CHI_001	Hipp11/H11	positive	Tier 2	1	GCF_003668045.3	NW_023276807.1	101678097	101678098	high	CHI2019	source_locus_id=CHI2019_L001; cell_line=CHO-S; observation_roles=positive:1,negative:0; locus_status=positive_only; binary_gold_eligible=TRUE; SpCas9_cut_boundary_1based=101678097|101678098; coordinate encoded as adjacent bases flanking the inferred interbase cleavage site

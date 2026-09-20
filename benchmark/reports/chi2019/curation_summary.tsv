@@ -1,0 +1,16 @@
+metric	value
+study_id	CHI2019
+doi	10.1371/journal.pone.0219842
+pmid	31344144
+cell_line	CHO-S
+locus	Hipp11/H11
+guide	cH11g2
+guide_plus_PAM	TATACACTTGAGCCAGTAGTGGG
+experimental_observations	1
+positive_observations	1
+harmonized_loci	1
+positive_loci	1
+binary_gold_loci	1
+binary_gold_locus	CHO_BM_CHI_001:Hipp11/H11
+canonical_coordinate	NW_023276807.1:101678097-101678098
+canonical_protospacer	NW_023276807.1:101678095-101678114(-)

@@ -1,0 +1,3 @@
+assembly	seqname	protospacer_start_1based	protospacer_end_1based	strand	pam	cut_boundary_1based	exact_hits
+GCF_003668045.3	NW_023276807.1	101678095	101678114	-	GGG	101678097|101678098	1
+GCF_000223135.1	NW_003614682.1	80070	80089	+	GGG	80086|80087	1

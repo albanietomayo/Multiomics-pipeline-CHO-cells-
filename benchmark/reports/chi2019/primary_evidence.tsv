@@ -1,0 +1,2 @@
+study_id	cell_line	locus	integration_strategy	guide_name	guide_plus_pam_5to3	guide_activity	target_validation	reporter	integration_efficiency	stability	copy_number	source
+CHI2019	CHO-S	Hipp11/H11	CRISPR/Cas9 landing-pad knock-in followed by PhiC31 TARGATT	cH11g2	TATACACTTGAGCCAGTAGTGGG	43% indel	5'/3' junction PCR plus Sanger sequencing	GFP	97.7% GFP-positive after GCV selection	GFP maintained at stable levels >40 passages	single-copy GFP by ddPCR	Chi et al. 2019; Fig. 1-4; S1/S4/S5
