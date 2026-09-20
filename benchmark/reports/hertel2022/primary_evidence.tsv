@@ -1,0 +1,4 @@
+study_id	site	cell_line	reporter	integration_specificity	long_term_result	observation_role	locus_role	rationale
+HERTEL2022	Site-A	CHO-K1	eGFP	73%	97 +/- 13% productivity retained without selection after 70 generations	positive	positive	Targeted integration experimentally confirmed; stable longitudinal pool phenotype
+HERTEL2022	Site-B	CHO-K1	eGFP	23%	26 +/- 5% and 31 +/- 4% of initial fluorescence after 70 generations	negative	support_only	Pool experimentally unstable, but low on-target fraction confounds locus attribution; authors state a monoclonal line at this locus could still be stable
+HERTEL2022	Site-C	CHO-K1	eGFP	51%	79 +/- 14% with selection and 72 +/- 14% without selection after 70 generations	positive	positive	Targeted integration confirmed and productivity retained above approximately 70% over 70 generations

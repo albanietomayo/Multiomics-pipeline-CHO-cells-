@@ -1,0 +1,17 @@
+metric	value
+study_id	HERTEL2022
+doi	10.3389/fbioe.2022.1010719
+pmid	36312557
+cell_line	CHO-K1
+source_assembly	GCA_003668045.1
+target_assembly	GCF_003668045.3
+experimental_observations	3
+positive_observations	2
+negative_observations	1
+harmonized_loci	3
+positive_loci	2
+negative_loci	0
+support_only_loci	1
+binary_gold_loci	2
+binary_gold_sites	Site-A;Site-C
+classification_policy	Site-B negative observation retained but locus support_only because mixed-pool instability cannot be uniquely attributed to the target locus

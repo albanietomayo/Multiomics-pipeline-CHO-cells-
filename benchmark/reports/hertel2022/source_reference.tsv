@@ -1,0 +1,11 @@
+field	value
+assembly_accession	GCA_003668045.1
+assembly_name	CriGri-PICR
+database	GenBank
+paper	HERTEL2022
+local_fasta	benchmark/raw/hertel2022/reference/GCA_003668045.1/genome.fa
+sha256	72d745c29268e1f89c7787b1c47cf50c0ed892708789395d9b5ed845b8ac8ecf
+n_sequences	1831
+bytes	2398703922
+download_source	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/668/045/GCA_003668045.1_CriGri-PICR/GCA_003668045.1_CriGri-PICR_genomic.fna.gz
+verification	NCBI_md5checksums_PASS
