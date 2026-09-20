@@ -1,0 +1,13 @@
+observation_id	locus	cargo	evidence_class	benchmark_role	decision_basis
+ZHAO2018_KC6	C12orf35	mCherry	observed_stable	positive	Longitudinal experiment: high and stable expression/productivity through 20 passages.
+ZHAO2018_KC15	C12orf35	mCherry	observed_stable	positive	Longitudinal experiment: high and stable expression/productivity through 20 passages.
+ZHAO2018_HC6	HPRT	mCherry	observed_unstable	negative	Longitudinal mCherry expression declined after passage 10.
+ZHAO2018_HC18	HPRT	mCherry	observed_unstable	negative	Longitudinal mCherry expression declined after passage 10.
+ZHAO2018_GC1	GRIK1	mCherry	observed_unstable	negative	Longitudinal mCherry expression declined after passage 10.
+ZHAO2018_GC7	GRIK1	mCherry	observed_unstable	negative	Longitudinal mCherry expression declined after passage 10.
+ZHAO2018_KP6	C12orf35	anti-PD1 mAb	observed_stable	positive	Longitudinal experiment: high and stable expression/productivity through 20 passages.
+ZHAO2018_KP11	C12orf35	anti-PD1 mAb	observed_stable	positive	Longitudinal experiment: high and stable expression/productivity through 20 passages.
+ZHAO2018_HP8	HPRT	anti-PD1 mAb	observed_stable	positive	Anti-PD1 production remained measurable through passage 20, but at substantially lower productivity than C12orf35.
+ZHAO2018_HP38	HPRT	anti-PD1 mAb	observed_unstable	negative	Anti-PD1 targeted clone failed to maintain growth beyond approximately passage 15.
+ZHAO2018_GP34	GRIK1	anti-PD1 mAb	observed_stable	positive	Anti-PD1 production remained measurable through passage 20, but at substantially lower productivity than C12orf35.
+ZHAO2018_GP58	GRIK1	anti-PD1 mAb	observed_stable	positive	Anti-PD1 production remained measurable through passage 20, but at substantially lower productivity than C12orf35.

@@ -1,0 +1,2 @@
+seqname	start_1based	end_1based	orientation	query_sequence	genomic_protospacer_guide_orientation	n_mismatches	mismatch_detail	pam	pam_valid_ngg	inside_Hprt1
+NC_048604.1	17024141	17024160	-	GTAGAATGATCAGTCAACAG	CTAGAATGATCAGTCAACAG	1	1:G>C	GGG	TRUE	TRUE

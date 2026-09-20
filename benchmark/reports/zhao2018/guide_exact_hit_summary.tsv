@@ -1,0 +1,9 @@
+reference_path	candidate_id	locus	sequence_5to3	status	n_exact_hits	interpretation
+resources/reference/CriGri-PICRH-1.0/genome.fa	C12_PATENT	C12orf35	CCCCCTTACAGCTGTAGATA	candidate_primary_associated	1	unique_exact_hit
+resources/reference/CriGri-PICRH-1.0/genome.fa	C12_SECONDARY	C12orf35	GCCCCTTACAGCTGTAGATA	candidate_secondary_peer_reviewed	0	no_exact_hit
+resources/reference/CriGri-PICRH-1.0/genome.fa	HPRT_ZHAO	HPRT	GTAGAATGATCAGTCAACAG	secondary_peer_reviewed	0	no_exact_hit
+resources/reference/CriGri-PICRH-1.0/genome.fa	GRIK1_FIG2_CANDIDATE	GRIK1	ATGTCTGTGGCTTTTAAACT	candidate_unconfirmed	1	unique_exact_hit
+benchmark/raw/gaidukov2018/reference/GCF_000223135.1/genome.fa	C12_PATENT	C12orf35	CCCCCTTACAGCTGTAGATA	candidate_primary_associated	1	unique_exact_hit
+benchmark/raw/gaidukov2018/reference/GCF_000223135.1/genome.fa	C12_SECONDARY	C12orf35	GCCCCTTACAGCTGTAGATA	candidate_secondary_peer_reviewed	0	no_exact_hit
+benchmark/raw/gaidukov2018/reference/GCF_000223135.1/genome.fa	HPRT_ZHAO	HPRT	GTAGAATGATCAGTCAACAG	secondary_peer_reviewed	0	no_exact_hit
+benchmark/raw/gaidukov2018/reference/GCF_000223135.1/genome.fa	GRIK1_FIG2_CANDIDATE	GRIK1	ATGTCTGTGGCTTTTAAACT	candidate_unconfirmed	1	unique_exact_hit

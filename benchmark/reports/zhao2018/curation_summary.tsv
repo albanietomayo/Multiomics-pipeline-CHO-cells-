@@ -1,0 +1,20 @@
+metric	value
+study_id	ZHAO2018
+doi	10.1007/s00253-018-9021-6
+pmid	29789882
+canonical_target_assembly	GCF_003668045.3
+experimental_observations	12
+positive_observations	7
+negative_observations	5
+observed_stable_observations	7
+observed_unstable_observations	5
+harmonized_loci	3
+positive_loci	1
+negative_loci	0
+support_only_loci	2
+binary_gold_loci	1
+binary_gold_locus	CHO_BM_ZHAO_001:C12orf35
+C12orf35_target	NC_048601.1:371365-371366
+HPRT_target	NC_048604.1:17024143-17024144
+GRIK1_target	NC_048597.1:9449577-9449578
+HPRT_mapping_note	unique Hprt1 near-match with 1:G>C guide/genome difference, NGG PAM, full cross-assembly sequence concordance

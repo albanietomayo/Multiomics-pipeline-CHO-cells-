@@ -1,0 +1,2 @@
+gene_symbol	gene_id	annotation_release	assembly	seqname	start_1based	end_1based	strand	evidence_source
+Hprt1	100769768	104	GCF_003668045.3	NC_048604.1	17007457	17043355	-	NCBI_Gene
