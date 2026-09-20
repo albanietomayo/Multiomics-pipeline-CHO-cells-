@@ -1,0 +1,8 @@
+study_id	category	value	rationale
+HILLIARDLEE2021	evidence_class	predicted_candidate	Safe-harbor regions were identified computationally from epigenomic and transcriptomic properties rather than by targeted transgene integration.
+HILLIARDLEE2021	benchmark_role	support_only	The study provides orthogonal genomic context but does not experimentally validate individual candidate loci by SSI.
+HILLIARDLEE2021	experimental_label_eligible	FALSE	No targeted integration phenotype exists from which to derive a positive or negative locus label.
+HILLIARDLEE2021	benchmark_observations_action	add_0	benchmark_observations.tsv is reserved for experimental integration observations; genome-wide omics-derived candidate intervals are not inserted as pseudo-observations.
+HILLIARDLEE2021	benchmark_loci_action	add_0	Predicted permissive regions are not promoted to harmonized experimental loci.
+HILLIARDLEE2021	binary_gold_action	add_0	Prediction-only evidence cannot enter the binary Gold benchmark.
+HILLIARDLEE2021	future_use	orthogonal_feature_track	The published Hi-C stable-region BED can later be used as an annotation/feature layer when characterizing experimentally validated loci, without circularly defining their labels.

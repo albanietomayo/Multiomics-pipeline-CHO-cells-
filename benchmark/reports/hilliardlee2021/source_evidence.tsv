@@ -1,0 +1,13 @@
+field	value
+study_id	HILLIARDLEE2021
+citation	Hilliard W; Lee KH. Biotechnology and Bioengineering. 2021;118(2):659-675.
+doi	10.1002/bit.27599
+pmid	33049068
+experimental_system	CHO-K1 parental host and an industrially relevant monoclonal-antibody-producing derivative
+omics	Hi-C;RNA-seq
+main_result	10.9% of the CHO genome was classified as transcriptionally permissive three-dimensional chromatin with enhanced predicted genetic and epigenetic stability
+site_specific_integration_validation	none
+raw_data_bioproject	PRJNA645419
+supplementary_coordinate_resource	bit27599-sup-0002-HiC_RNAseq_SupplementaryFile2.xlsx
+supplementary_coordinate_description	BED-style coordinates of Hi-C stable regions in the PICRH genome assembly
+benchmark_interpretation	computational safe-harbor candidate layer only; not experimental Gold labels

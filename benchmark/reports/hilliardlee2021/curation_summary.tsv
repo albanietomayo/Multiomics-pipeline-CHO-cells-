@@ -1,0 +1,15 @@
+metric	value
+study_id	HILLIARDLEE2021
+doi	10.1002/bit.27599
+pmid	33049068
+classification	predicted_candidate
+benchmark_role	support_only
+site_specific_integration_validation	0
+experimental_observations_added	0
+harmonized_loci_added	0
+binary_gold_loci_added	0
+global_observations	62
+global_harmonized_loci	37
+global_binary_gold	31
+future_use	orthogonal Hi-C / 3D-chromatin support feature layer
+circularity_policy	predicted epigenomic regions may characterize Gold loci but may not define Gold labels
