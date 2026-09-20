@@ -1,0 +1,16 @@
+metric	value
+study_id	HILLIARD2023
+doi	10.1002/bit.28390
+pmid	37014810
+retargeted_hotspots	8
+targeted_validated_observations	8
+positive_observations	8
+mapped_observations	0
+unresolved_observations	8
+harmonized_loci_added	0
+binary_gold_loci_added	0
+global_observations	62
+global_harmonized_loci	37
+global_binary_gold	31
+sites	Azin1;Sart1;Fosl2;Pde4a;Dop1b;Vgll4;Khdc4;Ddc
+resolution_policy	No genomic coordinate inferred without recoverable primary mapping evidence

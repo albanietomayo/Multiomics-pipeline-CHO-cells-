@@ -1,0 +1,12 @@
+field	value
+assembly_accession	GCF_003668045.1
+assembly_name	CriGri-PICR
+database	RefSeq
+study	HILLIARD2023
+local_source_archive	benchmark/raw/hilliard2023/reference/GCF_003668045.1/GCF_003668045.1_CriGri-PICR_genomic.fna.gz
+storage_mode	gzip_streamed
+compressed_bytes	750696261
+official_archive_md5	2959d7a0e5941c6d776a4c1868f1b831
+compressed_sha256	2c9e88e28967fb55b9bbe918e2cc6c95e5a514e95135971634040bdce0d5f72d
+verification	NCBI_md5checksums_PASS;gzip_integrity_PASS
+decompression_policy	stream_directly_from_gzip_to_avoid_duplicate_2.4GB_storage

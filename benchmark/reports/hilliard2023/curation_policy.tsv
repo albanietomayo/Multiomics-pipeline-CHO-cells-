@@ -1,0 +1,6 @@
+study_id	policy	value	rationale
+HILLIARD2023	evidence_class	targeted_validated	Eight TRIP-derived hotspot candidates were experimentally retargeted by CRISPR/HDR and master host cell lines had verified on-target single-copy landing-pad integrations.
+HILLIARD2023	observation_role	positive	All eight retargeted sites supported transgene mRNA expression equal to or higher than the Fer1l4 industrial comparator in equivalent conditions.
+HILLIARD2023	stability_policy	not_observed_stable	The retargeting experiment did not establish locus-specific longitudinal stability for every individual hotspot; the longitudinal 72-PDL measurements belong to the upstream TRIP screen.
+HILLIARD2023	mapping_policy	unresolved	Exact mapping information could not be recovered reliably from accessible machine-readable supplementary/patent material; no genomic coordinate is inferred from gene name alone.
+HILLIARD2023	binary_gold_policy	not_eligible_until_mapped	Positive observations without a reliable canonical physical coordinate remain outside benchmark_loci.tsv and benchmark_gold_binary.tsv.

@@ -1,0 +1,9 @@
+site	expression_group	retargeted_CRISPR_HDR	on_target_single_copy	transgene_expression_vs_Fer1l4	clonal_variability	final_observation_class	final_role
+Azin1	High	TRUE	TRUE	equal_or_higher	not_highlighted	targeted_validated	positive
+Sart1	High	TRUE	TRUE	equal_or_higher	not_highlighted	targeted_validated	positive
+Fosl2	High	TRUE	TRUE	equal_or_higher	not_highlighted	targeted_validated	positive
+Pde4a	Mid	TRUE	TRUE	equal_or_higher	not_highlighted	targeted_validated	positive
+Dop1b	Mid	TRUE	TRUE	equal_or_higher	high	targeted_validated	positive
+Vgll4	Low	TRUE	TRUE	equal_or_higher	not_highlighted	targeted_validated	positive
+Khdc4	Low	TRUE	TRUE	equal_or_higher	not_highlighted	targeted_validated	positive
+Ddc	Low	TRUE	TRUE	equal_or_higher	high	targeted_validated	positive
