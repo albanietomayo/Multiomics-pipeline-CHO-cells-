@@ -1,0 +1,8 @@
+study_id	first_author	year	doi	experimental_observations	source_loci	positive_observations	negative_observations	mapped_observations	unresolved_observations	harmonized_loci	positive_loci	negative_loci	support_only_loci	binary_gold_loci
+DHIMAN2020	Dhiman	2020	10.1016/j.csbj.2020.11.008	17	13	10	7	17	0	13	6	4	3	10
+GAIDUKOV2018	Gaidukov	2018	10.1093/nar/gky216	21	21	21	0	17	4	17	17	0	0	17
+ZHAO2018	Zhao	2018	10.1007/s00253-018-9021-6	12	3	7	5	12	0	3	1	0	2	1
+CHI2019	Chi	2019	10.1371/journal.pone.0219842	1	1	1	0	1	0	1	1	0	0	1
+HERTEL2022	Hertel	2022	10.3389/fbioe.2022.1010719	3	3	2	1	3	0	3	2	0	1	2
+HILLIARD2023	Hilliard	2023	10.1002/bit.28390	8	8	8	0	0	8	0	0	0	0	0
+HILLIARDLEE2021	Hilliard	2021	10.1002/bit.27599	0	0	0	0	0	0	0	0	0	0	0

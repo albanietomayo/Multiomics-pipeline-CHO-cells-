@@ -1,0 +1,16 @@
+metric	value
+registered_studies	7
+experimental_observations	62
+source_loci	49
+positive_observations	49
+negative_observations	13
+mapped_unique_observations	50
+unresolved_observations	12
+harmonized_loci	37
+positive_loci	27
+negative_loci	4
+support_only_loci	6
+binary_gold_loci	31
+binary_gold_positive	27
+binary_gold_negative	4
+canonical_target_reference	GCF_003668045.3

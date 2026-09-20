@@ -1,0 +1,3 @@
+file	rows	sha256
+benchmark/curated/benchmark_gold_binary.tsv	31	7274efa875783d5545d952d74b155d6bf7c61eb65c6a18d04f74210e062c0203
+benchmark/curated/benchmark_gold_binary.bed	31	8e3d3999cab1a83deeef0c6996b6ebd79bf3c9d91aa36a2a30c3ec7d97844093

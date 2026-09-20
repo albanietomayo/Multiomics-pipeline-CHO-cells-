@@ -1,0 +1,9 @@
+study	observations	source_loci	harmonized_loci	positive_loci	negative_loci	support_only_loci	unresolved_observations	binary_gold_loci
+Dhiman 2020	17	13	13	6	4	3	0	10
+Gaidukov 2018	21	21	17	17	0	0	4	17
+Zhao 2018	12	3	3	1	0	2	0	1
+Chi 2019	1	1	1	1	0	0	0	1
+Hertel 2022	3	3	3	2	0	1	0	2
+Hilliard 2023	8	8	0	0	0	0	8	0
+Hilliard 2021	0	0	0	0	0	0	0	0
+TOTAL	62	49	37	27	4	6	12	31
