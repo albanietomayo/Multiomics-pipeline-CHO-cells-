@@ -121,7 +121,9 @@ PATH="$CHIP_QC_ENV/bin:$PATH" "$CHIP_QC_ENV/bin/fastqc" --version > "$CHIP_SAVE/
 "$CHIP_QC_ENV/bin/multiqc" --version > "$CHIP_SAVE/software_versions/multiqc.txt" 2>&1
 "$CHIP_ALIGN_ENV/bin/bowtie2" --version > "$CHIP_SAVE/software_versions/bowtie2.txt" 2>&1
 "$CHIP_ALIGN_ENV/bin/samtools" --version > "$CHIP_SAVE/software_versions/samtools.txt" 2>&1
-"$CHIP_DUP_ENV/bin/picard" MarkDuplicates --version > "$CHIP_SAVE/software_versions/picard.txt" 2>&1
+conda list --json --prefix "$CHIP_DUP_ENV" \
+    | "$CHIP_MAIN_ENV/bin/python" "$CHIP_SUPPORT" package-provenance --package picard \
+    > "$CHIP_SAVE/software_versions/picard.txt"
 conda --version > "$CHIP_SAVE/software_versions/conda.txt" 2>&1
 conda list --explicit --prefix "$CHIP_MAIN_ENV" > "$CHIP_SAVE/software_versions/main_environment_explicit.txt"
 conda list --explicit --prefix "$CHIP_PREP_ENV" > "$CHIP_SAVE/software_versions/preprocessing_environment_explicit.txt"

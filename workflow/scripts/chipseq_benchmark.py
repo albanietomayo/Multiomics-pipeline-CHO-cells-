@@ -555,6 +555,37 @@ def parse_sacct(input_path: Path, output_path: Path) -> None:
     atomic_text(output_path, tsv_text(SACCT_FIELDS, rows))
 
 
+def package_provenance(packages: object, package_name: str) -> str:
+    if not isinstance(packages, list):
+        raise ValueError("Conda package metadata must be a JSON list")
+    matches = [
+        package for package in packages
+        if isinstance(package, dict) and package.get("name") == package_name
+    ]
+    if len(matches) != 1:
+        raise ValueError(
+            f"Expected exactly one Conda package named {package_name!r}; "
+            f"found {len(matches)}"
+        )
+    package = matches[0]
+    fields = {
+        "name": package.get("name"),
+        "version": package.get("version"),
+        "build": package.get("build_string"),
+        "channel": package.get("channel"),
+    }
+    invalid = [
+        field for field, value in fields.items()
+        if not isinstance(value, str) or not value.strip()
+    ]
+    if invalid:
+        raise ValueError(
+            f"Conda metadata for {package_name!r} has missing or malformed fields: "
+            f"{', '.join(invalid)}"
+        )
+    return "".join(f"{field}: {value}\n" for field, value in fields.items())
+
+
 def completion_record(stage: str, outputs: list[Path]) -> dict[str, object]:
     if not outputs:
         raise ValueError("At least one stage output is required")
@@ -652,6 +683,8 @@ def main() -> None:
     sacct = sub.add_parser("parse-sacct")
     sacct.add_argument("--input", type=Path, required=True)
     sacct.add_argument("--output", type=Path, required=True)
+    package = sub.add_parser("package-provenance")
+    package.add_argument("--package", required=True)
     complete = sub.add_parser("complete-stage")
     complete.add_argument("--stage", required=True)
     complete.add_argument("--marker", type=Path, required=True)
@@ -697,6 +730,8 @@ def main() -> None:
         print(json.dumps(storage_preflight(row, args.output_root, args.scratch_root), indent=2, sort_keys=True))
     elif args.action == "parse-sacct":
         parse_sacct(args.input, args.output)
+    elif args.action == "package-provenance":
+        print(package_provenance(json.load(sys.stdin), args.package), end="")
     elif args.action == "complete-stage":
         write_completion(args.stage, args.marker, args.outputs)
     elif args.action == "verify-stage":

@@ -6,6 +6,7 @@ import gzip
 import importlib.util
 import json
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -399,6 +400,64 @@ class ChipseqBenchmarkTests(unittest.TestCase):
         )
         self.assertNotIn("module load Java", script)
         self.assertNotIn("/usr/bin/java", script)
+
+    def test_worker_uses_duplicates_conda_metadata_for_picard_provenance(self):
+        script = SBATCH_PATH.read_text(encoding="utf-8")
+        self.assertNotIn('"$CHIP_DUP_ENV/bin/picard" MarkDuplicates --version', script)
+        self.assertNotIn('"$CHIP_DUP_ENV/bin/picard" --version', script)
+        self.assertIn(
+            'conda list --json --prefix "$CHIP_DUP_ENV" \\\n'
+            '    | "$CHIP_MAIN_ENV/bin/python" "$CHIP_SUPPORT" '
+            'package-provenance --package picard \\\n'
+            '    > "$CHIP_SAVE/software_versions/picard.txt"',
+            script,
+        )
+        self.assertIn(
+            'conda list --explicit --prefix "$CHIP_DUP_ENV" > '
+            '"$CHIP_SAVE/software_versions/duplicates_environment_explicit.txt"',
+            script,
+        )
+
+    def test_picard_package_provenance_command_succeeds_for_3_5_0(self):
+        metadata = [{
+            "name": "picard",
+            "version": "3.5.0",
+            "build_string": "hdfd78af_0",
+            "channel": "bioconda",
+        }]
+        completed = subprocess.run(
+            [
+                sys.executable,
+                str(SUPPORT_PATH),
+                "package-provenance",
+                "--package",
+                "picard",
+            ],
+            input=json.dumps(metadata),
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        self.assertEqual(
+            completed.stdout,
+            "name: picard\n"
+            "version: 3.5.0\n"
+            "build: hdfd78af_0\n"
+            "channel: bioconda\n",
+        )
+
+    def test_picard_package_provenance_fails_closed(self):
+        valid = {
+            "name": "picard",
+            "version": "3.5.0",
+            "build_string": "hdfd78af_0",
+            "channel": "bioconda",
+        }
+        for metadata in ([], [valid, valid], [{**valid, "build_string": ""}]):
+            with self.subTest(metadata=metadata):
+                with self.assertRaises(ValueError):
+                    SUPPORT.package_provenance(metadata, "picard")
 
     def test_no_persistent_per_run_reference_or_index_duplication(self):
         script = SBATCH_PATH.read_text(encoding="utf-8")
