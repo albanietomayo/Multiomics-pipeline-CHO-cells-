@@ -1,0 +1,7 @@
+{
+  "currently_eligible_rna_runs": 1740,
+  "eligible_runs_missing_counts": 16,
+  "eligible_runs_with_counts": 1724,
+  "physical_counts_blocked_by_gate": 93,
+  "physical_gene_count_files": 1817
+}
