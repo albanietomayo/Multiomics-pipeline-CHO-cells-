@@ -64,7 +64,9 @@ fastp --version > "$ART/software_versions/fastp.txt" 2>&1
 fastqc --version > "$ART/software_versions/fastqc.txt" 2>&1
 bowtie2 --version > "$ART/software_versions/bowtie2.txt" 2>&1
 samtools --version > "$ART/software_versions/samtools.txt" 2>&1
-picard MarkDuplicates --version > "$ART/software_versions/picard.txt" 2>&1
+conda list --json --prefix "$ENV" \
+    | "$ENV/bin/python" workflow/scripts/chipseq_benchmark.py package-provenance --package picard \
+    > "$ART/software_versions/picard.txt"
 macs3 --version > "$ART/software_versions/macs3.txt" 2>&1
 bedtools --version > "$ART/software_versions/bedtools.txt" 2>&1
 conda list --explicit --prefix "$ENV" > "$ART/software_versions/environment_explicit.txt"
