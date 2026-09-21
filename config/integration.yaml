@@ -1,0 +1,20 @@
+integration:
+
+  benchmark:
+    gold_tsv: "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_benchmark/benchmark/curated/benchmark_gold_binary.tsv"
+    gold_bed: "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_benchmark/benchmark/curated/benchmark_gold_binary.bed"
+
+  atac:
+    idr10: "/cephyr/users/mayoa/Vera/atac_production_validation/production_48e5aa5c_limited_real_v1/artifacts/job_10318071/results/atacseq/reproducibility/PRJNA667472_CHO-K1_bulk_ATAC/idr_le_0.10.tsv"
+
+    idr05: "/cephyr/users/mayoa/Vera/atac_production_validation/production_48e5aa5c_limited_real_v1/artifacts/job_10318071/results/atacseq/reproducibility/PRJNA667472_CHO-K1_bulk_ATAC/idr_le_0.05.tsv"
+
+    bigwig:
+      SRR12774931: "/cephyr/users/mayoa/Vera/atac_production_validation/production_48e5aa5c_limited_real_v1/artifacts/job_10318071/results/atacseq/tracks/SRR12774931/treatment_pileup.SPMR.bw"
+
+      SRR12774932: "/cephyr/users/mayoa/Vera/atac_production_validation/production_48e5aa5c_limited_real_v1/artifacts/job_10318071/results/atacseq/tracks/SRR12774932/treatment_pileup.SPMR.bw"
+
+    anchor_half_windows_bp:
+      - 1000
+      - 10000
+      - 50000

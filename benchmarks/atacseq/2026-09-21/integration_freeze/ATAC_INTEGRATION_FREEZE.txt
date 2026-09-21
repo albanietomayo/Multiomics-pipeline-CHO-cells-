@@ -1,0 +1,51 @@
+ATAC benchmark integration freeze
+
+Reference:
+GCF_003668045.3
+
+Benchmark:
+31 Gold loci
+27 positive
+4 negative
+
+ATAC biological dataset:
+PRJNA667472
+CHO-K1 bulk ATAC-seq
+SRR12774931
+SRR12774932
+
+Primary reproducible-accessibility definition:
+IDR <= 0.10
+
+Sensitivity definition:
+IDR <= 0.05
+
+IDR <= 0.10:
+44216 raw records
+39332 exact unique genomic intervals
+
+IDR <= 0.05:
+36800 raw records
+33226 exact unique genomic intervals
+
+Primary anchor windows:
++/- 1000 bp
++/- 10000 bp
++/- 50000 bp
+
+Continuous signal:
+MACS3 treatment pileup SPMR
+Consensus = arithmetic mean of replicate window means
+
+Primary integration matrix:
+benchmark_atac_features_primary.tsv
+
+Complete audit matrix:
+benchmark_atac_features_with_signal.tsv
+
+Sensitivity matrix:
+benchmark_atac_features_idr05_sensitivity.tsv
+
+Interpretation status:
+Exploratory regulatory-context characterization.
+No predictive or causal claim.

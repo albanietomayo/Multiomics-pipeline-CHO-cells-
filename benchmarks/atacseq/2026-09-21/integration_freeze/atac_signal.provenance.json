@@ -1,0 +1,26 @@
+{
+  "anchor_half_windows_bp": [
+    1000,
+    10000,
+    50000
+  ],
+  "consensus_signal": "arithmetic mean of replicate SPMR window means",
+  "input_features": {
+    "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/results/integration/atac/benchmark_atac_features.tsv",
+    "sha256": "82602b810367dc5a1363715cbc3e883af4a37e1cc4741b3a95f0abd759a7509b"
+  },
+  "missing_bigwig_positions": "treated as zero signal",
+  "n_loci": 31,
+  "pybigwig_version": "0.3.26",
+  "replicate_bigwigs": {
+    "SRR12774931": {
+      "path": "/cephyr/users/mayoa/Vera/atac_production_validation/production_48e5aa5c_limited_real_v1/artifacts/job_10318071/results/atacseq/tracks/SRR12774931/treatment_pileup.SPMR.bw",
+      "sha256": "d9bb118d709835fbe4ef0f4f1e5ff2fdaa4c70147ebd7daf8fa2d157bf0b7220"
+    },
+    "SRR12774932": {
+      "path": "/cephyr/users/mayoa/Vera/atac_production_validation/production_48e5aa5c_limited_real_v1/artifacts/job_10318071/results/atacseq/tracks/SRR12774932/treatment_pileup.SPMR.bw",
+      "sha256": "1a10c5a39edd52a8bb935d5cd1fc466fec2ae2d3343ba0c189a13e7ee5063e78"
+    }
+  },
+  "window_definition": "anchor +/- N bp; 2N+1 genomic bases before chromosome-boundary clipping"
+}
