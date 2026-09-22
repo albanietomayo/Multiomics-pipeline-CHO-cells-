@@ -11,6 +11,7 @@ reported by ENA. The final output is created only when both checks pass.
 import argparse
 import hashlib
 from pathlib import Path
+import re
 
 import pandas as pd
 import requests
@@ -72,8 +73,9 @@ def download_and_validate(
     """
     Download one FASTQ and validate its size and MD5 checksum.
 
-    Failed transfers are retried from the beginning. Incomplete
-    temporary files are removed before each new attempt.
+    Failed transfers are resumed with an HTTP Range request when the
+    server supports it. The completed temporary file is still accepted
+    only after exact size and MD5 validation.
     """
 
     output = Path(output)
@@ -93,9 +95,19 @@ def download_and_validate(
     last_error = None
 
     for attempt in range(1, max_attempts + 1):
+        existing_bytes = temporary.stat().st_size if temporary.exists() else 0
 
-        if temporary.exists():
+        if existing_bytes > expected_bytes:
             temporary.unlink()
+            existing_bytes = 0
+
+        if existing_bytes == expected_bytes:
+            if validate_existing_file(temporary, expected_bytes, expected_md5):
+                temporary.replace(output)
+                print(f"[OK] Download validated: {output} ({expected_bytes} bytes)")
+                return
+            temporary.unlink()
+            existing_bytes = 0
 
         print(
             f"[INFO] Download attempt "
@@ -103,19 +115,43 @@ def download_and_validate(
         )
         print(f"[INFO] Output: {output}")
 
-        md5 = hashlib.md5()
-        downloaded_bytes = 0
+        headers = {}
+        if existing_bytes:
+            headers["Range"] = f"bytes={existing_bytes}-"
+            print(f"[INFO] Resuming at byte {existing_bytes}")
 
         try:
             with requests.get(
                 normalized_url,
                 stream=True,
                 timeout=(30, 300),
+                headers=headers,
             ) as response:
 
                 response.raise_for_status()
 
-                with open(temporary, "wb") as handle:
+                append = False
+                if existing_bytes and response.status_code == 206:
+                    content_range = response.headers.get("Content-Range", "")
+                    match = re.fullmatch(r"bytes (\d+)-(\d+)/(\d+|\*)", content_range)
+                    if not match or int(match.group(1)) != existing_bytes:
+                        raise ValueError(
+                            "Invalid Content-Range for resume: "
+                            f"expected start {existing_bytes}, observed {content_range!r}"
+                        )
+                    if match.group(3) != "*" and int(match.group(3)) != expected_bytes:
+                        raise ValueError(
+                            "Content-Range total mismatch: "
+                            f"expected {expected_bytes}, observed {match.group(3)}"
+                        )
+                    append = True
+                elif existing_bytes and response.status_code == 200:
+                    print("[INFO] Server ignored Range; restarting this attempt")
+                    existing_bytes = 0
+
+                mode = "ab" if append else "wb"
+
+                with open(temporary, mode) as handle:
                     for chunk in response.iter_content(
                         chunk_size=1024 * 1024
                     ):
@@ -123,10 +159,7 @@ def download_and_validate(
                             continue
 
                         handle.write(chunk)
-                        md5.update(chunk)
-                        downloaded_bytes += len(chunk)
-
-            observed_md5 = md5.hexdigest()
+            downloaded_bytes = temporary.stat().st_size
 
             if downloaded_bytes != expected_bytes:
                 raise ValueError(
@@ -135,7 +168,10 @@ def download_and_validate(
                     f"{downloaded_bytes} bytes"
                 )
 
+            observed_md5 = calculate_md5(temporary)
+
             if observed_md5.lower() != expected_md5.lower():
+                temporary.unlink()
                 raise ValueError(
                     f"MD5 mismatch: expected {expected_md5}, "
                     f"observed {observed_md5}"
@@ -153,9 +189,6 @@ def download_and_validate(
         except Exception as error:
 
             last_error = error
-
-            if temporary.exists():
-                temporary.unlink()
 
             print(
                 f"[WARN] Download attempt "
