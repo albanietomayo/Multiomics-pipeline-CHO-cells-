@@ -9,8 +9,10 @@ fragment policy. Any disagreement between these layers fails before execution.
 The worker uses the existing download validator, fastp settings, Bowtie2
 settings, alignment QC, Picard duplicate marking, nuclear filtering,
 PhantomPeakQualTools parsing, MACS3 contract, FRiP, peak QC, and provenance
-implementations. It reads the shared Bowtie2 index in place. A global `flock`
-under the production root serializes jobs.
+implementations. It reads the shared Bowtie2 index in place. Two reserved
+production-slot `flock` files under the production root cap execution at two
+workers. Slot reservation happens before an analysis directory is created, so
+a third submission fails without persistent partial analysis output.
 
 For each physical run, node-local storage follows this validated deletion
 order:
@@ -27,7 +29,9 @@ order:
 
 A control is processed once and atomically persisted under
 `results/chipseq/production/shared_controls/<accession>/` as only its filtered
-BAM/CSI and compact QC/provenance. An IP filtered BAM stays in `$TMPDIR` and is
+BAM/CSI and compact QC/provenance. Existing-control workers retain a shared
+per-control lock while reading it; creation and validated cleanup retain the
+exclusive form of that lock. An IP filtered BAM stays in `$TMPDIR` and is
 never copied to persistent storage. MACS3 bedGraphs are validated by the
 existing QC and then stored as lossless deterministic gzip files. The final
 artifact directory and completion marker become visible atomically.
@@ -60,3 +64,7 @@ This check verifies every expected analysis manifest and artifact. It prints
 add `--remove` to remove only the validated control BAM/CSI; compact control QC
 and the cleanup marker remain. The production worker never removes a control
 automatically, including after failures.
+
+Post-run scientific validation remains serialized. Append a validated row via
+`chipseq_production.py ledger-append`; it takes an exclusive ledger lock,
+rejects duplicate analysis IDs, and atomically replaces the ledger.

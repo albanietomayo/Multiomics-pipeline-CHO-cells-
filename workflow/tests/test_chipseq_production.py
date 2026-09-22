@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 import importlib.util
 import json
+import os
 import shutil
+import signal
+import subprocess
+import sys
 import tempfile
+import time
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -10,6 +15,7 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[2]
 SUPPORT_PATH = ROOT / "workflow/scripts/chipseq_production.py"
 SBATCH = ROOT / "workflow/slurm/chipseq_production.sbatch"
+SUBMIT = ROOT / "workflow/slurm/submit_chipseq_production.py"
 
 def load(name, path):
     spec = importlib.util.spec_from_file_location(name, path)
@@ -60,7 +66,105 @@ class ChipseqProductionTests(unittest.TestCase):
         self.assertIn('INDEX="$REF/bowtie2_index/genome_plus_mt"', text)
         self.assertNotIn("cp -a \"$REF/bowtie2_index", text)
         self.assertIn("flock -n 9", text)
+        self.assertLess(text.index("flock -n 9"), text.index('mkdir -p "$WORK"'))
+        self.assertIn("flock -s 8", text)
+        self.assertIn("flock -x 8", text)
         self.assertIn("gzip -n -c", text)
+        self.assertIn('mv "$ART" "$ART_FINAL"', text)
+        submit = SUBMIT.read_text(encoding="utf-8")
+        self.assertLess(submit.index("reserve_production_slot"), submit.index("output = prepare"))
+
+    def test_two_slots_reserve_and_third_fails_without_analysis_output(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            first = SUPPORT.reserve_production_slot(root, "ERR868155", "1" * 32)
+            second = SUPPORT.reserve_production_slot(root, "ERR868156", "2" * 32)
+            self.assertEqual({first, second}, {1, 2})
+            with self.assertRaisesRegex(ValueError, "All 2"):
+                SUPPORT.reserve_production_slot(root, "ERR868154", "3" * 32)
+            self.assertFalse((root / "analyses" / "ERR868154").exists())
+            SUPPORT.release_production_slot(root, first, "ERR868155", "1" * 32)
+            self.assertEqual(SUPPORT.reserve_production_slot(root, "ERR868154", "3" * 32), first)
+
+    def test_locked_ledger_append_is_unique(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); ledger = root / "production_ledger.tsv"
+            row = root / "row.tsv"
+            ledger.write_text("analysis_id\tvalidation_status\nERR868151\tPASS\n", encoding="utf-8")
+            row.write_text("analysis_id\tvalidation_status\nERR868152\tPASS\n", encoding="utf-8")
+            SUPPORT.append_ledger_row(ledger, row)
+            self.assertEqual([item["analysis_id"] for item in SUPPORT.table(ledger)],
+                             ["ERR868151", "ERR868152"])
+            with self.assertRaisesRegex(ValueError, "already exists"):
+                SUPPORT.append_ledger_row(ledger, row)
+
+    def test_control_readers_share_and_exclusive_writer_waits(self):
+        with tempfile.TemporaryDirectory() as temporary, \
+             SUPPORT.control_lock(Path(temporary), "ERR868150", exclusive=False) as lock_path:
+            shared = subprocess.run(["flock", "-sn", str(lock_path), "true"], check=False)
+            exclusive = subprocess.run(["flock", "-xn", str(lock_path), "true"], check=False)
+            self.assertEqual(shared.returncode, 0)
+            self.assertNotEqual(exclusive.returncode, 0)
+
+    def test_synthetic_workers_share_control_reject_third_and_release_locks(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); control_locks = root / ".control_locks"
+            control_locks.mkdir(); control_path = control_locks / "ERR868150.lock"
+            control_path.touch()
+
+            def launch(slot, analysis, token, ready, delay, status):
+                lock_path, _ = SUPPORT.slot_paths(root, slot)
+                script = f'''set -eu
+exec 9>"{lock_path}"
+flock -n 9
+"{sys.executable}" "{SUPPORT_PATH}" validate-slot --production-root "{root}" --slot "{slot}" --analysis "{analysis}" --token "{token}"
+cleanup() {{ "{sys.executable}" "{SUPPORT_PATH}" release-slot --production-root "{root}" --slot "{slot}" --analysis "{analysis}" --token "{token}"; }}
+trap cleanup EXIT
+trap 'exit 143' TERM INT
+exec 8>"{control_path}"
+flock -s 8
+touch "{ready}"
+sleep "{delay}"
+exit "{status}"
+'''
+                return subprocess.Popen(["bash", "-c", script], start_new_session=True)
+
+            first_token, second_token = "1" * 32, "2" * 32
+            first = SUPPORT.reserve_production_slot(root, "ERR868155", first_token)
+            second = SUPPORT.reserve_production_slot(root, "ERR868156", second_token)
+            ready_one, ready_two = root / "ready-one", root / "ready-two"
+            one = launch(first, "ERR868155", first_token, ready_one, 1, 0)
+            two = launch(second, "ERR868156", second_token, ready_two, 1, 0)
+            for _ in range(100):
+                if ready_one.exists() and ready_two.exists(): break
+                time.sleep(0.02)
+            self.assertTrue(ready_one.exists() and ready_two.exists())
+            with self.assertRaisesRegex(ValueError, "All 2"):
+                SUPPORT.reserve_production_slot(root, "ERR868154", "3" * 32)
+            self.assertFalse((root / "analyses" / "ERR868154").exists())
+            self.assertNotEqual(subprocess.run(
+                ["flock", "-xn", str(control_path), "true"], check=False).returncode, 0)
+            self.assertEqual(one.wait(timeout=5), 0)
+            self.assertEqual(two.wait(timeout=5), 0)
+
+            failure_token = "4" * 32
+            failure_slot = SUPPORT.reserve_production_slot(root, "ERR868154", failure_token)
+            failed = launch(failure_slot, "ERR868154", failure_token,
+                            root / "ready-failure", 0, 7)
+            self.assertEqual(failed.wait(timeout=5), 7)
+            self.assertFalse(SUPPORT.slot_paths(root, failure_slot)[1].exists())
+
+            signal_token = "5" * 32
+            signal_slot = SUPPORT.reserve_production_slot(root, "ERR868154", signal_token)
+            ready_signal = root / "ready-signal"
+            signalled = launch(signal_slot, "ERR868154", signal_token, ready_signal, 30, 0)
+            for _ in range(100):
+                if ready_signal.exists(): break
+                time.sleep(0.02)
+            self.assertTrue(ready_signal.exists())
+            os.killpg(signalled.pid, signal.SIGTERM)
+            self.assertEqual(signalled.wait(timeout=5), 143)
+            self.assertFalse(SUPPORT.slot_paths(root, signal_slot)[1].exists())
 
     def test_control_cleanup_requires_all_expected_analyses(self):
         with tempfile.TemporaryDirectory() as temporary, \

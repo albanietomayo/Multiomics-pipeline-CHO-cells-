@@ -7,6 +7,7 @@ import importlib.util
 import json
 import os
 import re
+import secrets
 import shutil
 import subprocess
 import tempfile
@@ -93,15 +94,28 @@ def main():
     plan = local_plan(args)
     if not args.submit:
         print(json.dumps(plan, indent=2, sort_keys=True)); print("CHECK_ONLY_NO_SBATCH=PASS"); return
-    output = prepare(plan, args.production_root)
+    token = secrets.token_hex(16)
+    slot = SUPPORT.reserve_production_slot(args.production_root, args.analysis_id, token)
+    output = None
+    try:
+        output = prepare(plan, args.production_root)
+    except BaseException:
+        SUPPORT.release_production_slot(args.production_root, slot, args.analysis_id, token)
+        raise
     command = ["sbatch", "--parsable", "--export=ALL," +
         f"CHIP_ANALYSIS_ID={args.analysis_id},CHIP_CONTROL_RUN={args.control_run}," +
-        f"CHIP_OUTPUT_DIR={output},CHIP_PRODUCTION_ROOT={args.production_root.resolve()}",
+        f"CHIP_OUTPUT_DIR={output},CHIP_PRODUCTION_ROOT={args.production_root.resolve()}," +
+        f"CHIP_PRODUCTION_SLOT={slot},CHIP_PRODUCTION_SLOT_TOKEN={token}",
         "workflow/slurm/chipseq_production.sbatch"]
-    result = subprocess.check_output(command, cwd=output / "project", text=True).strip()
+    try:
+        result = subprocess.check_output(command, cwd=output / "project", text=True).strip()
+    except BaseException:
+        shutil.rmtree(output)
+        SUPPORT.release_production_slot(args.production_root, slot, args.analysis_id, token)
+        raise
     if not re.fullmatch(r"[0-9]+(?:;[^\n]+)?", result): raise ValueError(f"Unexpected sbatch response: {result!r}")
     SUPPORT.atomic_text(output / "job_id.txt", result + "\n")
-    print(f"SUBMITTED={result}"); print(f"OUTPUT_DIRECTORY={output}")
+    print(f"SUBMITTED={result}"); print(f"PRODUCTION_SLOT={slot}"); print(f"OUTPUT_DIRECTORY={output}")
 
 if __name__ == "__main__":
     try: main()

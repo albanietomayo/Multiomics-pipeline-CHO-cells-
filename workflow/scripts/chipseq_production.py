@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import fcntl
 import hashlib
 import importlib.util
 import io
@@ -12,6 +13,7 @@ import json
 import os
 import re
 import shutil
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -31,6 +33,7 @@ MANIFEST_FIELDS = [
     "fragment_size_policy", "fragment_size_bp", "start_utc", "end_utc",
     "slurm_job", "final_status", "persistent_artifact", "sha256", "size_bytes",
 ]
+MAX_PRODUCTION_SLOTS = 2
 
 
 def load_module(name: str, path: Path):
@@ -65,6 +68,107 @@ def atomic_text(path: Path | str, text: str) -> None:
 
 def atomic_json(path: Path | str, value: object) -> None:
     atomic_text(path, json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def _safe_lock_component(value: str, label: str) -> str:
+    if not ACCESSION.fullmatch(value):
+        raise ValueError(f"Unsafe {label}: {value!r}")
+    return value
+
+
+def slot_paths(root: Path, slot: int) -> tuple[Path, Path]:
+    if slot not in range(1, MAX_PRODUCTION_SLOTS + 1):
+        raise ValueError(f"Production slot must be 1..{MAX_PRODUCTION_SLOTS}")
+    return (root / f".production.slot.{slot}.lock",
+            root / f".production.slot.{slot}.reservation.json")
+
+
+def reserve_production_slot(root: Path, analysis_id: str, token: str) -> int:
+    _safe_lock_component(analysis_id, "analysis accession")
+    if not re.fullmatch(r"[0-9a-f]{32}", token):
+        raise ValueError("Production slot token must be 32 lowercase hexadecimal characters")
+    root.mkdir(parents=True, exist_ok=True)
+    for slot in range(1, MAX_PRODUCTION_SLOTS + 1):
+        lock_path, reservation = slot_paths(root, slot)
+        with lock_path.open("a+", encoding="utf-8") as lock:
+            try:
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                continue
+            if reservation.exists():
+                continue
+            atomic_json(reservation, {"schema_version": 1, "slot": slot,
+                "analysis_id": analysis_id, "token": token,
+                "reserved_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")})
+            return slot
+    raise ValueError(f"All {MAX_PRODUCTION_SLOTS} ChIP production slots are reserved or active")
+
+
+def validate_slot_reservation(root: Path, slot: int, analysis_id: str, token: str) -> None:
+    _, reservation = slot_paths(root, slot)
+    if not reservation.is_file():
+        raise ValueError(f"Missing production slot reservation: {slot}")
+    value = json.loads(reservation.read_text(encoding="utf-8"))
+    if (value.get("schema_version") != 1 or value.get("slot") != slot
+            or value.get("analysis_id") != analysis_id or value.get("token") != token):
+        raise ValueError(f"Production slot reservation mismatch: {slot}")
+
+
+def release_production_slot(root: Path, slot: int, analysis_id: str, token: str) -> None:
+    validate_slot_reservation(root, slot, analysis_id, token)
+    _, reservation = slot_paths(root, slot)
+    reservation.unlink()
+
+
+@contextmanager
+def control_lock(root: Path, control: str, exclusive: bool):
+    control = _safe_lock_component(control, "control accession")
+    directory = root / ".control_locks"
+    directory.mkdir(parents=True, exist_ok=True)
+    path = directory / f"{control}.lock"
+    with path.open("a+", encoding="utf-8") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX if exclusive else fcntl.LOCK_SH)
+        try:
+            yield path
+        finally:
+            fcntl.flock(lock, fcntl.LOCK_UN)
+
+
+def append_ledger_row(ledger: Path, row_file: Path) -> None:
+    if not ledger.is_file():
+        raise ValueError(f"Missing production ledger: {ledger}")
+    incoming = table(row_file)
+    if len(incoming) != 1:
+        raise ValueError("Ledger append input must contain exactly one data row")
+    lock_path = ledger.with_name(f".{ledger.name}.lock")
+    with lock_path.open("a+", encoding="utf-8") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        existing = table(ledger)
+        with ledger.open(encoding="utf-8", newline="") as handle:
+            fieldnames = csv.DictReader(handle, delimiter="\t").fieldnames
+        with row_file.open(encoding="utf-8", newline="") as handle:
+            incoming_fields = csv.DictReader(handle, delimiter="\t").fieldnames
+        if not fieldnames or incoming_fields != fieldnames:
+            raise ValueError("Ledger append columns differ from the production ledger")
+        row = incoming[0]
+        if row.get("validation_status") != "PASS" or not row.get("analysis_id"):
+            raise ValueError("Only an identified PASS validation may enter the production ledger")
+        if any(item.get("analysis_id") == row["analysis_id"] for item in existing):
+            raise ValueError(f"Analysis already exists in production ledger: {row['analysis_id']}")
+        buffer = io.StringIO()
+        writer = csv.DictWriter(buffer, fieldnames=fieldnames, delimiter="\t", lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(existing + incoming)
+        temporary = ledger.with_name(f".{ledger.name}.{os.getpid()}.part")
+        try:
+            with temporary.open("x", encoding="utf-8") as handle:
+                handle.write(buffer.getvalue())
+                handle.flush()
+                os.fsync(handle.fileno())
+            os.replace(temporary, ledger)
+        finally:
+            if temporary.exists():
+                temporary.unlink()
 
 
 def table(path: Path | str) -> list[dict[str, str]]:
@@ -390,26 +494,27 @@ def verify_analysis(root: Path, analysis_id: str) -> None:
 
 
 def control_cleanup(root: Path, control: str, remove: bool) -> None:
-    peaks, _ = validated_plans()
-    expected = sorted(row["analysis_id"] for row in peaks if row["control_run_accession"] == control)
-    if not expected:
-        raise ValueError(f"Control is not referenced by an eligible analysis: {control}")
-    for analysis_id in expected:
-        verify_analysis(root, analysis_id)
-    control_dir = root / "shared_controls" / control
-    plan = select_analysis(expected[0], control)
-    synthetic = {"analysis": plan["analysis"], "input_sha256": {
-        "analysis_plan": sha256(ANALYSIS_PLAN), "peak_plan": sha256(PEAK_PLAN)}}
-    load_control(synthetic, control_dir)
-    print(f"SAFE_TO_REMOVE_CONTROL_BAM={control}")
-    print(f"COMPLETED_EXPECTED_ANALYSES={','.join(expected)}")
-    if remove:
-        for name in ("filtered.bam", "filtered.bam.csi"):
-            (control_dir / name).unlink()
-        atomic_json(control_dir / "control_bam_removed.json", {"schema_version": 1,
-            "control": control, "verified_analyses": expected,
-            "removed_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")})
-        print(f"CONTROL_BAM_REMOVED={control}")
+    with control_lock(root, control, exclusive=True):
+        peaks, _ = validated_plans()
+        expected = sorted(row["analysis_id"] for row in peaks if row["control_run_accession"] == control)
+        if not expected:
+            raise ValueError(f"Control is not referenced by an eligible analysis: {control}")
+        for analysis_id in expected:
+            verify_analysis(root, analysis_id)
+        control_dir = root / "shared_controls" / control
+        plan = select_analysis(expected[0], control)
+        synthetic = {"analysis": plan["analysis"], "input_sha256": {
+            "analysis_plan": sha256(ANALYSIS_PLAN), "peak_plan": sha256(PEAK_PLAN)}}
+        load_control(synthetic, control_dir)
+        print(f"SAFE_TO_REMOVE_CONTROL_BAM={control}")
+        print(f"COMPLETED_EXPECTED_ANALYSES={','.join(expected)}")
+        if remove:
+            for name in ("filtered.bam", "filtered.bam.csi"):
+                (control_dir / name).unlink()
+            atomic_json(control_dir / "control_bam_removed.json", {"schema_version": 1,
+                "control": control, "verified_analyses": expected,
+                "removed_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")})
+            print(f"CONTROL_BAM_REMOVED={control}")
 
 
 def main() -> None:
@@ -430,6 +535,9 @@ def main() -> None:
     p = sub.add_parser("fragment-record"); p.add_argument("--plan", type=Path, required=True); p.add_argument("--parameters", type=Path, required=True); p.add_argument("--output", type=Path, required=True)
     p = sub.add_parser("finalize"); p.add_argument("--plan", type=Path, required=True); p.add_argument("--artifacts", type=Path, required=True); p.add_argument("--output", type=Path, required=True); p.add_argument("--start-utc", required=True); p.add_argument("--slurm-job", required=True)
     p = sub.add_parser("control-cleanup"); p.add_argument("--production-root", type=Path, required=True); p.add_argument("--control", required=True); p.add_argument("--remove", action="store_true")
+    p = sub.add_parser("validate-slot"); p.add_argument("--production-root", type=Path, required=True); p.add_argument("--slot", type=int, required=True); p.add_argument("--analysis", required=True); p.add_argument("--token", required=True)
+    p = sub.add_parser("release-slot"); p.add_argument("--production-root", type=Path, required=True); p.add_argument("--slot", type=int, required=True); p.add_argument("--analysis", required=True); p.add_argument("--token", required=True)
+    p = sub.add_parser("ledger-append"); p.add_argument("--ledger", type=Path, required=True); p.add_argument("--row", type=Path, required=True)
     args = parser.parse_args()
     if args.action == "preflight":
         value = preflight(args.analysis, args.control, args.reference_root, args.scratch_root, args.production_root)
@@ -445,6 +553,9 @@ def main() -> None:
     elif args.action == "fragment-record": fragment_record(json.loads(args.plan.read_text()), args.parameters, args.output)
     elif args.action == "finalize": finalize(json.loads(args.plan.read_text()), args.artifacts, args.output, args.start_utc, args.slurm_job)
     elif args.action == "control-cleanup": control_cleanup(args.production_root, args.control, args.remove)
+    elif args.action == "validate-slot": validate_slot_reservation(args.production_root, args.slot, args.analysis, args.token)
+    elif args.action == "release-slot": release_production_slot(args.production_root, args.slot, args.analysis, args.token)
+    elif args.action == "ledger-append": append_ledger_row(args.ledger, args.row)
 
 
 if __name__ == "__main__":

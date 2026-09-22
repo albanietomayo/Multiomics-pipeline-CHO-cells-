@@ -13,8 +13,11 @@ set -euo pipefail
 : "${CHIP_CONTROL_RUN:?The authoritative control accession is required}"
 : "${CHIP_OUTPUT_DIR:?An explicit persistent analysis directory is required}"
 : "${CHIP_PRODUCTION_ROOT:?An explicit persistent production root is required}"
+: "${CHIP_PRODUCTION_SLOT:?A reserved production slot is required}"
+: "${CHIP_PRODUCTION_SLOT_TOKEN:?A production slot token is required}"
 [[ "$TMPDIR" = /* && -d "$TMPDIR" && -w "$TMPDIR" ]] || { echo "ERROR: invalid TMPDIR" >&2; exit 2; }
 [[ "$CHIP_OUTPUT_DIR" = /* && "$CHIP_PRODUCTION_ROOT" = /* ]] || { echo "ERROR: persistent paths must be absolute" >&2; exit 2; }
+[[ "$CHIP_PRODUCTION_SLOT" == 1 || "$CHIP_PRODUCTION_SLOT" == 2 ]] || { echo "ERROR: production slot must be 1 or 2" >&2; exit 2; }
 
 SOURCE="$PWD"
 PLAN="$CHIP_OUTPUT_DIR/submission_plan.json"
@@ -26,19 +29,24 @@ CONTROL_DIR="$CHIP_PRODUCTION_ROOT/shared_controls/$CHIP_CONTROL_RUN"
 STAGE=initialization
 START_UTC="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 MONITOR_PID=""
+SLOT_ACTIVE=false
+SLOT_LOCK="$CHIP_PRODUCTION_ROOT/.production.slot.${CHIP_PRODUCTION_SLOT}.lock"
+exec 9>"$SLOT_LOCK"
+flock -n 9 || { echo "ERROR: reserved ChIP production slot is already active" >&2; exit 2; }
+
+stop_monitor() { if [[ -n "$MONITOR_PID" ]]; then kill "$MONITOR_PID" 2>/dev/null || true; wait "$MONITOR_PID" 2>/dev/null || true; MONITOR_PID=""; fi; }
+release_slot() { if [[ "$SLOT_ACTIVE" == true ]]; then python "$SOURCE/workflow/scripts/chipseq_production.py" release-slot --production-root "$CHIP_PRODUCTION_ROOT" --slot "$CHIP_PRODUCTION_SLOT" --analysis "$CHIP_ANALYSIS_ID" --token "$CHIP_PRODUCTION_SLOT_TOKEN"; SLOT_ACTIVE=false; fi; }
+finish() { status=$?; trap - EXIT; set +e; stop_monitor; printf 'stage\t%s\nexit_status\t%s\n' "$STAGE" "$status" > "$CHIP_OUTPUT_DIR/job_status.tsv"; release_slot; exit "$status"; }
+trap finish EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+python workflow/scripts/chipseq_production.py validate-slot --production-root "$CHIP_PRODUCTION_ROOT" --slot "$CHIP_PRODUCTION_SLOT" --analysis "$CHIP_ANALYSIS_ID" --token "$CHIP_PRODUCTION_SLOT_TOKEN"
+SLOT_ACTIVE=true
 [[ ! -e "$ART" && ! -e "$ART_FINAL" ]] || { echo "ERROR: persistent artifact collision" >&2; exit 2; }
 mkdir -p "$WORK" "$LOG" "$ART/software_versions"
 RESERVE="$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["scratch_structural_reserve_bytes"])' "$PLAN")"
 FREE="$(df -PB1 "$TMPDIR" | awk 'NR==2 {print $4}')"
 (( FREE >= RESERVE )) || { echo "ERROR: TMPDIR free bytes $FREE are below required reserve $RESERVE" >&2; exit 2; }
-exec 9>"$CHIP_PRODUCTION_ROOT/.production.lock"
-flock -n 9 || { echo "ERROR: another ChIP production analysis holds the lock" >&2; exit 2; }
-
-stop_monitor() { if [[ -n "$MONITOR_PID" ]]; then kill "$MONITOR_PID" 2>/dev/null || true; wait "$MONITOR_PID" 2>/dev/null || true; MONITOR_PID=""; fi; }
-finish() { status=$?; trap - EXIT; set +e; stop_monitor; printf 'stage\t%s\nexit_status\t%s\n' "$STAGE" "$status" > "$CHIP_OUTPUT_DIR/job_status.tsv"; exit "$status"; }
-trap finish EXIT
-trap 'exit 130' INT
-trap 'exit 143' TERM
 record_disk() { printf '%s\t%s\t%s\t%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$1" "$(du -sb "$WORK" | awk '{print $1}')" "$(df -PB1 "$TMPDIR" | awk 'NR==2 {print $4}')" >> "$ART/disk_usage.tsv"; }
 printf 'timestamp_utc\tphase\tscratch_used_bytes\tscratch_filesystem_free_bytes\n' > "$ART/disk_usage.tsv"
 printf 'epoch_seconds\tscratch_used_bytes\n' > "$ART/scratch_monitor.tsv"
@@ -121,11 +129,23 @@ process_run() {
 
 STAGE=control_validation_or_creation
 if [[ -e "$CONTROL_DIR" ]]; then
+    mkdir -p "$CHIP_PRODUCTION_ROOT/.control_locks"
+    exec 8>"$CHIP_PRODUCTION_ROOT/.control_locks/${CHIP_CONTROL_RUN}.lock"
+    flock -s 8
+    [[ -e "$CONTROL_DIR" ]] || { echo "ERROR: shared control disappeared while acquiring its reader lock" >&2; exit 2; }
     python workflow/scripts/chipseq_production.py load-control --plan "$PLAN" --destination "$CONTROL_DIR" > "$LOG/control_reuse_validation.json"
 else
-    process_run "$CHIP_CONTROL_RUN" input
-    python workflow/scripts/chipseq_production.py persist-control --plan "$PLAN" --source "$WORK/runs/$CHIP_CONTROL_RUN/filtered" --destination "$CONTROL_DIR"
-    rm -- "$WORK/runs/$CHIP_CONTROL_RUN/filtered/filtered.bam" "$WORK/runs/$CHIP_CONTROL_RUN/filtered/filtered.bam.csi"
+    mkdir -p "$CHIP_PRODUCTION_ROOT/.control_locks"
+    exec 8>"$CHIP_PRODUCTION_ROOT/.control_locks/${CHIP_CONTROL_RUN}.lock"
+    flock -x 8
+    if [[ -e "$CONTROL_DIR" ]]; then
+        python workflow/scripts/chipseq_production.py load-control --plan "$PLAN" --destination "$CONTROL_DIR" > "$LOG/control_reuse_validation.json"
+    else
+        process_run "$CHIP_CONTROL_RUN" input
+        python workflow/scripts/chipseq_production.py persist-control --plan "$PLAN" --source "$WORK/runs/$CHIP_CONTROL_RUN/filtered" --destination "$CONTROL_DIR"
+        rm -- "$WORK/runs/$CHIP_CONTROL_RUN/filtered/filtered.bam" "$WORK/runs/$CHIP_CONTROL_RUN/filtered/filtered.bam.csi"
+    fi
+    flock -s 8
 fi
 IP="$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["analysis"]["ip_run_accession"])' "$PLAN")"
 process_run "$IP" ip
@@ -172,6 +192,8 @@ printf 'maximum_observed_scratch_bytes\t%s\n' "$(awk -F '\t' 'NR>1 && $2>m {m=$2
 mv "$ART" "$ART_FINAL"
 ART="$ART_FINAL"
 python workflow/scripts/chipseq_production.py finalize --plan "$PLAN" --artifacts "$ART" --output "$CHIP_OUTPUT_DIR" --start-utc "$START_UTC" --slurm-job "$SLURM_JOB_ID"
+STAGE=slot_release
+release_slot
 STAGE=completed
 printf 'stage\tcompleted\nexit_status\t0\n' > "$CHIP_OUTPUT_DIR/job_status.tsv"
 trap - EXIT
