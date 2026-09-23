@@ -1,0 +1,45 @@
+{
+  "aggregation_policy": {
+    "analysis_qc_features": "median across the two condition-specific analyses",
+    "binary_peak_features": "n positive conditions, fraction positive, any condition, all conditions",
+    "cross_study_aggregation": "NOT performed at this stage",
+    "other_peak_features": "median across the two conditions within each study",
+    "spmr_features": "median, min, max, and absolute condition delta within study"
+  },
+  "expected_conditions_per_group": 2,
+  "grouping": [
+    "canonical_locus_id",
+    "target",
+    "study"
+  ],
+  "source_columns": 62,
+  "source_rows": 666,
+  "source_table": "benchmarks/chipseq/2026-09-23/locus_integration_v1/chipseq_locus_analysis_peak_spmr_features_v1.tsv",
+  "source_table_sha256": "16e82f05f6f3205c82808bdfc623cc627bb5597157182b6ccb1e013cfb178238",
+  "technical_spmr_fields": {
+    "full_coverage_errors": 0,
+    "nominal_windows_bp": {
+      "pm1000": 2001,
+      "pm10000": 20001,
+      "pm50000": 100001
+    },
+    "policy": "validated as invariants and excluded from biological study-summary features"
+  },
+  "validation": {
+    "H3K27ac_rows": 74,
+    "H3K27me3_rows": 37,
+    "H3K36me3_rows": 37,
+    "H3K4me1_rows": 37,
+    "H3K4me3_rows": 74,
+    "H3K9me3_rows": 74,
+    "columns": 75,
+    "groups_with_two_conditions": 333,
+    "rows": 333,
+    "status": "PASS",
+    "unique_loci": 37,
+    "unique_locus_mark_study_groups": 333,
+    "unique_marks": 6,
+    "validation_errors": 0
+  },
+  "workflow": "ChIP-seq locus x histone mark x study aggregation"
+}

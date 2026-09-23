@@ -1,0 +1,15 @@
+metric	value
+rows	333
+columns	75
+unique_loci	37
+unique_marks	6
+unique_locus_mark_study_groups	333
+groups_with_two_conditions	333
+H3K27ac_rows	74
+H3K4me3_rows	74
+H3K9me3_rows	74
+H3K27me3_rows	37
+H3K36me3_rows	37
+H3K4me1_rows	37
+validation_errors	0
+status	PASS
