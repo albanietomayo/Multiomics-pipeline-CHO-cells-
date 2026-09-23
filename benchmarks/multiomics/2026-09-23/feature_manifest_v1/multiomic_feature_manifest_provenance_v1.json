@@ -1,0 +1,73 @@
+{
+  "atac_policy": "IDR 0.10 and replicate-consensus SPMR features define the primary accessibility layer. IDR 0.05 features are retained as a stricter sensitivity-analysis layer.",
+  "benchmark_composition": {
+    "negative": 4,
+    "positive": 27,
+    "support_only": 6
+  },
+  "chip_benchmark_relative_policy": "All 96 ChIP relative_percentile columns remain excluded from a portable baseline predictor view because their values depend on the distribution of the same 37 benchmark loci.",
+  "chip_policy": "Study/analysis provenance is excluded. Peak-support and peak-context features remain biologically interpretable candidates subject to redundancy review. Cross-study variability is treated as sensitivity information.",
+  "classification_scope": "This manifest assigns semantic and governance roles to every column in the frozen 37-locus multiomic master. It does not create a training matrix and does not perform model fitting or outcome-driven feature selection.",
+  "constant_policy": "Biological or technical features that are constant across the 37 benchmark loci are marked exclude_constant for the baseline benchmark feature view. Their source values remain preserved in the frozen master.",
+  "coordinate_policy": "Absolute benchmark coordinates, locus width, RNA TSS coordinates, and ATAC/ChIP representative anchors are excluded from the baseline predictor space to avoid coordinate and benchmark-definition proxies.",
+  "label_policy": "benchmark_role is retained as the benchmark label only. It must never be included among predictors. support_only records are not negatives.",
+  "manifest_shape": {
+    "columns": 17,
+    "rows": 588
+  },
+  "master_shape": {
+    "columns": 588,
+    "rows": 37
+  },
+  "missingness_policy": "All-missing cross-study fields that are not applicable to one-study histone marks are marked exclude_not_applicable. No imputation is performed by this manifest.",
+  "observed_profile": {
+    "all_missing_columns": 54,
+    "benchmark_relative_columns": 96,
+    "columns_with_missing": 55,
+    "constant_columns": 107
+  },
+  "policy_counts": {
+    "candidate_categorical": 3,
+    "candidate_numeric": 2,
+    "candidate_redundancy_review": 111,
+    "exclude_benchmark_relative": 96,
+    "exclude_constant": 11,
+    "exclude_coordinate": 7,
+    "exclude_high_cardinality": 1,
+    "exclude_metadata": 45,
+    "exclude_not_applicable": 42,
+    "id_only": 1,
+    "label_only": 1,
+    "review_redundancy": 201,
+    "review_technical": 3,
+    "sensitivity_only": 64
+  },
+  "producer_script": "workflow/scripts/build_multiomic_feature_manifest.py",
+  "producer_script_sha256": "2879cd52378f7dd7d6719239317cf413856b95af870076fbb6c2d23c00925f2f",
+  "rna_policy": "Primary normalized expression and TSS context are retained as candidate biological features. Raw-count detection summaries require technical review. Features recalculated without PRJEB35183 are retained as sensitivity-analysis variables rather than baseline predictors.",
+  "selection_warning": "Candidate and review policies are pre-model governance labels, not evidence that a feature should be used in a final model. Redundancy, dimensionality, validation design, and the very small negative class must be addressed separately.",
+  "semantic_category_counts": {
+    "benchmark_coordinate_metadata": 6,
+    "benchmark_relative_feature": 96,
+    "biological_annotation": 2,
+    "biological_context": 5,
+    "biological_signal": 322,
+    "evidence_metadata": 5,
+    "identifier": 1,
+    "identifier_metadata": 1,
+    "label": 1,
+    "provenance_metadata": 38,
+    "reference_metadata": 1,
+    "sensitivity_analysis": 106,
+    "technical_or_detection_summary": 4
+  },
+  "source_master": "benchmarks/multiomics/2026-09-23/master_context_v1/benchmark_37_multiomic_master_context_v1.tsv",
+  "source_master_provenance": "benchmarks/multiomics/2026-09-23/master_context_v1/benchmark_37_multiomic_master_context_provenance_v1.json",
+  "source_master_provenance_sha256": "27669db855ac11714941ea8877afe4d2a742c56c2c3950e3063d05d2d725f38b",
+  "source_master_sha256": "3ba7329ade8d23781d71c7f925757fd09fbb1d05e92f3eda718cbc8f5e41065b",
+  "validation": {
+    "errors": 0,
+    "status": "PASS"
+  },
+  "workflow": "Multiomic feature governance manifest"
+}
