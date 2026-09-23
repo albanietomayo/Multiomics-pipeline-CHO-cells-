@@ -1,0 +1,23 @@
+{
+  "aggregation_definition": "Gene-wise median across normalized experiment-level values within each study.",
+  "aggregation_level": "study",
+  "aggregation_statistic": "median",
+  "input_dimensions": {
+    "experiments": 1473,
+    "genes": 27775,
+    "studies": 92
+  },
+  "post_aggregation_renormalization": false,
+  "study_median_tpm_column_sum": {
+    "max": 1001090.1851525352,
+    "median": 991093.4712124798,
+    "min": 905704.9724317298
+  },
+  "study_ordering": "lexicographic study_accession",
+  "study_size_experiments": {
+    "max": 96,
+    "median": 10.5,
+    "min": 1
+  },
+  "tpm_interpretation": "Study-median TPM summaries are not renormalized after gene-wise median aggregation and are therefore not expected to sum exactly to 1e6."
+}

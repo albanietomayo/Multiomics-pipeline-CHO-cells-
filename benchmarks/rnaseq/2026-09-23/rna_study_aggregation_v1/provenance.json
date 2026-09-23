@@ -1,0 +1,26 @@
+{
+  "aggregation": {
+    "level": "study",
+    "post_aggregation_renormalization": false,
+    "statistic": "median",
+    "study_weighting": "One output column per study; equal study weighting is applied when summarizing across study columns."
+  },
+  "aggregation_script": "workflow/scripts/aggregate_rnaseq_by_study.py",
+  "aggregation_script_sha256": "3ce7a1e7971d946cd7c400c60793dde3bf7b2881a0dee663de8ecf28995889bd",
+  "git_commit": "60701bc8bccb8ae0d6406821d2a0653563df8ca2",
+  "inputs": {
+    "experiment_metadata": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/rnaseq/2026-09-22/rna_experiment_matrix_v1/experiment_metadata.tsv",
+      "sha256": "79feaa20c20e12d992ee44639f66568ad33934dd116879580f9d9f42e6bfabfa"
+    },
+    "logcpm": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/rnaseq/2026-09-23/rna_normalization_v1/rnaseq_tmm_logcpm_by_experiment_1473.tsv.gz",
+      "sha256": "56d4b19f78c4cdc9fab06321ac2c1a02153345b4470cb4e4ee63781a86063147"
+    },
+    "tpm": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/rnaseq/2026-09-23/rna_normalization_v1/rnaseq_tpm_by_experiment_1473.tsv.gz",
+      "sha256": "36ddfe9033bba27040e9bed8f2893e509c781908d63119698f733aaa91b4c76b"
+    }
+  },
+  "python_version": "3.9.25 (main, Jul 13 2026, 00:00:00) \n[GCC 11.5.0 20240719 (Red Hat 11.5.0-14)]"
+}
