@@ -1,0 +1,16 @@
+metric	value
+rows	222
+columns	100
+unique_loci	37
+unique_marks	6
+unique_locus_mark_pairs	222
+one_study_rows	111
+two_study_rows	111
+H3K27ac_rows	37
+H3K27me3_rows	37
+H3K36me3_rows	37
+H3K4me1_rows	37
+H3K4me3_rows	37
+H3K9me3_rows	37
+validation_errors	0
+status	PASS
