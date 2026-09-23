@@ -1,0 +1,11 @@
+name: rnaseq-normalization
+
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - r-base=4.5.3
+  - bioconductor-edger=4.8.2
+  - r-data.table=1.18.6.1
+  - r-jsonlite=2.0.0
