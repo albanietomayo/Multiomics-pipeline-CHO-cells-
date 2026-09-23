@@ -1,0 +1,23 @@
+[
+  {
+    "path": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/final_matrix/rnaseq_gene_counts_v1/gene_annotation.tsv.gz",
+    "rows": 27775,
+    "columns": 6,
+    "first_column": "Geneid",
+    "data_columns": 5
+  },
+  {
+    "path": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/final_matrix/rnaseq_gene_counts_v1/rnaseq_gene_counts_matrix.tsv.gz",
+    "rows": 27775,
+    "columns": 1754,
+    "first_column": "Geneid",
+    "data_columns": 1753
+  },
+  {
+    "path": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/final_matrix/rnaseq_gene_counts_v1/run_order.tsv",
+    "rows": 1753,
+    "columns": 7,
+    "first_column": "matrix_column",
+    "data_columns": 6
+  }
+]

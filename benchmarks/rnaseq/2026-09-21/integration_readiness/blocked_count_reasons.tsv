@@ -1,0 +1,5 @@
+selection_reason	n_runs
+excluded:single_cell_protocol	32
+excluded:specialized_RNA_assay	21
+excluded:non_CHO	20
+review_required:protocol_review	7

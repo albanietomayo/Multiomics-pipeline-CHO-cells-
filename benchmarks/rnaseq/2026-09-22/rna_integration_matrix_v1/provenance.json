@@ -1,0 +1,30 @@
+{
+  "source_matrix": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/final_matrix/rnaseq_gene_counts_v1/rnaseq_gene_counts_matrix.tsv.gz",
+  "source_matrix_sha256": "c6210da4a66ca52fc08bff1a5a2196439cd1e572eb2e2d1e556905ad3aeb29e3",
+  "source_annotation": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/final_matrix/rnaseq_gene_counts_v1/gene_annotation.tsv.gz",
+  "source_annotation_sha256": "0f1ccd507ce284bc0dee9c613b52d9492a272b50faf720d1f0d2e2894c3d3a0e",
+  "source_run_order": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/final_matrix/rnaseq_gene_counts_v1/run_order.tsv",
+  "source_run_order_sha256": "bc05994fbc78ba9766d8174861b85448c17371183e668f4a28228369ef11a3dc",
+  "source_runs": 1753,
+  "integration_runs": 1740,
+  "excluded_runs": [
+    "SRR10215648",
+    "SRR10215649",
+    "SRR10215650",
+    "SRR10215651",
+    "SRR10215652",
+    "SRR10215653",
+    "SRR10215654",
+    "SRR10215655",
+    "SRR10215656",
+    "SRR10215657",
+    "SRR10215658",
+    "SRR5358887",
+    "SRR5358889"
+  ],
+  "excluded_run_reason": "specialized_RNA_assay",
+  "gene_rows": 27775,
+  "output_uncompressed_payload_sha256": "e52461ee1fe85568ea2b79b8e24238b58a8a6a2d1b1a07ee7d46a3be25d0414a",
+  "selection_decisions_sha256": "1ec50bbca76943128c4dab4ee3c6b937cf953c62c87c0cd21e9ec1dc8ddf631b",
+  "samples_sha256": "8611f84086b97074cc2271a331adc42442bb5ebf908ee5a736db49f4f94bd570"
+}

@@ -1,0 +1,16 @@
+{
+  "eligible_runs": 1740,
+  "unique_experiments": 1473,
+  "multi_run_experiments": 102,
+  "runs_per_experiment": {
+    "1": 1371,
+    "2": 35,
+    "3": 3,
+    "4": 47,
+    "6": 17
+  },
+  "inconsistent_experiments": [],
+  "unique_studies": 92,
+  "samples_reused_by_multiple_experiments": 21,
+  "expression_unit_decision": "Technical sequencing runs sharing experiment_accession can be considered for raw-count consolidation because audited grouping fields are internally consistent."
+}

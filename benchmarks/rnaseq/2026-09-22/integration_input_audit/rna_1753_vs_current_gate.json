@@ -1,0 +1,21 @@
+{
+  "matrix": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/final_matrix/rnaseq_gene_counts_v1/rnaseq_gene_counts_matrix.tsv.gz",
+  "matrix_runs": 1753,
+  "current_gate_eligible": 1740,
+  "matrix_not_current_eligible": [
+    "SRR10215648",
+    "SRR10215649",
+    "SRR10215650",
+    "SRR10215651",
+    "SRR10215652",
+    "SRR10215653",
+    "SRR10215654",
+    "SRR10215655",
+    "SRR10215656",
+    "SRR10215657",
+    "SRR10215658",
+    "SRR5358887",
+    "SRR5358889"
+  ],
+  "eligible_not_matrix": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_run_matrix": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/rnaseq/2026-09-22/rna_integration_matrix_v1/rnaseq_gene_counts_integration_1740.tsv.gz",
+  "source_run_matrix_sha256": "bc6c38f87a3c7d4c33d07712cadc19e02761a1f9a983c02fa24595bc323d2c84",
+  "source_experiment_manifest": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/rnaseq/2026-09-22/rna_integration_matrix_v1/experiment_manifest.tsv",
+  "source_experiment_manifest_sha256": "d1ea9a0d21c215c3f4ab4dd6fd1c34c5c8f4097538810f3a7865b9c660b03731",
+  "source_runs": 1740,
+  "output_experiments": 1473,
+  "gene_rows": 27775,
+  "aggregation": "Raw integer counts summed gene-by-gene across runs sharing experiment_accession",
+  "normalization_applied": false
+}

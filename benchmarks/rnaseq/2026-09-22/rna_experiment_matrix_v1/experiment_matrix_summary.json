@@ -1,0 +1,35 @@
+{
+  "source_runs": 1740,
+  "experiments": 1473,
+  "multi_run_experiments": 102,
+  "runs_per_experiment": {
+    "1": 1371,
+    "2": 35,
+    "3": 3,
+    "4": 47,
+    "6": 17
+  },
+  "genes": 27775,
+  "source_global_count_sum": 32414951647,
+  "experiment_global_count_sum": 32414951647,
+  "global_count_conservation": true,
+  "experiment_column_sum_mismatches": [],
+  "raw_count_quantiles": {
+    "min": 210955,
+    "p01": 1145257.3599999999,
+    "p05": 4428971.0,
+    "p10": 7128485.199999999,
+    "p25": 12189711.0,
+    "p50": 17631412.0,
+    "p75": 26614674.0,
+    "p90": 40447955.4,
+    "max": 133035037
+  },
+  "nonzero_gene_fraction_quantiles": {
+    "min": 0.33245724572457247,
+    "p10": 0.5186822682268226,
+    "p50": 0.589018901890189,
+    "p90": 0.6538613861386139,
+    "max": 0.7763456345634564
+  }
+}

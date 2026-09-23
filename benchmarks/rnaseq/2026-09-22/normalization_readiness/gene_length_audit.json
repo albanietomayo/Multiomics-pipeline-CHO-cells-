@@ -1,0 +1,8 @@
+{
+  "genes": 27775,
+  "unique_gene_ids": 27775,
+  "invalid_lengths": 0,
+  "minimum_length": 55,
+  "median_length": 1675,
+  "maximum_length": 87576
+}

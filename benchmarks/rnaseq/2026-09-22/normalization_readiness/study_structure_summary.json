@@ -1,0 +1,10 @@
+{
+  "studies": 92,
+  "experiments": 1473,
+  "median_experiments_per_study": 10.5,
+  "min_experiments_per_study": 1,
+  "max_experiments_per_study": 96,
+  "studies_median_counts_lt_2m": [
+    "PRJEB35183"
+  ]
+}
