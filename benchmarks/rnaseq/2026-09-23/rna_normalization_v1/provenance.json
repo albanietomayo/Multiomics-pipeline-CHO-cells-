@@ -1,0 +1,49 @@
+{
+  "smoke_test": false,
+  "inputs": {
+    "matrix": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/rnaseq/2026-09-22/rna_experiment_matrix_v1/rnaseq_gene_counts_by_experiment_1473.tsv.gz",
+      "sha256": "def8f0c00dd30b869b2644001cb315547dff6b68de67fe5870d1013b60f61737"
+    },
+    "metadata": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/rnaseq/2026-09-22/rna_experiment_matrix_v1/experiment_metadata.tsv",
+      "sha256": "79feaa20c20e12d992ee44639f66568ad33934dd116879580f9d9f42e6bfabfa"
+    },
+    "raw_count_qc": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/benchmarks/rnaseq/2026-09-22/rna_experiment_matrix_v1/experiment_raw_count_qc.tsv",
+      "sha256": "69be3513edfa97a9aaed14af5880cc7a9a77f26e313bbadf99eff9306a4b50d1"
+    },
+    "annotation": {
+      "path": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/final_matrix/rnaseq_gene_counts_v1/gene_annotation.tsv.gz",
+      "sha256": "0f1ccd507ce284bc0dee9c613b52d9492a272b50faf720d1f0d2e2894c3d3a0e"
+    }
+  },
+  "output_sha256": {
+    "tmm_factors_1473.tsv": "42f60b257410503edd04bcb87912fc9040b02d1d2f9f0db7c038cf43ea8f2cc2",
+    "rnaseq_tmm_logcpm_by_experiment_1473.tsv.gz": "56d4b19f78c4cdc9fab06321ac2c1a02153345b4470cb4e4ee63781a86063147",
+    "rnaseq_tpm_by_experiment_1473.tsv.gz": "36ddfe9033bba27040e9bed8f2893e509c781908d63119698f733aaa91b4c76b",
+    "gene_normalization_qc.tsv": "6f6e41b2ded5f5b1c74359faedc296c920df7b4624c78e6382d25dedd9249847",
+    "normalization_qc_summary.json": "e0a1bc3a7981d5a45c64e426c7249768f485dd60dce96e4efa0f0a9931f5785d"
+  },
+  "dimensions": {
+    "genes": 27775,
+    "experiments": 1473,
+    "studies": 92
+  },
+  "tmm_method": "TMM",
+  "logcpm_prior_count": 2,
+  "tpm_formula": "(raw_count / (featureCounts_Length_bp / 1000)) / column_sum_RPK * 1e6",
+  "tpm_length_source": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/final_matrix/rnaseq_gene_counts_v1/gene_annotation.tsv.gz",
+  "gene_filtering": "none; all-zero genes retained",
+  "normalization_scope": "experiment-level only; no batch correction or study aggregation",
+  "r_version": "R version 4.5.3 (2026-03-11)",
+  "package_versions": {
+    "edgeR": "4.8.2",
+    "data.table": "1.18.6.1",
+    "jsonlite": "2.0.0"
+  },
+  "session_info": ["R version 4.5.3 (2026-03-11)", "Platform: x86_64-conda-linux-gnu", "Running under: Rocky Linux 9.8 (Blue Onyx)", "", "Matrix products: default", "BLAS/LAPACK: /cephyr/users/mayoa/Vera/.conda/envs/tfm_rnaseq_normalization/lib/libopenblasp-r0.3.34.so;  LAPACK version 3.12.0", "", "locale:", " [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              ", " [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    ", " [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   ", " [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 ", " [9] LC_ADDRESS=C               LC_TELEPHONE=C            ", "[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       ", "", "time zone: UTC", "tzcode source: system (glibc)", "", "attached base packages:", "[1] stats     graphics  grDevices utils     datasets  methods   base     ", "", "loaded via a namespace (and not attached):", "[1] edgeR_4.8.2         compiler_4.5.3      limma_3.66.0       ", "[4] grid_4.5.3          locfit_1.5-9.12     data.table_1.18.6.1", "[7] jsonlite_2.0.0      lattice_0.23-1      statmod_1.5.2      "],
+  "timestamp_utc": "2026-09-23T12:06:47Z",
+  "git_commit": "3077fc31d8690b924047ebb005203d889ec53b01",
+  "normalization_script_sha256": "7b852ba43a4c400c34e30e6b25eca10ceb51e8c90cdca636637d26f907492387"
+}

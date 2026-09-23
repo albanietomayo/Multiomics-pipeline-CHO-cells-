@@ -1,0 +1,38 @@
+{
+  "smoke_test": false,
+  "input_dimensions": {
+    "genes": 27775,
+    "experiments": 1473,
+    "studies": 92
+  },
+  "output_dimensions": {
+    "tmm_logcpm": {
+      "genes": 27775,
+      "experiments": 1473
+    },
+    "tpm": {
+      "genes": 27775,
+      "experiments": 1473
+    }
+  },
+  "globally_all_zero_genes": 428,
+  "genes_nonzero_in_at_least_one_experiment": 27347,
+  "tmm_factor": {
+    "min": 0.3182,
+    "median": 1.0009,
+    "max": 1.2963
+  },
+  "effective_library_size": {
+    "min": 90696.0522,
+    "median": 17240747.303,
+    "max": 127125296.4316
+  },
+  "tpm_column_sum": {
+    "min": 1000000,
+    "median": 1000000,
+    "max": 1000000
+  },
+  "tpm_column_sum_target": 1000000,
+  "tpm_column_sum_absolute_tolerance": 0.0001,
+  "all_zero_logcpm_note": "Finite logCPM from prior.count=2 does not establish expression. Use gene_normalization_qc.tsv."
+}
