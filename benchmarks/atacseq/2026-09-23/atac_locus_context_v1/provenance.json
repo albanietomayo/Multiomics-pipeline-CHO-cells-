@@ -1,0 +1,41 @@
+{
+  "description": "Reproducible ATAC-seq regulatory context for all 37 canonical CHO benchmark loci.",
+  "method": {
+    "anchor_definition": "Integer centre of the canonical 1-based closed locus interval; representative context point only, not assumed to be the exact integration coordinate for mapped interval loci.",
+    "anchor_half_windows_bp": [
+      1000,
+      10000,
+      50000
+    ],
+    "biological_dataset": "PRJNA667472 CHO-K1 bulk ATAC-seq",
+    "complete_locus_features": "Peak overlap evaluated against the full canonical 1-based closed locus interval.",
+    "continuous_signal": "Arithmetic mean of replicate MACS3 treatment-pileup SPMR window means.",
+    "interpretation": "Exploratory regulatory-context characterization; no predictive or causal claim.",
+    "primary_reproducible_accessibility": "IDR <= 0.10",
+    "replicates": [
+      "SRR12774931",
+      "SRR12774932"
+    ],
+    "sensitivity_reproducible_accessibility": "IDR <= 0.05"
+  },
+  "pipeline_commit": "3c06a1fb183ad8d07e4f64875166d3c570506758",
+  "product": "benchmark_37_atac_context_v1",
+  "sources": {
+    "all37_atac_features_with_signal": {
+      "path": "benchmarks/atacseq/2026-09-23/all37_integration_v1/benchmark_37_atac_features_with_signal.tsv",
+      "sha256": "63293aaef16083d6202b9718a9e513be3ccde694f4fb88f24f320ba2f90c030b"
+    },
+    "benchmark": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_benchmark/benchmark/curated/benchmark_loci.tsv",
+      "sha256": "ea5a30f96853b288791e12ca84ed7c438987ed7cc9605d81fe503cc52438bdf0"
+    },
+    "locus_audit": {
+      "path": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/reference_gtf_recovery_audit/benchmark_37_nearest_gene_tss_audit.tsv",
+      "sha256": "6fbf88c612b02d76a46deb7dd6e9913f89276e12e55e91e8cfb782df05f52cdf"
+    },
+    "script": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/workflow/scripts/build_atac_locus_context.py",
+      "sha256": "9c182970f8c3d059bdd329343e271db0a5feb005dd2efdb5685073827a1aa342"
+    }
+  }
+}

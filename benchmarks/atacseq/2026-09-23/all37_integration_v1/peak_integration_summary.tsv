@@ -1,0 +1,13 @@
+metric	value
+benchmark_loci	37
+benchmark_positive	27
+benchmark_negative	4
+benchmark_support_only	6
+idr10_raw_records	44216
+idr10_unique_intervals	39332
+idr10_exact_duplicate_records	4884
+idr05_raw_records	36800
+idr05_unique_intervals	33226
+idr05_exact_duplicate_records	3574
+benchmark_loci_anchor_in_idr10_peak	0
+benchmark_loci_anchor_in_idr05_peak	0

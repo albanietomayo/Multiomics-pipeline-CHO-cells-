@@ -1,0 +1,32 @@
+{
+  "anchor_definition": "integer centre of 1-based closed benchmark interval",
+  "anchor_half_windows_bp": [
+    1000,
+    10000,
+    50000
+  ],
+  "benchmark_bed": {
+    "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_benchmark/benchmark/curated/benchmark_loci.bed",
+    "sha256": "fabcb8dbc2dfdb79c9a3c6d3e518b7c7a25a63f1137cfc1d7e3028b770261d07"
+  },
+  "benchmark_tsv": {
+    "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_benchmark/benchmark/curated/benchmark_loci.tsv",
+    "sha256": "ea5a30f96853b288791e12ca84ed7c438987ed7cc9605d81fe503cc52438bdf0"
+  },
+  "coordinate_system": {
+    "benchmark_tsv": "1-based closed",
+    "internal_and_bed": "0-based half-open"
+  },
+  "idr05": {
+    "path": "/cephyr/users/mayoa/Vera/atac_production_validation/production_48e5aa5c_limited_real_v1/artifacts/job_10318071/results/atacseq/reproducibility/PRJNA667472_CHO-K1_bulk_ATAC/idr_le_0.05.tsv",
+    "raw_records": 36800,
+    "sha256": "06a106192a66558aa59e809ed05381f4d4dfa5dbec6e4a20a117f90efd6a1307",
+    "unique_intervals": 33226
+  },
+  "idr10": {
+    "path": "/cephyr/users/mayoa/Vera/atac_production_validation/production_48e5aa5c_limited_real_v1/artifacts/job_10318071/results/atacseq/reproducibility/PRJNA667472_CHO-K1_bulk_ATAC/idr_le_0.10.tsv",
+    "raw_records": 44216,
+    "sha256": "36ebdf975d6cb695d218f45c0b31d32df1af1e7ff4a53952c564b61986310411",
+    "unique_intervals": 39332
+  }
+}
