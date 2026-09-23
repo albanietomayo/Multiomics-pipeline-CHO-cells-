@@ -1,0 +1,16 @@
+metric	value
+rows	666
+columns	62
+unique_loci	37
+unique_analyses	18
+unique_locus_analysis_pairs	666
+inherited_peak_feature_mismatches	0
+input_columns	46
+appended_spmr_columns	16
+source_spmr_tracks	18
+source_sha256_mismatches	0
+reference_contigs	648
+pm1000bp_actual_window_bp_values	2001
+pm10000bp_actual_window_bp_values	20001
+pm50000bp_actual_window_bp_values	100001
+status	PASS

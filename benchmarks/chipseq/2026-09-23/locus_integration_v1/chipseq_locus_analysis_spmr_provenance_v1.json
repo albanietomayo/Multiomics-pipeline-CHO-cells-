@@ -1,0 +1,237 @@
+{
+  "coordinate_semantics": {
+    "anchor": "anchor1 = floor((start1 + end1)/2); anchor0 = anchor1 - 1",
+    "bedgraph": "0-based half-open",
+    "benchmark": "1-based closed",
+    "canonical_locus": "start0 = target_start_1based - 1; end0 = target_end_1based",
+    "windows": "anchor +/- N bp including anchor; nominal width = 2*N + 1"
+  },
+  "input_inventory": "benchmarks/chipseq/2026-09-23/integration_input_v1/chipseq_artifact_inventory_v1.tsv",
+  "input_inventory_sha256": "91cd429f2f5dbeb3007744b1b8452796fc863e17fd9a297d6330d50d85dd9902",
+  "input_peak_table": "benchmarks/chipseq/2026-09-23/locus_integration_v1/chipseq_locus_analysis_peak_features_v1.tsv",
+  "input_peak_table_sha256": "e98ecb0cbc859cf9e6d5e35c24aa74ec3ae6b0cc5e9afb8720c56a95fce5c9e3",
+  "output_columns": [
+    "canonical_locus_id",
+    "locus_name",
+    "benchmark_role",
+    "best_evidence_tier",
+    "n_observations",
+    "target_assembly",
+    "target_seqname",
+    "target_start_1based",
+    "target_end_1based",
+    "locus_width_bp",
+    "locus_semantic_class",
+    "mapping_confidence",
+    "supporting_studies",
+    "chip_anchor_1based",
+    "analysis_id",
+    "study",
+    "condition_key",
+    "target",
+    "peak_mode",
+    "ip_run",
+    "control_run",
+    "peak_file_type",
+    "analysis_peak_count",
+    "analysis_frip",
+    "analysis_input_overlap_fraction",
+    "analysis_ip_input_overlap_ratio",
+    "analysis_median_fold_enrichment",
+    "chip_exact_overlap",
+    "chip_exact_n_peaks",
+    "chip_exact_overlap_bp",
+    "chip_exact_overlap_fraction_of_locus",
+    "chip_anchor_in_peak",
+    "chip_nearest_peak_distance_to_anchor_bp",
+    "chip_nearest_peak_distance_to_locus_bp",
+    "chip_n_peaks_pm1000bp",
+    "chip_any_peak_pm1000bp",
+    "chip_enriched_bp_pm1000bp",
+    "chip_enriched_fraction_pm1000bp",
+    "chip_n_peaks_pm10000bp",
+    "chip_any_peak_pm10000bp",
+    "chip_enriched_bp_pm10000bp",
+    "chip_enriched_fraction_pm10000bp",
+    "chip_n_peaks_pm50000bp",
+    "chip_any_peak_pm50000bp",
+    "chip_enriched_bp_pm50000bp",
+    "chip_enriched_fraction_pm50000bp",
+    "chip_spmr_locus_mean",
+    "chip_spmr_locus_covered_bp",
+    "chip_spmr_locus_covered_fraction",
+    "chip_spmr_locus_actual_bp",
+    "chip_spmr_pm1000bp_mean",
+    "chip_spmr_pm1000bp_covered_bp",
+    "chip_spmr_pm1000bp_covered_fraction",
+    "chip_spmr_pm1000bp_actual_window_bp",
+    "chip_spmr_pm10000bp_mean",
+    "chip_spmr_pm10000bp_covered_bp",
+    "chip_spmr_pm10000bp_covered_fraction",
+    "chip_spmr_pm10000bp_actual_window_bp",
+    "chip_spmr_pm50000bp_mean",
+    "chip_spmr_pm50000bp_covered_bp",
+    "chip_spmr_pm50000bp_covered_fraction",
+    "chip_spmr_pm50000bp_actual_window_bp"
+  ],
+  "reference_fai": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq_generalization/snapshots/chipseq/alignment_validation_001/job/outputs/reference/genome_plus_mt.fa.fai",
+  "reference_fai_sha256": "2dfb28d82459be6cbddb6e4be79e2c328c436654cc37f2e703c7abb9c50a0d57",
+  "source_artifacts": {
+    "ERR868151": {
+      "relative_path": "results/chipseq/production/analyses/ERR868151/artifacts/peaks/ERR868151_treat_pileup.bdg.gz",
+      "sha256": "1fdfd17f9916f4ab15b260b14bcfd03d0cf5b203d82a910fc598a8cfc0fa76cc",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 178722115
+    },
+    "ERR868152": {
+      "relative_path": "results/chipseq/production/analyses/ERR868152/artifacts/peaks/ERR868152_treat_pileup.bdg.gz",
+      "sha256": "fbaa0ee37e0a87f34373adb16dc9f0ca8dde949b3717b8f3dfc2193858bd242a",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 271348346
+    },
+    "ERR868153": {
+      "relative_path": "results/chipseq/production/analyses/ERR868153/artifacts/peaks/ERR868153_treat_pileup.bdg.gz",
+      "sha256": "77a400b5d7856d9a1e0afd2dfb74952e43d5f3317a1be5b562255fd156efd53c",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 330972042
+    },
+    "ERR868154": {
+      "relative_path": "results/chipseq/production/analyses/ERR868154/artifacts/peaks/ERR868154_treat_pileup.bdg.gz",
+      "sha256": "401d3198804e310ffb414ba1878103ffc5de73efb019bcfd7e8b58a2a986b987",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 299375004
+    },
+    "ERR868155": {
+      "relative_path": "results/chipseq/production/analyses/ERR868155/artifacts/peaks/ERR868155_treat_pileup.bdg.gz",
+      "sha256": "0bf826eb2dfe777ad71c45dbadfce30ddd55d4a3bb613921215194bcd3724cdb",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 135533697
+    },
+    "ERR868156": {
+      "relative_path": "results/chipseq/production/analyses/ERR868156/artifacts/peaks/ERR868156_treat_pileup.bdg.gz",
+      "sha256": "9dd2d26b77f791170c4dff9bf950af6b765691f82d6bed21fa0e44540b02d1f3",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 308307400
+    },
+    "ERR868171": {
+      "relative_path": "results/chipseq/production/analyses/ERR868171/artifacts/peaks/ERR868171_treat_pileup.bdg.gz",
+      "sha256": "a521f38f52fe3f1e6c03f14497f324d1db62cfed3141af708914d099ee622d5a",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 230554769
+    },
+    "ERR868172": {
+      "relative_path": "results/chipseq/production/analyses/ERR868172/artifacts/peaks/ERR868172_treat_pileup.bdg.gz",
+      "sha256": "3c32cff0fccfb76a2904ffedb580239b2059f61203a2331f1316979b6fdf2eae",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 250888269
+    },
+    "ERR868173": {
+      "relative_path": "results/chipseq/production/analyses/ERR868173/artifacts/peaks/ERR868173_treat_pileup.bdg.gz",
+      "sha256": "d25ed8ac7881d0b5f12f173e8cc678a27f7b676472c109ff259012808d7ec255",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 277491198
+    },
+    "ERR868174": {
+      "relative_path": "results/chipseq/production/analyses/ERR868174/artifacts/peaks/ERR868174_treat_pileup.bdg.gz",
+      "sha256": "38a75fe26cfaba86df7b3ca799cb56d318df93261d26470643a039a1824735e0",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 106857370
+    },
+    "ERR868175": {
+      "relative_path": "results/chipseq/production/analyses/ERR868175/artifacts/peaks/ERR868175_treat_pileup.bdg.gz",
+      "sha256": "51716c9924586435b87c4b031aa765be5d943d293210ce2bc506f37d0bc99080",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 184708149
+    },
+    "ERR868176": {
+      "relative_path": "results/chipseq/production/analyses/ERR868176/artifacts/peaks/ERR868176_treat_pileup.bdg.gz",
+      "sha256": "c2f2f472a593fc208efb8dc19051a5ae14d2fe4083fb97082cb2c37e36ef6402",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 201248180
+    },
+    "SRR20770291": {
+      "relative_path": "results/chipseq/production/analyses/SRR20770291/artifacts/peaks/SRR20770291_treat_pileup.bdg.gz",
+      "sha256": "da4e6ce2730609c26f469dc835a3c62c5b7ae478f3786f1942f4171d1a9fc8d4",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 463600540
+    },
+    "SRR20770292": {
+      "relative_path": "results/chipseq/production/analyses/SRR20770292/artifacts/peaks/SRR20770292_treat_pileup.bdg.gz",
+      "sha256": "8f398b979d31ebd4b82088df572f71cbf396c58ae3b4defe90a98daa29650833",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 331557696
+    },
+    "SRR20770293": {
+      "relative_path": "results/chipseq/production/analyses/SRR20770293/artifacts/peaks/SRR20770293_treat_pileup.bdg.gz",
+      "sha256": "afbd94f9acdb7e75f4f914818d0cbd19b176b7e90dade71ff3feb5b1e7e97413",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 548402036
+    },
+    "SRR20770294": {
+      "relative_path": "results/chipseq/production/analyses/SRR20770294/artifacts/peaks/SRR20770294_treat_pileup.bdg.gz",
+      "sha256": "083929f34f2c3d8231da155450b5a6ce8962cfab9c143546801569b842b0868a",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 421181171
+    },
+    "SRR20770296": {
+      "relative_path": "results/chipseq/production/analyses/SRR20770296/artifacts/peaks/SRR20770296_treat_pileup.bdg.gz",
+      "sha256": "6b8632bd21ad42a2e2a286c4c35fb63a9136d33ff8089f77731b33ad368fdef2",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 338433833
+    },
+    "SRR20770297": {
+      "relative_path": "results/chipseq/production/analyses/SRR20770297/artifacts/peaks/SRR20770297_treat_pileup.bdg.gz",
+      "sha256": "c7cbf9f423f294a85563533d5b70579746a296e007ae3a9e5af7f44a9eb12dd7",
+      "sha256_matches_frozen_inventory": true,
+      "size_bytes": 349098565
+    }
+  },
+  "spmr_semantics": {
+    "covered_bp": "bp represented by valid non-overlapping bedGraph segments within region",
+    "mean": "sum(signal_value * overlap_bp) / actual_region_bp",
+    "uncovered_positions": "contribute zero to the full-region mean"
+  },
+  "track_record_counts": {
+    "ERR868151": 27772816,
+    "ERR868152": 47513169,
+    "ERR868153": 54806777,
+    "ERR868154": 52381788,
+    "ERR868155": 21376162,
+    "ERR868156": 50053250,
+    "ERR868171": 37017045,
+    "ERR868172": 43947598,
+    "ERR868173": 44809445,
+    "ERR868174": 18641280,
+    "ERR868175": 28912988,
+    "ERR868176": 35569595,
+    "SRR20770291": 79229168,
+    "SRR20770292": 58321793,
+    "SRR20770293": 92404512,
+    "SRR20770294": 72264083,
+    "SRR20770296": 59580828,
+    "SRR20770297": 59739785
+  },
+  "validation": {
+    "appended_spmr_columns": 16,
+    "columns": 62,
+    "inherited_peak_feature_mismatches": 0,
+    "input_columns": 46,
+    "pm10000bp_actual_window_bp_values": "20001",
+    "pm1000bp_actual_window_bp_values": "2001",
+    "pm50000bp_actual_window_bp_values": "100001",
+    "reference_contigs": 648,
+    "rows": 666,
+    "source_sha256_mismatches": 0,
+    "source_spmr_tracks": 18,
+    "status": "PASS",
+    "unique_analyses": 18,
+    "unique_loci": 37,
+    "unique_locus_analysis_pairs": 666
+  },
+  "windows_bp": [
+    1000,
+    10000,
+    50000
+  ],
+  "workflow": "condition-specific ChIP-seq SPMR locus integration"
+}

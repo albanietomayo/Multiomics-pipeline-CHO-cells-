@@ -1,0 +1,54 @@
+{
+  "coordinate_policy": {
+    "anchor": "floor((start_1based + end_1based)/2); representative context point only, not assumed to be an exact insertion coordinate for interval-class loci.",
+    "benchmark": "Canonical loci are 1-based closed intervals.",
+    "conversion": "benchmark_start0 = target_start_1based - 1; benchmark_end0 = target_end_1based",
+    "full_locus_priority": "Exact peak overlap is evaluated on the full canonical interval and is the primary locus-local feature.",
+    "peak_files": "MACS3 narrowPeak/broadPeak are 0-based half-open intervals.",
+    "windows": "Representative-anchor windows include the anchor base plus W bases on each side; nominal widths are 2001, 20001 and 100001 bp for W=1000,10000,50000."
+  },
+  "description": "Condition-specific ChIP-seq peak features for all 37 canonical CHO benchmark loci across 18 validated IP-Input analyses.",
+  "dimensions": {
+    "benchmark_loci": 37,
+    "chip_analyses": 18,
+    "rows": 666
+  },
+  "peak_policy": {
+    "aggregation": "No aggregation across conditions, studies or marks at this stage.",
+    "broad_marks": [
+      "H3K4me1",
+      "H3K27me3",
+      "H3K36me3",
+      "H3K9me3"
+    ],
+    "interpretation": "Descriptive regulatory-context features; no causal or predictive claim.",
+    "narrow_marks": [
+      "H3K27ac",
+      "H3K4me3"
+    ]
+  },
+  "product": "chipseq_locus_analysis_peak_features_v1",
+  "repository_HEAD_at_generation": "537142a103965a1ffef924fd3269a25f43b65d0e",
+  "sources": {
+    "analysis_design": {
+      "path": "benchmarks/chipseq/2026-09-23/integration_input_v1/chipseq_analysis_design_v1.tsv",
+      "sha256": "29e448cb657963d84d62ecc8b9eb432916adca40f238e4f1ea6a9989d9653d57"
+    },
+    "artifact_inventory": {
+      "path": "benchmarks/chipseq/2026-09-23/integration_input_v1/chipseq_artifact_inventory_v1.tsv",
+      "sha256": "91cd429f2f5dbeb3007744b1b8452796fc863e17fd9a297d6330d50d85dd9902"
+    },
+    "benchmark": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_benchmark/benchmark/curated/benchmark_loci.tsv",
+      "sha256": "ea5a30f96853b288791e12ca84ed7c438987ed7cc9605d81fe503cc52438bdf0"
+    },
+    "locus_audit": {
+      "path": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/reference_gtf_recovery_audit/benchmark_37_nearest_gene_tss_audit.tsv",
+      "sha256": "6fbf88c612b02d76a46deb7dd6e9913f89276e12e55e91e8cfb782df05f52cdf"
+    },
+    "script": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/workflow/scripts/build_chipseq_locus_peak_features.py",
+      "sha256": "66ed596e8564fdada84715fa82524e4dbbc631ae67d1aa621a0506b2bc3ec730"
+    }
+  }
+}
