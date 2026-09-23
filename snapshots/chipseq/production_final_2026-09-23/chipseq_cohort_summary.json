@@ -1,0 +1,20 @@
+{
+  "audited_runs": 120,
+  "blacklist_status": "not_performed",
+  "blocked_no_control": 90,
+  "broad": 10,
+  "input_runs": 6,
+  "ip_runs": 114,
+  "mitochondrial_accession": "NC_007936.1",
+  "narrow": 8,
+  "nuclear_reference_span_bp": 2366634374,
+  "physical_runs_used": 22,
+  "production_failed_final": 0,
+  "production_pass": 18,
+  "production_pending": 0,
+  "ready_analyses": 18,
+  "reference": "GCF_003668045.3",
+  "replicate_concordance_status": "not_performed_or_not_supported_by_validated_groups",
+  "review_required": 6,
+  "unique_shared_controls": 4
+}

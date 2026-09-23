@@ -1,0 +1,15 @@
+# Final ChIP-seq production snapshot (2026-09-23)
+
+This text-only snapshot closes the eligible ChIP-seq cohort and hands its 18 validated peak sets to multi-omic integration. The audited cohort contains 120 runs (114 IP, 6 Input); the authoritative analysis plan classified 18 IP/Input analyses ready, 6 review_required, and 90 blocked_no_control. All 18 eligible analyses completed and passed validation. These are 18 IP runs with four shared Input runs (22 physical runs); the other audited runs are not claimed as produced.
+
+## Sources and paths
+
+The summary and integration rows come from `results/chipseq/production/production_ledger.tsv`, each `results/chipseq/production/analyses/<analysis_id>/production_run_manifest.tsv`, completed marker, fragment provenance, parameters, peak QC, and output inventory. Pairings and eligibility come from `snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv`; policies come from `config/chipseq_peak_calling_plan.tsv` and `config/chipseq_peak_calling_policy.json`. Cohort counts were checked against the planning summary and metadata run table. Control hashes and cleanup state come from `results/chipseq/production/shared_controls/<control_run>/`. Integration paths are repository-relative paths to persisted files on Vera.
+
+## Scientific policy and metrics
+
+All analyses use CriGri-PICRH-1.0 (GCF_003668045.3), exclude mitochondrial contig NC_007936.1 when deriving the 2,366,634,374 bp nuclear reference span, use MACS3 q-value 0.01 and `keep_dup=all`. Broad analyses also use broad cutoff 0.1. PRJNA865478 uses fixed 147 bp fragments; PRJEB9291 uses independent PhantomPeakQualTools estimates. There are 8 narrowPeak and 10 broadPeak outputs. Persisted signal tracks are gzip-compressed bedGraph/SPMR files, not BigWig.
+
+FRiP is IP reads in peaks divided by IP total reads. Input overlap fraction is Input reads overlapping IP peaks divided by Input total reads. IP/Input overlap ratio divides FRiP by Input overlap fraction. Median fold enrichment and median minus log10 q are peak-level medians; peak widths are in bp. Union peak span is the nonredundant span of called peaks, and nuclear coverage fraction divides it by the nuclear reference span. These QC statistics are descriptive, not universal pass thresholds. `NA` means a value is genuinely unavailable or inapplicable.
+
+Blacklist filtering was not performed because no validated CHO blacklist was available. Replicate concordance and IDR were not performed or are unsupported by validated replicate groups; no replicate agreement is claimed. Final production used at most two concurrent analyses. Large FASTQ, BAM, CSI, peak, and signal outputs remain on Vera and are intentionally not version controlled. Shared Input BAM/CSI files were cleaned after every dependent analysis completed and was verified by the production cleanup routine; hashes and cleanup markers remain. The three historical SRR20770287 analyses received their final ledger PASS rows during reconciliation on 2026-09-23, after the original cleanup.
