@@ -1,0 +1,47 @@
+{
+  "analysis_count": 18,
+  "artifact_count": 36,
+  "description": "Validated condition-specific ChIP-seq integration input for 18 IP-Input analyses.",
+  "integration_policy": {
+    "aggregation": "No cross-condition or cross-study aggregation at this stage",
+    "continuous_signal": "MACS3 treatment pileup generated with SPMR normalization",
+    "control_lambda": "Not required for integration; removed after completed QC and production verification",
+    "peak_evidence": "MACS3 narrowPeak or broadPeak according to validated mark policy",
+    "unit": "one condition-specific IP-Input analysis"
+  },
+  "pipeline_commit_at_build": "216b401fac5c5a7d62767c42e3c4449bc10d43fc",
+  "product": "chipseq_integration_input_v1",
+  "production_commits": [
+    "290c35dcec4b76c258b2788a4adbc6940654d04f",
+    "48d80c961acfd188033db9e1cf2972222fbc48a5",
+    "fb62508d51efa41ab73067ba7ca57966516cd5f9"
+  ],
+  "reference_accession": "GCF_003668045.3",
+  "source_root": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq_generalization",
+  "sources": {
+    "condition_metadata": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq_generalization/snapshots/chipseq/control_validation_001/chipseq_conditions.tsv",
+      "sha256": "12a6cb7c77a9ec9e1d6f560d24e6fa1e7ac5b1ecfa5192d668134cca6a7a447c"
+    },
+    "integration_manifest": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq_generalization/snapshots/chipseq/production_final_2026-09-23/chipseq_integration_manifest.tsv",
+      "sha256": "fd36f996d618ec623203bc7107f03116b2c68486010ac07ece89874e4a8e2a65"
+    },
+    "production_summary": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_chipseq_generalization/snapshots/chipseq/production_final_2026-09-23/chipseq_production_summary.tsv",
+      "sha256": "898cbf4b20e01c7574a82825881f1d73ddfb95dcd6c054a3528213222b04670c"
+    },
+    "script": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/workflow/scripts/build_chipseq_integration_input.py",
+      "sha256": "6ec0d15b8134d23beae166893cf514c342292e33b3b1429bc28c4decafd40cf6"
+    }
+  },
+  "targets": {
+    "H3K27ac": 4,
+    "H3K27me3": 2,
+    "H3K36me3": 2,
+    "H3K4me1": 2,
+    "H3K4me3": 4,
+    "H3K9me3": 4
+  }
+}
