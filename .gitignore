@@ -46,3 +46,5 @@ Thumbs.db
 # Generated RNA normalization matrices; retain their QC and provenance
 /benchmarks/rnaseq/2026-09-23/rna_normalization_v1/rnaseq_tmm_logcpm_by_experiment_1473.tsv.gz
 /benchmarks/rnaseq/2026-09-23/rna_normalization_v1/rnaseq_tpm_by_experiment_1473.tsv.gz
+/benchmarks/rnaseq/2026-09-23/rna_study_aggregation_v1/rnaseq_tmm_logcpm_by_study_median_92.tsv.gz
+/benchmarks/rnaseq/2026-09-23/rna_study_aggregation_v1/rnaseq_tpm_by_study_median_92.tsv.gz
