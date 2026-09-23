@@ -102,6 +102,30 @@ def main():
                    "--smoke-test"]
         subprocess.run(command, check=True, cwd=ROOT)
         out = temp / "normalized"
+
+        expected_files = {
+            "tmm_factors_4.tsv",
+            "rnaseq_tmm_logcpm_by_experiment_4.tsv.gz",
+            "rnaseq_tpm_by_experiment_4.tsv.gz",
+            "gene_normalization_qc.tsv",
+            "normalization_qc_summary.json",
+            "provenance.json",
+            "SHA256SUMS.txt",
+        }
+        assert {path.name for path in out.iterdir()} == expected_files
+        assert all((out / name).stat().st_size > 0 for name in expected_files)
+
+        subprocess.run(
+            ["gzip", "-t", str(out / "rnaseq_tmm_logcpm_by_experiment_4.tsv.gz")],
+            check=True,
+        )
+        subprocess.run(
+            ["gzip", "-t", str(out / "rnaseq_tpm_by_experiment_4.tsv.gz")],
+            check=True,
+        )
+
+        assert not list(temp.glob("normalized.tmp-*"))
+
         factor_rows = read_tsv(out / "tmm_factors_4.tsv")
         assert [row["experiment_accession"] for row in factor_rows] == experiments
         assert all(math.isfinite(float(row["tmm_norm_factor"])) and
@@ -148,6 +172,7 @@ def main():
 
         print("SMOKE PASS: 10 genes x 4 experiments; 2 all-zero genes retained; TPM sums within 1e-4")
         print("SMOKE PASS: TMM factors/effective sizes finite and positive; order and SHA256SUMS verified")
+        print("SMOKE PASS: all 7 published outputs are non-empty; both matrix gzip streams pass integrity checks")
         print("SMOKE PASS: inconsistent raw-count QC rejected with non-zero exit")
 
 

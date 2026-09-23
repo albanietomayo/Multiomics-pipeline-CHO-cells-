@@ -66,6 +66,113 @@ check_finite <- function(values, label, positive = FALSE) {
     if (positive && any(values <= 0)) fail(paste(label, "contains non-positive values"))
 }
 
+assert_nonempty_file <- function(path, label = basename(path)) {
+    if (!file.exists(path)) fail(paste(label, "does not exist:", path))
+    info <- file.info(path)
+    size <- info$size[[1L]]
+    if (is.na(size) || !is.finite(size) || size <= 0) {
+        fail(paste(label, "is empty or has invalid size:", path))
+    }
+    invisible(size)
+}
+
+validate_gzip_file <- function(path, label = basename(path)) {
+    assert_nonempty_file(path, label)
+    answer <- suppressWarnings(system2(
+        "gzip",
+        c("-t", shQuote(path)),
+        stdout = TRUE,
+        stderr = TRUE
+    ))
+    status <- attr(answer, "status")
+    if (!is.null(status) && status != 0L) {
+        fail(paste(label, "failed gzip integrity validation:", paste(answer, collapse = " ")))
+    }
+    invisible(TRUE)
+}
+
+validate_json_file <- function(path, label = basename(path)) {
+    assert_nonempty_file(path, label)
+    value <- tryCatch(
+        jsonlite::read_json(path, simplifyVector = FALSE),
+        error = function(e) fail(paste(label, "is not valid JSON:", conditionMessage(e)))
+    )
+    if (!is.list(value)) fail(paste(label, "did not decode to a JSON object"))
+    invisible(value)
+}
+
+validate_tsv_file <- function(path, expected_header, expected_rows, label) {
+    assert_nonempty_file(path, label)
+    con <- file(path, open = "rt")
+    on.exit(close(con), add = TRUE)
+
+    header <- readLines(con, n = 1L, warn = FALSE)
+    if (length(header) != 1L || !identical(header[[1L]], expected_header)) {
+        fail(paste(label, "has an unexpected header"))
+    }
+
+    rows <- 0L
+    repeat {
+        chunk <- readLines(con, n = 10000L, warn = FALSE)
+        if (!length(chunk)) break
+        rows <- rows + length(chunk)
+    }
+
+    if (rows != expected_rows) {
+        fail(paste(label, "has", rows, "data rows; expected", expected_rows))
+    }
+    invisible(TRUE)
+}
+
+validate_matrix_gz_file <- function(path, genes, experiments, label) {
+    validate_gzip_file(path, label)
+
+    con <- gzfile(path, open = "rt")
+    on.exit(close(con), add = TRUE)
+
+    expected_header <- paste(c("Geneid", experiments), collapse = "\t")
+    header <- readLines(con, n = 1L, warn = FALSE)
+
+    if (length(header) != 1L || !identical(header[[1L]], expected_header)) {
+        fail(paste(label, "has an unexpected matrix header"))
+    }
+
+    rows <- 0L
+    repeat {
+        chunk <- readLines(con, n = 5000L, warn = FALSE)
+        if (!length(chunk)) break
+        rows <- rows + length(chunk)
+    }
+
+    if (rows != length(genes)) {
+        fail(paste(label, "has", rows, "gene rows; expected", length(genes)))
+    }
+    invisible(TRUE)
+}
+
+validate_checksum_manifest <- function(workdir) {
+    manifest <- file.path(workdir, "SHA256SUMS.txt")
+    assert_nonempty_file(manifest, "SHA256SUMS.txt")
+
+    previous_wd <- getwd()
+    on.exit(setwd(previous_wd), add = TRUE)
+    setwd(workdir)
+
+    answer <- suppressWarnings(system2(
+        "sha256sum",
+        c("--check", "SHA256SUMS.txt"),
+        stdout = TRUE,
+        stderr = TRUE
+    ))
+    status <- attr(answer, "status")
+
+    if (!is.null(status) && status != 0L) {
+        fail(paste("SHA256SUMS verification failed:", paste(answer, collapse = " ")))
+    }
+
+    invisible(TRUE)
+}
+
 write_matrix_gz <- function(values, genes, path) {
     con <- gzfile(path, open = "wb", compression = 6L)
     on.exit(close(con), add = TRUE)
@@ -239,6 +346,44 @@ main <- function() {
     rm(tpm)
     gc(verbose = FALSE)
 
+    # Fail closed before any metadata/checksum publication.
+    # A zero-byte or truncated output must never become a final result.
+    validate_tsv_file(
+        paths$factors,
+        paste(c(
+            "experiment_accession",
+            "study_accession",
+            "raw_library_size",
+            "tmm_norm_factor",
+            "effective_library_size"
+        ), collapse = "\t"),
+        n_experiments,
+        "TMM factors"
+    )
+    validate_tsv_file(
+        paths$gene_qc,
+        paste(c(
+            "Geneid",
+            "Length",
+            "all_zero_across_experiments",
+            "n_nonzero_experiments"
+        ), collapse = "\t"),
+        n_genes,
+        "gene normalization QC"
+    )
+    validate_matrix_gz_file(
+        paths$logcpm,
+        genes,
+        experiments,
+        "TMM logCPM matrix"
+    )
+    validate_matrix_gz_file(
+        paths$tpm,
+        genes,
+        experiments,
+        "TPM matrix"
+    )
+
     range_summary <- function(x) list(min = min(x), median = median(x), max = max(x))
     dimensions <- list(genes = n_genes, experiments = n_experiments,
                        studies = length(unique(metadata$study_accession)))
@@ -256,6 +401,7 @@ main <- function() {
         all_zero_logcpm_note = "Finite logCPM from prior.count=2 does not establish expression. Use gene_normalization_qc.tsv."
     )
     jsonlite::write_json(summary, paths$summary, pretty = TRUE, auto_unbox = TRUE)
+    validate_json_file(paths$summary, "normalization QC summary")
 
     input_paths <- list(matrix = args$counts, metadata = args$metadata,
                         raw_count_qc = args$qc, annotation = args$annotation)
@@ -297,13 +443,38 @@ main <- function() {
         normalization_script_sha256 = script_sha256
     )
     jsonlite::write_json(provenance, paths$provenance, pretty = TRUE, auto_unbox = TRUE)
+    validate_json_file(paths$provenance, "provenance")
+
     checksum_names <- c(unname(output_names), basename(paths$provenance))
     checksum_paths <- file.path(workdir, checksum_names)
     checksum_lines <- vapply(seq_along(checksum_paths), function(i) {
         paste0(sha256(checksum_paths[[i]]), "  ", checksum_names[[i]])
     }, character(1))
-    writeLines(checksum_lines, file.path(workdir, "SHA256SUMS.txt"))
-    if (!file.rename(workdir, args$outdir)) fail(paste("Cannot publish output directory:", args$outdir))
+    checksum_manifest <- file.path(workdir, "SHA256SUMS.txt")
+    writeLines(checksum_lines, checksum_manifest)
+    assert_nonempty_file(checksum_manifest, "SHA256SUMS.txt")
+    validate_checksum_manifest(workdir)
+
+    expected_final_names <- sort(c(checksum_names, "SHA256SUMS.txt"))
+    actual_final_names <- sort(list.files(
+        workdir,
+        all.files = FALSE,
+        full.names = FALSE,
+        recursive = FALSE,
+        no.. = TRUE
+    ))
+    if (!identical(actual_final_names, expected_final_names)) {
+        fail(paste(
+            "Unexpected final output set. Expected:",
+            paste(expected_final_names, collapse = ","),
+            "Observed:",
+            paste(actual_final_names, collapse = ",")
+        ))
+    }
+
+    if (!file.rename(workdir, args$outdir)) {
+        fail(paste("Cannot publish output directory:", args$outdir))
+    }
     cat("Validated and wrote", n_genes, "genes x", n_experiments,
         "experiments to", args$outdir, "\n")
 }
