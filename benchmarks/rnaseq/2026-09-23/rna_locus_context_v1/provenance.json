@@ -1,0 +1,38 @@
+{
+  "description": "Gene-level RNA-seq context for the 37 canonical CHO benchmark loci. RNA signal is associated by nearest gene-level TSS and must not be interpreted as localized transcriptional signal at the integration site.",
+  "method": {
+    "locus_distance": "minimum distance from gene-level TSS to complete canonical 1-based inclusive locus interval",
+    "rna_resolution": "gene_id",
+    "sensitivity": "repeat consensus excluding PRJEB35183",
+    "study_consensus": "median across 92 study-level medians with equal study weighting",
+    "tss_definition": "5-prime boundary of GTF gene feature; validated as most-upstream annotated transcript TSS for all quantified genes"
+  },
+  "pipeline_commit": "0dd89f1cd98f9b252b4fc2b532213c943f0ccdcc",
+  "product": "benchmark_37_rna_context_v1",
+  "sources": {
+    "benchmark": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_benchmark/benchmark/curated/benchmark_loci.tsv",
+      "sha256": "ea5a30f96853b288791e12ca84ed7c438987ed7cc9605d81fe503cc52438bdf0"
+    },
+    "consensus": {
+      "path": "benchmarks/rnaseq/2026-09-23/rna_gene_consensus_v1/rnaseq_gene_consensus_equal_study_weight_92.tsv.gz",
+      "sha256": "43c1b4e64285b28e732f3f1cca8acb342faa591c048f6f7bb990d5397bb9900f"
+    },
+    "locus_audit": {
+      "path": "/cephyr/users/mayoa/Vera/hpc_rnaseq_production_results/2026-09-10/reference_gtf_recovery_audit/benchmark_37_nearest_gene_tss_audit.tsv",
+      "sha256": "6fbf88c612b02d76a46deb7dd6e9913f89276e12e55e91e8cfb782df05f52cdf"
+    },
+    "raw_support": {
+      "path": "benchmarks/rnaseq/2026-09-23/rna_locus_integration_v1/benchmark_37_nearest_gene_raw_count_support.tsv",
+      "sha256": "38ce7cfed564a69ef7dce920864e23c0dbca52ace88c86c6156089412719fdd4"
+    },
+    "script": {
+      "path": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git/workflow/scripts/build_rna_locus_context.py",
+      "sha256": "a82345a265823af0413204e31d309b1cf20e1ee1111857504465bae0606a1858"
+    },
+    "sensitivity": {
+      "path": "benchmarks/rnaseq/2026-09-23/rna_locus_integration_v1/benchmark_37_PRJEB35183_sensitivity.tsv",
+      "sha256": "6ae4bab9b56655e2681ff7bd68367ef0d7ad33b87b2153764f8ef276d030d6c5"
+    }
+  }
+}

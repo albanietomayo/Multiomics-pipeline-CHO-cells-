@@ -1,0 +1,17 @@
+metric	value
+benchmark_loci	37
+unique_nearest_genes	37
+tmm_abs_delta_median	0.0030335651782751327
+tmm_abs_delta_q95	0.044629678991312212
+tmm_abs_delta_max	0.38655948150884001
+tmm_max_change_locus	CHO_BM_GAIDUKOV_013
+tmm_max_change_gene	Dcn
+tpm_abs_delta_median	0.03461076779322525
+tpm_abs_delta_q95	0.84055685614814757
+tpm_abs_delta_max	2.6422103346494623
+tpm_max_change_locus	CHO_BM_DHIMAN_006
+tpm_max_change_gene	LOC100766031
+loci_with_positive_original_tpm_median	24
+absolute_tpm_relative_change_median	0.0081770553587990104
+absolute_tpm_relative_change_q95	0.060431039360954342
+absolute_tpm_relative_change_max	0.14514760630150031

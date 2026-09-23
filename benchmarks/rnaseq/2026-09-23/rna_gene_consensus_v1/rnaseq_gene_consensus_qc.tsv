@@ -1,0 +1,11 @@
+metric	value
+genes	27775
+studies	92
+aggregation_level	study
+study_weighting	equal
+central_tendency	median
+quartile_method	Hyndman-Fan_type_7
+tmm_logcpm_missing_values	0
+tpm_missing_values	0
+genes_with_zero_positive_study_median_tpm	3314
+genes_with_positive_study_median_tpm_in_all_92_studies	9504

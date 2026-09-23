@@ -1,0 +1,13 @@
+metric	value
+genes	27775
+original_studies	92
+sensitivity_studies	91
+excluded_study	PRJEB35183
+tmm_abs_delta_median	0.001567759057285123
+tmm_abs_delta_q95	0.030372127939621969
+tmm_abs_delta_q99	0.072301375730099496
+tmm_abs_delta_max	0.68601793874703265
+tpm_abs_delta_median	0.0019782575135128544
+tpm_abs_delta_q95	0.62173847119489944
+tpm_abs_delta_q99	2.5876635603223925
+tpm_abs_delta_max	125.43300912404811

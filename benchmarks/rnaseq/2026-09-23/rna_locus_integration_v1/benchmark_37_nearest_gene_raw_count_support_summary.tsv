@@ -1,0 +1,8 @@
+metric	value
+benchmark_loci	37
+unique_nearest_genes	37
+experiments	1473
+nearest_genes_raw_all_zero	0
+nearest_genes_raw_nonzero	37
+minimum_positive_experiments	5
+maximum_positive_experiments	1473
