@@ -1,0 +1,52 @@
+{
+  "anchor_policy": "Point-anchor-specific variables are excluded from the core view. ATAC nearest peak distance is anchor-based and is retained only in the extended view. ChIP core nearest-peak distances use the full canonical locus interval. Fixed +/-1 kb, +/-10 kb and +/-50 kb regional summaries remain anchor-centred context features.",
+  "benchmark_relative_policy": "No ChIP relative-percentile feature is included because those values depend on the composition of the same 37 benchmark loci.",
+  "core_principle": "The core view is a compact subset of the extended view emphasizing central RNA expression/TSS context, primary IDR<=0.10 ATAC accessibility, and full-locus or regional ChIP peak context across all six histone marks.",
+  "core_view": {
+    "ATAC_predictors": 8,
+    "CHIP_predictors": 54,
+    "RNA_predictors": 5,
+    "predictors": 67,
+    "rows": 37,
+    "table_columns": 69,
+    "textual_predictors": [
+      "rna_locus_relative_to_tss"
+    ]
+  },
+  "encoding_policy": "Categorical biological predictors are preserved as raw categorical values in these feature views. No one-hot encoding or other model-specific transformation is applied at this stage.",
+  "extended_view": {
+    "ATAC_predictors": 12,
+    "CHIP_predictors": 145,
+    "RNA_predictors": 10,
+    "predictors": 167,
+    "rows": 37,
+    "table_columns": 169,
+    "textual_predictors": [
+      "rna_nearest_gene_strand",
+      "rna_locus_relative_to_tss"
+    ]
+  },
+  "label_policy": "benchmark_role is provided only as a separate label column. support_only is preserved as a distinct benchmark class and must not be silently recoded as negative.",
+  "missingness_policy": "No predictor column with missing values is included. No imputation is performed.",
+  "producer_script": "workflow/scripts/build_multiomic_feature_views.py",
+  "producer_script_sha256": "1fc8bc3aaf83251ef8f4ae7c3516e62a3f12b065b63ce43999c961fd7b7bee2e",
+  "scaling_policy": "No scaling, centering, normalization, or feature transformation is fitted at this stage. Any model-specific transform must be fitted only within the training data of the eventual modelling design.",
+  "scope_warning": "These are model-facing benchmark feature views, not evidence that the 37 loci are sufficient for supervised model training or inferential performance estimation. The benchmark contains only four negative loci.",
+  "selection_principle": "Feature membership was pre-specified from biological semantics, feature governance, and deterministic/algebraic redundancy. benchmark_role was not used to select or rank predictors.",
+  "sensitivity_policy": "RNA leave-one-study-out sensitivity features, ATAC IDR<=0.05 features, and ChIP cross-study variability features are not included in either baseline feature view.",
+  "source_feature_manifest": "benchmarks/multiomics/2026-09-23/feature_manifest_v1/multiomic_feature_manifest_v1.tsv",
+  "source_feature_manifest_sha256": "322c1dafc2175189d178452159074bca09a09679df576ab740a75a8886aa6ac7",
+  "source_master": "benchmarks/multiomics/2026-09-23/master_context_v1/benchmark_37_multiomic_master_context_v1.tsv",
+  "source_master_sha256": "3ba7329ade8d23781d71c7f925757fd09fbb1d05e92f3eda718cbc8f5e41065b",
+  "structural_reduction": "The extended view starts from the 317 governed biological candidate/review columns and removes 150 representations demonstrated to be deterministic or algebraically redundant. No outcome association was used.",
+  "table_roles": {
+    "benchmark_role": "label_only",
+    "canonical_locus_id": "identifier_only",
+    "predictors": "all remaining columns in each feature-view table"
+  },
+  "validation": {
+    "errors": 0,
+    "status": "PASS"
+  },
+  "workflow": "Multiomic core and extended feature views"
+}
