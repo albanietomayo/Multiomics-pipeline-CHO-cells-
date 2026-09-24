@@ -1,0 +1,14 @@
+metric	statistic	positive_n	positive_value	negative_n	negative_value	unit_or_scale
+RNA TPM	median	6	5.102501334518161	4	0.0	TPM
+RNA detectable-study fraction	median	6	0.9891304347826086	4	0.00543478260869565	fraction
+RNA loci with TPM > 0	count	6	5.0	4	1.0	loci
+ATAC accessible bp +/-50 kb	median	6	1313.5	4	258.0	bp
+ATAC SPMR +/-50 kb	median	6	0.10304043471470176	4	0.061777249795339245	SPMR
+ATAC loci with accessible bp +/-50 kb > 0	count	6	5.0	4	2.0	loci
+H3K27ac nearest peak distance	median	6	20475.375	4	254677.375	bp
+H3K4me3 nearest peak distance	median	6	34412.125	4	154109.75	bp
+H3K36me3 nearest peak distance	median	6	37709.0	4	593533.5	bp
+H3K9me3 enriched fraction +/-10 kb	median	6	0.0	4	0.01334933253335	fraction
+H3K9me3 loci with any peak +/-10 kb	count	6	1.0	4	3.0	loci
+H3K27me3 enriched fraction +/-10 kb	median	6	0.0	4	0.00581220938955	fraction
+H3K27me3 loci with any peak +/-10 kb	count	6	1.0	4	2.0	loci
