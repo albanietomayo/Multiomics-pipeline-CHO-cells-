@@ -34,14 +34,33 @@ for mark in MARKS:
     ])
 HEATMAP_FEATURES = RNA_FEATURES + ATAC_FEATURES + CHIP_FEATURES
 HEATMAP_LABELS = [
-    "RNA: TSS distance", "RNA: logCPM", "RNA: TPM", "RNA: detected",
-    "ATAC: exact peaks", "ATAC: exact overlap",
-    "ATAC: bp +/-1 kb", "ATAC: SPMR +/-1 kb",
-    "ATAC: bp +/-10 kb", "ATAC: SPMR +/-10 kb",
-    "ATAC: bp +/-50 kb", "ATAC: SPMR +/-50 kb",
+    "RNA\nDistancia mín. TSS (bp)",
+    "RNA\nTMM-logCPM mediana",
+    "RNA\nTPM mediana",
+    "RNA\nFrac. estudios con TPM mediana >0",
+
+    "ATAC\nN.º picos IDR10 exactos",
+    "ATAC\nFrac. locus solapada (IDR10)",
+    "ATAC\nbp accesibles ±1 kb",
+    "ATAC\nSPMR consenso ±1 kb",
+    "ATAC\nbp accesibles ±10 kb",
+    "ATAC\nSPMR consenso ±10 kb",
+    "ATAC\nbp accesibles ±50 kb",
+    "ATAC\nSPMR consenso ±50 kb",
+
+    "H3K27ac\nFrac. cond. con pico ±50 kb",
+    "H3K27ac\nFrac. enriquecida ±10 kb",
+    "H3K4me3\nFrac. cond. con pico ±50 kb",
+    "H3K4me3\nFrac. enriquecida ±10 kb",
+    "H3K36me3\nFrac. cond. con pico ±50 kb",
+    "H3K36me3\nFrac. enriquecida ±10 kb",
+    "H3K4me1\nFrac. cond. con pico ±50 kb",
+    "H3K4me1\nFrac. enriquecida ±10 kb",
+    "H3K27me3\nFrac. cond. con pico ±50 kb",
+    "H3K27me3\nFrac. enriquecida ±10 kb",
+    "H3K9me3\nFrac. cond. con pico ±50 kb",
+    "H3K9me3\nFrac. enriquecida ±10 kb",
 ]
-for mark in MARKS:
-    HEATMAP_LABELS.extend([f"{mark}: peak +/-50 kb", f"{mark}: enrich +/-10 kb"])
 
 
 def sha256(path: Path) -> str:
@@ -123,26 +142,26 @@ def build_heatmap(core: pd.DataFrame, outdir: Path):
         for l, r in zip(meta["canonical_locus_id"], meta["benchmark_role"])
     ]
 
-    fig, ax = plt.subplots(figsize=(17, 12))
+    fig, ax = plt.subplots(figsize=(21, 12.5))
     im = ax.imshow(Z_ord.values, aspect="auto")
     ax.set_xticks(np.arange(len(HEATMAP_LABELS)))
-    ax.set_xticklabels(HEATMAP_LABELS, rotation=65, ha="right", fontsize=8)
+    ax.set_xticklabels(HEATMAP_LABELS, rotation=55, ha="right", fontsize=8.5)
     ax.set_yticks(np.arange(len(row_labels)))
-    ax.set_yticklabels(row_labels, fontsize=8)
-    ax.set_title("Contexto regulador multi-omico de los 37 loci del benchmark", fontsize=13, pad=10)
-    ax.set_xlabel("Caracteristicas de la vista Core estandarizadas por columna")
+    ax.set_yticklabels(row_labels, fontsize=8.5)
+    ax.set_title("Contexto regulador multi-ómico de los 37 loci del benchmark", fontsize=13, pad=10)
+    ax.set_xlabel("Características de la vista Core estandarizadas por característica")
     ax.set_ylabel("Loci (P = positive; N = negative; S = support_only)")
     for boundary in [3.5, 11.5, 13.5, 15.5, 17.5, 19.5, 21.5]:
         ax.axvline(boundary, linewidth=0.8)
     cbar = fig.colorbar(im, ax=ax, fraction=0.025, pad=0.02)
-    cbar.set_label("z-score por caracteristica")
+    cbar.set_label("z-score por característica")
     fig.text(
         0.5, 0.008,
-        "Clustering jerarquico no supervisado de los loci (Ward, distancia euclidea). "
-        "benchmark_role se muestra solo como anotacion y no interviene en el clustering.",
+        "Clustering jerárquico no supervisado de los loci (Ward, distancia euclídea). "
+        "benchmark_role se muestra solo como anotación y no interviene en el clustering.",
         ha="center", fontsize=8,
     )
-    fig.tight_layout(rect=[0, 0.035, 1, 0.98])
+    fig.tight_layout(rect=[0, 0.05, 1, 0.98])
     fig.savefig(outdir / "Figure_5_heatmap_multiomic_37_loci.png", dpi=300, bbox_inches="tight")
     fig.savefig(outdir / "Figure_5_heatmap_multiomic_37_loci.pdf", bbox_inches="tight")
     plt.close(fig)
