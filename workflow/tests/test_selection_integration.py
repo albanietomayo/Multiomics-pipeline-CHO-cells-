@@ -43,7 +43,9 @@ class Integration(unittest.TestCase):
     def test_unknown_and_wrong_modality(self):
         self.assertFalse(gate.decision('SRR0')[0]);self.assertFalse(gate.decision('SRR12774931',omics='RNA-seq')[0])
     def test_all_retained_rna_technical_support(self):
-        rows=gate.catalogue();self.assertEqual(sum(gate.decision(a,omics='RNA-seq')[0] for a in rows),1753)
+        # The frozen integration matrix has 1740 eligible runs after excluding
+        # 13 specialized assays from its 1753-run source matrix.
+        rows=gate.catalogue();self.assertEqual(sum(gate.decision(a,omics='RNA-seq')[0] for a in rows),1740)
     def test_checksums_require_compressed_and_payload(self):
         d=saved(self.p,GOOD);self.assertTrue(gate.counts_complete(d))
         (d/'gene_counts.tsv.sha256').write_text('0'*64);self.assertFalse(gate.counts_complete(d))

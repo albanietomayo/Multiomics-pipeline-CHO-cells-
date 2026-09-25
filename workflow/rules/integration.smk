@@ -1,3 +1,9 @@
+# LEGACY/HISTORICAL Gold31 ATAC integration: 27 positive + 4 negative loci.
+# This rule consumes benchmark_gold_binary.tsv/.bed, excludes support_only, and
+# is not included by the top-level Snakefile. Keep its historical VERA inputs
+# as execution evidence; it is not the final 37-locus multiomic workflow.
+# Final contexts and views were built with validated standalone scripts under
+# workflow/scripts/ and are frozen under benchmarks/*/2026-09-23/.
 configfile: "config/integration.yaml"
 
 rule integration_atac_benchmark_features:

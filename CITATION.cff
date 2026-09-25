@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+title: "Building training and benchmarking data pipelines for predictive genome engineering in CHO cells"
+authors:
+  - given-names: Alba
+    family-names: Nieto Mayo
+    affiliation: "Universidad Europea de Madrid; Chalmers University of Technology"
+version: 1.0.0
+repository-code: "https://github.com/albanietomayo/Multiomics-pipeline-CHO-cells-"
+preferred-citation:
+  type: software
+  title: "Building training and benchmarking data pipelines for predictive genome engineering in CHO cells"
+  authors:
+    - given-names: Alba
+      family-names: Nieto Mayo
+      affiliation: "Universidad Europea de Madrid; Chalmers University of Technology"
+  version: 1.0.0
+  year: 2026

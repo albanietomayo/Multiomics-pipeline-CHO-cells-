@@ -15,26 +15,27 @@ Cell-line spelling and case variants remain distinct, including clone names. No 
 All analysis scripts run in `cho-multiomics`. Installed versions for this run: Python 3.14.7, pandas 3.0.5, Plotly 6.9.0, Kaleido 1.3.0. Installation also updated OpenSSL from 3.6.3 to 3.6.4.
 
 ```bash
+conda env create -f environment.yml
 conda install -n cho-multiomics -c conda-forge pandas plotly python-kaleido
 ```
 
 By default PDF export uses Kaleido with Linux Chrome/Chromium. If unavailable, `conda run -n cho-multiomics plotly_get_chrome -y` installs it.
 
-This machine already has **Windows Chrome**. The initial results use `--windows-chrome` to launch it from WSL and print the identical Plotly figure with a page sized to the chart. This avoids installing Linux Chrome. A separate temporary browser profile and print HTML are cleaned up after export; the personal browser profile is not used. The Windows path must be supplied as a WSL `/mnt/c/...` path. This alternative currently expects Chrome under the user's `AppData/Local/Google/Chrome/Application` installation. Export backend and browser path are recorded in `plot_provenance.json`.
+The historical repository export used Windows Chrome through WSL. The export
+backend and browser path are recorded in `plot_provenance.json`. For a new run,
+use Linux Chrome/Chromium by default; the WSL alternative is below.
 
 ## Reproduce this repository analysis
 
-Run from the repository root in WSL:
+Run from the repository root on Linux with Conda available on `PATH`:
 
 ```bash
-export CONDA_EXE=/home/alba/miniconda3/bin/conda
-"$CONDA_EXE" run -n cho-multiomics python statistical_analysis/scripts/prepare_repository_metadata.py \
+conda run -n cho-multiomics python statistical_analysis/scripts/prepare_repository_metadata.py \
   --metadata config/samples.tsv
 bash statistical_analysis/scripts/run_analysis.sh \
   --metadata statistical_analysis/results/metadata_complete.tsv \
   --sample-id-col sample_accession --sequencing-type-col omics \
-  --subtitle 'Annotated samples only; see metadata_coverage.json for exclusions' \
-  --windows-chrome /mnt/c/Users/Usuario/AppData/Local/Google/Chrome/Application/chrome.exe
+  --subtitle 'Annotated samples only; see metadata_coverage.json for exclusions'
 ```
 
 Preparation writes a complete-label subset, the excluded source rows with reasons, and a coverage report including the source SHA256 and command. It does not modify source metadata. The collector itself remains strict: missing required values are errors.
@@ -47,15 +48,28 @@ bash statistical_analysis/scripts/run_analysis.sh --metadata path/to/metadata.ts
   --sequencing-type-col sequencing_type --output-dir statistical_analysis/results
 ```
 
-CSV and TSV are supported. The three column names shown are defaults; `--metadata` is required. Output defaults to `statistical_analysis/results` relative to the scripts. The wrapper runs both Python scripts with `conda run -n cho-multiomics`; set `CONDA_EXE` if conda is absent from PATH. Pass `--windows-chrome` as above on this machine. `--subtitle` changes the plot annotation.
+CSV and TSV are supported. The three column names shown are defaults; `--metadata` is required. Output defaults to `statistical_analysis/results` relative to the scripts. The wrapper runs both Python scripts with `conda run -n cho-multiomics`; set `CONDA_EXE` if conda is absent from PATH. `--subtitle` changes the plot annotation.
 
 To regenerate only plots:
 
 ```bash
 conda run -n cho-multiomics python statistical_analysis/scripts/plot_sample_counts.py \
-  --counts statistical_analysis/results/counts_by_cell_line_and_assay.csv \
-  --windows-chrome /mnt/c/Users/Usuario/AppData/Local/Google/Chrome/Application/chrome.exe
+  --counts statistical_analysis/results/counts_by_cell_line_and_assay.csv
 ```
+
+### Optional WSL export with Windows Chrome
+
+When running under WSL without Linux Chrome, pass a local Windows Chrome path:
+
+```bash
+bash statistical_analysis/scripts/run_analysis.sh \
+  --metadata statistical_analysis/results/metadata_complete.tsv \
+  --sample-id-col sample_accession --sequencing-type-col omics \
+  --windows-chrome '/mnt/c/Users/<USER>/AppData/Local/Google/Chrome/Application/chrome.exe'
+```
+
+The optional export uses a temporary browser profile and print HTML, then
+removes them after export. It does not use the personal browser profile.
 
 ## Counting rules
 

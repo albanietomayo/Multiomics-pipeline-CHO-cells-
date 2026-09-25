@@ -107,10 +107,16 @@ Large-file SHA-256 values are computed in bounded-memory chunks. Paths are
 project-relative. Direct production dependencies are pinned in separate
 alignment/Picard/QC, downstream MACS3/bedtools, IDR and track environments.
 
-MACS3, FRiP, IDR and BigWig are **PILOT-VALIDATED BUT NEWLY INTEGRATED**. The new
-Snakemake downstream implementation is **NOT YET PRODUCTION-VALIDATED** until an
-authorized limited SLURM run verifies it. No production run, biological threshold
-or PAIRED downstream interpretation is implied by unit tests or dry-runs.
+The SINGLE bulk CHO production path, including MACS3, FRiP, IDR and BigWig,
+completed the limited production execution recorded in
+`benchmarks/atacseq/2026-09-19/production_10318071_capsule/README.md` (job
+10318071). The frozen ATAC integration evidence is under
+`benchmarks/atacseq/2026-09-21/integration_freeze/`; the later all-37-locus
+context is under `benchmarks/atacseq/2026-09-23/atac_locus_context_v1/`.
+The earlier numbers above are explicitly pilot observations and should not be
+substituted for the frozen production outputs. PAIRED remains technically tested
+only; no PAIRED biological production validation or downstream interpretation
+is implied.
 
 Dry-run examples (never use the global target for ATAC):
 

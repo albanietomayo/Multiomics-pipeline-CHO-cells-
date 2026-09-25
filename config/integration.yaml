@@ -1,3 +1,7 @@
+# LEGACY/HISTORICAL Gold31 ATAC integration configuration (27 positive, 4 negative).
+# Consumed only by workflow/rules/integration.smk, which the top-level Snakefile
+# does not include. Original VERA paths preserve the historical execution context.
+# The final 37-locus multiomic products were built by validated standalone scripts.
 integration:
 
   benchmark:
