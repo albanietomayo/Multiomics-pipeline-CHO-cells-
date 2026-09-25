@@ -7,6 +7,8 @@ authors:
     family-names: Nieto Mayo
     affiliation: "Universidad Europea de Madrid; Chalmers University of Technology"
 version: 1.0.0
+date-released: "2026-09-25"
+doi: 10.5281/zenodo.22957205
 repository-code: "https://github.com/albanietomayo/Multiomics-pipeline-CHO-cells-"
 preferred-citation:
   type: software
@@ -16,4 +18,6 @@ preferred-citation:
       family-names: Nieto Mayo
       affiliation: "Universidad Europea de Madrid; Chalmers University of Technology"
   version: 1.0.0
+  date-released: "2026-09-25"
+  doi: 10.5281/zenodo.22957205
   year: 2026

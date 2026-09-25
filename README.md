@@ -241,6 +241,14 @@ run only a subset. Test failures caused by missing tools should be distinguished
 from selection or scientific-output regressions; no SLURM job submission is
 needed for the documented tests.
 
+## Citation and archived release
+
+The exact archived **v1.0.0** release has the
+[version-specific DOI](https://doi.org/10.5281/zenodo.22957205).
+The [concept DOI](https://doi.org/10.5281/zenodo.22957204) resolves to the
+software record across versions. Cite the version-specific DOI when referring
+to v1.0.0; [CITATION.cff](CITATION.cff) contains its citation metadata.
+
 ## Known limitations and release status
 
 - The four negative loci limit outcome-based inference; no robust supervised
@@ -252,12 +260,9 @@ needed for the documented tests.
   executions. They are not portable defaults.
 - Capability status: **downstream reuse: YES; workflow reproduction: PARTIAL;
   full raw-to-final reproduction: NO, currently**.
-- `LICENSE` is empty. A human must select and supply the release license.
-- `CITATION.cff` is empty; **citation metadata pending final release**.
-- The finalized work is on `multiomics-integration`, while GitHub's default
-  branch remains `main`. Review and change the default branch as a later
-  release task; no merge or hosting-setting change is part of this preparation.
+- Original repository source code is under the [MIT License](LICENSE).
+- The v1.0.0 citation and archive identifiers are recorded above and in
+  [CITATION.cff](CITATION.cff). Third-party data retain their source terms.
 
-This is a pre-release research repository. Citation and license decisions,
-external-data packaging, and the default-branch decision remain for human
-review before a public release.
+The v1.0.0 archive records this research repository as released. External-data
+packaging and the partial upstream workflow boundary remain as described above.
