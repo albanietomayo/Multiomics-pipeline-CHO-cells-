@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.0.1 - ChIP-seq reproducibility patch (unreleased)
+## v1.0.1 - ChIP-seq reproducibility patch (2026-10-01)
 
 Adds the validated upstream ChIP-seq processing implementation, stage-specific
 software environments, portable execution interface and production provenance

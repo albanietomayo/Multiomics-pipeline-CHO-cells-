@@ -8,8 +8,6 @@ authors:
     affiliation: "Universidad Europea de Madrid; Chalmers University of Technology"
 version: 1.0.1
 date-released: "2026-10-01"
-# Set date-released in BOTH blocks to the planned tag-creation day before release.
-# If tagging slips to a later day, update BOTH dates in the release commit.
 doi: 10.5281/zenodo.22957204
 identifiers:
   - type: doi
