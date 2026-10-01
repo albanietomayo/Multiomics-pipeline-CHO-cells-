@@ -1,0 +1,193 @@
+{
+  "analysis_id": "SRR20770297",
+  "scientific_comparison": "FAIL",
+  "historical_peak_count": 59186,
+  "new_peak_count": 59186,
+  "historical_frip": 0.2082672344724393,
+  "new_frip": 0.2082672344724393,
+  "comparison_classes": {
+    "MATCH": 126,
+    "MISMATCH": 16,
+    "EXPECTED_NONIDENTICAL_PACKAGING": 4
+  },
+  "mismatches": [
+    {
+      "analysis_id": "SRR20770297",
+      "component": "input_total_reads",
+      "historical_value": "33103220",
+      "reproduction_value": "33103222",
+      "classification": "MISMATCH",
+      "reason": "Exact comparison; no numerical tolerance."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "peak_qc.input_peak_overlap_fraction",
+      "historical_value": "0.01666384720277967",
+      "reproduction_value": "0.016663846195998686",
+      "classification": "MISMATCH",
+      "reason": "Exact comparison; no numerical tolerance."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "peak_qc.ip_to_input_peak_overlap_ratio",
+      "historical_value": "12.498148353022499",
+      "reproduction_value": "12.498149108124169",
+      "classification": "MISMATCH",
+      "reason": "Exact comparison; no numerical tolerance."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "product_peaks.narrowPeak.sha256",
+      "historical_value": "9493a321f03acab9d67c4bde263637719727fced0460e09406b1a5ef6eac771d",
+      "reproduction_value": "c0dd54a84e6562396e3cd7b4f7da146c4ee1eeacf5374b0e84a42d697332030e",
+      "classification": "MISMATCH",
+      "reason": "Exact comparison; no numerical tolerance."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "product_summits.bed.sha256",
+      "historical_value": "00850fbeefd7c179265c25e30ccab6c30165f383d28713808a5e08bab931ee4a",
+      "reproduction_value": "3c85bbaf280320e1be00faeb24fd4f4586b971d8b029e24b23a171f74e14ad9d",
+      "classification": "MISMATCH",
+      "reason": "Exact comparison; no numerical tolerance."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "SPMR_treat_pileup.bdg.gz.decompressed_sha256",
+      "historical_value": "478dff3cd03daf0bc9157916ca6a02c9f625874068e64db7b801069922a05163",
+      "reproduction_value": "e6993ff222488ccb9f68e3283dc70663d2e278697dc40f0093bdf1a17bffa3d5",
+      "classification": "MISMATCH",
+      "reason": "Historical lossless-compression checksum compared exactly; control-lambda historical file was removed."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "SPMR_treat_pileup.bdg.gz.gzip_sha256",
+      "historical_value": "c7cbf9f423f294a85563533d5b70579746a296e007ae3a9e5af7f44a9eb12dd7",
+      "reproduction_value": "8373d2390bee78d98e5935b79f411ffd4f6e037923f94c5b4b1097f6d6375f5b",
+      "classification": "MISMATCH",
+      "reason": "Gzip container difference is acceptable only with exact decompressed content equality; differing scientific content is a mismatch."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "SPMR_control_lambda.bdg.gz.decompressed_sha256",
+      "historical_value": "f478cdb73081392494dee30645b3f39d5f7c5d74fb6574ede3172c5c8dba7223",
+      "reproduction_value": "3781f64f7f2c09becc81c0b3df1e3ad8291bbd37ad6d3bc05d9ef97ea4e8269c",
+      "classification": "MISMATCH",
+      "reason": "Historical lossless-compression checksum compared exactly; control-lambda historical file was removed."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "SPMR_control_lambda.bdg.gz.gzip_sha256",
+      "historical_value": "ace90e7ebdfb89e0b8464cbe34e487d4ed88a933bab0761fe686b1a058e7f615",
+      "reproduction_value": "e21232e56466465da834beac2d1e7079551d8ee232e2fa58f16d56fbb4e3dd12",
+      "classification": "MISMATCH",
+      "reason": "Gzip container difference is acceptable only with exact decompressed content equality; differing scientific content is a mismatch."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "MACS3.xls.scientific_rows_sha256",
+      "historical_value": "ddbd58a15031461a53927a088221ad7f86b6b775d6d1d1168a89c76710b94310",
+      "reproduction_value": "33f167d1023ba4a0495f70ceade3565228cc43ec8d79541df38843ef7b8b635b",
+      "classification": "MISMATCH",
+      "reason": "Exact comparison; no numerical tolerance."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "MACS3.xls.container_sha256",
+      "historical_value": "2dd4b75b1c9f4f4721f7b818d197f4c44e775adb5e5922c0f65f341c13eab90b",
+      "reproduction_value": "4f5eaf9df7e425c2b10248df17fd9c3f768cdf82635c0b98861b26e5f8b58e79",
+      "classification": "MISMATCH",
+      "reason": "Comment-header packaging is acceptable only with identical scientific rows."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "Input.filtering.removed_duplicate",
+      "historical_value": "2658714",
+      "reproduction_value": "2658712",
+      "classification": "MISMATCH",
+      "reason": "Exact comparison; no numerical tolerance."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "Input.filtering.retained_pct_of_input",
+      "historical_value": "75.52468465579402",
+      "reproduction_value": "75.5246892187752",
+      "classification": "MISMATCH",
+      "reason": "Exact comparison; no numerical tolerance."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "Input.filtering.retained_reads",
+      "historical_value": "33103220",
+      "reproduction_value": "33103222",
+      "classification": "MISMATCH",
+      "reason": "Exact comparison; no numerical tolerance."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "SRR20770297_peaks.narrowPeak.differing_scientific_rows",
+      "historical_value": "0",
+      "reproduction_value": "1876",
+      "classification": "MISMATCH",
+      "reason": "Exact comparison; no numerical tolerance."
+    },
+    {
+      "analysis_id": "SRR20770297",
+      "component": "SRR20770297_summits.bed.differing_scientific_rows",
+      "historical_value": "0",
+      "reproduction_value": "1222",
+      "classification": "MISMATCH",
+      "reason": "Exact comparison; no numerical tolerance."
+    }
+  ],
+  "job_10413311_status": "COMPLETED",
+  "slurm_exit_code": "0:0",
+  "job_end_cluster_time": "2026-09-30T16:49:20",
+  "rerun_performed": false,
+  "peak_coordinate_comparison": {
+    "SRR20770297_peaks.narrowPeak": {
+      "historical_rows": 59186,
+      "reproduced_rows": 59186,
+      "differing_rows": 1876,
+      "differing_rows_by_column_1based": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 499,
+        "8": 921,
+        "9": 1222,
+        "10": 0
+      },
+      "coordinates_match": true
+    },
+    "SRR20770297_summits.bed": {
+      "historical_rows": 59186,
+      "reproduced_rows": 59186,
+      "differing_rows": 1222,
+      "differing_rows_by_column_1based": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 1222
+      },
+      "coordinates_match": true
+    }
+  },
+  "ready_for_commit_review": false,
+  "cause_of_input_difference": "UNRESOLVED",
+  "causal_attribution": "No change to peak count, IP FRiP, or coordinates. Peak numeric content and both decoded SPMR tracks differ; the two-read Input discrepancy is not established as the sole cause.",
+  "treatment_signal_difference_example": {
+    "contig": "NC_048604.1",
+    "interval_0based": [
+      92740176,
+      92740177
+    ],
+    "historical_value": "0.25231",
+    "reproduced_value": "0.28384",
+    "method": "Direct read-only streaming comparison of historical and reproduced decompressed bedGraph; overlapping interval values differ, not just row segmentation."
+  }
+}

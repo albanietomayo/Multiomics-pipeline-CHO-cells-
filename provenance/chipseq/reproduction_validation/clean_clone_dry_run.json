@@ -1,0 +1,18 @@
+{
+  "command": "snakemake --snakefile workflow/chipseq/Snakefile --use-conda --cores 1 -n chipseq_all",
+  "saved_source_log": "/tmp/chipseq-v101-clean-dryrun-final.log",
+  "source_clone": "/tmp/chipseq-v101-clean-dryrun-v2",
+  "clone_origin": "/cephyr/users/mayoa/Vera/TFM_multiomics_pipeline_git",
+  "clone_head": "826e45882b3196975a7a4a881326a2df1fc28b73",
+  "physical_runs": 22,
+  "analyses": 18,
+  "narrow_analyses": 8,
+  "broad_analyses": 10,
+  "shared_inputs": 4,
+  "dag_jobs": 49,
+  "dry_run_only": true,
+  "production_jobs_executed_during_dry_run": false,
+  "saved_log_sha256": "bebe8799438dc6c78ca2e44529e252cfd5f6f99ac5c7803c2462672d9f826d7d",
+  "reexecuted_from_fastq": "1 of 18 analyses: SRR20770297 vs SRR20770287 only",
+  "other_17_reexecuted": false
+}

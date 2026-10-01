@@ -1,0 +1,15 @@
+{
+  "analysis": "SRR20770297_vs_SRR20770287",
+  "reexecuted_analyses": "1_OF_18",
+  "other_17_reexecuted": false,
+  "scientific_reproduction": "FAIL",
+  "forensic_source_sha256": {
+    "stage_comparison.tsv": "67245d10257f2e7ef7e64920f3b10acccf8d2543d17a3254b6f2c0fd3f8493a9",
+    "environment_comparison.json": "3e35df9901b90f8f20d590f63574a5ddeb2b33cff4f065f8d358cd0eea7680fa",
+    "dispatch_evidence.json": "6fb3dfaa410fd6202db360f695a0ab317392dda8f0191d411a20665b1b9a5572",
+    "downstream_impact.json": "fb55f604a701182c5bc89d8f54db407f827deffe7fc4fec0dc530a1fcca2d44f",
+    "treatment_difference_summary.json": "f4660d3bdba710a9849b2c43df2511300f9a928bab488ef4e68a61c33f88cfbf",
+    "diagnosis.json": "30e45e8d1361f6fbf84fe88b32f0937286cd990894f421d3132496132bbe26b2",
+    "preservation_verification.json": "ff2ab8fcb7f2996f9c00a6afa15d0b00b4a455fdc32c9c2a662c060646155e3d"
+  }
+}

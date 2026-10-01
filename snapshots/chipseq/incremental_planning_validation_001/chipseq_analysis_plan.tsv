@@ -1,0 +1,115 @@
+analysis_id	study_accession	ip_run_accession	control_run_accession	declared_target	library_layout	instrument_platform	condition_status	condition_rule	label_context	time_value	time_unit	candidate_status	candidate_count	candidate_input_runs	pairing_rule	analysis_status	status_reason
+ERR2593625	PRJEB9291	ERR2593625		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	4	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593626	PRJEB9291	ERR2593626		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	17	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593627	PRJEB9291	ERR2593627		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	28	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593628	PRJEB9291	ERR2593628		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	42	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593629	PRJEB9291	ERR2593629		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	53	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593630	PRJEB9291	ERR2593630		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	76	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593631	PRJEB9291	ERR2593631		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	90	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593632	PRJEB9291	ERR2593632		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	101	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593633	PRJEB9291	ERR2593633		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	125	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593634	PRJEB9291	ERR2593634		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	138	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593635	PRJEB9291	ERR2593635		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	149	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593636	PRJEB9291	ERR2593636		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	173	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593637	PRJEB9291	ERR2593637		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	186	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593638	PRJEB9291	ERR2593638		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	197	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593639	PRJEB9291	ERR2593639		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	4	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593640	PRJEB9291	ERR2593640		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	17	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593641	PRJEB9291	ERR2593641		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	28	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593642	PRJEB9291	ERR2593642		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	42	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593643	PRJEB9291	ERR2593643		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	53	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593644	PRJEB9291	ERR2593644		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	76	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593645	PRJEB9291	ERR2593645		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	90	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593646	PRJEB9291	ERR2593646		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	101	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593647	PRJEB9291	ERR2593647		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	125	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593648	PRJEB9291	ERR2593648		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	138	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593649	PRJEB9291	ERR2593649		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	149	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593650	PRJEB9291	ERR2593650		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	173	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593651	PRJEB9291	ERR2593651		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	186	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593652	PRJEB9291	ERR2593652		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	197	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593653	PRJEB9291	ERR2593653		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	4	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593654	PRJEB9291	ERR2593654		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	17	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593655	PRJEB9291	ERR2593655		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	28	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593656	PRJEB9291	ERR2593656		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	42	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593657	PRJEB9291	ERR2593657		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	53	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593658	PRJEB9291	ERR2593658		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	76	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593659	PRJEB9291	ERR2593659		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	90	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593660	PRJEB9291	ERR2593660		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	101	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593661	PRJEB9291	ERR2593661		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	125	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593662	PRJEB9291	ERR2593662		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	138	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593663	PRJEB9291	ERR2593663		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	149	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593664	PRJEB9291	ERR2593664		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	173	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593665	PRJEB9291	ERR2593665		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	186	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593666	PRJEB9291	ERR2593666		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	197	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593667	PRJEB9291	ERR2593667		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	4	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593668	PRJEB9291	ERR2593668		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	17	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593669	PRJEB9291	ERR2593669		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	28	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593670	PRJEB9291	ERR2593670		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	42	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593671	PRJEB9291	ERR2593671		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	53	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593672	PRJEB9291	ERR2593672		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	76	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593673	PRJEB9291	ERR2593673		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	90	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593674	PRJEB9291	ERR2593674		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	101	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593675	PRJEB9291	ERR2593675		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	125	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593676	PRJEB9291	ERR2593676		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	138	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593677	PRJEB9291	ERR2593677		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	149	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593678	PRJEB9291	ERR2593678		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	173	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593679	PRJEB9291	ERR2593679		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	186	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593680	PRJEB9291	ERR2593680		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	197	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593681	PRJEB9291	ERR2593681		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	4	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593682	PRJEB9291	ERR2593682		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	17	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593683	PRJEB9291	ERR2593683		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	28	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593684	PRJEB9291	ERR2593684		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	42	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593685	PRJEB9291	ERR2593685		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	53	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593686	PRJEB9291	ERR2593686		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	76	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593687	PRJEB9291	ERR2593687		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	90	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593688	PRJEB9291	ERR2593688		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	101	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593689	PRJEB9291	ERR2593689		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	125	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593690	PRJEB9291	ERR2593690		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	138	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593691	PRJEB9291	ERR2593691		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	149	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593692	PRJEB9291	ERR2593692		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	173	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593693	PRJEB9291	ERR2593693		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	186	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593694	PRJEB9291	ERR2593694		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	197	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593695	PRJEB9291	ERR2593695		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	4	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593696	PRJEB9291	ERR2593696		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	17	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593697	PRJEB9291	ERR2593697		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	28	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593698	PRJEB9291	ERR2593698		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	42	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593699	PRJEB9291	ERR2593699		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	53	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593700	PRJEB9291	ERR2593700		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	76	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593701	PRJEB9291	ERR2593701		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	90	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593702	PRJEB9291	ERR2593702		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	101	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593703	PRJEB9291	ERR2593703		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	125	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593704	PRJEB9291	ERR2593704		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	138	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593705	PRJEB9291	ERR2593705		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	149	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593706	PRJEB9291	ERR2593706		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	173	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593707	PRJEB9291	ERR2593707		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	186	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR2593708	PRJEB9291	ERR2593708		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_tp_hours	cho-k1_8mm_gln	197	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR868151	PRJEB9291	ERR868151	ERR868150	H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	66	hours	single_candidate_needs_review	1	"[""ERR868150""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+ERR868152	PRJEB9291	ERR868152	ERR868150	H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	66	hours	single_candidate_needs_review	1	"[""ERR868150""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+ERR868153	PRJEB9291	ERR868153	ERR868150	H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	66	hours	single_candidate_needs_review	1	"[""ERR868150""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+ERR868154	PRJEB9291	ERR868154	ERR868150	H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	66	hours	single_candidate_needs_review	1	"[""ERR868150""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+ERR868155	PRJEB9291	ERR868155	ERR868150	H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	66	hours	single_candidate_needs_review	1	"[""ERR868150""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+ERR868156	PRJEB9291	ERR868156	ERR868150	H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	66	hours	single_candidate_needs_review	1	"[""ERR868150""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+ERR868157	PRJEB9291	ERR868157		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	114	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR868158	PRJEB9291	ERR868158		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	114	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR868159	PRJEB9291	ERR868159		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	114	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR868160	PRJEB9291	ERR868160		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	114	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR868161	PRJEB9291	ERR868161		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	114	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR868162	PRJEB9291	ERR868162		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	114	hours	no_candidate	0	[]		blocked_no_control	no_compatible_input_control
+ERR868164	PRJEB9291	ERR868164		H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	162	hours	multiple_candidates_needs_review	2	"[""ERR868163"",""ERR868170""]"		review_required	multiple_compatible_input_controls
+ERR868165	PRJEB9291	ERR868165		H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	162	hours	multiple_candidates_needs_review	2	"[""ERR868163"",""ERR868170""]"		review_required	multiple_compatible_input_controls
+ERR868166	PRJEB9291	ERR868166		H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	162	hours	multiple_candidates_needs_review	2	"[""ERR868163"",""ERR868170""]"		review_required	multiple_compatible_input_controls
+ERR868167	PRJEB9291	ERR868167		H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	162	hours	multiple_candidates_needs_review	2	"[""ERR868163"",""ERR868170""]"		review_required	multiple_compatible_input_controls
+ERR868168	PRJEB9291	ERR868168		H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	162	hours	multiple_candidates_needs_review	2	"[""ERR868163"",""ERR868170""]"		review_required	multiple_compatible_input_controls
+ERR868169	PRJEB9291	ERR868169		H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	162	hours	multiple_candidates_needs_review	2	"[""ERR868163"",""ERR868170""]"		review_required	multiple_compatible_input_controls
+ERR868171	PRJEB9291	ERR868171	ERR868177	H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	210	hours	single_candidate_needs_review	1	"[""ERR868177""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+ERR868172	PRJEB9291	ERR868172	ERR868177	H3K27me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	210	hours	single_candidate_needs_review	1	"[""ERR868177""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+ERR868173	PRJEB9291	ERR868173	ERR868177	H3K36me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	210	hours	single_candidate_needs_review	1	"[""ERR868177""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+ERR868174	PRJEB9291	ERR868174	ERR868177	H3K4me1	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	210	hours	single_candidate_needs_review	1	"[""ERR868177""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+ERR868175	PRJEB9291	ERR868175	ERR868177	H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	210	hours	single_candidate_needs_review	1	"[""ERR868177""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+ERR868176	PRJEB9291	ERR868176	ERR868177	H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	alias_hours	cho-k1_8mm_gln_mcb	210	hours	single_candidate_needs_review	1	"[""ERR868177""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+SRR20770291	PRJNA865478	SRR20770291	SRR20770295	H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	title_time_label	cho-k1 from fed-batch	7	days	single_candidate_needs_review	1	"[""SRR20770295""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+SRR20770292	PRJNA865478	SRR20770292	SRR20770295	H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	title_time_label	cho-k1 from fed-batch	7	days	single_candidate_needs_review	1	"[""SRR20770295""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+SRR20770293	PRJNA865478	SRR20770293	SRR20770295	H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	title_time_label	cho-k1 from fed-batch	7	days	single_candidate_needs_review	1	"[""SRR20770295""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+SRR20770294	PRJNA865478	SRR20770294	SRR20770287	H3K27ac	SINGLE	ILLUMINA	resolved_from_labels	title_time_label	cho-k1 from fed-batch	3	days	single_candidate_needs_review	1	"[""SRR20770287""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+SRR20770296	PRJNA865478	SRR20770296	SRR20770287	H3K9me3	SINGLE	ILLUMINA	resolved_from_labels	title_time_label	cho-k1 from fed-batch	3	days	single_candidate_needs_review	1	"[""SRR20770287""]"	unique_exact_condition_input	ready	unique_exact_condition_input
+SRR20770297	PRJNA865478	SRR20770297	SRR20770287	H3K4me3	SINGLE	ILLUMINA	resolved_from_labels	title_time_label	cho-k1 from fed-batch	3	days	single_candidate_needs_review	1	"[""SRR20770287""]"	unique_exact_condition_input	ready	unique_exact_condition_input

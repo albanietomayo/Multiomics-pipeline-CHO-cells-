@@ -1,0 +1,147 @@
+analysis_id	component	historical_value	reproduction_value	classification	reason
+SRR20770297	analysis_id	SRR20770297	SRR20770297	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	ip_run_accession	SRR20770297	SRR20770297	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	control_run_accession	SRR20770287	SRR20770287	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	declared_target	H3K4me3	H3K4me3	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_mode	narrow	narrow	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	fragment_size_bp	147	147	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_count	59186	59186	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	ip_total_reads	31707556	31707556	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	input_total_reads	33103220	33103222	MISMATCH	Exact comparison; no numerical tolerance.
+SRR20770297	ip_reads_in_peaks	6603645	6603645	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	input_reads_overlapping_ip_peaks	551627	551627	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	ip_frip	0.2082672344724393	0.2082672344724393	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.blacklist_filtering	not_performed_no_validated_CHO_blacklist_available	not_performed_no_validated_CHO_blacklist_available	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.chromosomes_with_peaks	31	31	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.fragment_size_source	study_fixed_publication_supported	study_fixed_publication_supported	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.input_peak_overlap_fraction	0.01666384720277967	0.016663846195998686	MISMATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.interpretation	descriptive_only_no_universal_pass_fail_threshold	descriptive_only_no_universal_pass_fail_threshold	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.ip_to_input_peak_overlap_ratio	12.498148353022499	12.498149108124169	MISMATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.mean_peak_width_bp	761.7287027337546	761.7287027337546	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.median_fold_enrichment	6.39845	6.39845	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.median_minus_log10_qvalue	10.9298	10.9298	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.median_peak_width_bp	402.0	402.0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.nuclear_reference_span	2366634374	2366634374	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.peak_calling_status	completed_with_peaks	completed_with_peaks	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.peak_nuclear_span_coverage_fraction	0.01904970006997794	0.01904970006997794	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.replicate_idr	not_performed_no_validated_replicate_groups_in_authoritative_plan	not_performed_no_validated_replicate_groups_in_authoritative_plan	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.schema_version	1	1	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.secondary_output_statistics	"{""summit_count"":59186}"	"{""summit_count"":59186}"	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.study_accession	PRJNA865478	PRJNA865478	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.sum_peak_bp	45083675	45083675	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	peak_qc.union_peak_bp	45083675	45083675	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	frozen_public_summary.peak_count	59186	59186	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	frozen_public_summary.frip	0.2082672344724393	0.2082672344724393	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	parameters.analysis_id	SRR20770297	SRR20770297	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.blacklist_filtering	not_performed_no_validated_CHO_blacklist_available	not_performed_no_validated_CHO_blacklist_available	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.control_run_accession	SRR20770287	SRR20770287	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.flags	"[""--nomodel"",""--extsize"",""147"",""--keep-dup"",""all"",""-B"",""--SPMR""]"	"[""--nomodel"",""--extsize"",""147"",""--keep-dup"",""all"",""-B"",""--SPMR""]"	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.format	BAM	BAM	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.fragment_result_path	null	null	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.fragment_result_sha256	null	null	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.fragment_size_bp	147	147	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.fragment_size_source	study_fixed_publication_supported	study_fixed_publication_supported	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.input_sha256	"{""analysis_plan"":""70aa3261a06cd8794ea39c1437d05ad657e7c15d7efc607453d60565d2306b79"",""filtering_policy"":""82f754f7617fe9b793e6d7d2d209edaa7155779c7749712e9f9d6059ae4d9b22"",""peak_plan"":""776324e2d7095fd63dbe910e67fa1fea9ae610a125e6ec906e35b44611996b4c"",""peak_plan_summary"":""35af9b60c232ec128d40ba9ee07743464da69482ed1ba352d7aee00b7cfb6243"",""peak_policy"":""c31611679f906dced15f68ebe052620d5715b284a8eba03d18d9200d98768729"",""processing_plan"":""2e9ca290ad6482d190f11b8bca75b8f68058af230941824183b34ff91670ad7f"",""samples"":""8611f84086b97074cc2271a331adc42442bb5ebf908ee5a736db49f4f94bd570""}"	"{""analysis_plan"":""70aa3261a06cd8794ea39c1437d05ad657e7c15d7efc607453d60565d2306b79"",""filtering_policy"":""82f754f7617fe9b793e6d7d2d209edaa7155779c7749712e9f9d6059ae4d9b22"",""peak_plan"":""776324e2d7095fd63dbe910e67fa1fea9ae610a125e6ec906e35b44611996b4c"",""peak_plan_summary"":""35af9b60c232ec128d40ba9ee07743464da69482ed1ba352d7aee00b7cfb6243"",""peak_policy"":""c31611679f906dced15f68ebe052620d5715b284a8eba03d18d9200d98768729"",""processing_plan"":""2e9ca290ad6482d190f11b8bca75b8f68058af230941824183b34ff91670ad7f"",""samples"":""8611f84086b97074cc2271a331adc42442bb5ebf908ee5a736db49f4f94bd570""}"	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.ip_run_accession	SRR20770297	SRR20770297	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.keep_dup	all	all	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.macs3_genome_size	2366634374	2366634374	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.macs3_genome_size_basis	derive_nuclear_reference_span_from_fai_excluding_mitochondrial_contig	derive_nuclear_reference_span_from_fai_excluding_mitochondrial_contig	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.peak_mode	narrow	narrow	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.qvalue	0.01	0.01	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.replicate_idr	not_performed_no_validated_replicate_groups_in_authoritative_plan	not_performed_no_validated_replicate_groups_in_authoritative_plan	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.required_peak_outputs	"[""narrowPeak"",""summits""]"	"[""narrowPeak"",""summits""]"	MATCH	All scientific parameter values compared exactly.
+SRR20770297	parameters.runtime_manifest_sha256	67135eea487033c382c81b519c65c4373cff7380312c6034b6d6d56ccecb9d8b	07e744890f9b2ab699cb297606769552abb51b2c8d05584e02c20b5d1f036487	EXPECTED_NONIDENTICAL_PACKAGING	Runtime record contains new execution/BAM paths and hashes.
+SRR20770297	parameters.scale_to	small	small	MATCH	All scientific parameter values compared exactly.
+SRR20770297	filtering.blacklist_filtering	not_performed	not_performed	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.exclude_flags	3844	3844	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.independent_counts_may_overlap	true	true	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.independent_duplicate	5011126	5011126	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.independent_low_mapq	5894710	5894710	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.independent_mapq_unknown	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.independent_mitochondrial	152	152	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.independent_nonprimary	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.independent_qc_fail	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.independent_unmapped	251988	251988	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.input_reads	41724399	41724399	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.mapped_primary_duplicates	5011126	5011126	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.min_mapq	30	30	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.optical_duplicate_detection	not_performed	not_performed	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.picard_percent_duplication	0.12083	0.12083	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.picard_unpaired_reads_examined	41472411	41472411	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.removed_duplicate	3870027	3870027	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.removed_low_mapq	5894676	5894676	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.removed_mapq_unknown	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.removed_mitochondrial	152	152	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.removed_nonprimary	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.removed_qc_fail	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.removed_unmapped	251988	251988	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.retained_pct_of_input	75.99284054397044	75.99284054397044	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.retained_reads	31707556	31707556	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.role	ip	ip	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.run_accession	SRR20770297	SRR20770297	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	filtering.signal_quality	not_evaluated	not_evaluated	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	IP.fastp.summary	"{""after_filtering"":{""gc_content"":0.435923,""q20_bases"":3334019108,""q20_rate"":0.957069,""q30_bases"":3270530721,""q30_rate"":0.938844,""read1_mean_length"":83,""total_bases"":3483570996,""total_reads"":41724399},""before_filtering"":{""gc_content"":0.435923,""q20_bases"":3334019108,""q20_rate"":0.957069,""q30_bases"":3270530721,""q30_rate"":0.938844,""read1_mean_length"":83,""total_bases"":3483570996,""total_reads"":41724399},""fastp_version"":""1.3.6"",""sequencing"":""single end (84 cycles)""}"	"{""after_filtering"":{""gc_content"":0.435923,""q20_bases"":3334019108,""q20_rate"":0.957069,""q30_bases"":3270530721,""q30_rate"":0.938844,""read1_mean_length"":83,""total_bases"":3483570996,""total_reads"":41724399},""before_filtering"":{""gc_content"":0.435923,""q20_bases"":3334019108,""q20_rate"":0.957069,""q30_bases"":3270530721,""q30_rate"":0.938844,""read1_mean_length"":83,""total_bases"":3483570996,""total_reads"":41724399},""fastp_version"":""1.3.6"",""sequencing"":""single end (84 cycles)""}"	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	IP.alignment_qc	"{""alignment_records"":41724399,""bam_filtering"":""not_performed"",""diagnostic_mapq"":30,""duplicate_marking"":""not_performed"",""five_prime_clipped_bases"":10507960,""five_prime_clipped_reads"":6307353,""mapped_mapq_ge_threshold"":35577701,""mapped_reads"":41472411,""mapped_reads_pct_of_input"":99.39606559701436,""mitochondrial_reads"":152,""mitochondrial_reads_pct_of_input"":0.0003642952412568004,""nonprimary_records"":0,""nuclear_mapq_ge_threshold"":35577583,""nuclear_mapq_ge_threshold_pct_of_input"":85.268053831045,""nuclear_reads"":41472259,""primary_reads"":41724399,""role"":""ip"",""run_accession"":""SRR20770297"",""signal_quality"":""not_evaluated"",""soft_clipped_pct_of_mapped"":17.387433780977915,""soft_clipped_reads"":7210988,""three_prime_clipped_bases"":10744074,""three_prime_clipped_reads"":1258051,""unmapped_reads"":251988}"	"{""alignment_records"":41724399,""bam_filtering"":""not_performed"",""diagnostic_mapq"":30,""duplicate_marking"":""not_performed"",""five_prime_clipped_bases"":10507960,""five_prime_clipped_reads"":6307353,""mapped_mapq_ge_threshold"":35577701,""mapped_reads"":41472411,""mapped_reads_pct_of_input"":99.39606559701436,""mitochondrial_reads"":152,""mitochondrial_reads_pct_of_input"":0.0003642952412568004,""nonprimary_records"":0,""nuclear_mapq_ge_threshold"":35577583,""nuclear_mapq_ge_threshold_pct_of_input"":85.268053831045,""nuclear_reads"":41472259,""primary_reads"":41724399,""role"":""ip"",""run_accession"":""SRR20770297"",""signal_quality"":""not_evaluated"",""soft_clipped_pct_of_mapped"":17.387433780977915,""soft_clipped_reads"":7210988,""three_prime_clipped_bases"":10744074,""three_prime_clipped_reads"":1258051,""unmapped_reads"":251988}"	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	reference.assembly	CriGri-PICRH-1.0	CriGri-PICRH-1.0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	reference.accession	GCF_003668045.3	GCF_003668045.3	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	reference.mitochondrial	NC_007936.1	NC_007936.1	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	reference.nuclear_sha256	5c81f08eafe8f5051704f692cc21a970f58b24b2bc1bedef82cb17ec7a2b4478	5c81f08eafe8f5051704f692cc21a970f58b24b2bc1bedef82cb17ec7a2b4478	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	reference.mitochondrial_sha256	b7ccf6b1c6981c2b4a0c9e57245bd6712a861e685571db56d274c04fc30ed37c	b7ccf6b1c6981c2b4a0c9e57245bd6712a861e685571db56d274c04fc30ed37c	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	reference.mapping_sha256	dfd445e136c4bc9c11f9616d251b86732d1aab0cbdbf9d1ababb8093f7430e94	dfd445e136c4bc9c11f9616d251b86732d1aab0cbdbf9d1ababb8093f7430e94	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	reference.fai_sha256	2dfb28d82459be6cbddb6e4be79e2c328c436654cc37f2e703c7abb9c50a0d57	2dfb28d82459be6cbddb6e4be79e2c328c436654cc37f2e703c7abb9c50a0d57	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	FASTQ.input.accession	SRR20770287	SRR20770287	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	FASTQ.input.bytes	1992978505	1992978505	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	FASTQ.input.md5	0b6b491f21805b91df0f42771fc193fb	0b6b491f21805b91df0f42771fc193fb	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	FASTQ.ip.accession	SRR20770297	SRR20770297	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	FASTQ.ip.bytes	1909331888	1909331888	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	FASTQ.ip.md5	7f268c7938bf23eddd0b68be679ea649	7f268c7938bf23eddd0b68be679ea649	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	product_peaks.narrowPeak.sha256	9493a321f03acab9d67c4bde263637719727fced0460e09406b1a5ef6eac771d	c0dd54a84e6562396e3cd7b4f7da146c4ee1eeacf5374b0e84a42d697332030e	MISMATCH	Exact comparison; no numerical tolerance.
+SRR20770297	product_summits.bed.sha256	00850fbeefd7c179265c25e30ccab6c30165f383d28713808a5e08bab931ee4a	3c85bbaf280320e1be00faeb24fd4f4586b971d8b029e24b23a171f74e14ad9d	MISMATCH	Exact comparison; no numerical tolerance.
+SRR20770297	SPMR_treat_pileup.bdg.gz.decompressed_sha256	478dff3cd03daf0bc9157916ca6a02c9f625874068e64db7b801069922a05163	e6993ff222488ccb9f68e3283dc70663d2e278697dc40f0093bdf1a17bffa3d5	MISMATCH	Historical lossless-compression checksum compared exactly; control-lambda historical file was removed.
+SRR20770297	SPMR_treat_pileup.bdg.gz.validity	true	true	MATCH	Full gzip read; nuclear contigs, positive intervals, finite nonnegative SPMR values.
+SRR20770297	SPMR_treat_pileup.bdg.gz.gzip_sha256	c7cbf9f423f294a85563533d5b70579746a296e007ae3a9e5af7f44a9eb12dd7	8373d2390bee78d98e5935b79f411ffd4f6e037923f94c5b4b1097f6d6375f5b	MISMATCH	Gzip container difference is acceptable only with exact decompressed content equality; differing scientific content is a mismatch.
+SRR20770297	SPMR_control_lambda.bdg.gz.decompressed_sha256	f478cdb73081392494dee30645b3f39d5f7c5d74fb6574ede3172c5c8dba7223	3781f64f7f2c09becc81c0b3df1e3ad8291bbd37ad6d3bc05d9ef97ea4e8269c	MISMATCH	Historical lossless-compression checksum compared exactly; control-lambda historical file was removed.
+SRR20770297	SPMR_control_lambda.bdg.gz.validity	true	true	MATCH	Full gzip read; nuclear contigs, positive intervals, finite nonnegative SPMR values.
+SRR20770297	SPMR_control_lambda.bdg.gz.gzip_sha256	ace90e7ebdfb89e0b8464cbe34e487d4ed88a933bab0761fe686b1a058e7f615	e21232e56466465da834beac2d1e7079551d8ee232e2fa58f16d56fbb4e3dd12	MISMATCH	Gzip container difference is acceptable only with exact decompressed content equality; differing scientific content is a mismatch.
+SRR20770297	MACS3.xls.scientific_rows_sha256	ddbd58a15031461a53927a088221ad7f86b6b775d6d1d1168a89c76710b94310	33f167d1023ba4a0495f70ceade3565228cc43ec8d79541df38843ef7b8b635b	MISMATCH	Exact comparison; no numerical tolerance.
+SRR20770297	MACS3.xls.container_sha256	2dd4b75b1c9f4f4721f7b818d197f4c44e775adb5e5922c0f65f341c13eab90b	4f5eaf9df7e425c2b10248df17fd9c3f768cdf82635c0b98861b26e5f8b58e79	MISMATCH	Comment-header packaging is acceptable only with identical scientific rows.
+SRR20770297	execution_record.parameters.json.sha256	ba05d36be35dc13e4018e821f9df2a85153953235a59966893c5efe73f3c4646	2d241ec8fee0f31acb17526c9fa81cc0c5dd2c44ecbeec221c95cdce55a5da8a	EXPECTED_NONIDENTICAL_PACKAGING	New execution paths, source adaptation, times and artifact packaging; scientific values compared separately.
+SRR20770297	execution_record.provenance.json.sha256	451285440af2c63b4902e2449bed3edcf5d2b64c7fbf4ad6ca530d6dd6c83c7f	e49e4ef0a240ef34af6e228c957223048b68d6106e3e462d62226c5997251f7e	EXPECTED_NONIDENTICAL_PACKAGING	New execution paths, source adaptation, times and artifact packaging; scientific values compared separately.
+SRR20770297	execution_record.production_run_manifest.tsv.sha256	62f5076811dac0b9d2b114209ee8d13c12d611d98c491c1d57891804d881dc8c	b7085aff3931229759b8d375d0549a2b553ff3fe44afde7c6f4f88fa0ef0628f	EXPECTED_NONIDENTICAL_PACKAGING	New execution paths, source adaptation, times and artifact packaging; scientific values compared separately.
+SRR20770297	Input.filtering.blacklist_filtering	"""not_performed"""	"""not_performed"""	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.exclude_flags	3844	3844	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.independent_counts_may_overlap	true	true	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.independent_duplicate	4432287	4432287	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.independent_low_mapq	7825289	7825289	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.independent_mapq_unknown	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.independent_mitochondrial	501	501	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.independent_nonprimary	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.independent_qc_fail	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.independent_unmapped	243355	243355	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.input_reads	43830994	43830994	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.mapped_primary_duplicates	4432287	4432287	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.min_mapq	30	30	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.optical_duplicate_detection	"""not_performed"""	"""not_performed"""	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.picard_percent_duplication	0.101687	0.101687	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.picard_unpaired_reads_examined	43587639	43587639	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.removed_duplicate	2658714	2658712	MISMATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.removed_low_mapq	7825204	7825204	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.removed_mapq_unknown	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.removed_mitochondrial	501	501	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.removed_nonprimary	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.removed_qc_fail	0	0	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.removed_unmapped	243355	243355	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.retained_pct_of_input	75.52468465579402	75.5246892187752	MISMATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.retained_reads	33103220	33103222	MISMATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.role	"""input"""	"""input"""	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.run_accession	"""SRR20770287"""	"""SRR20770287"""	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.filtering.signal_quality	"""not_evaluated"""	"""not_evaluated"""	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	Input.alignment_qc.json	"{""alignment_records"": 43830994, ""bam_filtering"": ""not_performed"", ""diagnostic_mapq"": 30, ""duplicate_marking"": ""not_performed"", ""five_prime_clipped_bases"": 11368892, ""five_prime_clipped_reads"": 6514690, ""mapped_mapq_ge_threshold"": 35762350, ""mapped_reads"": 43587639, ""mapped_reads_pct_of_input"": 99.44478785947679, ""mitochondrial_reads"": 501, ""mitochondrial_reads_pct_of_input"": 0.0011430267814597132, ""nonprimary_records"": 0, ""nuclear_mapq_ge_threshold"": 35761934, ""nuclear_mapq_ge_threshold_pct_of_input"": 81.59051560637663, ""nuclear_reads"": 43587138, ""primary_reads"": 43830994, ""role"": ""input"", ""run_accession"": ""SRR20770287"", ""signal_quality"": ""not_evaluated"", ""soft_clipped_pct_of_mapped"": 17.274337800219, ""soft_clipped_reads"": 7529476, ""three_prime_clipped_bases"": 11068401, ""three_prime_clipped_reads"": 1414716, ""unmapped_reads"": 243355}"	"{""alignment_records"": 43830994, ""bam_filtering"": ""not_performed"", ""diagnostic_mapq"": 30, ""duplicate_marking"": ""not_performed"", ""five_prime_clipped_bases"": 11368892, ""five_prime_clipped_reads"": 6514690, ""mapped_mapq_ge_threshold"": 35762350, ""mapped_reads"": 43587639, ""mapped_reads_pct_of_input"": 99.44478785947679, ""mitochondrial_reads"": 501, ""mitochondrial_reads_pct_of_input"": 0.0011430267814597132, ""nonprimary_records"": 0, ""nuclear_mapq_ge_threshold"": 35761934, ""nuclear_mapq_ge_threshold_pct_of_input"": 81.59051560637663, ""nuclear_reads"": 43587138, ""primary_reads"": 43830994, ""role"": ""input"", ""run_accession"": ""SRR20770287"", ""signal_quality"": ""not_evaluated"", ""soft_clipped_pct_of_mapped"": 17.274337800219, ""soft_clipped_reads"": 7529476, ""three_prime_clipped_bases"": 11068401, ""three_prime_clipped_reads"": 1414716, ""unmapped_reads"": 243355}"	MATCH	Reproduction diagnostic preserved while job 10413311 was running; no processing rerun.
+SRR20770297	Input.fastp.json	"{""after_filtering"": {""gc_content"": 0.422531, ""q20_bases"": 3507519615, ""q20_rate"": 0.958622, ""q30_bases"": 3442449964, ""q30_rate"": 0.940838, ""read1_mean_length"": 83, ""total_bases"": 3658917279, ""total_reads"": 43830994}, ""before_filtering"": {""gc_content"": 0.422531, ""q20_bases"": 3507519615, ""q20_rate"": 0.958622, ""q30_bases"": 3442449964, ""q30_rate"": 0.940838, ""read1_mean_length"": 83, ""total_bases"": 3658917279, ""total_reads"": 43830994}, ""fastp_version"": ""1.3.6"", ""sequencing"": ""single end (84 cycles)""}"	"{""after_filtering"": {""gc_content"": 0.422531, ""q20_bases"": 3507519615, ""q20_rate"": 0.958622, ""q30_bases"": 3442449964, ""q30_rate"": 0.940838, ""read1_mean_length"": 83, ""total_bases"": 3658917279, ""total_reads"": 43830994}, ""before_filtering"": {""gc_content"": 0.422531, ""q20_bases"": 3507519615, ""q20_rate"": 0.958622, ""q30_bases"": 3442449964, ""q30_rate"": 0.940838, ""read1_mean_length"": 83, ""total_bases"": 3658917279, ""total_reads"": 43830994}, ""fastp_version"": ""1.3.6"", ""sequencing"": ""single end (84 cycles)""}"	MATCH	Reproduction diagnostic preserved while job 10413311 was running; no processing rerun.
+SRR20770297	SRR20770297_peaks.narrowPeak.coordinates_sha256	"""7eb755455de1ede5e6aa9ac00bd9b84b7bf8066ffc35a8ec192837d10c54376c"""	"""7eb755455de1ede5e6aa9ac00bd9b84b7bf8066ffc35a8ec192837d10c54376c"""	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	SRR20770297_peaks.narrowPeak.differing_scientific_rows	0	1876	MISMATCH	Exact comparison; no numerical tolerance.
+SRR20770297	SRR20770297_peaks.narrowPeak.summit_offsets	true	true	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	SRR20770297_summits.bed.coordinates_sha256	"""9785b89f487c19e9e909533558f609229ffe6023cdfc7cf7e8b5f7958c7e8571"""	"""9785b89f487c19e9e909533558f609229ffe6023cdfc7cf7e8b5f7958c7e8571"""	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	SRR20770297_summits.bed.differing_scientific_rows	0	1222	MISMATCH	Exact comparison; no numerical tolerance.
+SRR20770297	MACS3.command.scientific_arguments	"[""callpeak"", ""-f"", ""BAM"", ""-g"", ""2366634374"", ""-n"", ""SRR20770297"", ""-q"", ""0.01"", ""--scale-to"", ""small"", ""--nomodel"", ""--extsize"", ""147"", ""--keep-dup"", ""all"", ""-B"", ""--SPMR""]"	"[""callpeak"", ""-f"", ""BAM"", ""-g"", ""2366634374"", ""-n"", ""SRR20770297"", ""-q"", ""0.01"", ""--scale-to"", ""small"", ""--nomodel"", ""--extsize"", ""147"", ""--keep-dup"", ""all"", ""-B"", ""--SPMR""]"	MATCH	Exact comparison; no numerical tolerance.
+SRR20770297	MACS3.version	"""# This file is generated by MACS version 3.0.4"""	"""# This file is generated by MACS version 3.0.4"""	MATCH	Exact comparison; no numerical tolerance.

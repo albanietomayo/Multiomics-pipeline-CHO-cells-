@@ -1,0 +1,9 @@
+{
+  "chipseq_runs": 120,
+  "samples_sha256": "8611f84086b97074cc2271a331adc42442bb5ebf908ee5a736db49f4f94bd570",
+  "schema_version": 1,
+  "script_sha256": "37a34500a93b8e4ee13f82a36f664f5484bb83967295616ad5f0d35c6de09910",
+  "studies": 2,
+  "unique_experiments": 120,
+  "unique_samples": 112
+}

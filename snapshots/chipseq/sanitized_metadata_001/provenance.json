@@ -1,0 +1,11 @@
+{
+  "contact_fields": "excluded",
+  "historical_archive_sha256": "5b01f03bacf45548c004c70c28e46222e6313a0f457a3549f2165f174c0c54cf",
+  "metadata_sha256": "fe733fed2b6c4044a29153abbd87a638e3911700124307ef3c36d3a2607563ab",
+  "query_definition": "ENA browser API XML by exact experiment/sample accessions in ena_request_plan.tsv; only five scientific label fields retained",
+  "raw_xml_publication": "prohibited_in_git_github_release_assets_and_zenodo",
+  "record_count": 232,
+  "request_plan_sha256": "25129dbc49541d04165526155d620475e8ac22e07767b780114ecc5e440ace26",
+  "schema_version": 1,
+  "source_inventory": "snapshots/chipseq/xml_validation_001/xml_inventory.tsv"
+}

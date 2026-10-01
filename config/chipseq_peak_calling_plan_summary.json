@@ -1,0 +1,34 @@
+{
+  "execution_status_counts": {
+    "ready_for_peak_calling": 6,
+    "requires_fragment_estimation": 12
+  },
+  "fragment_policy_counts": {
+    "fixed": 6,
+    "phantompeakqualtools": 12
+  },
+  "input_sha256": {
+    "analysis_plan": "70aa3261a06cd8794ea39c1437d05ad657e7c15d7efc607453d60565d2306b79",
+    "policy": "c31611679f906dced15f68ebe052620d5715b284a8eba03d18d9200d98768729"
+  },
+  "peak_analyses": 18,
+  "peak_calling_plan_sha256": "776324e2d7095fd63dbe910e67fa1fea9ae610a125e6ec906e35b44611996b4c",
+  "peak_mode_counts": {
+    "broad": 10,
+    "narrow": 8
+  },
+  "schema_version": 1,
+  "scope": "dynamic_chipseq_peak_calling_plan",
+  "study_counts": {
+    "PRJEB9291": 12,
+    "PRJNA865478": 6
+  },
+  "target_counts": {
+    "H3K27ac": 4,
+    "H3K27me3": 2,
+    "H3K36me3": 2,
+    "H3K4me1": 2,
+    "H3K4me3": 4,
+    "H3K9me3": 4
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "analysis_id": "SRR20770297",
+  "input_run": "SRR20770287",
+  "status": "SCIENTIFIC_MISMATCH",
+  "alignment_qc_comparison": "MATCH (all fields)",
+  "picard_duplicate_total_comparison": "MATCH",
+  "filtering_differences": {
+    "retained_pct_of_input": {
+      "historical": 75.52468465579402,
+      "new": 75.5246892187752
+    },
+    "removed_duplicate": {
+      "historical": 2658714,
+      "new": 2658712
+    },
+    "retained_reads": {
+      "historical": 33103220,
+      "new": 33103222
+    }
+  },
+  "historical_control_bam_available": false,
+  "historical_control_bam_removed_utc": "2026-09-21T17:12:01Z",
+  "cause": "UNRESOLVED",
+  "hypothesis": "Ordering-dependent duplicate representative selection under multithreaded alignment; not established by read-level comparison.",
+  "parameter_or_tolerance_changes": false,
+  "release_readiness": "BLOCKED",
+  "downstream_comparison": {
+    "peak_count": "MATCH",
+    "ip_frip": "MATCH",
+    "peak_coordinates": "MATCH",
+    "peak_scientific_content": "MISMATCH",
+    "treatment_spmr_content": "MISMATCH",
+    "control_lambda_spmr_content": "MISMATCH",
+    "causality": "No change to peak count, IP FRiP, or coordinates. Peak numeric content and both decoded SPMR tracks differ; the two-read Input discrepancy is not established as the sole cause."
+  }
+}

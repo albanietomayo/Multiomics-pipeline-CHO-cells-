@@ -1,0 +1,26 @@
+# Prospective unstaged state; no staging/commit in either repository.
+# PUBLIC denotes the audited public repository; VALIDATION_ROOT is a disposable external directory.
+git clone --no-tags --no-hardlinks --branch chipseq-v1.0.1-reproducibility "$PUBLIC" "$VALIDATION_ROOT/clone"
+# Overlay only the explicitly reviewed modified/new patch files; exclude pre-existing unrelated untracked files.
+# Verify executable/configuration/snapshot hashes against tested_sources.tsv.
+cd "$VALIDATION_ROOT/clone"
+snakemake --snakefile workflow/chipseq/Snakefile --use-conda --cores 1 -n chipseq_all
+snakemake --snakefile workflow/chipseq/Snakefile --cores 1 chipseq_metadata_all
+# Install the exact historical scientific environment in disposable local scratch.
+conda create -y --prefix "$SCIENTIFIC_ENV" --file provenance/chipseq/production_2026-09-23/environments/environment_d.explicit.txt
+# Reference files are read-only inputs; only a byte-identical private inventory copy is provided.
+# The adapter verifies original content/index/inventory hashes before processing.
+# Make the scientific environment first on PATH; Snakemake comes from a separate orchestration environment.
+# execution.yaml changes output_root, scratch_root and max_parallel_analyses only (one worker).
+# All large outputs are in disposable node-local scratch; scientific settings are unchanged.
+snakemake "$OUTPUT_ROOT/analyses/SRR20770297/completed.json" --snakefile workflow/chipseq/Snakefile --cores 8 --resources chipseq_slots=1 --configfile "$VALIDATION_ROOT/execution.yaml"
+# The real execution omits --use-conda deliberately: it uses the exact historical explicit package set installed on PATH.
+# Do not treat this as a new production source commit or a frozen-output replacement.
+
+# Resume 2026-09-30: read-only scheduler/log check; completed analysis not rerun.
+squeue -j 10413311
+sacct -j 10413311 --format=JobID,JobName,State,ExitCode,Start,End,Elapsed -P
+# Execute saved comparison only (no SLURM submission or analysis):
+PYTHONDONTWRITEBYTECODE=1 /apps/Common/software/Miniforge3/26.1.1-3/bin/python "$VALIDATION_ROOT/compare_scientific_evidence.py"
+# Supplement exact Input QC, coordinate hashes, MACS3 command/version and direct signal-difference evidence.
+# Overall FAIL is expected and retained; no parameter or tolerance changes.

@@ -1,0 +1,84 @@
+{
+  "build": {
+    "builder": "bowtie2-build",
+    "command": "bowtie2-build --large-index --threads 8 ${TMPDIR}/genome_plus_mt.fa ${TMPDIR}/bowtie2_index/genome_plus_mt",
+    "input": "TMPDIR decompression of genome_plus_mt.fa.gz",
+    "mode": "large-index",
+    "version": "2.5.5"
+  },
+  "fai": {
+    "mitochondrial_length_bp": 16284,
+    "nuclear_span_bp": 2366634374,
+    "sequence_count": 648
+  },
+  "files": [
+    {
+      "bytes": 882813762,
+      "relative_path": "genome_plus_mt.fa.gz",
+      "sha256": "f5e1effa4d063b9005eeaa0f245e7a09e84d970d6efaeb80f442cfbbf6216923"
+    },
+    {
+      "bytes": 24707,
+      "relative_path": "genome_plus_mt.fa.fai",
+      "sha256": "2dfb28d82459be6cbddb6e4be79e2c328c436654cc37f2e703c7abb9c50a0d57"
+    },
+    {
+      "bytes": 710,
+      "relative_path": "reference_provenance.json",
+      "sha256": "3646c60b547d946814704af383464807dda890cfd371ff78f24edf8307fd582f"
+    },
+    {
+      "bytes": 796690238,
+      "relative_path": "bowtie2_index/genome_plus_mt.1.bt2l",
+      "sha256": "118700f9a8d95891d1e5ee57426aa5f2c6fab9d956c80ec70a4039441009b635"
+    },
+    {
+      "bytes": 1182112388,
+      "relative_path": "bowtie2_index/genome_plus_mt.2.bt2l",
+      "sha256": "7fbd1b2b9740d6ca25597dda35318386204e465b4e13d9ab06a1ba921f114e46"
+    },
+    {
+      "bytes": 81816,
+      "relative_path": "bowtie2_index/genome_plus_mt.3.bt2l",
+      "sha256": "2e8c3993d9fd1c1547a4fedb1910bfd885881d926c3a4f696de2176b80612cd5"
+    },
+    {
+      "bytes": 591056189,
+      "relative_path": "bowtie2_index/genome_plus_mt.4.bt2l",
+      "sha256": "378366a87a47b551ff1caccdcb847525133d0da7d702edba985feaa1688b5d30"
+    },
+    {
+      "bytes": 796690238,
+      "relative_path": "bowtie2_index/genome_plus_mt.rev.1.bt2l",
+      "sha256": "56c82a047a2e4c97ccfdb688cb48a43d4419c8489054f4b11e0b55fec9369fb7"
+    },
+    {
+      "bytes": 1182112388,
+      "relative_path": "bowtie2_index/genome_plus_mt.rev.2.bt2l",
+      "sha256": "954f69ac9878638827b5ed5ffabbf7855907e6c7ecf67bd1443daa1de865e6c8"
+    }
+  ],
+  "identity": {
+    "assembly_name": "CriGri-PICRH-1.0",
+    "configured_annotation_release": "104",
+    "genbank_accession": "GCA_003668045.2",
+    "mitochondrial_accession": "NC_007936.1",
+    "refseq_accession": "GCF_003668045.3",
+    "species": "Cricetulus griseus",
+    "taxid": "10029"
+  },
+  "required_index_components": [
+    "bowtie2_index/genome_plus_mt.1.bt2l",
+    "bowtie2_index/genome_plus_mt.2.bt2l",
+    "bowtie2_index/genome_plus_mt.3.bt2l",
+    "bowtie2_index/genome_plus_mt.4.bt2l",
+    "bowtie2_index/genome_plus_mt.rev.1.bt2l",
+    "bowtie2_index/genome_plus_mt.rev.2.bt2l"
+  ],
+  "schema_version": 2,
+  "source_content_sha256": {
+    "mapping": "dfd445e136c4bc9c11f9616d251b86732d1aab0cbdbf9d1ababb8093f7430e94",
+    "mitochondrial": "b7ccf6b1c6981c2b4a0c9e57245bd6712a861e685571db56d274c04fc30ed37c",
+    "nuclear": "5c81f08eafe8f5051704f692cc21a970f58b24b2bc1bedef82cb17ec7a2b4478"
+  }
+}

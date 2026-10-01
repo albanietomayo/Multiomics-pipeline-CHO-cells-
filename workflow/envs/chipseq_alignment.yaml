@@ -1,0 +1,9 @@
+name: chipseq-alignment
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - bowtie2=2.5.5
+  - samtools=1.24
+  - python=3.14.7
+  - pyyaml=6.0.3

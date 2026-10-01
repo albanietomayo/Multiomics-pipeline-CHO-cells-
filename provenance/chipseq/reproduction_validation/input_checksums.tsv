@@ -1,0 +1,3 @@
+run_accession	bytes	md5	sha256	source_url	historical_expected_md5	historical_expected_bytes
+SRR20770287	1992978505	0b6b491f21805b91df0f42771fc193fb	cb28407f1e5f85351d4d8bf291b5e9aa9aa649c02fe390d7065cb0ebeab00227	ftp.sra.ebi.ac.uk/vol1/fastq/SRR207/087/SRR20770287/SRR20770287.fastq.gz	0b6b491f21805b91df0f42771fc193fb	1992978505
+SRR20770297	1909331888	7f268c7938bf23eddd0b68be679ea649	63fb04a489c9676ea0bbaab6ef2bb17825db90a1ad36e3bce77eb659cc0892ab	ftp.sra.ebi.ac.uk/vol1/fastq/SRR207/097/SRR20770297/SRR20770297.fastq.gz	7f268c7938bf23eddd0b68be679ea649	1909331888

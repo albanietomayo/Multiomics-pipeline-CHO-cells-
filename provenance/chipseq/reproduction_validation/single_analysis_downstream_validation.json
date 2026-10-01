@@ -1,0 +1,604 @@
+{
+  "downstream_locus_features_affected": "YES (ancillary QC columns only; locus peak and SPMR features unchanged)",
+  "locus_signal_feature_comparisons": 592,
+  "historical_reconstruction_mismatches": [],
+  "reproduced_locus_spmr_mismatches": [],
+  "peak_coordinate_features": "MATCH: frozen peak construction uses only coordinates, which match across all peaks; peak numeric scores are not inputs to these features.",
+  "condition_feature_qc_differing_cells": 74,
+  "differing_qc_loci": [
+    "CHO_BM_DHIMAN_005",
+    "CHO_BM_GAIDUKOV_002",
+    "CHO_BM_DHIMAN_004",
+    "CHO_BM_DHIMAN_006",
+    "CHO_BM_GAIDUKOV_016",
+    "CHO_BM_ZHAO_003",
+    "CHO_BM_DHIMAN_007",
+    "CHO_BM_DHIMAN_008",
+    "CHO_BM_GAIDUKOV_015",
+    "CHO_BM_DHIMAN_009",
+    "CHO_BM_GAIDUKOV_017",
+    "CHO_BM_GAIDUKOV_005",
+    "CHO_BM_GAIDUKOV_014",
+    "CHO_BM_GAIDUKOV_018",
+    "CHO_BM_GAIDUKOV_003",
+    "CHO_BM_DHIMAN_010",
+    "CHO_BM_GAIDUKOV_007",
+    "CHO_BM_GAIDUKOV_008",
+    "CHO_BM_HERTEL_003",
+    "CHO_BM_ZHAO_001",
+    "CHO_BM_DHIMAN_011",
+    "CHO_BM_GAIDUKOV_021",
+    "CHO_BM_HERTEL_001",
+    "CHO_BM_DHIMAN_012",
+    "CHO_BM_HERTEL_002",
+    "CHO_BM_ZHAO_002",
+    "CHO_BM_DHIMAN_013",
+    "CHO_BM_GAIDUKOV_009",
+    "CHO_BM_GAIDUKOV_011",
+    "CHO_BM_GAIDUKOV_001",
+    "CHO_BM_GAIDUKOV_013",
+    "CHO_BM_DHIMAN_003",
+    "CHO_BM_CHI_001",
+    "CHO_BM_GAIDUKOV_010",
+    "CHO_BM_DHIMAN_001",
+    "CHO_BM_GAIDUKOV_019",
+    "CHO_BM_DHIMAN_002"
+  ],
+  "temporary_aggregation_comparisons": [
+    {
+      "product": "study",
+      "rows": 333,
+      "columns": 75,
+      "file_hash_match": false,
+      "differing_cells": 74,
+      "differences": [
+        {
+          "row": 6,
+          "locus": "CHO_BM_CHI_001",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 6,
+          "locus": "CHO_BM_CHI_001",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 15,
+          "locus": "CHO_BM_DHIMAN_001",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 15,
+          "locus": "CHO_BM_DHIMAN_001",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 24,
+          "locus": "CHO_BM_DHIMAN_002",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 24,
+          "locus": "CHO_BM_DHIMAN_002",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 33,
+          "locus": "CHO_BM_DHIMAN_003",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 33,
+          "locus": "CHO_BM_DHIMAN_003",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 42,
+          "locus": "CHO_BM_DHIMAN_004",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 42,
+          "locus": "CHO_BM_DHIMAN_004",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 51,
+          "locus": "CHO_BM_DHIMAN_005",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 51,
+          "locus": "CHO_BM_DHIMAN_005",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 60,
+          "locus": "CHO_BM_DHIMAN_006",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 60,
+          "locus": "CHO_BM_DHIMAN_006",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 69,
+          "locus": "CHO_BM_DHIMAN_007",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 69,
+          "locus": "CHO_BM_DHIMAN_007",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 78,
+          "locus": "CHO_BM_DHIMAN_008",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 78,
+          "locus": "CHO_BM_DHIMAN_008",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 87,
+          "locus": "CHO_BM_DHIMAN_009",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 87,
+          "locus": "CHO_BM_DHIMAN_009",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 96,
+          "locus": "CHO_BM_DHIMAN_010",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 96,
+          "locus": "CHO_BM_DHIMAN_010",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 105,
+          "locus": "CHO_BM_DHIMAN_011",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 105,
+          "locus": "CHO_BM_DHIMAN_011",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 114,
+          "locus": "CHO_BM_DHIMAN_012",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 114,
+          "locus": "CHO_BM_DHIMAN_012",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 123,
+          "locus": "CHO_BM_DHIMAN_013",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 123,
+          "locus": "CHO_BM_DHIMAN_013",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 132,
+          "locus": "CHO_BM_GAIDUKOV_001",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 132,
+          "locus": "CHO_BM_GAIDUKOV_001",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 141,
+          "locus": "CHO_BM_GAIDUKOV_002",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 141,
+          "locus": "CHO_BM_GAIDUKOV_002",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 150,
+          "locus": "CHO_BM_GAIDUKOV_003",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 150,
+          "locus": "CHO_BM_GAIDUKOV_003",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 159,
+          "locus": "CHO_BM_GAIDUKOV_005",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 159,
+          "locus": "CHO_BM_GAIDUKOV_005",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 168,
+          "locus": "CHO_BM_GAIDUKOV_007",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 168,
+          "locus": "CHO_BM_GAIDUKOV_007",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 177,
+          "locus": "CHO_BM_GAIDUKOV_008",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 177,
+          "locus": "CHO_BM_GAIDUKOV_008",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 186,
+          "locus": "CHO_BM_GAIDUKOV_009",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 186,
+          "locus": "CHO_BM_GAIDUKOV_009",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 195,
+          "locus": "CHO_BM_GAIDUKOV_010",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 195,
+          "locus": "CHO_BM_GAIDUKOV_010",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 204,
+          "locus": "CHO_BM_GAIDUKOV_011",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 204,
+          "locus": "CHO_BM_GAIDUKOV_011",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 213,
+          "locus": "CHO_BM_GAIDUKOV_013",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 213,
+          "locus": "CHO_BM_GAIDUKOV_013",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 222,
+          "locus": "CHO_BM_GAIDUKOV_014",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 222,
+          "locus": "CHO_BM_GAIDUKOV_014",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 231,
+          "locus": "CHO_BM_GAIDUKOV_015",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 231,
+          "locus": "CHO_BM_GAIDUKOV_015",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 240,
+          "locus": "CHO_BM_GAIDUKOV_016",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 240,
+          "locus": "CHO_BM_GAIDUKOV_016",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 249,
+          "locus": "CHO_BM_GAIDUKOV_017",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 249,
+          "locus": "CHO_BM_GAIDUKOV_017",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 258,
+          "locus": "CHO_BM_GAIDUKOV_018",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 258,
+          "locus": "CHO_BM_GAIDUKOV_018",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 267,
+          "locus": "CHO_BM_GAIDUKOV_019",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 267,
+          "locus": "CHO_BM_GAIDUKOV_019",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 276,
+          "locus": "CHO_BM_GAIDUKOV_021",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 276,
+          "locus": "CHO_BM_GAIDUKOV_021",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 285,
+          "locus": "CHO_BM_HERTEL_001",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 285,
+          "locus": "CHO_BM_HERTEL_001",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 294,
+          "locus": "CHO_BM_HERTEL_002",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 294,
+          "locus": "CHO_BM_HERTEL_002",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 303,
+          "locus": "CHO_BM_HERTEL_003",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 303,
+          "locus": "CHO_BM_HERTEL_003",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 312,
+          "locus": "CHO_BM_ZHAO_001",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 312,
+          "locus": "CHO_BM_ZHAO_001",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 321,
+          "locus": "CHO_BM_ZHAO_002",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 321,
+          "locus": "CHO_BM_ZHAO_002",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        },
+        {
+          "row": 330,
+          "locus": "CHO_BM_ZHAO_003",
+          "field": "analysis_input_overlap_fraction_study_median",
+          "historical": "0.0175990693387",
+          "reproduced": "0.0175990688353"
+        },
+        {
+          "row": 330,
+          "locus": "CHO_BM_ZHAO_003",
+          "field": "analysis_ip_input_overlap_ratio_study_median",
+          "historical": "11.6527145196",
+          "reproduced": "11.6527148971"
+        }
+      ]
+    },
+    {
+      "product": "consensus",
+      "rows": 222,
+      "columns": 100,
+      "file_hash_match": true,
+      "differing_cells": 0,
+      "differences": []
+    },
+    {
+      "product": "context",
+      "rows": 37,
+      "columns": 524,
+      "file_hash_match": true,
+      "differing_cells": 0,
+      "differences": []
+    }
+  ],
+  "37_locus_chip_representation": "MATCH (37 x 524, byte-identical temporary context TSV)",
+  "master_matrix": "UNCHANGED: its sole ChIP source is the byte-identical 37 x 524 context; original 37 x 588 matrix not regenerated",
+  "control_lambda_downstream": "Not an input to the frozen locus SPMR feature construction.",
+  "reexecution_scope": {
+    "analysis": "SRR20770297",
+    "input": "SRR20770287",
+    "study": "PRJNA865478",
+    "fragment_size_bp": 147,
+    "reexecuted_analyses": "1_OF_18",
+    "other_17_reexecuted": false,
+    "substitution": "Only this analysis was substituted; the other 17 historical analyses remained frozen."
+  }
+}

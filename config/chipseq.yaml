@@ -1,0 +1,16 @@
+# Execution locations only. Scientific policies remain in the frozen files.
+chipseq:
+  mode: frozen
+  samples: config/samples.tsv
+  analysis_plan: snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv
+  processing_plan: snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv
+  peak_plan: config/chipseq_peak_calling_plan.tsv
+  peak_plan_summary: config/chipseq_peak_calling_plan_summary.json
+  peak_policy: config/chipseq_peak_calling_policy.json
+  alignment_policy: config/chipseq_alignment.json
+  filtering_policy: config/chipseq_filtering.json
+  metadata_root: results/chipseq/reproduction/metadata
+  reference_root: results/chipseq/reproduction/reference
+  output_root: results/chipseq/reproduction
+  scratch_root: null
+  max_parallel_analyses: 2

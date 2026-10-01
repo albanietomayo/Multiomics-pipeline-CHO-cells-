@@ -1,0 +1,17 @@
+V1.0.1 CLEAN-CLONE REPRODUCTION
+Scientific environment installed from the selected analysis's historical explicit package record.
+Historical record: production_2026-09-23/environments/environment_d.explicit.txt
+Historical record SHA256: 25de69a3f5f6bdf09e4d2f15e45f06ff5f560849f7e9355d7206f51ff8a24771
+Reproduction explicit record SHA256: 9ae4ae7b53a2284cb0fa2372690455c177eb191d88361f7da726d310bae879b0
+Explicit package URL/hash set: MATCH (198 packages; no solve or software version update).
+Orchestration: Snakemake 9.25.2 in a separate temporary environment.
+python	3.10.21	h267e890_0_cpython
+bowtie2	2.5.5	h63e9258_1
+samtools	1.24	h9dcdb79_1
+picard	3.5.0	hdfd78af_0
+pysam	0.24.0	py310h4a09ff2_1
+phantompeakqualtools	1.2.2	hdfd78af_1
+macs3	3.0.4	py310h5a5e57a_0
+bedtools	2.31.1	h13024bc_3
+fastp	1.3.6	h43da1c4_0
+fastqc	0.12.1	hdfd78af_0

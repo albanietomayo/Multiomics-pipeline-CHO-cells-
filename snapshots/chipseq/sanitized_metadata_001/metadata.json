@@ -1,0 +1,2901 @@
+{
+  "records": [
+    {
+      "accession": "ERX2609900",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "f3e2ede149f017cd7a0ee16d368e14a1aa9d233f154d7208ed88c5860332de4a",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:21.361536+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609900"
+    },
+    {
+      "accession": "ERX2609901",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "3eed919f42c44ace2e467b49f53cf8e83232998960018da786f6a2df609a02b6",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:33.842486+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609901"
+    },
+    {
+      "accession": "ERX2609902",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "70bb5e559f6f1300ba32b938ec155a06756bdb56d12e75c8b71c5b2378be79c7",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:01.912368+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609902"
+    },
+    {
+      "accession": "ERX2609903",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "6e975ab0b3e1fede3cd910c5a0e60a99124949a1bbcf1e93a5fd7456fa6cb89e",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:10.648613+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609903"
+    },
+    {
+      "accession": "ERX2609904",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "1d1e2b9a9e867aef53c6bcc743a14c47418af0bbec385665d26ed43c0bed7074",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:00.786088+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609904"
+    },
+    {
+      "accession": "ERX2609905",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "96634aeced9a83e4d7f288631bdea0f88ca8eabf2299754f3fd7f650e5fada3e",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:24.889086+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609905"
+    },
+    {
+      "accession": "ERX2609906",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "021c8e454cf18e7b1b1bb91ec422268b43c3b2e1e08ff7a9de5da4cb3c0e678b",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:17.010172+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609906"
+    },
+    {
+      "accession": "ERX2609907",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "e5201b9c8c9ba3ac8208da9dbd706235629ec51e49e7c378d0f81568753812ce",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:56.337278+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609907"
+    },
+    {
+      "accession": "ERX2609908",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "41d4d87aaffb4ed4b65890393ebce5152839dbbc0c405a2a9138d940dd3a7725",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:28.870215+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609908"
+    },
+    {
+      "accession": "ERX2609909",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "98f20a532512d062ded1e6d65bc361f08512748c0c31e975ccf43cbf6637f2a2",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:31.362317+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609909"
+    },
+    {
+      "accession": "ERX2609910",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "0c0a495294cf9627a0373015dc0689b5e38790fd697427a1fce3450fe2d338ca",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:37.563127+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609910"
+    },
+    {
+      "accession": "ERX2609911",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "da377da51f743c35e477b6f86fe09fbaacd5d989e78e633f4d5bb156ab5af72f",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:06.912913+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609911"
+    },
+    {
+      "accession": "ERX2609912",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "34ec77b4059b182da4023f2754f9de549fab8597fd8e14d6a35b46d1da844d4e",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:51.349456+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609912"
+    },
+    {
+      "accession": "ERX2609913",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "e10355e41485e2910875bb6849e50ca0a5d60c13dd96a56205d7c91dc75d28e8",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:40.429616+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609913"
+    },
+    {
+      "accession": "ERX2609914",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "20f11fb1387668370960aa087a88f5b7ef15dd1158db75780a94af4dde85a374",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:56.467424+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609914"
+    },
+    {
+      "accession": "ERX2609915",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "c28b11a88376fb2a8099ad5890ee9b18b98efbfc34bd6a15d4aa95dc697e72dd",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:47.217670+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609915"
+    },
+    {
+      "accession": "ERX2609916",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "7df256a99408093c97afc40e8b2503cb6ffb1345b1727092fadf7950e9365597",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:28.658271+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609916"
+    },
+    {
+      "accession": "ERX2609917",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "8dafcee6d1103066511b4a78538c89fc5162d7331a89bf48c3e42ba43647518f",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:44.142432+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609917"
+    },
+    {
+      "accession": "ERX2609918",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "d350b8b6ee9360537d7d99306dcf47b4e203e8569f5b270883764fa3f3a1f1be",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:00.164378+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609918"
+    },
+    {
+      "accession": "ERX2609919",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "9c2b34b73fb1858d7a2286575b1c68a403a6f3ec1d7a9030f80196b1ca1d9745",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:11.889497+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609919"
+    },
+    {
+      "accession": "ERX2609920",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "9a1706189801147d9e7a27c5d1a47d581c72f3aef6a5e44df64ef927d332e6e2",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:22.635838+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609920"
+    },
+    {
+      "accession": "ERX2609921",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "c1189a8a9e9edd41c8c095be929b44fc7f4e9ee21e571c23377c5582b05b39a1",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:40.052370+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609921"
+    },
+    {
+      "accession": "ERX2609922",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "a4d92e973eca7ffeeff787225a88abc049bc1b72a4f576436766df755bca0b35",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:49.458334+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609922"
+    },
+    {
+      "accession": "ERX2609923",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "9e90c9cf824c3d7f6a9e7a33beabee0e127c44cd2dc714b491dbfa68b0d4d103",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:59.427417+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609923"
+    },
+    {
+      "accession": "ERX2609924",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "93369b48da54efebf01e424837297f9fc817a53fdb39e1961e0fc9b6d0a86b99",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:45.699969+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609924"
+    },
+    {
+      "accession": "ERX2609925",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "602e26579582563e2b3344ebf4e332e487f63873e9db5ab907416367698c000e",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:45.076565+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609925"
+    },
+    {
+      "accession": "ERX2609926",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "3a5fba812ff500f736783a69304e2f17768a0b9291e9ab0ace7332dd58bb2e2d",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:18.121229+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609926"
+    },
+    {
+      "accession": "ERX2609927",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "a10a146a5cfce84e6d657fd5c5b228e029d9a34c7eb6c425aced97ab7761e430",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:25.163724+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609927"
+    },
+    {
+      "accession": "ERX2609928",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "14cd7a4b209b8ee3860ce5d573c558d71519633ecd0c0921e27770dec52e9c90",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:32.663711+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609928"
+    },
+    {
+      "accession": "ERX2609929",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "f9de59f0d9b5a114ddb8e602612f0d6ba59c863231ef4907f14f01f5d80749ef",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:27.049152+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609929"
+    },
+    {
+      "accession": "ERX2609930",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "2fc3eeca143307eb4a30f067253b631cff64ed5f3c6bea2edcae3d7352f25b7b",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:39.486356+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609930"
+    },
+    {
+      "accession": "ERX2609931",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "2e4fc7cf10e82da70387bae0586fad505596b243e67fb6ff18e1dba752a8a347",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:42.522376+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609931"
+    },
+    {
+      "accession": "ERX2609932",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "cb4bec70508fb76f070545706052cd89e4b2ac056ccc77e3f5e63d6a3b434dcd",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:50.711542+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609932"
+    },
+    {
+      "accession": "ERX2609933",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "b492a0f67fb40ce4cf48673bcdb6c1328b54ea288c426717af398777c7bc256b",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:23.878625+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609933"
+    },
+    {
+      "accession": "ERX2609934",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "fe170f55caaa0ded4a677f012aefdb4d75b295d4e230261d0cf7764facaecea8",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:32.021128+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609934"
+    },
+    {
+      "accession": "ERX2609935",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "3568e690f857ecfaf68f47639e646949967ed06ce11eb50f7a9ab1b65fa38bea",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:28.304309+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609935"
+    },
+    {
+      "accession": "ERX2609936",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "6884eb43feecb9faa4afc0c57e29d8e911a25458be30266cf5386cbd6a3be4af",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:16.230588+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609936"
+    },
+    {
+      "accession": "ERX2609937",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "c2783a2f4f6011a35a31869b17f6812a2195ffd8150dc377cfb865d7865b224a",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:45.991446+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609937"
+    },
+    {
+      "accession": "ERX2609938",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "a678298a741cc7c4f6210eee078fb5223f681ecb13be1d41fedfb567fdf527fb",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:29.281233+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609938"
+    },
+    {
+      "accession": "ERX2609939",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "484903704b385cbddcc1f400c961263828bef7be029016fb2ac182d0a1d0e184",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:45.369553+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609939"
+    },
+    {
+      "accession": "ERX2609940",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "ae32640aef702dfbe2fb98e6e9d90afb051b0b00f2a6a8075f9798aa048be6ff",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:16.374413+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609940"
+    },
+    {
+      "accession": "ERX2609941",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "f5d930c91273f97d3b2dae9399a663452cff86bfc2ab275fc029ed1b7d6f7b5a",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:11.969658+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609941"
+    },
+    {
+      "accession": "ERX2609942",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "095d71d37d5b33ce9d72f8001c327fcad44b071945a3b72201a5184ad07f375e",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:33.218105+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609942"
+    },
+    {
+      "accession": "ERX2609943",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "2ae610c762d1f8aa72f40b731688bd3adbb250f140c7b698961e2eb54d3866e5",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:31.395711+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609943"
+    },
+    {
+      "accession": "ERX2609944",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "082e85ef284084cd6679d0f15b54871a7c3555ee02671b67972aec572c5887b1",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:45.750041+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609944"
+    },
+    {
+      "accession": "ERX2609945",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "8ce6c7adce286108bbd5f7ce99dfe95b1f3540d5d9fbf36c3727199a8aecacd9",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:14.990831+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609945"
+    },
+    {
+      "accession": "ERX2609946",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "3db871e041c1d6387228bbcf169725e9872576ce0f362c00f73098b964587858",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:07.535431+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609946"
+    },
+    {
+      "accession": "ERX2609947",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "ca4c9e0c6bb4311495dc8c17cc18207d95db63e918b07c276001b3142f84d6d0",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:10.018366+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609947"
+    },
+    {
+      "accession": "ERX2609948",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "ff28738431c26eac43a2aecaa99ffe223f5e2516281fc1f501d8eb1b0faeade0",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:50.888998+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609948"
+    },
+    {
+      "accession": "ERX2609949",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "f2215d17b715362b5ab8fcbcb0c5f19cabba5121e14600b3927e73c49f274118",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:28.035726+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609949"
+    },
+    {
+      "accession": "ERX2609950",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "afb8f2463c6573ee3aca728cb47d1007fde4c62019d7e904dbb3aee8c620b021",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:42.917546+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609950"
+    },
+    {
+      "accession": "ERX2609951",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "48ec350e0e3a171bcd274ba3ea090f0e3185d226aeeefe01bc53764c7d8d49f6",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:58.312970+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609951"
+    },
+    {
+      "accession": "ERX2609952",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "30d4940fb7cdb2510aacf036205ba8d6396042b9609a9807f00f2965b759066d",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:14.492249+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609952"
+    },
+    {
+      "accession": "ERX2609953",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "6e4cec7539eeba54bc9d3abaa371c742c8455ea725a03e6d2ad48c75420a52d8",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:43.197997+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609953"
+    },
+    {
+      "accession": "ERX2609954",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "c1dcca451ea382dae25d1099c557b0c9f609f54cf3831df4f8321ac4556d32fe",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:12.514622+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609954"
+    },
+    {
+      "accession": "ERX2609955",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "0e579a10c006ab651444132dc89da7f9bea0687d3f611b77a2b3f34307f36735",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:38.188818+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609955"
+    },
+    {
+      "accession": "ERX2609956",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "1d17bd370e7b2616a5d04b73784a12df3c179b9671c4a753fab486dec28785aa",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:02.550800+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609956"
+    },
+    {
+      "accession": "ERX2609957",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "81afc90d98c9a8cdf6b5b786060d3deec510bae41cf214a79c78637c91a45ae2",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:52.599287+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609957"
+    },
+    {
+      "accession": "ERX2609958",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "9292a6b5c8968ab7c6dc2b23176cdf8b0837d7812630b0c868dc56ff6b8bec22",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:26.413089+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609958"
+    },
+    {
+      "accession": "ERX2609959",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "ff9dc3deee326b6edbbe058ac9f5965a4d6d9ace8b7d92a6f580d5732690cc0d",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:33.911253+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609959"
+    },
+    {
+      "accession": "ERX2609960",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "68548557edb7684c8499850c4d1550672513ca2c3d652bf0ee84f9b2f6e55d91",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:25.789458+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609960"
+    },
+    {
+      "accession": "ERX2609961",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "68d0949898979f2432c212a09fadc1cbe56015bf45bcac8ac9f77656062e487f",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:17.478222+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609961"
+    },
+    {
+      "accession": "ERX2609962",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "b8b201c6bd1815ffe83fb98694b3960e33f06daca91444ff44e96d181f9e92de",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:10.722738+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609962"
+    },
+    {
+      "accession": "ERX2609963",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "015ed6a9038e0bbab02c7430fbb3001d80a79fb9567f3e187a92293953513444",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:34.871337+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609963"
+    },
+    {
+      "accession": "ERX2609964",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "0ad6ef2244da75e77a0acbc96553fb158b51d3dd1e84f2e594331595d1c8cd6d",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:29.493723+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609964"
+    },
+    {
+      "accession": "ERX2609965",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "5c9be626b41ac394c08889f79f5dec4b43c4e9367d9697bff43f60140cb3f971",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:07.603550+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609965"
+    },
+    {
+      "accession": "ERX2609966",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "c8fe26df25b7355a9d0518c4ca4112f0717b95b16a2fa986715df51686d5a4e9",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:43.759320+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609966"
+    },
+    {
+      "accession": "ERX2609967",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "5dece230045654490bfeee0407795dc9b5c7f365c4a7641eb712148c20562ba5",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:13.220475+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609967"
+    },
+    {
+      "accession": "ERX2609968",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "b543c4f2f464a7d35b1242b438e1e30bd8693994e9e3b2e09b2d41ffc294c93d",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:30.736952+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609968"
+    },
+    {
+      "accession": "ERX2609969",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "5c0dd36d67fdbda6fdc5bf0671f13bc8a172579fe2615fe588cb4a61c584f63e",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:35.506024+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609969"
+    },
+    {
+      "accession": "ERX2609970",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "d4763d3f381d485a7415f14cc5d4395ff60ba43e78984e26c59a74540b37e9f0",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:51.512497+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609970"
+    },
+    {
+      "accession": "ERX2609971",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "d7e80137004e8d4a4cbbc20876fc4cb7544054e998acf32edc155847fd01ca51",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:06.343100+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609971"
+    },
+    {
+      "accession": "ERX2609972",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "e49cab9248c8800ffac0fad33267d512b0116a745621bd36a8b7c14451ecc16a",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:33.287008+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609972"
+    },
+    {
+      "accession": "ERX2609973",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "40663061bbd1fc128db8eeff1cb3677a707089626071b7e3c54867934c57e139",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:12.593147+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609973"
+    },
+    {
+      "accession": "ERX2609974",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "9f6f122e29225c1417a76ab3a6586446fa69c25c52c5ad1198747e3b5cef1e7b",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:34.248585+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609974"
+    },
+    {
+      "accession": "ERX2609975",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "6e8cc697c6d9b826518d16970e702b52df3cd593af8f6cbf240689fa7fbed43e",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:50.270986+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609975"
+    },
+    {
+      "accession": "ERX2609976",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "c33cfda2b74393f3a9e7f065ae6c57cf6008d9e1a146242989e421e84f0f2978",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:06.284038+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609976"
+    },
+    {
+      "accession": "ERX2609977",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "7fd3a787b6917c199638a1643f61279082fba57e2fa3c916fc0bdb9bba5021c9",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:53.855358+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609977"
+    },
+    {
+      "accession": "ERX2609978",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "6ed40c30e8d982b064b2531d18ebf386194ca8ff27420377f35ae7bb997a9064",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:28.924393+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609978"
+    },
+    {
+      "accession": "ERX2609979",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "dd6846f05b696b56837e953dc497d9670f5c288850430518176dd511f159a8d8",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:35.164554+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609979"
+    },
+    {
+      "accession": "ERX2609980",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "3cfa6c34e588d74281a7c1abab2a4011a5c9a0a37b51279f86a595cb7c4b042c",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:24.528705+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609980"
+    },
+    {
+      "accession": "ERX2609981",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "8a84e989d8b19dd08e25672c024a779107082ed89dab2589180c974b80e6da4e",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:27.014490+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609981"
+    },
+    {
+      "accession": "ERX2609982",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "7d0b183b655a88168020320157bd0878865c8ab11fadd28d173d614b3c3b0577",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:42.288716+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609982"
+    },
+    {
+      "accession": "ERX2609983",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "14b7eb2beaed56d07b321ac8882a7aa8cdc0f933c97fdfd2fcb7ff07e91235a2",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:01.403240+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX2609983"
+    },
+    {
+      "accession": "ERX947751",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "a16e31b1ef88ce6f8e3de803405988d1ff3ef711f5a8e9a85b339a7c63c5f10f",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:48.169050+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947751"
+    },
+    {
+      "accession": "ERX947752",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "a44cb870a7a085f3bd502d6e3b7abcefeba4b4675de1544d090837ee39014906",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:54.609608+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947752"
+    },
+    {
+      "accession": "ERX947753",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "eeb3780e6d2e827093dae16e8a2ff726a8e16d68e3b637c2bf195e6492ddce06",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:23.239414+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947753"
+    },
+    {
+      "accession": "ERX947754",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "a4959a8df52bef750e5bb217bd088f06f567d4e7da403f6d88d0bab66af666ac",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:35.703712+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947754"
+    },
+    {
+      "accession": "ERX947755",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "6072c4e056e90e29bd533010e6fed2b13b9f49f87967e8498891ebfc4d77bb6e",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:03.175387+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947755"
+    },
+    {
+      "accession": "ERX947756",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "7a319b4af950633ac570266e889958fe28f463ffd07ee2bad08d26affd6dbc1d",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:09.389763+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947756"
+    },
+    {
+      "accession": "ERX947757",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "e9133e27f337bc8b2afbbc63f6cbb96183ceeb5eaadcdb1686031bfb56751fd7",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:59.540613+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947757"
+    },
+    {
+      "accession": "ERX947758",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "31fd8bbd1fd2622ce9fee845871e798e179d072018c2c05413ffb161d4ac5064",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:25.520944+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947758"
+    },
+    {
+      "accession": "ERX947759",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "2b41372245d5ca95052e5bdf3725bf132120ff7d49d14b6aee6c60a9c7d5c4c7",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:41.667304+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947759"
+    },
+    {
+      "accession": "ERX947760",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "033cd244c105f142caa9686b6d0e9bfee2bf9d05cf7244db413fcd4ed0104664",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:57.695153+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947760"
+    },
+    {
+      "accession": "ERX947761",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "a1b71109ded9735b3a9a45f983f398a35e093e9bd49e7191f1fd1f553369dae6",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:15.745013+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947761"
+    },
+    {
+      "accession": "ERX947762",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "3b176c70d51b42718c0ddc1b9c477bb8ab78fda6bafc576d66be078749d86d4d",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:41.340389+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947762"
+    },
+    {
+      "accession": "ERX947763",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "87dc0491646ba8aea6a6facaace0cba345d2f8c03afafb9c75a7888fc2e6af9f",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:19.495779+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947763"
+    },
+    {
+      "accession": "ERX947764",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "abc32b498ba308f215be36cf57475289ab8e1a88f119bce4242a0926a2d5c692",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:20.590470+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947764"
+    },
+    {
+      "accession": "ERX947765",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "1816c0130f52bd77a605da3be7b8dc72e5951a110ee1da2a260984daee898f07",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:30.157664+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947765"
+    },
+    {
+      "accession": "ERX947766",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "161cb7a2b19fae73bad60be5f5b1a04c2c13fc871db918b3c68204de4d640f70",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:03.803016+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947766"
+    },
+    {
+      "accession": "ERX947767",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "3b457545d77ebc9b212e07f53105ed59b65280d719ab5d15269ee20e75223fa0",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:50.085425+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947767"
+    },
+    {
+      "accession": "ERX947768",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "361aea13fbf751ef6f2b48d8697aa21351feda8d9ca8cedf1945db5561100666",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:01.283318+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947768"
+    },
+    {
+      "accession": "ERX947769",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "c6dbfd5f5665c4b9b21ff11cfd4848d45a023ba879eaa41b0bb2535a13fa9a80",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:16.855127+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947769"
+    },
+    {
+      "accession": "ERX947770",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "9c6b196d10e5680fe72237bc2818cdfb2da6803696b5152a0a944d63c75122b5",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:06.964482+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947770"
+    },
+    {
+      "accession": "ERX947771",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "3f386b4731a7a944ea308f14b6069d44cee2b9883ef388ffc356e4c8a04f0f5b",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:32.383121+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947771"
+    },
+    {
+      "accession": "ERX947772",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "0eac66bd7f1e4ab6ed6c473df2fe08f2442423dfdba0363797bbdcaa334632b9",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:39.807018+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947772"
+    },
+    {
+      "accession": "ERX947773",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "81810f377de6bb51115c0de9c4aaaee31f31246897264565aba4709d0d0b8619",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:52.742750+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947773"
+    },
+    {
+      "accession": "ERX947774",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "1ccad7f558202fdf2be802e2f2220a86435869e063563776afc8411fa9c043e8",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:08.232225+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947774"
+    },
+    {
+      "accession": "ERX947775",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "a8db340c5b374628c42441caf4ff6e81c2f2e85c0f8e7b74dbc82beb18672f53",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:44.402786+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947775"
+    },
+    {
+      "accession": "ERX947776",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "537f76cc5eb54477017e5fa9bbb1a8cc07cc1e94881b584d18fc76b2bcff71db",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:13.844943+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947776"
+    },
+    {
+      "accession": "ERX947777",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "06311ad64f5302bf939a4487ec4dd683350452c7db77ac0423a779220c3d9afa",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:23.866667+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947777"
+    },
+    {
+      "accession": "ERX947778",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "Illumina HiSeq 2000 sequencing",
+        "library_name": "unspecified"
+      },
+      "historical_source_sha256": "763d7ea30e81f7c67d1e8b69b1d71ea96fcaffe1d5d61725cec01c5e106859bc",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:40.716962+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX947778"
+    },
+    {
+      "accession": "SRX16790169",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "ChIP-Seq (H3K4me3) of CHO-K1 from Fed-Batch T3",
+        "library_name": "K4_T3"
+      },
+      "historical_source_sha256": "a82bfd996c1a4829961e0b863b5066dc93ecfdcaaddb2736dbe2ba756e18b81b",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:43.836032+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SRX16790169"
+    },
+    {
+      "accession": "SRX16790170",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "ChIP-Seq (H3K9me3) of CHO-K1 from Fed-Batch T3",
+        "library_name": "K9_T3"
+      },
+      "historical_source_sha256": "723aca4dda1590d48314945d496f5ca00c519536f789c3e4167dd913c0ac3795",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:14.367818+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SRX16790170"
+    },
+    {
+      "accession": "SRX16790171",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "ChIP-Seq (Input) of CHO-K1 from Fed-Batch T7",
+        "library_name": "Input_T7"
+      },
+      "historical_source_sha256": "7f23548dbbea847abb030727f235fd02039e96dbfa907be56967b79bf31235b3",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:04.506571+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SRX16790171"
+    },
+    {
+      "accession": "SRX16790172",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "ChIP-Seq (H3K27ac) of CHO-K1 from Fed-Batch T3",
+        "library_name": "K27_T3"
+      },
+      "historical_source_sha256": "187b55e7eeaaf6cc720d452c03bee852b5d1e910639325d02a73520d050ae8ba",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:57:27.401240+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SRX16790172"
+    },
+    {
+      "accession": "SRX16790173",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "ChIP-Seq (H3K4me3) of CHO-K1 from Fed-Batch T7",
+        "library_name": "K4_T7"
+      },
+      "historical_source_sha256": "3dd12db473fe0dee58c7d1002bd522d9b1d77db7c64059ad2f594ed4e4806a8f",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:53.224663+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SRX16790173"
+    },
+    {
+      "accession": "SRX16790174",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "ChIP-Seq (H3K9me3) of CHO-K1 from Fed-Batch T7",
+        "library_name": "K9_T7"
+      },
+      "historical_source_sha256": "cc66a2713b011ac95c6bf91d412bf6175818a7eb57caf911f956c1b8a3d885b3",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:27.672537+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SRX16790174"
+    },
+    {
+      "accession": "SRX16790175",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "ChIP-Seq (H3K27ac) of CHO-K1 from Fed-Batch T7",
+        "library_name": "K27_T7"
+      },
+      "historical_source_sha256": "75f4f0f56ee5a7c9a918b8d3985d80e60a9271d1a6190c1018429d74f7dd7561",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:59:34.538922+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SRX16790175"
+    },
+    {
+      "accession": "SRX16790179",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "experiment_title": "ChIP-Seq (Input) of CHO-K1 from Fed-Batch T3",
+        "library_name": "Input_T3"
+      },
+      "historical_source_sha256": "fd0f1b6311f35a986a28d9325c959ef7b6c152feba541e511127f2d063879d92",
+      "record_type": "experiment",
+      "retrieved_at_utc": "2026-09-13T14:58:09.483051+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SRX16790179"
+    },
+    {
+      "accession": "SAMEA3373337",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_114h_H3K4me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "b82e14016a2cbc8c6e3d73ac29ce6ec251fe093ddbd245644fc35bb0e2808478",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:31.147158+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373337"
+    },
+    {
+      "accession": "SAMEA3373338",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_66h_H3K36me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "16e3592a3c052a2c4a1819279c6a2f5b9dbc5ae9496fb1776106df92ab30c5f8",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:37.334598+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373338"
+    },
+    {
+      "accession": "SAMEA3373339",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_66h_Input",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "488da8b30d68a9a819febf71989154918145c9e864d1b7b10bf36200c537bfa3",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:53.350362+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373339"
+    },
+    {
+      "accession": "SAMEA3373340",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_66h_H3K27ac",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "742d955cbe670bbbe6c72d90bc703c2b1cd60af7f6827f789262a06c52b11d03",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:08.854346+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373340"
+    },
+    {
+      "accession": "SAMEA3373341",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_66h_H3K4me1",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "5e7d02e8d8cff87da12113a3b2c25b9a0fe49bb1a829c07966dc095ba3c66992",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:54.475847+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373341"
+    },
+    {
+      "accession": "SAMEA3373342",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_162h_H3K4me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "f3a71820f471864ea3e55b65135f37e3dbdc4880f79149462fd97296bdb9aa71",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:17.626136+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373342"
+    },
+    {
+      "accession": "SAMEA3373343",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_210h_H3K27me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "cfbe71faa6243f9bb590caab70a3816cbcc2956bbcfff0c8f975c7de6978e8a8",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:24.514656+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373343"
+    },
+    {
+      "accession": "SAMEA3373344",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_210h_H3K9me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "69f1b113918011f043f6825ac1e534053cc912a7be9d99dd8025f0376a5503bb",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:36.318891+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373344"
+    },
+    {
+      "accession": "SAMEA3373345",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_114h_H3K27me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "27d101f23340d3028ffa4b9c10259f05034604b2b6719e794dfb189669266847",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:41.284160+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373345"
+    },
+    {
+      "accession": "SAMEA3373346",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_114h_H3K36me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "fcd82c65be15e5d361a6aab95272a86900b42b12241120a35ec4804ac4b739dd",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:47.600000+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373346"
+    },
+    {
+      "accession": "SAMEA3373347",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_114h_H3K27ac",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "04a936c5112d3a644590d7200082598ba82aeab0f52dcf132e9869d6ba698c1f",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:00.038808+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373347"
+    },
+    {
+      "accession": "SAMEA3373348",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_114h_H3K4me1",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "bc8f923df38d4ee6f2bc497604e9c51bffe252ff22d4d9478a7ee553e32b18b0",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:19.353505+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373348"
+    },
+    {
+      "accession": "SAMEA3373349",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_162h_H3K36me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "42670931efa7a4b2a9e7b216a264f685359e9e59bc23924cbaadbf329b0fc419",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:05.037762+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373349"
+    },
+    {
+      "accession": "SAMEA3373350",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_162h_Input",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "bf1f8355a3d050264922a21094fa7dfbd8bc84f40ab96356dce3c0842d58978e",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:08.148631+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373350"
+    },
+    {
+      "accession": "SAMEA3373351",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_162h_H3K27ac",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "9d365a78cbcbcc746d8b338076eed9cbd240116a0dd65f7a9573c820b6c6e6b2",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:52.120374+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373351"
+    },
+    {
+      "accession": "SAMEA3373352",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_162h_H3K27me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "515fa4d07ad73f077cee43c972500722a89aac8a7ff8332681693fe421bce18f",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:38.559285+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373352"
+    },
+    {
+      "accession": "SAMEA3373353",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_162h_H3K9me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "cc3bdedf75dde9950609fe644dd4e0f1f3f342c31eb84dbbb79db26cb5d3caae",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:57.074407+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373353"
+    },
+    {
+      "accession": "SAMEA3373354",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_162h_H3K4me1",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "fec1d7ef63bd57d7902cfc8ae532c62d45ac63e5b03bb2e95694c8b03b04db16",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:11.345134+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373354"
+    },
+    {
+      "accession": "SAMEA3373355",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_210h_Input",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "2ee0f5ac0a8759fd02111749e99248b752316a0a771fce08695dcb6cda800817",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:57.574335+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373355"
+    },
+    {
+      "accession": "SAMEA3373356",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_210h_H3K4me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "d8f3b35c2b671aa2683c2b0288ac3e9517ef49b61c5a95a72e3b2abee3151682",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:40.092794+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373356"
+    },
+    {
+      "accession": "SAMEA3373357",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_66h_H3K27me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "46abf111198808dcd8708804d739f1a4069e658d42fec0f70146fa6e2ca107fe",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:44.449148+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373357"
+    },
+    {
+      "accession": "SAMEA3373358",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_210h_H3K27ac",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "8cb1202921299511a33e1a497b40feea49a761ec20a4d2e7dcf189cb3650d48f",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:15.607115+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373358"
+    },
+    {
+      "accession": "SAMEA3373359",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_210h_H3K4me1",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "c8b73bb4fe7d46f44c4ad7ab3bfc7bcf201fc5d0b3bf17c909cc89d811ac8f82",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:05.723705+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373359"
+    },
+    {
+      "accession": "SAMEA3373360",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_66h_H3K9me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "9eab1924ce4ce9d50fdfae435f0a18bf530301c950e186c52aa82ad4348963e3",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:29.910991+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373360"
+    },
+    {
+      "accession": "SAMEA3373361",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_66h_H3K4me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "0b873103618b2ca4f5b0c615a87fc259122b7aeb30b542dcaaa350d4b0f8bf73",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:37.942415+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373361"
+    },
+    {
+      "accession": "SAMEA3373362",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_114h_H3K9me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "a8741d4aa5bf19d143f75c86b60a7287d5785dc9b2501e9f1ce23254b32c3491",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:53.973953+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373362"
+    },
+    {
+      "accession": "SAMEA3373363",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln_MCB_210h_H3K36me3",
+        "sample_description": "Histone Modifications CHO K1 8mM Glutamine batch culture",
+        "sample_title": "Histone Modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "e1470fd4a73674109ad6cd05216916e1cb4c84badec5bc83b8617a95409a7c1c",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:10.096126+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA3373363"
+    },
+    {
+      "accession": "SAMEA4681865",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp0 (4h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 4 hours of batch culture (TP0)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "a3db1afcfbda9542c09d295a822391277300397d3cce87eb8501cb52d51c90c7",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:55.089699+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681865"
+    },
+    {
+      "accession": "SAMEA4681866",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp1 (17h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 17 hours of batch culture (TP1)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "1d2b6c761ceb9571695a315671c38a32eb9aed07df03fafd54729f23261070f4",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:26.373674+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681866"
+    },
+    {
+      "accession": "SAMEA4681867",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp2 (28h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 28 hours of batch culture (TP2)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "4f4614c1aafb390598b97bb28f4065de07fbd440ec231bb0bfa592d2e77d4704",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:18.738418+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681867"
+    },
+    {
+      "accession": "SAMEA4681868",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp3 (42h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 42 hours of batch culture (TP3)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "081f3b951ed44f2fa6b878b709ba8847de64baaf4024cef99d63c6af99e8c1a4",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:36.932398+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681868"
+    },
+    {
+      "accession": "SAMEA4681869",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp4 (53h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 53 hours of batch culture (TP4)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "c11bc3fc5b6f114826cf5e4b64e33ca6576fabfbc3786c7462492588b1c3a148",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:41.898515+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681869"
+    },
+    {
+      "accession": "SAMEA4681870",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp6 (76h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 76 hours of batch culture (TP6)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "54bdd150fe005a742e17fb8b97c7e25fae7dd81b00e03f7cefdcf3d1b40245bb",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:48.214191+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681870"
+    },
+    {
+      "accession": "SAMEA4681871",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp7 (90h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 90 hours of batch culture (TP7)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "f6027aa88ce95f7b4c4313ea3b80dc9c20999624db752aa7306579d16ce1360c",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:00.651317+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681871"
+    },
+    {
+      "accession": "SAMEA4681872",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp8 (101h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 101 hours of batch culture (TP8)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "317d346d269af45d857a55cd85300ebb77c77b7b967c05fcb811279548bd36f7",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:18.859385+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681872"
+    },
+    {
+      "accession": "SAMEA4681873",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp10 (125h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 125 hours of batch culture (TP10)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "e41d1fc4582330ef2d239b82085cae56891bfc7478f1d8dc74665f38c9712301",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:31.977772+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681873"
+    },
+    {
+      "accession": "SAMEA4681874",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp11 (138h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 138 hours of batch culture (TP11)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "8c28783e47f73fd7cb17a77a278c9d17d36fb9f0556c602e6b15aea467a3696d",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:29.535349+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681874"
+    },
+    {
+      "accession": "SAMEA4681875",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp12 (149h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 149 hours of batch culture (TP12)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "39b2c01eb9918d16cf8d2dead0db2aec6c11b6866fecb32829045a865761611d",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:43.135946+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681875"
+    },
+    {
+      "accession": "SAMEA4681876",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp14 (173h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 173 hours of batch culture (TP14)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "27f3902b43bd449fce13b1f8824eda65ffd58c14d9dd7d001c52190e1d601d7c",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:43.524606+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681876"
+    },
+    {
+      "accession": "SAMEA4681877",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp15 (186h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 186 hours of batch culture (TP15)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "193b5656305a220fc50540f5d108def62e9a1953a47fbf3ea8ba99dcaedbc93d",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:58.919964+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681877"
+    },
+    {
+      "accession": "SAMEA4681878",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K36me3 Tp16 (197h)",
+        "sample_description": "CHO-K1 H3K36me3 sampled at 197 hours of batch culture (TP16)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "b2130f684ba65a666c023ebe05c3dd30766b08c893b7c35ea7e5678bfc4bbfd0",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:15.104343+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681878"
+    },
+    {
+      "accession": "SAMEA4681879",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp0 (4h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 4 hours of batch culture (TP0)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "9fa52bba4ba25845aa4b3b91fb20a7272c60a1f822c2cd4aef519a964d9f23a7",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:38.240057+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681879"
+    },
+    {
+      "accession": "SAMEA4681880",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp1 (17h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 17 hours of batch culture (TP1)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "53b6965603131845d84203d32133779beb9389d496dfdbb713862a9757d61c4b",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:20.112286+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681880"
+    },
+    {
+      "accession": "SAMEA4681881",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp2 (28h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 28 hours of batch culture (TP2)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "ec7314615a77b548a83a032505d4a44474e663e9e0a5bf38055363c63da8a8ba",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:32.592472+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681881"
+    },
+    {
+      "accession": "SAMEA4681882",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp3 (42h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 42 hours of batch culture (TP3)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "dbd327b6675241c2180b7b84af6854902a1143ba5808e96ec196c0a3b613675d",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:38.806682+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681882"
+    },
+    {
+      "accession": "SAMEA4681883",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp4 (53h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 53 hours of batch culture (TP4)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "a727ac0c958399d2b73ac911d9b2b478810c7e2c80515b289310d248681cbbfc",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:45.119487+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681883"
+    },
+    {
+      "accession": "SAMEA4681884",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp6 (76h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 76 hours of batch culture (TP6)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "fdb6a4ec322d925d3b4b9fdd91512c7828582b42c2f2db8072abb480b5963417",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:11.262887+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681884"
+    },
+    {
+      "accession": "SAMEA4681885",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp7 (90h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 90 hours of batch culture (TP7)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "9dcc76d5d401270cdc5bbe2d1984baf09ac0758199c77ad5bb1be43d1af22da9",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:47.537927+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681885"
+    },
+    {
+      "accession": "SAMEA4681886",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp8 (101h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 101 hours of batch culture (TP8)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "8e7f0e2841b423ea87398a696a3791220094edaf78e0571f91dc765967e7179e",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:33.002295+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681886"
+    },
+    {
+      "accession": "SAMEA4681887",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp10 (125h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 125 hours of batch culture (TP10)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "39f5986effe4378e6d20f3b17e31ff35cd39800928ec3d4788137f4ee3877ea6",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:48.433726+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681887"
+    },
+    {
+      "accession": "SAMEA4681888",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp11 (138h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 138 hours of batch culture (TP11)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "72399ca3ab6925b0c83cca8160f5b82808365dc92f8e5494bbd87ff067bde08d",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:03.847304+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681888"
+    },
+    {
+      "accession": "SAMEA4681889",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp12 (149h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 149 hours of batch culture (TP12)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "fb83029d6840be65ab9815eae1d6364db1707a8f5cb2948bb476371ae7bf2576",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:22.599800+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681889"
+    },
+    {
+      "accession": "SAMEA4681890",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp14 (173h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 173 hours of batch culture (TP14)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "c4ebb50a18ca1e95d94a369730fdb1736313088b9ac3e8d20e6974f352376d5f",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:36.725434+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681890"
+    },
+    {
+      "accession": "SAMEA4681891",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp15 (186h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 186 hours of batch culture (TP15)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "1f1580c5042be1da3ba180b3f7107f06d50a187cc2d0cefb804878fd13f0798f",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:30.109004+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681891"
+    },
+    {
+      "accession": "SAMEA4681892",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me3 Tp16 (197h)",
+        "sample_description": "CHO-K1 H3K4me3 sampled at 197 hours of batch culture (TP16)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "9c085c904a7d22f2b5f277840d973589703745f743007df7f1b328b75ba73bd3",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:48.779479+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681892"
+    },
+    {
+      "accession": "SAMEA4681893",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp0 (4h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 4 hours of batch culture (TP0)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "a408c96e956c426a8baa0a56cce774ae8d543544d74ef9b3dae61a4506f6d330",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:40.670279+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681893"
+    },
+    {
+      "accession": "SAMEA4681894",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp1 (17h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 17 hours of batch culture (TP1)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "1a977e6e0ca8c95935edfa28412032a2db738b209b9c38c04a3d8bedee52d9d4",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:19.967351+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681894"
+    },
+    {
+      "accession": "SAMEA4681895",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp2 (28h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 28 hours of batch culture (TP2)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "32c513ad8ded16a4969e09129fb7360223064ee16d01cfb4a195e3cb1cd034c6",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:05.656030+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681895"
+    },
+    {
+      "accession": "SAMEA4681896",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp3 (42h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 42 hours of batch culture (TP3)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "66c2699a0780ae40a35f26c097da96c27a5e21e099502c68edc1bec7a8487cfb",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:08.763696+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681896"
+    },
+    {
+      "accession": "SAMEA4681897",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp4 (53h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 53 hours of batch culture (TP4)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "b901e24feca49b92c0669bf4371ba1d1a9cb43d9030b07cf4325098cb597cb2d",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:49.652179+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681897"
+    },
+    {
+      "accession": "SAMEA4681898",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp6 (76h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 76 hours of batch culture (TP6)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "35e0d56dfce7b7f7c6656629ac09ea2486b92f58fb80c28cdc14d11d33b9aed4",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:26.781397+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681898"
+    },
+    {
+      "accession": "SAMEA4681899",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp7 (90h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 90 hours of batch culture (TP7)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "27e22190fc354afddfce439c4b68b7b31ea0997d1fb59c049585858b019620da",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:25.748982+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681899"
+    },
+    {
+      "accession": "SAMEA4681900",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp8 (101h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 101 hours of batch culture (TP8)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "33efc8ea1024479e924c8683f3776196bd2be43a33efbcfa20380c80b6f48fa3",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:20.732499+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681900"
+    },
+    {
+      "accession": "SAMEA4681901",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp10 (125h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 125 hours of batch culture (TP10)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "4cda44173c71446ffd25b923932d9c4dee147cf97dd7f538b48d06caa74b967d",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:21.207567+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681901"
+    },
+    {
+      "accession": "SAMEA4681902",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp11 (138h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 138 hours of batch culture (TP11)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "9b2e2b7141398a1bd9af70c4808747ae1b323fd0cf13cd7f892e9550dbf438e3",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:39.419418+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681902"
+    },
+    {
+      "accession": "SAMEA4681903",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp12 (149h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 149 hours of batch culture (TP12)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "b480c2579022a1e04b9d34fd5e038cd751038cf8415fdbb4346c966805a5fde6",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:51.962052+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681903"
+    },
+    {
+      "accession": "SAMEA4681904",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp14 (173h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 173 hours of batch culture (TP14)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "12506f37f03bcb7e3eba39cced880afc934305fb91ca921df7ecbc59835b7ce0",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:56.957062+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681904"
+    },
+    {
+      "accession": "SAMEA4681905",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp15 (186h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 186 hours of batch culture (TP15)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "bb4f5984a4b58382b4a7b4871a76a9c276f32fb480960b6e41a4a1ec7317c152",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:46.310993+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681905"
+    },
+    {
+      "accession": "SAMEA4681906",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27ac Tp16 (197h)",
+        "sample_description": "CHO-K1 H3K27ac sampled at 197 hours of batch culture (TP16)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "a83613bed237c9ad20bc5ef7f6cd7fa7365f43281d467ffe00ca4fd997416091",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:37.007449+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681906"
+    },
+    {
+      "accession": "SAMEA4681907",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp0 (4h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 4 hours of batch culture (TP0)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "0d0f0367461ae548a5d64587e6082a7819f960bb62287e8e97404ebf1ef1a622",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:23.246710+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681907"
+    },
+    {
+      "accession": "SAMEA4681908",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp1 (17h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 17 hours of batch culture (TP1)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "7b9a0c39f12c78b3d2487cb51525fcf79dff13b1f160451c770ec05ca3e86a72",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:27.632536+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681908"
+    },
+    {
+      "accession": "SAMEA4681909",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp2 (28h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 28 hours of batch culture (TP2)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "65947f6e801a192711b9f4a89627a8447485151bfbaba7015d67fc3683ccda31",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:41.037274+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681909"
+    },
+    {
+      "accession": "SAMEA4681910",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp3 (42h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 42 hours of batch culture (TP3)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "4e54e9153862120f4260ed2773eb3876f5c98d4b7f22bcc1a3999add28038e2b",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:33.612916+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681910"
+    },
+    {
+      "accession": "SAMEA4681911",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp4 (53h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 53 hours of batch culture (TP4)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "5884d8d5ae803afc0e98a53da3aaa7733a9418533bc8583c4ee9115e899adfd6",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:49.044178+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681911"
+    },
+    {
+      "accession": "SAMEA4681912",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp6 (76h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 76 hours of batch culture (TP6)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "602268cca29eda8cd35894b813076f41bc025e5d142c17dd804390876469aa23",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:05.113627+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681912"
+    },
+    {
+      "accession": "SAMEA4681913",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp7 (90h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 90 hours of batch culture (TP7)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "34997fe8278c9fe7924f2e1e0714ae129c86b925069af14ff1eed4b642e77365",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:35.074153+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681913"
+    },
+    {
+      "accession": "SAMEA4681914",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp8 (101h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 101 hours of batch culture (TP8)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "758eb28f9587b28db2011cb7dd2f54033508361805f74b688a66cc7ba9b212f5",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:55.222068+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681914"
+    },
+    {
+      "accession": "SAMEA4681915",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp10 (125h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 125 hours of batch culture (TP10)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "fb85bbbb4175667caa3d8787b073de5e1b1cd712e7c12b11b21aea3a9680aca2",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:13.744782+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681915"
+    },
+    {
+      "accession": "SAMEA4681916",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp11 (138h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 138 hours of batch culture (TP11)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "7b2d502bbb25155bc9d2ed899dd8a473c31dd0218988aa2432df7a653b7fa05f",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:46.923264+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681916"
+    },
+    {
+      "accession": "SAMEA4681917",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp12 (149h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 149 hours of batch culture (TP12)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "e484b051120d797f9a08827557962580eccc02081b8126eefb052c7fad58b988",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:37.625477+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681917"
+    },
+    {
+      "accession": "SAMEA4681919",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp14 (173h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 173 hours of batch culture (TP14)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "d5d0cdc2300fdff92b8be288bef3305bde9c33689ce9fc99b8e30b0037fabda4",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:21.819525+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681919"
+    },
+    {
+      "accession": "SAMEA4681920",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp15 (186h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 186 hours of batch culture (TP15)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "6e98f7f981174a4513306def393210132b259286a267c1c55f02cb51ac110611",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:44.750997+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681920"
+    },
+    {
+      "accession": "SAMEA4681921",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K9me3 Tp16 (197h)",
+        "sample_description": "CHO-K1 H3K9me3 sampled at 197 hours of batch culture (TP16)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "3935ee48b488058ddcd85ed713ef3c16feb33ad85804ba8ec1a0357e9026f0d3",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:30.522817+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681921"
+    },
+    {
+      "accession": "SAMEA4681922",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp0 (4h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 4 hours of batch culture (TP0)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "1895a2be3aaa161c67a817e6a7339c3b3e6626e3f7386ce955ccc7ebf7482c62",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:46.597465+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681922"
+    },
+    {
+      "accession": "SAMEA4681923",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp1 (17h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 17 hours of batch culture (TP1)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "5a5e4366473bcf54219b98f89b2480f45789bd2c896a3975a2788861e69aef79",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:02.621394+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681923"
+    },
+    {
+      "accession": "SAMEA4681924",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp2 (28h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 28 hours of batch culture (TP2)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "53faaac8adb986fb790e1774c2d894c5d276537176d04e462512ed78b31b7179",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:31.756523+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681924"
+    },
+    {
+      "accession": "SAMEA4681925",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp3 (42h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 42 hours of batch culture (TP3)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "94276cbb2be6f4a738d345e658456cc3a141931e6feee9c4f12a045e634941d3",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:47.825344+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681925"
+    },
+    {
+      "accession": "SAMEA4681926",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp4 (53h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 53 hours of batch culture (TP4)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "3a129356ee2a64820a2aba7e0ea2e1e9bd6285d628854f39afff1801fc2d6cde",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:03.231398+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681926"
+    },
+    {
+      "accession": "SAMEA4681927",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp6 (76h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 76 hours of batch culture (TP6)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "9a0deb53e1d665f74e6625baf8446ffe7a2c4ff23ab11cd4e1b22a90f75e4faa",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:30.771002+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681927"
+    },
+    {
+      "accession": "SAMEA4681928",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp7 (90h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 90 hours of batch culture (TP7)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "5ee92136a35f605e544781e033e8594514d94c71e8dead5870add0558dc0f86f",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:36.114978+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681928"
+    },
+    {
+      "accession": "SAMEA4681929",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp8 (101h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 101 hours of batch culture (TP8)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "ca3d71a38e887d7ef008e6524897cf33c23f3d1d3b0f0e0ce7e2bb8d21ea27aa",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:21.980280+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681929"
+    },
+    {
+      "accession": "SAMEA4681930",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp10 (125h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 125 hours of batch culture (TP10)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "e75ad1ed2f979cbeb139557025c71092352864a0148739aa2e2b7915db835e62",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:34.458338+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681930"
+    },
+    {
+      "accession": "SAMEA4681931",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp11 (138h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 138 hours of batch culture (TP11)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "85ef531a0523ee9b9ed315e123c93e5f0da999facac95fa5efda52b5164b9bf5",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:35.777613+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681931"
+    },
+    {
+      "accession": "SAMEA4681932",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp12 (149h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 149 hours of batch culture (TP12)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "428dec31b8e252b34e7396469a637174b1c9b494ddab7c65b12c59b77f0c15f1",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:46.363522+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681932"
+    },
+    {
+      "accession": "SAMEA4681933",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp14 (173h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 173 hours of batch culture (TP14)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "4fcbe9cb7fa0f129f834a2f737e8a0e6843fe0dc702bd3543ce6b9611a8bf824",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:58.185319+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681933"
+    },
+    {
+      "accession": "SAMEA4681934",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp15 (186h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 186 hours of batch culture (TP15)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "711383270d4063a4866b58c43ee3fb39b9bee3186416cb30c96365ef630b2eef",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:41.953428+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681934"
+    },
+    {
+      "accession": "SAMEA4681935",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K27me3 Tp16 (197h)",
+        "sample_description": "CHO-K1 H3K27me3 sampled at 197 hours of batch culture (TP16)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "1ff01170f7d3f898e05007f8e535d58263f62ab229b4c82b4987fe15b0aa1c3e",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:38.854312+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681935"
+    },
+    {
+      "accession": "SAMEA4681936",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp0 (4h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 4 hours of batch culture (TP0)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "c67ca0693eedb24a55ed5b8588393fe97ae0fd4b4e7eccfa2770810f96292ff7",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:13.130566+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681936"
+    },
+    {
+      "accession": "SAMEA4681937",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp1 (17h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 17 hours of batch culture (TP1)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "635ba95239606a98108fa2cfe94c34c98ba02b2126f7b38c42fc16d0d85e51b5",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:02.010549+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681937"
+    },
+    {
+      "accession": "SAMEA4681938",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp2 (28h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 28 hours of batch culture (TP2)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "760b4f08c1462c2ee8cb16aa7077aae65f5abd2504eb93ab03125fc0c12bac56",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:26.154153+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681938"
+    },
+    {
+      "accession": "SAMEA4681939",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp3 (42h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 42 hours of batch culture (TP3)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "be38edd0e7cafd25f20f10c7cce1bf45b125caf5cca7ca223fee71b797219923",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:39.170483+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681939"
+    },
+    {
+      "accession": "SAMEA4681940",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp4 (53h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 53 hours of batch culture (TP4)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "b63b48f6a3422e842a38cfbb0dee6c99eabd2dff4d9564ed4eac489951fa67ed",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:57:55.832661+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681940"
+    },
+    {
+      "accession": "SAMEA4681941",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp6 (76h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 76 hours of batch culture (TP6)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "d076ebfd4c1e3201cfc0bddd873406d63f0a46ba753d8ea04a7b68496708f094",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:28.244978+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681941"
+    },
+    {
+      "accession": "SAMEA4681942",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp7 (90h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 90 hours of batch culture (TP7)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "60d55fb8bb0c8d367faa60b24497d0f887212a723874ab3bbd6e2842376fefe4",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:55.708184+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681942"
+    },
+    {
+      "accession": "SAMEA4681943",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp8 (101h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 101 hours of batch culture (TP8)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "7e53442df7a334e931feb3b394e9c1c6f16dd4ba62993f0450fa18a512979f3b",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:18.241628+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681943"
+    },
+    {
+      "accession": "SAMEA4681944",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp10 (125h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 125 hours of batch culture (TP10)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "b4cfd004c5914f6a31a2d25edddfb2b4cc6d54d2be1c52f80a739362f286de18",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:25.134095+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681944"
+    },
+    {
+      "accession": "SAMEA4681945",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp11 (138h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 138 hours of batch culture (TP11)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "d4b581f19ae561defced667239f9b99a40b4f9175bf8e9d4029652f3e7c891f3",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:42.564011+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681945"
+    },
+    {
+      "accession": "SAMEA4681946",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp12 (149h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 149 hours of batch culture (TP12)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "ae71a881e227233c81145e61ed5ce955bf661a9fedc722e68564156d4c1bd67d",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:48.829278+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681946"
+    },
+    {
+      "accession": "SAMEA4681947",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp14 (173h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 173 hours of batch culture (TP14)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "a957707a67aa89398d0bbcf74cec6999b8826996225ced3f8ac0b6e1a829075e",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:46.983704+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681947"
+    },
+    {
+      "accession": "SAMEA4681948",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp15 (186h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 186 hours of batch culture (TP15)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "04f2cc7c78b2e8ac7c0307a3ad84633078e31af23902f0904614f6d4a83d1b07",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:58:58.800232+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681948"
+    },
+    {
+      "accession": "SAMEA4681949",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "CHO-K1_8mM_Gln H3K4me1 Tp16 (197h)",
+        "sample_description": "CHO-K1 H3K4me1 sampled at 197 hours of batch culture (TP16)",
+        "sample_title": "Histone modifications CHO-K1_8mM_Gln"
+      },
+      "historical_source_sha256": "46ae94ae6c1214891ce72c30ae63615d4e70f78ec464de47a90ec4139767a818",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:36.392178+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMEA4681949"
+    },
+    {
+      "accession": "SAMN30113683",
+      "fetch_script_sha256": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c",
+      "fields": {
+        "sample_alias": "ChIP_and_CRISPR_Seq",
+        "sample_description": "",
+        "sample_title": "Model organism or animal sample from Cricetulus griseus"
+      },
+      "historical_source_sha256": "e3aa686730c3ea2deafc09a81830219bae299fe732ea674b518c8558d08ed5c4",
+      "record_type": "sample",
+      "retrieved_at_utc": "2026-09-13T14:59:04.424914+00:00",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/api/xml/SAMN30113683"
+    }
+  ],
+  "schema_version": 1
+}

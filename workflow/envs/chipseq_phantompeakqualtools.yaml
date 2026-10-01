@@ -1,0 +1,6 @@
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - phantompeakqualtools=1.2.2
+  - samtools=1.24

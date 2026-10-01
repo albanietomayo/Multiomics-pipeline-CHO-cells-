@@ -1,0 +1,444 @@
+<frozen importlib._bootstrap>:491: RuntimeWarning: The global interpreter lock (GIL) has been enabled to load module 'immutables._map', which has not declared that it can run safely without the GIL. To override this behavior and keep the GIL disabled (at your own risk), run with PYTHON_GIL=0 or -Xgil=0.
+
+SNAKEMAKE
+=========
+  Date: 2026-09-30 15:05:27
+  Workflow ID: 80154378-a532-42c1-bdde-104e5e1b7527
+  Platform: Linux-5.14.0-687.41.1.el9_8.x86_64-x86_64-with-glibc2.34
+  Host: vera1
+  User: mayoa
+  Snakemake version: 9.25.2
+  Python version: 3.14.7 free-threading build | packaged by conda-forge | (main, Sep  2 2026, 21:11:49) [GCC 15.3.0]
+  Command: /tmp/chipseq-v101-test-env/bin/snakemake --snakefile workflow/chipseq/Snakefile --use-conda --cores 1 -n chipseq_all
+  Snakefile: /tmp/chipseq-v101-clean-dryrun-v2/workflow/chipseq/Snakefile
+  Base directory: /tmp/chipseq-v101-clean-dryrun-v2/workflow/chipseq
+  Run directory: /tmp/chipseq-v101-clean-dryrun-v2
+  Working directory: /tmp/chipseq-v101-clean-dryrun-v2
+  Config file(s): ['config/chipseq.yaml', 'config/chipseq_metadata.yaml']
+  Config MD5: 6be7b01f580426d366357f77fee409a0
+
+Building DAG of jobs...
+Your conda installation is not configured to use strict channel priorities. This is however important for having robust and correct environments (for details, see https://conda-forge.org/docs/user/tipsandtricks.html). Please consider to configure strict priorities by executing 'conda config --set channel_priority strict'.
+Conda environment workflow/envs/chipseq_production.yaml will be created.
+Job stats:
+job                        count
+-----------------------  -------
+chipseq_plan_validate          1
+chipseq_fastq_manifest         1
+chipseq_reference_build        1
+chipseq_download_fastq        22
+chipseq_shared_control         4
+chipseq_broad_analysis        10
+chipseq_narrow_analysis        8
+chipseq_cohort_summary         1
+chipseq_all                    1
+total                         49
+
+
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_plan_validate:
+    input: workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json, provenance/chipseq/production_2026-09-23/frozen_inputs.sha256, provenance/chipseq/production_2026-09-23/frozen_contract.json
+    output: results/chipseq/reproduction/plan_validation.json
+    jobid: 4
+    reason: Missing output files: results/chipseq/reproduction/plan_validation.json
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_fastq_manifest:
+    input: results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/fastq_manifest.tsv
+    jobid: 3
+    reason: Missing output files: results/chipseq/reproduction/fastq_manifest.tsv; Input files updated by another job: results/chipseq/reproduction/plan_validation.json
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_reference_build:
+    input: results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, workflow/scripts/fetch_reference_genome.py, config/config.yaml
+    output: results/chipseq/reproduction/reference/reference_inventory.json
+    jobid: 7
+    reason: Missing output files: results/chipseq/reproduction/reference/reference_inventory.json; Input files updated by another job: results/chipseq/reproduction/plan_validation.json
+    resources: tmpdir=/tmp, mem_mb=24000, mem=24 GB, mem_mib=22889
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868150.fastq.gz
+    jobid: 6
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868150.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868150
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/SRR20770295.fastq.gz
+    jobid: 35
+    reason: Missing output files: results/chipseq/reproduction/raw/SRR20770295.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=SRR20770295
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868176.fastq.gz
+    jobid: 31
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868176.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868176
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868154.fastq.gz
+    jobid: 13
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868154.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868154
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868173.fastq.gz
+    jobid: 25
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868173.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868173
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/SRR20770297.fastq.gz
+    jobid: 47
+    reason: Missing output files: results/chipseq/reproduction/raw/SRR20770297.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=SRR20770297
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868155.fastq.gz
+    jobid: 15
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868155.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868155
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868152.fastq.gz
+    jobid: 9
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868152.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868152
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/SRR20770292.fastq.gz
+    jobid: 37
+    reason: Missing output files: results/chipseq/reproduction/raw/SRR20770292.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=SRR20770292
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/SRR20770291.fastq.gz
+    jobid: 33
+    reason: Missing output files: results/chipseq/reproduction/raw/SRR20770291.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=SRR20770291
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868174.fastq.gz
+    jobid: 27
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868174.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868174
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868151.fastq.gz
+    jobid: 2
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868151.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868151
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868177.fastq.gz
+    jobid: 21
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868177.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868177
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868156.fastq.gz
+    jobid: 17
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868156.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868156
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/SRR20770287.fastq.gz
+    jobid: 43
+    reason: Missing output files: results/chipseq/reproduction/raw/SRR20770287.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=SRR20770287
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868153.fastq.gz
+    jobid: 11
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868153.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868153
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/SRR20770293.fastq.gz
+    jobid: 39
+    reason: Missing output files: results/chipseq/reproduction/raw/SRR20770293.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=SRR20770293
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868175.fastq.gz
+    jobid: 29
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868175.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868175
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868172.fastq.gz
+    jobid: 23
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868172.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868172
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/ERR868171.fastq.gz
+    jobid: 19
+    reason: Missing output files: results/chipseq/reproduction/raw/ERR868171.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=ERR868171
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/SRR20770296.fastq.gz
+    jobid: 45
+    reason: Missing output files: results/chipseq/reproduction/raw/SRR20770296.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=SRR20770296
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_download_fastq:
+    input: results/chipseq/reproduction/fastq_manifest.tsv, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/raw/SRR20770294.fastq.gz
+    jobid: 41
+    reason: Missing output files: results/chipseq/reproduction/raw/SRR20770294.fastq.gz; Input files updated by another job: results/chipseq/reproduction/fastq_manifest.tsv
+    wildcards: run=SRR20770294
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_shared_control:
+    input: results/chipseq/reproduction/raw/SRR20770295.fastq.gz, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/shared_controls/SRR20770295/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam.csi
+    jobid: 34
+    reason: Missing output files: results/chipseq/reproduction/shared_controls/SRR20770295/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam.csi; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/raw/SRR20770295.fastq.gz
+    wildcards: control=SRR20770295
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_shared_control:
+    input: results/chipseq/reproduction/raw/ERR868177.fastq.gz, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi
+    jobid: 20
+    reason: Missing output files: results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/raw/ERR868177.fastq.gz
+    wildcards: control=ERR868177
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_shared_control:
+    input: results/chipseq/reproduction/raw/ERR868150.fastq.gz, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi
+    jobid: 5
+    reason: Missing output files: results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi; Input files updated by another job: results/chipseq/reproduction/raw/ERR868150.fastq.gz, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json
+    wildcards: control=ERR868150
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_shared_control:
+    input: results/chipseq/reproduction/raw/SRR20770287.fastq.gz, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/shared_controls/SRR20770287/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam.csi
+    jobid: 42
+    reason: Missing output files: results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam, results/chipseq/reproduction/shared_controls/SRR20770287/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam.csi; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/raw/SRR20770287.fastq.gz
+    wildcards: control=SRR20770287
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_broad_analysis:
+    input: results/chipseq/reproduction/raw/ERR868173.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868173/completed.json, results/chipseq/reproduction/analyses/ERR868173/artifacts/peaks/ERR868173_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868173/artifacts/peaks/ERR868173_peaks.gappedPeak, results/chipseq/reproduction/analyses/ERR868173/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868173/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868173/artifacts/peaks/ERR868173_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868173/artifacts/peaks/ERR868173_control_lambda.bdg.gz
+    jobid: 24
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868173/completed.json, results/chipseq/reproduction/analyses/ERR868173/artifacts/peaks/ERR868173_peaks.broadPeak; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/raw/ERR868173.fastq.gz
+    wildcards: analysis=ERR868173
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_narrow_analysis:
+    input: results/chipseq/reproduction/raw/SRR20770291.fastq.gz, results/chipseq/reproduction/shared_controls/SRR20770295/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/SRR20770291/completed.json, results/chipseq/reproduction/analyses/SRR20770291/artifacts/peaks/SRR20770291_peaks.narrowPeak, results/chipseq/reproduction/analyses/SRR20770291/artifacts/peaks/SRR20770291_summits.bed, results/chipseq/reproduction/analyses/SRR20770291/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/SRR20770291/artifacts/parameters.json, results/chipseq/reproduction/analyses/SRR20770291/artifacts/peaks/SRR20770291_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/SRR20770291/artifacts/peaks/SRR20770291_control_lambda.bdg.gz
+    jobid: 32
+    reason: Missing output files: results/chipseq/reproduction/analyses/SRR20770291/completed.json, results/chipseq/reproduction/analyses/SRR20770291/artifacts/peaks/SRR20770291_peaks.narrowPeak; Input files updated by another job: results/chipseq/reproduction/raw/SRR20770291.fastq.gz, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/shared_controls/SRR20770295/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam.csi, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam, results/chipseq/reproduction/plan_validation.json
+    wildcards: analysis=SRR20770291
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_broad_analysis:
+    input: results/chipseq/reproduction/raw/SRR20770296.fastq.gz, results/chipseq/reproduction/shared_controls/SRR20770287/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/SRR20770296/completed.json, results/chipseq/reproduction/analyses/SRR20770296/artifacts/peaks/SRR20770296_peaks.broadPeak, results/chipseq/reproduction/analyses/SRR20770296/artifacts/peaks/SRR20770296_peaks.gappedPeak, results/chipseq/reproduction/analyses/SRR20770296/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/SRR20770296/artifacts/parameters.json, results/chipseq/reproduction/analyses/SRR20770296/artifacts/peaks/SRR20770296_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/SRR20770296/artifacts/peaks/SRR20770296_control_lambda.bdg.gz
+    jobid: 44
+    reason: Missing output files: results/chipseq/reproduction/analyses/SRR20770296/completed.json, results/chipseq/reproduction/analyses/SRR20770296/artifacts/peaks/SRR20770296_peaks.broadPeak; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam.csi, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/shared_controls/SRR20770287/control_manifest.json, results/chipseq/reproduction/raw/SRR20770296.fastq.gz
+    wildcards: analysis=SRR20770296
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_narrow_analysis:
+    input: results/chipseq/reproduction/raw/ERR868155.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868155/completed.json, results/chipseq/reproduction/analyses/ERR868155/artifacts/peaks/ERR868155_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868155/artifacts/peaks/ERR868155_summits.bed, results/chipseq/reproduction/analyses/ERR868155/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868155/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868155/artifacts/peaks/ERR868155_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868155/artifacts/peaks/ERR868155_control_lambda.bdg.gz
+    jobid: 14
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868155/completed.json, results/chipseq/reproduction/analyses/ERR868155/artifacts/peaks/ERR868155_peaks.narrowPeak; Input files updated by another job: results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/raw/ERR868155.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi
+    wildcards: analysis=ERR868155
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_broad_analysis:
+    input: results/chipseq/reproduction/raw/ERR868156.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868156/completed.json, results/chipseq/reproduction/analyses/ERR868156/artifacts/peaks/ERR868156_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868156/artifacts/peaks/ERR868156_peaks.gappedPeak, results/chipseq/reproduction/analyses/ERR868156/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868156/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868156/artifacts/peaks/ERR868156_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868156/artifacts/peaks/ERR868156_control_lambda.bdg.gz
+    jobid: 16
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868156/completed.json, results/chipseq/reproduction/analyses/ERR868156/artifacts/peaks/ERR868156_peaks.broadPeak; Input files updated by another job: results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/raw/ERR868156.fastq.gz, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi
+    wildcards: analysis=ERR868156
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_broad_analysis:
+    input: results/chipseq/reproduction/raw/ERR868174.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868174/completed.json, results/chipseq/reproduction/analyses/ERR868174/artifacts/peaks/ERR868174_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868174/artifacts/peaks/ERR868174_peaks.gappedPeak, results/chipseq/reproduction/analyses/ERR868174/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868174/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868174/artifacts/peaks/ERR868174_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868174/artifacts/peaks/ERR868174_control_lambda.bdg.gz
+    jobid: 26
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868174/artifacts/peaks/ERR868174_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868174/completed.json; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/raw/ERR868174.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/plan_validation.json
+    wildcards: analysis=ERR868174
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_broad_analysis:
+    input: results/chipseq/reproduction/raw/ERR868154.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868154/completed.json, results/chipseq/reproduction/analyses/ERR868154/artifacts/peaks/ERR868154_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868154/artifacts/peaks/ERR868154_peaks.gappedPeak, results/chipseq/reproduction/analyses/ERR868154/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868154/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868154/artifacts/peaks/ERR868154_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868154/artifacts/peaks/ERR868154_control_lambda.bdg.gz
+    jobid: 12
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868154/completed.json, results/chipseq/reproduction/analyses/ERR868154/artifacts/peaks/ERR868154_peaks.broadPeak; Input files updated by another job: results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/raw/ERR868154.fastq.gz, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi
+    wildcards: analysis=ERR868154
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_broad_analysis:
+    input: results/chipseq/reproduction/raw/SRR20770292.fastq.gz, results/chipseq/reproduction/shared_controls/SRR20770295/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/SRR20770292/completed.json, results/chipseq/reproduction/analyses/SRR20770292/artifacts/peaks/SRR20770292_peaks.broadPeak, results/chipseq/reproduction/analyses/SRR20770292/artifacts/peaks/SRR20770292_peaks.gappedPeak, results/chipseq/reproduction/analyses/SRR20770292/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/SRR20770292/artifacts/parameters.json, results/chipseq/reproduction/analyses/SRR20770292/artifacts/peaks/SRR20770292_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/SRR20770292/artifacts/peaks/SRR20770292_control_lambda.bdg.gz
+    jobid: 36
+    reason: Missing output files: results/chipseq/reproduction/analyses/SRR20770292/artifacts/peaks/SRR20770292_peaks.broadPeak, results/chipseq/reproduction/analyses/SRR20770292/completed.json; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/shared_controls/SRR20770295/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam.csi, results/chipseq/reproduction/raw/SRR20770292.fastq.gz, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam, results/chipseq/reproduction/plan_validation.json
+    wildcards: analysis=SRR20770292
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_broad_analysis:
+    input: results/chipseq/reproduction/raw/ERR868152.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868152/completed.json, results/chipseq/reproduction/analyses/ERR868152/artifacts/peaks/ERR868152_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868152/artifacts/peaks/ERR868152_peaks.gappedPeak, results/chipseq/reproduction/analyses/ERR868152/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868152/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868152/artifacts/peaks/ERR868152_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868152/artifacts/peaks/ERR868152_control_lambda.bdg.gz
+    jobid: 8
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868152/artifacts/peaks/ERR868152_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868152/completed.json; Input files updated by another job: results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/raw/ERR868152.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi
+    wildcards: analysis=ERR868152
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_narrow_analysis:
+    input: results/chipseq/reproduction/raw/SRR20770297.fastq.gz, results/chipseq/reproduction/shared_controls/SRR20770287/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/SRR20770297/completed.json, results/chipseq/reproduction/analyses/SRR20770297/artifacts/peaks/SRR20770297_peaks.narrowPeak, results/chipseq/reproduction/analyses/SRR20770297/artifacts/peaks/SRR20770297_summits.bed, results/chipseq/reproduction/analyses/SRR20770297/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/SRR20770297/artifacts/parameters.json, results/chipseq/reproduction/analyses/SRR20770297/artifacts/peaks/SRR20770297_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/SRR20770297/artifacts/peaks/SRR20770297_control_lambda.bdg.gz
+    jobid: 46
+    reason: Missing output files: results/chipseq/reproduction/analyses/SRR20770297/completed.json, results/chipseq/reproduction/analyses/SRR20770297/artifacts/peaks/SRR20770297_peaks.narrowPeak; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/raw/SRR20770297.fastq.gz, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam.csi, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/shared_controls/SRR20770287/control_manifest.json
+    wildcards: analysis=SRR20770297
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_broad_analysis:
+    input: results/chipseq/reproduction/raw/ERR868172.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868172/completed.json, results/chipseq/reproduction/analyses/ERR868172/artifacts/peaks/ERR868172_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868172/artifacts/peaks/ERR868172_peaks.gappedPeak, results/chipseq/reproduction/analyses/ERR868172/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868172/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868172/artifacts/peaks/ERR868172_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868172/artifacts/peaks/ERR868172_control_lambda.bdg.gz
+    jobid: 22
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868172/artifacts/peaks/ERR868172_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868172/completed.json; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/raw/ERR868172.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/plan_validation.json
+    wildcards: analysis=ERR868172
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_broad_analysis:
+    input: results/chipseq/reproduction/raw/ERR868153.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868153/completed.json, results/chipseq/reproduction/analyses/ERR868153/artifacts/peaks/ERR868153_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868153/artifacts/peaks/ERR868153_peaks.gappedPeak, results/chipseq/reproduction/analyses/ERR868153/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868153/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868153/artifacts/peaks/ERR868153_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868153/artifacts/peaks/ERR868153_control_lambda.bdg.gz
+    jobid: 10
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868153/completed.json, results/chipseq/reproduction/analyses/ERR868153/artifacts/peaks/ERR868153_peaks.broadPeak; Input files updated by another job: results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/raw/ERR868153.fastq.gz, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi
+    wildcards: analysis=ERR868153
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_narrow_analysis:
+    input: results/chipseq/reproduction/raw/ERR868171.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868171/completed.json, results/chipseq/reproduction/analyses/ERR868171/artifacts/peaks/ERR868171_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868171/artifacts/peaks/ERR868171_summits.bed, results/chipseq/reproduction/analyses/ERR868171/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868171/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868171/artifacts/peaks/ERR868171_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868171/artifacts/peaks/ERR868171_control_lambda.bdg.gz
+    jobid: 18
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868171/artifacts/peaks/ERR868171_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868171/completed.json; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/raw/ERR868171.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/plan_validation.json
+    wildcards: analysis=ERR868171
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_narrow_analysis:
+    input: results/chipseq/reproduction/raw/ERR868175.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868175/completed.json, results/chipseq/reproduction/analyses/ERR868175/artifacts/peaks/ERR868175_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868175/artifacts/peaks/ERR868175_summits.bed, results/chipseq/reproduction/analyses/ERR868175/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868175/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868175/artifacts/peaks/ERR868175_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868175/artifacts/peaks/ERR868175_control_lambda.bdg.gz
+    jobid: 28
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868175/completed.json, results/chipseq/reproduction/analyses/ERR868175/artifacts/peaks/ERR868175_peaks.narrowPeak; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/raw/ERR868175.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/plan_validation.json
+    wildcards: analysis=ERR868175
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_narrow_analysis:
+    input: results/chipseq/reproduction/raw/SRR20770293.fastq.gz, results/chipseq/reproduction/shared_controls/SRR20770295/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/SRR20770293/completed.json, results/chipseq/reproduction/analyses/SRR20770293/artifacts/peaks/SRR20770293_peaks.narrowPeak, results/chipseq/reproduction/analyses/SRR20770293/artifacts/peaks/SRR20770293_summits.bed, results/chipseq/reproduction/analyses/SRR20770293/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/SRR20770293/artifacts/parameters.json, results/chipseq/reproduction/analyses/SRR20770293/artifacts/peaks/SRR20770293_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/SRR20770293/artifacts/peaks/SRR20770293_control_lambda.bdg.gz
+    jobid: 38
+    reason: Missing output files: results/chipseq/reproduction/analyses/SRR20770293/completed.json, results/chipseq/reproduction/analyses/SRR20770293/artifacts/peaks/SRR20770293_peaks.narrowPeak; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/shared_controls/SRR20770295/control_manifest.json, results/chipseq/reproduction/raw/SRR20770293.fastq.gz, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam.csi, results/chipseq/reproduction/shared_controls/SRR20770295/filtered.bam, results/chipseq/reproduction/plan_validation.json
+    wildcards: analysis=SRR20770293
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_broad_analysis:
+    input: results/chipseq/reproduction/raw/ERR868176.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868176/completed.json, results/chipseq/reproduction/analyses/ERR868176/artifacts/peaks/ERR868176_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868176/artifacts/peaks/ERR868176_peaks.gappedPeak, results/chipseq/reproduction/analyses/ERR868176/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868176/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868176/artifacts/peaks/ERR868176_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868176/artifacts/peaks/ERR868176_control_lambda.bdg.gz
+    jobid: 30
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868176/completed.json, results/chipseq/reproduction/analyses/ERR868176/artifacts/peaks/ERR868176_peaks.broadPeak; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam, results/chipseq/reproduction/raw/ERR868176.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868177/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868177/filtered.bam.csi, results/chipseq/reproduction/plan_validation.json
+    wildcards: analysis=ERR868176
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_narrow_analysis:
+    input: results/chipseq/reproduction/raw/ERR868151.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/ERR868151/completed.json, results/chipseq/reproduction/analyses/ERR868151/artifacts/peaks/ERR868151_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868151/artifacts/peaks/ERR868151_summits.bed, results/chipseq/reproduction/analyses/ERR868151/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/ERR868151/artifacts/parameters.json, results/chipseq/reproduction/analyses/ERR868151/artifacts/peaks/ERR868151_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/ERR868151/artifacts/peaks/ERR868151_control_lambda.bdg.gz
+    jobid: 1
+    reason: Missing output files: results/chipseq/reproduction/analyses/ERR868151/completed.json, results/chipseq/reproduction/analyses/ERR868151/artifacts/peaks/ERR868151_peaks.narrowPeak; Input files updated by another job: results/chipseq/reproduction/shared_controls/ERR868150/control_manifest.json, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/raw/ERR868151.fastq.gz, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam, results/chipseq/reproduction/shared_controls/ERR868150/filtered.bam.csi
+    wildcards: analysis=ERR868151
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_narrow_analysis:
+    input: results/chipseq/reproduction/raw/SRR20770294.fastq.gz, results/chipseq/reproduction/shared_controls/SRR20770287/control_manifest.json, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam.csi, results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/plan_validation.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py, config/samples.tsv, snapshots/chipseq/incremental_planning_validation_001/chipseq_analysis_plan.tsv, snapshots/chipseq/runtime_planning_validation_001/chipseq_processing_runs.tsv, config/chipseq_peak_calling_plan.tsv, config/chipseq_peak_calling_plan_summary.json, config/chipseq_peak_calling_policy.json, config/chipseq_alignment.json, config/chipseq_filtering.json
+    output: results/chipseq/reproduction/analyses/SRR20770294/completed.json, results/chipseq/reproduction/analyses/SRR20770294/artifacts/peaks/SRR20770294_peaks.narrowPeak, results/chipseq/reproduction/analyses/SRR20770294/artifacts/peaks/SRR20770294_summits.bed, results/chipseq/reproduction/analyses/SRR20770294/artifacts/peak_qc.json, results/chipseq/reproduction/analyses/SRR20770294/artifacts/parameters.json, results/chipseq/reproduction/analyses/SRR20770294/artifacts/peaks/SRR20770294_treat_pileup.bdg.gz, results/chipseq/reproduction/analyses/SRR20770294/artifacts/peaks/SRR20770294_control_lambda.bdg.gz
+    jobid: 40
+    reason: Missing output files: results/chipseq/reproduction/analyses/SRR20770294/completed.json, results/chipseq/reproduction/analyses/SRR20770294/artifacts/peaks/SRR20770294_peaks.narrowPeak; Input files updated by another job: results/chipseq/reproduction/reference/reference_inventory.json, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam.csi, results/chipseq/reproduction/shared_controls/SRR20770287/filtered.bam, results/chipseq/reproduction/plan_validation.json, results/chipseq/reproduction/shared_controls/SRR20770287/control_manifest.json, results/chipseq/reproduction/raw/SRR20770294.fastq.gz
+    wildcards: analysis=SRR20770294
+    resources: tmpdir=/tmp, chipseq_slots=1, mem_mb=32000, mem=32 GB, mem_mib=30518
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_cohort_summary:
+    input: results/chipseq/reproduction/analyses/ERR868151/completed.json, results/chipseq/reproduction/analyses/ERR868152/completed.json, results/chipseq/reproduction/analyses/ERR868153/completed.json, results/chipseq/reproduction/analyses/ERR868154/completed.json, results/chipseq/reproduction/analyses/ERR868155/completed.json, results/chipseq/reproduction/analyses/ERR868156/completed.json, results/chipseq/reproduction/analyses/ERR868171/completed.json, results/chipseq/reproduction/analyses/ERR868172/completed.json, results/chipseq/reproduction/analyses/ERR868173/completed.json, results/chipseq/reproduction/analyses/ERR868174/completed.json, results/chipseq/reproduction/analyses/ERR868175/completed.json, results/chipseq/reproduction/analyses/ERR868176/completed.json, results/chipseq/reproduction/analyses/SRR20770291/completed.json, results/chipseq/reproduction/analyses/SRR20770292/completed.json, results/chipseq/reproduction/analyses/SRR20770293/completed.json, results/chipseq/reproduction/analyses/SRR20770294/completed.json, results/chipseq/reproduction/analyses/SRR20770296/completed.json, results/chipseq/reproduction/analyses/SRR20770297/completed.json, workflow/scripts/chipseq_portable_runtime.py, workflow/scripts/chipseq_production.py, workflow/scripts/chipseq_alignment_support.py, workflow/scripts/chipseq_filtering_support.py, workflow/scripts/chipseq_peak_calling_dynamic.py, workflow/scripts/chipseq_benchmark.py, workflow/scripts/chipseq_download_fastq.py
+    output: results/chipseq/reproduction/cohort_summary.json
+    jobid: 48
+    reason: Missing output files: results/chipseq/reproduction/cohort_summary.json; Input files updated by another job: results/chipseq/reproduction/analyses/ERR868155/completed.json, results/chipseq/reproduction/analyses/SRR20770291/completed.json, results/chipseq/reproduction/analyses/SRR20770296/completed.json, results/chipseq/reproduction/analyses/SRR20770292/completed.json, results/chipseq/reproduction/analyses/ERR868172/completed.json, results/chipseq/reproduction/analyses/ERR868174/completed.json, results/chipseq/reproduction/analyses/ERR868151/completed.json, results/chipseq/reproduction/analyses/ERR868173/completed.json, results/chipseq/reproduction/analyses/ERR868175/completed.json, results/chipseq/reproduction/analyses/ERR868154/completed.json, results/chipseq/reproduction/analyses/ERR868176/completed.json, results/chipseq/reproduction/analyses/SRR20770293/completed.json, results/chipseq/reproduction/analyses/SRR20770297/completed.json, results/chipseq/reproduction/analyses/SRR20770294/completed.json, results/chipseq/reproduction/analyses/ERR868156/completed.json, results/chipseq/reproduction/analyses/ERR868153/completed.json, results/chipseq/reproduction/analyses/ERR868152/completed.json, results/chipseq/reproduction/analyses/ERR868171/completed.json
+    resources: tmpdir=/tmp
+[Wed Sep 30 15:05:31 2026]
+rule chipseq_all:
+    input: results/chipseq/reproduction/analyses/ERR868151/completed.json, results/chipseq/reproduction/analyses/ERR868152/completed.json, results/chipseq/reproduction/analyses/ERR868153/completed.json, results/chipseq/reproduction/analyses/ERR868154/completed.json, results/chipseq/reproduction/analyses/ERR868155/completed.json, results/chipseq/reproduction/analyses/ERR868156/completed.json, results/chipseq/reproduction/analyses/ERR868171/completed.json, results/chipseq/reproduction/analyses/ERR868172/completed.json, results/chipseq/reproduction/analyses/ERR868173/completed.json, results/chipseq/reproduction/analyses/ERR868174/completed.json, results/chipseq/reproduction/analyses/ERR868175/completed.json, results/chipseq/reproduction/analyses/ERR868176/completed.json, results/chipseq/reproduction/analyses/SRR20770291/completed.json, results/chipseq/reproduction/analyses/SRR20770292/completed.json, results/chipseq/reproduction/analyses/SRR20770293/completed.json, results/chipseq/reproduction/analyses/SRR20770294/completed.json, results/chipseq/reproduction/analyses/SRR20770296/completed.json, results/chipseq/reproduction/analyses/SRR20770297/completed.json, results/chipseq/reproduction/analyses/ERR868151/artifacts/peaks/ERR868151_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868152/artifacts/peaks/ERR868152_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868153/artifacts/peaks/ERR868153_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868154/artifacts/peaks/ERR868154_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868155/artifacts/peaks/ERR868155_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868156/artifacts/peaks/ERR868156_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868171/artifacts/peaks/ERR868171_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868172/artifacts/peaks/ERR868172_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868173/artifacts/peaks/ERR868173_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868174/artifacts/peaks/ERR868174_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868175/artifacts/peaks/ERR868175_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868176/artifacts/peaks/ERR868176_peaks.broadPeak, results/chipseq/reproduction/analyses/SRR20770291/artifacts/peaks/SRR20770291_peaks.narrowPeak, results/chipseq/reproduction/analyses/SRR20770292/artifacts/peaks/SRR20770292_peaks.broadPeak, results/chipseq/reproduction/analyses/SRR20770293/artifacts/peaks/SRR20770293_peaks.narrowPeak, results/chipseq/reproduction/analyses/SRR20770294/artifacts/peaks/SRR20770294_peaks.narrowPeak, results/chipseq/reproduction/analyses/SRR20770296/artifacts/peaks/SRR20770296_peaks.broadPeak, results/chipseq/reproduction/analyses/SRR20770297/artifacts/peaks/SRR20770297_peaks.narrowPeak, results/chipseq/reproduction/cohort_summary.json
+    jobid: 0
+    reason: Input files updated by another job: results/chipseq/reproduction/analyses/SRR20770296/completed.json, results/chipseq/reproduction/analyses/SRR20770297/artifacts/peaks/SRR20770297_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868173/artifacts/peaks/ERR868173_peaks.broadPeak, results/chipseq/reproduction/cohort_summary.json, results/chipseq/reproduction/analyses/ERR868176/artifacts/peaks/ERR868176_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868151/artifacts/peaks/ERR868151_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868172/artifacts/peaks/ERR868172_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868155/artifacts/peaks/ERR868155_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868153/completed.json, results/chipseq/reproduction/analyses/SRR20770292/artifacts/peaks/SRR20770292_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868171/completed.json, results/chipseq/reproduction/analyses/ERR868152/artifacts/peaks/ERR868152_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868176/completed.json, results/chipseq/reproduction/analyses/ERR868156/completed.json, results/chipseq/reproduction/analyses/ERR868152/completed.json, results/chipseq/reproduction/analyses/ERR868173/completed.json, results/chipseq/reproduction/analyses/ERR868175/completed.json, results/chipseq/reproduction/analyses/SRR20770293/artifacts/peaks/SRR20770293_peaks.narrowPeak, results/chipseq/reproduction/analyses/SRR20770297/completed.json, results/chipseq/reproduction/analyses/SRR20770294/completed.json, results/chipseq/reproduction/analyses/ERR868156/artifacts/peaks/ERR868156_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868175/artifacts/peaks/ERR868175_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868153/artifacts/peaks/ERR868153_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868155/completed.json, results/chipseq/reproduction/analyses/ERR868174/artifacts/peaks/ERR868174_peaks.broadPeak, results/chipseq/reproduction/analyses/SRR20770292/completed.json, results/chipseq/reproduction/analyses/ERR868172/completed.json, results/chipseq/reproduction/analyses/ERR868174/completed.json, results/chipseq/reproduction/analyses/ERR868151/completed.json, results/chipseq/reproduction/analyses/SRR20770291/artifacts/peaks/SRR20770291_peaks.narrowPeak, results/chipseq/reproduction/analyses/ERR868171/artifacts/peaks/ERR868171_peaks.narrowPeak, results/chipseq/reproduction/analyses/SRR20770296/artifacts/peaks/SRR20770296_peaks.broadPeak, results/chipseq/reproduction/analyses/ERR868154/completed.json, results/chipseq/reproduction/analyses/SRR20770293/completed.json, results/chipseq/reproduction/analyses/SRR20770294/artifacts/peaks/SRR20770294_peaks.narrowPeak, results/chipseq/reproduction/analyses/SRR20770291/completed.json, results/chipseq/reproduction/analyses/ERR868154/artifacts/peaks/ERR868154_peaks.broadPeak
+    resources: tmpdir=/tmp
+Job stats:
+job                        count
+-----------------------  -------
+chipseq_plan_validate          1
+chipseq_fastq_manifest         1
+chipseq_reference_build        1
+chipseq_download_fastq        22
+chipseq_shared_control         4
+chipseq_broad_analysis        10
+chipseq_narrow_analysis        8
+chipseq_cohort_summary         1
+chipseq_all                    1
+total                         49
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        chipseq_all, chipseq_broad_analysis, chipseq_cohort_summary, chipseq_download_fastq, chipseq_fastq_manifest, chipseq_narrow_analysis, chipseq_reference_build, chipseq_shared_control
+    output files have to be generated:
+        chipseq_broad_analysis, chipseq_cohort_summary, chipseq_download_fastq, chipseq_fastq_manifest, chipseq_narrow_analysis, chipseq_plan_validate, chipseq_reference_build, chipseq_shared_control
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.

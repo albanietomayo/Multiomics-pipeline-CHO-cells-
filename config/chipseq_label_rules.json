@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "source_fields": [
+    "sample_alias",
+    "sample_title",
+    "sample_description",
+    "experiment_title",
+    "library_name"
+  ],
+  "histone_pattern": "(?<![A-Za-z0-9])(?P<histone>H[1-4](?:[.][0-9]+)?)(?P<residue>[KR])(?P<position>[0-9]+)(?P<modification>me[123]|ac)(?![A-Za-z0-9])",
+  "control_patterns": [
+    {
+      "rule_id": "input_label",
+      "role": "input",
+      "pattern": "(?<![A-Za-z0-9])input(?![A-Za-z0-9])"
+    },
+    {
+      "rule_id": "igg_label",
+      "role": "igg_control",
+      "pattern": "(?<![A-Za-z0-9])IgG(?![A-Za-z0-9])"
+    }
+  ]
+}

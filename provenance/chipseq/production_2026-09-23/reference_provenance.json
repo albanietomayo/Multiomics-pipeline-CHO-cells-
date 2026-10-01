@@ -1,0 +1,13 @@
+{
+  "annotation_release_independently_verified": false,
+  "configured_annotation_release": 104,
+  "mapping_sha256": "dfd445e136c4bc9c11f9616d251b86732d1aab0cbdbf9d1ababb8093f7430e94",
+  "mitochondrial_accession": "NC_007936.1",
+  "mitochondrial_length": 16284,
+  "mitochondrial_sha256": "b7ccf6b1c6981c2b4a0c9e57245bd6712a861e685571db56d274c04fc30ed37c",
+  "mitochondrial_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_007936.1&rettype=fasta&retmode=text",
+  "nuclear_accession": "GCF_003668045.3",
+  "nuclear_sequences": 647,
+  "nuclear_sha256": "5c81f08eafe8f5051704f692cc21a970f58b24b2bc1bedef82cb17ec7a2b4478",
+  "purpose": "ChIP-seq nuclear and mitochondrial mapping"
+}

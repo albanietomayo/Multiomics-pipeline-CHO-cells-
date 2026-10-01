@@ -1,0 +1,28 @@
+{
+  "approved_pairings": 0,
+  "candidate_status_counts": {
+    "multiple_candidates_needs_review": 6,
+    "no_candidate": 90,
+    "single_candidate_needs_review": 18
+  },
+  "condition_status_counts": {
+    "resolved_from_labels": 120
+  },
+  "input_sha256": {
+    "annotations": "aba14651dcf09a0504da32b0310ae7f25774ae64051eece807443ae3d270d79f",
+    "inventory": "b5e1ffa5b316e34162401fc789a3ea4786e3a5ed5aa78f5e32a2e73d8b398bdb",
+    "label_summary": "9fc58d38585c9ecb91431091de7eb9d4e7f804dac4ee15a739ebbaeb365a278d",
+    "rules": "ef534144f20ccba30aa24fa809700d85608459a3a80e4ca129d52b0824c1c3ef",
+    "runs": "c13f1ffc79fc9e0ee3c97a293296c0a9a9ec2b25e67e836e6043986479f30911",
+    "script": "6d2468e569e531b1a36a3d00b69afbb655554425e3941b141a9ed0df89ab4f48",
+    "study_evidence": "df7ec932a28b974a28db24b705dab36d3e080a99bb639f25237b09c7dcf611c1",
+    "validator": "15047555063794e98d431ef7323ae844212d6ded2f6dd1d796b91c9fc5058a7c"
+  },
+  "ip_count": 114,
+  "output_sha256": {
+    "chipseq_conditions.tsv": "12a6cb7c77a9ec9e1d6f560d24e6fa1e7ac5b1ecfa5192d668134cca6a7a447c",
+    "chipseq_control_candidates.tsv": "fd95901aaff8dca7bcdb2a6a48de2dbbec2616ecea1d134ea88d329a0826276f"
+  },
+  "run_count": 120,
+  "schema_version": 1
+}

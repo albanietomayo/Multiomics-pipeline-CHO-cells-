@@ -1,0 +1,12 @@
+{
+  "archive_sha256": "5b01f03bacf45548c004c70c28e46222e6313a0f457a3549f2165f174c0c54cf",
+  "job_exit_status": 0,
+  "job_id": "10280245",
+  "records_by_type": {
+    "experiment": 120,
+    "sample": 112
+  },
+  "request_plan_sha256": "25129dbc49541d04165526155d620475e8ac22e07767b780114ecc5e440ace26",
+  "snakemake_version": "9.25.2",
+  "verified_records": 232
+}

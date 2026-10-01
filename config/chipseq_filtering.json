@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "alignment_latest_submission": "results/chipseq/alignment/slurm/latest_submission.txt",
+  "min_mapq": 30,
+  "exclude_mapq_255": true,
+  "exclude_flags": 3844,
+  "mitochondrial_accession": "NC_007936.1",
+  "optical_duplicate_detection": false,
+  "duplicate_scoring_strategy": "SUM_OF_BASE_QUALITIES",
+  "threads": 4,
+  "picard_heap_mb": 12000,
+  "scope": "dynamic_single_end_duplicate_marking_and_nuclear_filtering"
+}

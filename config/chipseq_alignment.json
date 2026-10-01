@@ -1,0 +1,14 @@
+{
+  "bowtie2_mode": "local",
+  "bowtie2_preset": "very-sensitive-local",
+  "bowtie2_seed": 0,
+  "diagnostic_mapq": 30,
+  "mitochondrial_accession": "NC_007936.1",
+  "preprocessing_latest_submission": "results/chipseq/preprocessing/slurm/latest_submission.txt",
+  "processing_runs": "results/metadata/chipseq/ena_snapshot_001/analysis_plan/chipseq_processing_runs.tsv",
+  "qc_by_fastq": "results/preprocessing/fastp/reports/preprocessing_qc_by_fastq.tsv",
+  "qc_by_job": "results/preprocessing/fastp/reports/preprocessing_qc_by_job.tsv",
+  "schema_version": 1,
+  "scope": "dynamic_single_end_alignment_and_qc",
+  "threads": 8
+}

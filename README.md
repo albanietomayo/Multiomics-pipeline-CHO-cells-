@@ -43,6 +43,40 @@ Extended: 167 predictors / Core: 67 predictors
   plus standalone validated scripts for final locus and feature integration.
 - Historical execution evidence and descriptive downstream figures and tables.
 
+## ChIP-seq reproducibility patch (proposed v1.0.1)
+
+v1.0.0 contains the frozen scientific release. The proposed v1.0.1 patch adds an
+[isolated ChIP-seq reproduction workflow](docs/CHIPSEQ_WORKFLOW.md) without
+changing scientific results or the existing RNA/ATAC entry point. Final
+historical production used `chipseq_production.yaml`; the five Table A9 stage
+environments document modular dependencies. [Per-analysis source commits and
+installed environment records](provenance/chipseq/production_2026-09-23/README.md)
+are preserved. The portable implementation is an adaptation for reproducibility,
+not a claim that one byte-identical source set produced every historical run.
+
+```bash
+snakemake --snakefile workflow/chipseq/Snakefile --use-conda --cores 1 -n chipseq_all
+```
+
+Clean-clone validation re-executed **one of the 18 PASS ChIP-seq analyses** from
+FASTQ: SRR20770297 IP versus SRR20770287 Input (PRJNA865478, fixed 147 bp).
+For this analysis, peak count, FRiP and peak/summit coordinates matched history.
+Strict signal-level identity was not obtained; small localized numerical
+differences and a two-read Input discrepancy remain unresolved. Substituting
+the reproduced products of this single analysis into the frozen downstream
+aggregation preserved its locus SPMR and peak-coordinate features and produced
+a byte-identical final 37 x 524 ChIP context table. The ChIP values entering the
+37 x 588 master matrix were unchanged. Ancillary condition/study Input QC
+fields differed but are excluded from those final products.
+**The remaining 17 PASS analyses were not re-executed from FASTQ.**
+
+See the [validation record](docs/CHIPSEQ_V101_VALIDATION.md). This patch is not yet
+released; the existing v1.0.0 tag remains unchanged. Citation metadata is being
+prepared for v1.0.1 and does not indicate that publication has occurred.
+The [changelog](CHANGELOG.md) and [thesis code-availability note](ERRATA_THESIS.md)
+describe the omission. Metadata replay uses sanitized scientific fields; raw
+ENA XML is excluded from Git, GitHub release assets and Zenodo.
+
 ## Key validated outputs
 
 | Product | Location | Shape or purpose |

@@ -1,0 +1,8 @@
+# Isolated ChIP-seq entry point. The multiomics Snakefile is unchanged.
+from pathlib import Path
+
+workdir: str(Path(workflow.basedir).resolve().parents[1])
+configfile: "config/chipseq.yaml"
+
+include: "../rules/chipseq_metadata.smk"
+include: "../rules/chipseq_production.smk"

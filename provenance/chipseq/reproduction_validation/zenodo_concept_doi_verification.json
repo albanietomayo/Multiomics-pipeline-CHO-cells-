@@ -1,0 +1,13 @@
+{
+  "source": "https://zenodo.org/api/records/22957205",
+  "record_id": 22957205,
+  "record_title": "Building training and benchmarking data pipelines for predictive genome engineering in CHO cells",
+  "record_version": "1.0.0",
+  "version_doi": "10.5281/zenodo.22957205",
+  "concept_doi": "10.5281/zenodo.22957204",
+  "parent_doi": "https://doi.org/10.5281/zenodo.22957204",
+  "parent_doi_html": "https://zenodo.org/doi/10.5281/zenodo.22957204",
+  "verified_utc": "2026-09-30T19:06:16.447207+00:00",
+  "verification": "Direct read-only Zenodo API response: conceptdoi and parent DOI both identify 10.5281/zenodo.22957204. No numerical-proximity inference.",
+  "record_response_sha256": "644e77b2ab2d017ac889a042902755955c4d91df6c68528f5cda262b35543679"
+}
